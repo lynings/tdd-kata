@@ -4,14 +4,21 @@ import java.util.List;
 
 public class Student {
 
-    public static String countOff(Integer position, List<GameRule> gameRules) {
-        if (position % gameRules.get(0).getRandom() == 0) {
+    public static String countOff(final Integer position, final List<GameRule> gameRules) {
+        // 这条规则优先级最高，所以放在这里
+        if (position.toString().contains(gameRules.get(0).getRandom().toString())) {
             return gameRules.get(0).getTerm();
-        } else if (position % gameRules.get(1).getRandom() == 0) {
-            return gameRules.get(1).getTerm();
-        } else if (position % gameRules.get(2).getRandom() == 0) {
-            return gameRules.get(2).getTerm();
         }
-        return position.toString();
+        String term = gameRules
+                .stream()
+                .filter(rule -> isMultiple(position, rule.getRandom()))
+                .map(rule -> rule.getTerm())
+                .reduce((t1, t2) -> t1 + t2)
+                .orElse(position.toString());
+        return term;
+    }
+
+    private static boolean isMultiple(Integer divisor, Integer dividend) {
+        return divisor % dividend == 0;
     }
 }
