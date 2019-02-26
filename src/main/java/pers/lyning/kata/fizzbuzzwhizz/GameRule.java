@@ -1,16 +1,16 @@
 package pers.lyning.kata.fizzbuzzwhizz;
 
 public class GameRule {
-    private Integer random;
+    private Integer number;
     private String term;
 
-    public GameRule(Integer random, String term) {
-        this.random = random;
+    public GameRule(Integer number, String term) {
+        this.number = number;
         this.term = term;
     }
 
-    public Integer getRandom() {
-        return random;
+    public Integer getNumber() {
+        return number;
     }
 
     public String getTerm() {

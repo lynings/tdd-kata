@@ -6,12 +6,12 @@ public class Student {
 
     public static String countOff(final Integer position, final List<GameRule> gameRules) {
         // 这条规则优先级最高，所以放在这里
-        if (position.toString().contains(gameRules.get(0).getRandom().toString())) {
+        if (position.toString().contains(gameRules.get(0).getNumber().toString())) {
             return gameRules.get(0).getTerm();
         }
         String term = gameRules
                 .stream()
-                .filter(rule -> isMultiple(position, rule.getRandom()))
+                .filter(rule -> isMultiple(position, rule.getNumber()))
                 .map(rule -> rule.getTerm())
                 .reduce((t1, t2) -> t1 + t2)
                 .orElse(position.toString());
