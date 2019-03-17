@@ -1,8 +1,9 @@
 package pers.lyning.kata.fizzbuzzwhizz;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class Student {
+public class Rule {
 
     public static String countOff(final Integer position, final List<GameRule> gameRules) {
         // 这条规则优先级最高，所以放在这里

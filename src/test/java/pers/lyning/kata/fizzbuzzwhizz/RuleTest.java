@@ -3,11 +3,12 @@ package pers.lyning.kata.fizzbuzzwhizz;
 import org.assertj.core.util.Lists;
 import org.junit.Test;
 
+import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class StudentTest {
+public class RuleTest {
 
     private final List<GameRule> gameRules = Lists.list(
             new GameRule(3, "Fizz"),
@@ -17,42 +18,42 @@ public class StudentTest {
 
     @Test
     public void should_return_1_when_mismatch_any_number() {
-        assertThat(Student.countOff(1, gameRules)).isEqualTo("1");
+        assertThat(Rule.countOff(1, gameRules)).isEqualTo("1");
     }
 
     @Test
     public void should_return_fizz_when_just_a_multiple_of_the_first_number() {
-        assertThat(Student.countOff(3, gameRules)).isEqualTo("Fizz");
-        assertThat(Student.countOff(6, gameRules)).isEqualTo("Fizz");
+        assertThat(Rule.countOff(3, gameRules)).isEqualTo("Fizz");
+        assertThat(Rule.countOff(6, gameRules)).isEqualTo("Fizz");
     }
 
     @Test
     public void should_return_buzz_when_just_a_multiple_of_the_second_number() {
-        assertThat(Student.countOff(5, gameRules)).isEqualTo("Buzz");
-        assertThat(Student.countOff(10, gameRules)).isEqualTo("Buzz");
+        assertThat(Rule.countOff(5, gameRules)).isEqualTo("Buzz");
+        assertThat(Rule.countOff(10, gameRules)).isEqualTo("Buzz");
     }
 
     @Test
     public void should_return_whizz_when_just_a_multiple_of_the_third_number() {
-        assertThat(Student.countOff(7, gameRules)).isEqualTo("Whizz");
-        assertThat(Student.countOff(14, gameRules)).isEqualTo("Whizz");
+        assertThat(Rule.countOff(7, gameRules)).isEqualTo("Whizz");
+        assertThat(Rule.countOff(14, gameRules)).isEqualTo("Whizz");
     }
 
     @Test
     public void should_return_fizzbuzz_when_just_a_multiple_of_the_first_number_and_second_number() {
-        assertThat(Student.countOff(15, gameRules)).isEqualTo("FizzBuzz");
-        assertThat(Student.countOff(45, gameRules)).isEqualTo("FizzBuzz");
+        assertThat(Rule.countOff(15, gameRules)).isEqualTo("FizzBuzz");
+        assertThat(Rule.countOff(45, gameRules)).isEqualTo("FizzBuzz");
     }
 
     @Test
     public void should_return_fizzwhizz_when_just_a_multiple_of_the_first_number_and_third_number() {
-        assertThat(Student.countOff(21, gameRules)).isEqualTo("FizzWhizz");
-        assertThat(Student.countOff(42, gameRules)).isEqualTo("FizzWhizz");
+        assertThat(Rule.countOff(21, gameRules)).isEqualTo("FizzWhizz");
+        assertThat(Rule.countOff(42, gameRules)).isEqualTo("FizzWhizz");
     }
 
     @Test
     public void should_return_buzzwhizz_when_just_a_multiple_of_the_second_number_and_third_number() {
-        assertThat(Student.countOff(70, gameRules)).isEqualTo("BuzzWhizz");
+        assertThat(Rule.countOff(70, gameRules)).isEqualTo("BuzzWhizz");
     }
 
     @Test
@@ -62,15 +63,15 @@ public class StudentTest {
                 new GameRule(3, "Buzz"),
                 new GameRule(4, "Whizz")
         );
-        assertThat(Student.countOff(48, gameRules)).isEqualTo("FizzBuzzWhizz");
-        assertThat(Student.countOff(96, gameRules)).isEqualTo("FizzBuzzWhizz");
+        assertThat(Rule.countOff(48, gameRules)).isEqualTo("FizzBuzzWhizz");
+        assertThat(Rule.countOff(96, gameRules)).isEqualTo("FizzBuzzWhizz");
     }
 
     @Test
     public void should_return_fizz_when_included_the_first_number() {
-        assertThat(Student.countOff(3, gameRules)).isEqualTo("Fizz");
-        assertThat(Student.countOff(13, gameRules)).isEqualTo("Fizz");
-        assertThat(Student.countOff(30, gameRules)).isEqualTo("Fizz");
-        assertThat(Student.countOff(31, gameRules)).isEqualTo("Fizz");
+        assertThat(Rule.countOff(3, gameRules)).isEqualTo("Fizz");
+        assertThat(Rule.countOff(13, gameRules)).isEqualTo("Fizz");
+        assertThat(Rule.countOff(30, gameRules)).isEqualTo("Fizz");
+        assertThat(Rule.countOff(31, gameRules)).isEqualTo("Fizz");
     }
 }
