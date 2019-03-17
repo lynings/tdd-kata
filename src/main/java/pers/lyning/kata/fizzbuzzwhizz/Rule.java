@@ -5,6 +5,15 @@ import java.util.List;
 
 public class Rule {
 
+    private List<Item> items;
+
+    public Rule(final List<Integer> specialNumbers) {
+        this.items = new ArrayList<>(3);
+        this.items.add(new Item(specialNumbers.get(0), "Fizz"));
+        this.items.add(new Item(specialNumbers.get(1), "Buzz"));
+        this.items.add(new Item(specialNumbers.get(2), "Whizz"));
+    }
+
     public static String countOff(final Integer position, final List<GameRule> gameRules) {
         // 这条规则优先级最高，所以放在这里
         if (position.toString().contains(gameRules.get(0).getNumber().toString())) {
@@ -21,5 +30,23 @@ public class Rule {
 
     private static boolean isMultiple(Integer divisor, Integer dividend) {
         return divisor % dividend == 0;
+    }
+
+    private class Item {
+        private Integer number;
+        private String word;
+
+        public Item(Integer number, String word) {
+            this.number = number;
+            this.word = word;
+        }
+
+        public Integer getNumber() {
+            return number;
+        }
+
+        public String getWord() {
+            return word;
+        }
     }
 }
