@@ -32,6 +32,18 @@ public class Rule {
         return divisor % dividend == 0;
     }
 
+    public String match(Integer number) {
+        if (number.toString().contains(items.get(0).getNumber().toString())) {
+            return items.get(0).getWord();
+        }
+        return items
+                .stream()
+                .filter(item -> isMultiple(number, item.getNumber()))
+                .map(item -> item.getWord())
+                .reduce((w1, w2) -> w1 + w2)
+                .orElse(number.toString());
+    }
+
     private class Item {
         private Integer number;
         private String word;
