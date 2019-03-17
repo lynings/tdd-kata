@@ -15,7 +15,7 @@ public class Rule {
     }
 
     public String match(Integer number) {
-        if (number.toString().contains(items.get(0).getNumber().toString())) {
+        if (isContainFirstSpecialNumber(number)) {
             return items.get(0).getWord();
         }
         return items
@@ -26,8 +26,15 @@ public class Rule {
                 .orElse(number.toString());
     }
 
-    private static boolean isMultiple(Integer divisor, Integer dividend) {
+    private boolean isMultiple(Integer divisor, Integer dividend) {
         return divisor % dividend == 0;
+    }
+
+    private boolean isContainFirstSpecialNumber(Integer number) {
+        if (number.toString().contains(items.get(0).getNumber().toString())) {
+            return true;
+        }
+        return false;
     }
 
     private class Item {
