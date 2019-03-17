@@ -14,24 +14,6 @@ public class Rule {
         this.items.add(new Item(specialNumbers.get(2), "Whizz"));
     }
 
-    public static String countOff(final Integer position, final List<GameRule> gameRules) {
-        // 这条规则优先级最高，所以放在这里
-        if (position.toString().contains(gameRules.get(0).getNumber().toString())) {
-            return gameRules.get(0).getTerm();
-        }
-        String term = gameRules
-                .stream()
-                .filter(rule -> isMultiple(position, rule.getNumber()))
-                .map(rule -> rule.getTerm())
-                .reduce((t1, t2) -> t1 + t2)
-                .orElse(position.toString());
-        return term;
-    }
-
-    private static boolean isMultiple(Integer divisor, Integer dividend) {
-        return divisor % dividend == 0;
-    }
-
     public String match(Integer number) {
         if (number.toString().contains(items.get(0).getNumber().toString())) {
             return items.get(0).getWord();
@@ -42,6 +24,10 @@ public class Rule {
                 .map(item -> item.getWord())
                 .reduce((w1, w2) -> w1 + w2)
                 .orElse(number.toString());
+    }
+
+    private static boolean isMultiple(Integer divisor, Integer dividend) {
+        return divisor % dividend == 0;
     }
 
     private class Item {
