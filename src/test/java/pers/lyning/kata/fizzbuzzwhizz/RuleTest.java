@@ -2,13 +2,14 @@ package pers.lyning.kata.fizzbuzzwhizz;
 
 import org.junit.Test;
 
-import java.util.Arrays;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class RuleTest {
 
-    final Rule rule = new Rule(Arrays.asList(3, 5, 7));
+    final Rule rule = new Rule(new UniqueNumbers(3, 5, 7));
+
+    public RuleTest() throws Exception {
+    }
 
     @Test
     public void should_return_1_when_mismatch_any_number() {
@@ -51,8 +52,8 @@ public class RuleTest {
     }
 
     @Test
-    public void should_return_fizzbuzzwhizz_when_at_the_same_time_is_a_multiple_of_the_three_number() {
-        Rule rule = new Rule(Arrays.asList(2, 3, 4));
+    public void should_return_fizzbuzzwhizz_when_at_the_same_time_is_a_multiple_of_the_three_number() throws Exception {
+        Rule rule = new Rule(new UniqueNumbers(2, 3, 4));
         assertThat(rule.match(48)).isEqualTo("FizzBuzzWhizz");
         assertThat(rule.match(96)).isEqualTo("FizzBuzzWhizz");
     }

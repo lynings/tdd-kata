@@ -1,57 +1,37 @@
 package pers.lyning.kata.fizzbuzzwhizz;
 
-import java.util.ArrayList;
-import java.util.List;
-
+/**
+ * @author lyning
+ */
 public class Rule {
+    private final UniqueNumbers uniqueNumbers;
 
-    private List<Item> items;
-
-    public Rule(final List<Integer> specialNumbers) {
-        this.items = new ArrayList<>(3);
-        this.items.add(new Item(specialNumbers.get(0), "Fizz"));
-        this.items.add(new Item(specialNumbers.get(1), "Buzz"));
-        this.items.add(new Item(specialNumbers.get(2), "Whizz"));
+    public Rule(UniqueNumbers uniqueNumbers) {
+        this.uniqueNumbers = uniqueNumbers;
     }
 
     public String match(Integer number) {
-        if (isContainFirstSpecialNumber(number)) {
-            return items.get(0).getWord();
+        if (isContainFirstNumber(number)) {
+            return uniqueNumbers.getFirst().getWord();
         }
-        return items
+        return uniqueNumbers
+                .getNumberAndWords()
                 .stream()
-                .filter(item -> isMultiple(number, item.getNumber()))
+                .filter(item -> isDivisible(number, item.getNumber()))
                 .map(item -> item.getWord())
                 .reduce((w1, w2) -> w1 + w2)
                 .orElse(number.toString());
     }
 
-    private boolean isMultiple(Integer divisor, Integer dividend) {
+    private boolean isDivisible(Integer divisor, Integer dividend) {
         return divisor % dividend == 0;
     }
 
-    private boolean isContainFirstSpecialNumber(Integer number) {
-        if (number.toString().contains(items.get(0).getNumber().toString())) {
+    private boolean isContainFirstNumber(Integer number) {
+        if (number.toString().contains(uniqueNumbers.getFirst().getNumber().toString())) {
             return true;
         }
         return false;
     }
-
-    private class Item {
-        private Integer number;
-        private String word;
-
-        public Item(Integer number, String word) {
-            this.number = number;
-            this.word = word;
-        }
-
-        public Integer getNumber() {
-            return number;
-        }
-
-        public String getWord() {
-            return word;
-        }
-    }
 }
+
