@@ -4,69 +4,49 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import static java.util.stream.Collectors.toList;
-
 /**
  * @author lyning
  */
 public class PointToPointDistanceConstraintRouteStrategy implements RouteStrategy {
 
-    private List<Edge> edges;
-    private String origin;
-    private String destination;
-    private DistanceConstraint distanceConstraint;
+    private final Digraph digraph;
+    private final Route route;
+    private final Set<String> routes;
+    private final DistanceConstraint distanceConstraint;
 
-    public PointToPointDistanceConstraintRouteStrategy(List<Edge> edges, String route, DistanceConstraint distanceConstraint) {
-        this.edges = edges;
-        this.origin = route.split("")[0];
-        this.destination = route.split("")[1];
+    public PointToPointDistanceConstraintRouteStrategy(Digraph digraph, String route, DistanceConstraint distanceConstraint) {
+        this.digraph = digraph;
+        this.route = new Route(route.split("")[0], route.split("")[1]);
         this.distanceConstraint = distanceConstraint;
+        routes = new HashSet<>();
     }
 
     @Override
     public Integer calculate() {
-        Set<String> routes = this.getRoutes();
+        return this.calculateTimesOfRoutes();
+    }
+
+    private Integer calculateTimesOfRoutes() {
+        List<Edge> edgeList = this.digraph.getEdgesOfOrigin(route.getOrigin());
+        for (Edge edge : edgeList) {
+            this.depthFirstSearch(edge, edge.getName(), edge.getDistance());
+        }
         return routes.size();
     }
 
-    private Set<String> getRoutes() {
-        Set<String> routes = new HashSet<>();
-
-        List<Edge> edgeList = this.getEdgesWithOrigin(this.origin);
-        for (Edge edge : edgeList) {
-            this.includeRoutesAndSearch(edge, edge.getOrigin() + edge.getDestination(), edge.getDistance(), routes);
-        }
-        return routes;
-    }
-
-    private void includeRoutesAndSearch(Edge origin, String route, Integer distance, Set<String> routes) {
+    private void depthFirstSearch(Edge origin, String route, Integer distance) {
         if (!this.distanceConstraint.isValid(distance)) {
             return;
         }
 
-        if (this.isArrivedToDestination(route) && this.distanceConstraint.isValid(distance)) {
+        if (this.route.isArrivedToDestination(route) && this.distanceConstraint.isValid(distance)) {
             routes.add(route);
         }
 
-        List<Edge> edgeList = this.getEdgesWithOrigin(origin.getDestination());
-        for (Edge edge : edgeList) {
-            this.includeRoutesAndSearch(edge, route + edge.getDestination(), distance + edge.getDistance(), routes);
+        List<Edge> edges = this.digraph.getEdgesOfOrigin(origin.getEndNode());
+        for (Edge edge : edges) {
+            this.depthFirstSearch(edge, route.concat(edge.getEndNode()), distance + edge.getDistance());
         }
-    }
-
-    private boolean isArrivedToDestination(String route) {
-        if (route.startsWith(this.origin)
-                && route.endsWith(this.destination)) {
-            return true;
-        }
-        return false;
-    }
-
-    private List<Edge> getEdgesWithOrigin(String origin) {
-        return this.edges
-                .stream()
-                .filter(o -> o.getOrigin().equals(origin))
-                .collect(toList());
     }
 }
 

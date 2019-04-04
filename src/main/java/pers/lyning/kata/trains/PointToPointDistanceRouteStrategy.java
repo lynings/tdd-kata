@@ -9,11 +9,11 @@ import java.util.Optional;
  */
 public class PointToPointDistanceRouteStrategy implements RouteStrategy {
 
-    private List<Edge> edges;
+    private final Digraph digraph;
     private String route;
 
-    public PointToPointDistanceRouteStrategy(List<Edge> edges, String route) {
-        this.edges = edges;
+    public PointToPointDistanceRouteStrategy(Digraph digraph, String route) {
+        this.digraph = digraph;
         this.route = route;
     }
 
@@ -46,9 +46,9 @@ public class PointToPointDistanceRouteStrategy implements RouteStrategy {
     }
 
     private Optional<Edge> findEdge(String route) {
-        Optional<Edge> edgeOptional = this.edges
+        Optional<Edge> edgeOptional = this.digraph.getEdges()
                 .stream()
-                .filter(o -> (o.getOrigin() + o.getDestination()).equals(route))
+                .filter(o -> o.getName().equals(route))
                 .findFirst();
         return edgeOptional;
     }

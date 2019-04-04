@@ -2,6 +2,8 @@ package pers.lyning.kata.trains;
 
 import java.util.List;
 
+import static java.util.stream.Collectors.toList;
+
 /**
  * @author lyning
  */
@@ -15,5 +17,16 @@ public class Digraph {
 
     public Integer calculate(RouteStrategy strategy) throws Exception {
         return strategy.calculate();
+    }
+
+    public List<Edge> getEdgesOfOrigin(String origin) {
+        return this.edges
+                .stream()
+                .filter(o -> o.getStartNode().equals(origin))
+                .collect(toList());
+    }
+
+    public List<Edge> getEdges() {
+        return edges;
     }
 }

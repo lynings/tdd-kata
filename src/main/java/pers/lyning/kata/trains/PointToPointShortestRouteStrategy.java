@@ -3,23 +3,19 @@ package pers.lyning.kata.trains;
 import java.util.List;
 import java.util.Objects;
 
-import static java.util.stream.Collectors.toList;
-
 /**
  * @author lyning
  */
 public class PointToPointShortestRouteStrategy implements RouteStrategy {
 
-    private List<Edge> edges;
-    private String origin;
-    private String destination;
-    private ShortestRoute shortestRoute;
+    private final Digraph digraph;
+    private final Route route;
+    private final ShortestRoute shortestRoute;
     private final Integer MAX_NUMBER_OF_STOP_STATION = 10;
 
-    public PointToPointShortestRouteStrategy(List<Edge> edges, String route) {
-        this.edges = edges;
-        this.origin = route.split("")[0];
-        this.destination = route.split("")[1];
+    public PointToPointShortestRouteStrategy(Digraph digraph, String route) {
+        this.digraph = digraph;
+        this.route = new Route(route.split("")[0], route.split("")[1]);
         this.shortestRoute = new ShortestRoute();
     }
 
@@ -34,10 +30,9 @@ public class PointToPointShortestRouteStrategy implements RouteStrategy {
     }
 
     private void depthFirstSearch() {
-        List<Edge> edges = this.getEdgesOfOrigin(this.origin);
+        List<Edge> edges = this.digraph.getEdgesOfOrigin(this.route.getOrigin());
         for (Edge edge : edges) {
-            String route = edge.getOrigin().concat(edge.getDestination());
-            this.depthFirstSearch(edge, route, edge.getDistance());
+            this.depthFirstSearch(edge, edge.getName(), edge.getDistance());
         }
     }
 
@@ -46,32 +41,21 @@ public class PointToPointShortestRouteStrategy implements RouteStrategy {
             return;
         }
 
-        if (this.isArrivedToDestination(route) && this.shortestRoute.isShortest(distance)) {
+        if (this.route.isArrivedToDestination(route) && this.shortestRoute.isShortest(distance)) {
             shortestRoute.setDistance(distance);
             shortestRoute.setRoute(route);
             return;
         }
 
-        List<Edge> edges = this.getEdgesOfOrigin(partOfRoute.getDestination());
+        List<Edge> edges = this.digraph.getEdgesOfOrigin(partOfRoute.getEndNode());
         for (Edge edge : edges) {
-            this.depthFirstSearch(edge, route.concat(edge.getDestination()), distance + edge.getDistance());
+            this.depthFirstSearch(edge, route.concat(edge.getEndNode()), distance + edge.getDistance());
         }
-    }
-
-    private boolean isArrivedToDestination(String route) {
-        return route.startsWith(this.origin) && route.endsWith(this.destination);
     }
 
     private boolean isRepeatedly(String route) {
         // 根据人工设置一个最大的沿途站数量来避免陷入无限循环
         return route.length() > MAX_NUMBER_OF_STOP_STATION;
-    }
-
-    private List<Edge> getEdgesOfOrigin(String origin) {
-        return this.edges
-                .stream()
-                .filter(o -> o.getOrigin().equals(origin))
-                .collect(toList());
     }
 
     private class ShortestRoute {

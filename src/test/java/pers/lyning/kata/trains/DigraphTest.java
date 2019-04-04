@@ -28,10 +28,10 @@ public class DigraphTest {
     @Test
     public void should_return_distance_when_calculate_the_distance_of_route() throws Exception {
         List<ResultAndRouteStrategy> distanceAndRouteStrategyList = Arrays.asList(
-                new ResultAndRouteStrategy(9, RouteStrategyFactory.createPointToPointDistanceRouteStrategy(edges, "ABC")),
-                new ResultAndRouteStrategy(5, RouteStrategyFactory.createPointToPointDistanceRouteStrategy(edges, "AD")),
-                new ResultAndRouteStrategy(13, RouteStrategyFactory.createPointToPointDistanceRouteStrategy(edges, "ADC")),
-                new ResultAndRouteStrategy(22, RouteStrategyFactory.createPointToPointDistanceRouteStrategy(edges, "AEBCD"))
+                new ResultAndRouteStrategy(9, RouteStrategyFactory.createPointToPointDistanceRouteStrategy(digraph, "ABC")),
+                new ResultAndRouteStrategy(5, RouteStrategyFactory.createPointToPointDistanceRouteStrategy(digraph, "AD")),
+                new ResultAndRouteStrategy(13, RouteStrategyFactory.createPointToPointDistanceRouteStrategy(digraph, "ADC")),
+                new ResultAndRouteStrategy(22, RouteStrategyFactory.createPointToPointDistanceRouteStrategy(digraph, "AEBCD"))
         );
         for (ResultAndRouteStrategy obj : distanceAndRouteStrategyList) {
             assertThat(digraph.calculate(obj.getRouteStrategy())).isEqualTo(obj.getResult());
@@ -41,8 +41,8 @@ public class DigraphTest {
     @Test
     public void should_return_times_of_routes_when_calculate_all_routes_from_origin_to_destination() throws Exception {
         List<ResultAndRouteStrategy> strategies = Arrays.asList(
-                new ResultAndRouteStrategy(2, RouteStrategyFactory.createPointToPointStopsConstraintRouteStrategy(edges, "CC", 3, ConditionEnum.LessThanOrEqual)),
-                new ResultAndRouteStrategy(3, RouteStrategyFactory.createPointToPointStopsConstraintRouteStrategy(edges, "AC", 4, ConditionEnum.Equal))
+                new ResultAndRouteStrategy(2, RouteStrategyFactory.createPointToPointStopsConstraintRouteStrategy(digraph, "CC", 3, ConditionEnum.LessThanOrEqual)),
+                new ResultAndRouteStrategy(3, RouteStrategyFactory.createPointToPointStopsConstraintRouteStrategy(digraph, "AC", 4, ConditionEnum.Equal))
         );
 
         for (ResultAndRouteStrategy resultAndRouteStrategy : strategies) {
@@ -56,7 +56,7 @@ public class DigraphTest {
         String route = "CC";
         final int MAX_DISTANCE = 30;
         ConditionEnum conditionEnum = ConditionEnum.LessThan;
-        RouteStrategy strategy = RouteStrategyFactory.createPointToPointDistanceConstraintRouteStrategy(edges, route, MAX_DISTANCE, conditionEnum);
+        RouteStrategy strategy = RouteStrategyFactory.createPointToPointDistanceConstraintRouteStrategy(digraph, route, MAX_DISTANCE, conditionEnum);
         Integer times = this.digraph.calculate(strategy);
         assertThat(times).isEqualTo(7);
     }
@@ -64,8 +64,8 @@ public class DigraphTest {
     @Test
     public void should_return_distance_when_calculate_the_shortest_route_distance_of_origin_to_destination() throws Exception {
         List<ResultAndRouteStrategy> distanceAndRouteStrategyList = Arrays.asList(
-                new ResultAndRouteStrategy(9, RouteStrategyFactory.createPointToPointShortestRouteStrategy(edges, "AC")),
-                new ResultAndRouteStrategy(9, RouteStrategyFactory.createPointToPointShortestRouteStrategy(edges, "BB"))
+                new ResultAndRouteStrategy(9, RouteStrategyFactory.createPointToPointShortestRouteStrategy(digraph, "AC")),
+                new ResultAndRouteStrategy(9, RouteStrategyFactory.createPointToPointShortestRouteStrategy(digraph, "BB"))
         );
         for (ResultAndRouteStrategy obj : distanceAndRouteStrategyList) {
             assertThat(obj.getResult()).isEqualTo(9);

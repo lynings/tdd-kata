@@ -4,22 +4,18 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import static java.util.stream.Collectors.toList;
-
 /**
  * @author lyning
  */
 public class PointToPointStopsConstraintRouteStrategy implements RouteStrategy {
 
-    private List<Edge> edges;
-    private String origin;
-    private String destination;
-    private StopsConstraint stopsConstraint;
+    private final Digraph digraph;
+    private final Route route;
+    private final StopsConstraint stopsConstraint;
 
-    public PointToPointStopsConstraintRouteStrategy(List<Edge> edges, String route, StopsConstraint stopsConstraint) {
-        this.edges = edges;
-        this.origin = route.split("")[0];
-        this.destination = route.split("")[1];
+    public PointToPointStopsConstraintRouteStrategy(Digraph digraph, String route, StopsConstraint stopsConstraint) {
+        this.digraph = digraph;
+        this.route = new Route(route.split("")[0], route.split("")[1]);
         this.stopsConstraint = stopsConstraint;
     }
 
@@ -32,46 +28,32 @@ public class PointToPointStopsConstraintRouteStrategy implements RouteStrategy {
     private Set<String> getRoutes() {
         Set<String> routes = new HashSet<>();
 
-        List<Edge> edgeList = this.getEdgesWithOrigin(this.origin);
-        for (Edge edge : edgeList) {
-            this.includeRoutesAndSearch(edge, edge.getOrigin() + edge.getDestination(), routes);
+        List<Edge> edges = this.digraph.getEdgesOfOrigin(this.route.getOrigin());
+        for (Edge edge : edges) {
+            this.depthFirstSearch(edge, edge.getName(), routes);
         }
         return routes;
     }
 
-    private void includeRoutesAndSearch(Edge origin, String route, Set<String> routes) {
+    private void depthFirstSearch(Edge origin, String route, Set<String> routes) {
         // 打破循环，避免路线陷入无线循环
-        if (this.isInfiniteLoop(origin.getOrigin() + origin.getDestination(), route)) {
+        if (this.isInfiniteLoop(origin.getName(), route)) {
             return;
         }
 
-        if (this.isArrivedToDestination(route) && this.stopsConstraint.isValid(route.length() - 1)) {
+        if (this.route.isArrivedToDestination(route) && this.stopsConstraint.isValid(route.length() - 1)) {
             routes.add(route);
             return;
         }
 
-        List<Edge> edgeList = this.getEdgesWithOrigin(origin.getDestination());
+        List<Edge> edgeList = this.digraph.getEdgesOfOrigin(origin.getEndNode());
         for (Edge edge : edgeList) {
-            this.includeRoutesAndSearch(edge, route + edge.getDestination(), routes);
+            this.depthFirstSearch(edge, route + edge.getEndNode(), routes);
         }
     }
 
     private boolean isInfiniteLoop(String edge, String route) {
         return (route.length() - route.split(edge).length) / 2 > this.stopsConstraint.getNumberOfStops();
-    }
-
-    private boolean isArrivedToDestination(String route) {
-        if (route.startsWith(this.origin) && route.endsWith(this.destination)) {
-            return true;
-        }
-        return false;
-    }
-
-    private List<Edge> getEdgesWithOrigin(String origin) {
-        return this.edges
-                .stream()
-                .filter(o -> o.getOrigin().equals(origin))
-                .collect(toList());
     }
 }
 
