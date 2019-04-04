@@ -65,7 +65,7 @@ public class DigraphTest {
     }
 
     @Test
-    public void should_return_distance_when_calculate_the_shortest_route_distance_of_origin_to_destination() throws Exception {
+    public void should_return_distance_when_calculate_the_shortest_distance_of_route() throws Exception {
         List<ResultAndRouteStrategy> distanceAndRouteStrategyList = Arrays.asList(
                 new ResultAndRouteStrategy(9, RouteStrategyFactory.createPointToPointShortestRouteStrategy(new Route("A", "C"))),
                 new ResultAndRouteStrategy(9, RouteStrategyFactory.createPointToPointShortestRouteStrategy(new Route("B", "B")))
