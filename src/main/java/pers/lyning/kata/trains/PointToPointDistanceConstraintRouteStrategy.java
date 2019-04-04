@@ -39,7 +39,7 @@ public class PointToPointDistanceConstraintRouteStrategy implements RouteStrateg
             return;
         }
 
-        if (this.route.isArrived(route) && this.distanceConstraint.isValid(distance)) {
+        if (this.route.isEquals(route) && this.distanceConstraint.isValid(distance)) {
             routes.add(route);
         }
 

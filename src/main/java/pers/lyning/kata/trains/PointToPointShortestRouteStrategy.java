@@ -37,7 +37,7 @@ public class PointToPointShortestRouteStrategy implements RouteStrategy {
             return;
         }
 
-        if (this.route.isArrived(route) && this.shortestRoute.isShortest(distance)) {
+        if (this.route.isEquals(route) && this.shortestRoute.isShortest(distance)) {
             shortestRoute.setDistance(distance);
             shortestRoute.setRoute(route);
             return;

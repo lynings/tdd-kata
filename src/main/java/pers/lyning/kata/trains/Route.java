@@ -20,7 +20,7 @@ public class Route {
         return destination;
     }
 
-    public boolean isArrived(String route) {
+    public boolean isEquals(String route) {
         if (route.startsWith(this.getOrigin()) && route.endsWith(this.getDestination())) {
             return true;
         }
