@@ -84,3 +84,4 @@ Output #10: 7
 - [ ] 同一条路线不能出现一次以上。
 - [ ] 同一条路线不会出现起点和终点相同。
 - [x] 重构 PointToPointDistanceRouteStrategy 和 PointToPointShortestRouteStrategy
+- [ ] 重构 PointToPointShortestRouteStrategy
