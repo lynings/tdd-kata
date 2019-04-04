@@ -42,11 +42,11 @@ public class PointToPointShortestRouteStrategy implements RouteStrategy {
     }
 
     private void depthFirstSearch(Edge partOfRoute, String route, Integer distance, RouteCollector routeCollector) {
-        if (!this.isDecreased(routeCollector.getDistance(), distance) || this.isRepeatedly(route)) {
+        if (!this.isReduce(routeCollector.getDistance(), distance) || this.isRepeatedly(route)) {
             return;
         }
 
-        if (this.isArrivedToDestination(route) && this.isDecreased(routeCollector.getDistance(), distance)) {
+        if (this.isArrivedToDestination(route) && this.isReduce(routeCollector.getDistance(), distance)) {
             routeCollector.setDistance(distance);
             routeCollector.setRoute(route);
             return;
@@ -58,7 +58,7 @@ public class PointToPointShortestRouteStrategy implements RouteStrategy {
         }
     }
 
-    public boolean isDecreased(Integer sourceDistance, Integer targetDistance) {
+    public boolean isReduce(Integer sourceDistance, Integer targetDistance) {
         if (Objects.isNull(sourceDistance) || targetDistance < sourceDistance) {
             return true;
         }
