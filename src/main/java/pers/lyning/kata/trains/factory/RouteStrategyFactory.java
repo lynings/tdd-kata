@@ -1,4 +1,7 @@
-package pers.lyning.kata.trains;
+package pers.lyning.kata.trains.factory;
+
+import pers.lyning.kata.trains.Route;
+import pers.lyning.kata.trains.strategy.*;
 
 /**
  * @author lyning

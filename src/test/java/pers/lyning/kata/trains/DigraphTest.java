@@ -1,6 +1,9 @@
 package pers.lyning.kata.trains;
 
 import org.junit.Test;
+import pers.lyning.kata.trains.factory.RouteStrategyFactory;
+import pers.lyning.kata.trains.strategy.ConditionEnum;
+import pers.lyning.kata.trains.strategy.RouteStrategy;
 
 import java.util.Arrays;
 import java.util.List;

@@ -1,4 +1,4 @@
-package pers.lyning.kata.trains;
+package pers.lyning.kata.trains.strategy;
 
 /**
  * @author lyning

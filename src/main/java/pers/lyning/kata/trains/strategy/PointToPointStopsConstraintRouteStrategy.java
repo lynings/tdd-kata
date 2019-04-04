@@ -1,4 +1,6 @@
-package pers.lyning.kata.trains;
+package pers.lyning.kata.trains.strategy;
+
+import pers.lyning.kata.trains.*;
 
 import java.util.HashSet;
 import java.util.List;

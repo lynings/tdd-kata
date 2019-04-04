@@ -1,4 +1,7 @@
-package pers.lyning.kata.trains;
+package pers.lyning.kata.trains.strategy;
+
+import pers.lyning.kata.trains.Digraph;
+import pers.lyning.kata.trains.Edge;
 
 import java.util.Optional;
 

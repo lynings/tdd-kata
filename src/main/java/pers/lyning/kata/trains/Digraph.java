@@ -1,5 +1,7 @@
 package pers.lyning.kata.trains;
 
+import pers.lyning.kata.trains.strategy.RouteStrategy;
+
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
