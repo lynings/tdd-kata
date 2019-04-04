@@ -41,7 +41,7 @@ public class PointToPointStopsConstraintRouteStrategy implements RouteStrategy {
             return;
         }
 
-        if (this.route.isArrivedToDestination(route) && this.stopsConstraint.isValid(route.length() - 1)) {
+        if (this.route.isArrived(route) && this.stopsConstraint.isValid(route.length() - 1)) {
             routes.add(route);
             return;
         }
