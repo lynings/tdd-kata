@@ -13,56 +13,49 @@ public class PointToPointShortestRouteStrategy implements RouteStrategy {
     private List<Edge> edges;
     private String origin;
     private String destination;
+    private ShortestRoute shortestRoute;
     private final Integer MAX_NUMBER_OF_STOP_STATION = 10;
 
     public PointToPointShortestRouteStrategy(List<Edge> edges, String route) {
         this.edges = edges;
         this.origin = route.split("")[0];
         this.destination = route.split("")[1];
+        this.shortestRoute = new ShortestRoute();
     }
 
     @Override
     public Integer calculate() {
-        RouteCollector routeCollector = this.getShortestDistance();
-        return routeCollector.getDistance();
+        return this.getShortestDistance();
     }
 
-    private RouteCollector getShortestDistance() {
-        return this.depthFirstSearch();
+    private Integer getShortestDistance() {
+        this.depthFirstSearch();
+        return shortestRoute.getDistance();
     }
 
-    private RouteCollector depthFirstSearch() {
-        RouteCollector routeCollector = new RouteCollector();
+    private void depthFirstSearch() {
         List<Edge> edges = this.getEdgesOfOrigin(this.origin);
         for (Edge edge : edges) {
-            String route = edge.getOrigin() + edge.getDestination();
-            this.depthFirstSearch(edge, route, edge.getDistance(), routeCollector);
+            String route = edge.getOrigin().concat(edge.getDestination());
+            this.depthFirstSearch(edge, route, edge.getDistance());
         }
-        return routeCollector;
     }
 
-    private void depthFirstSearch(Edge partOfRoute, String route, Integer distance, RouteCollector routeCollector) {
-        if (!this.isReduce(routeCollector.getDistance(), distance) || this.isRepeatedly(route)) {
+    private void depthFirstSearch(Edge partOfRoute, String route, Integer distance) {
+        if (!this.shortestRoute.isShortest(distance) || this.isRepeatedly(route)) {
             return;
         }
 
-        if (this.isArrivedToDestination(route) && this.isReduce(routeCollector.getDistance(), distance)) {
-            routeCollector.setDistance(distance);
-            routeCollector.setRoute(route);
+        if (this.isArrivedToDestination(route) && this.shortestRoute.isShortest(distance)) {
+            shortestRoute.setDistance(distance);
+            shortestRoute.setRoute(route);
             return;
         }
 
         List<Edge> edges = this.getEdgesOfOrigin(partOfRoute.getDestination());
         for (Edge edge : edges) {
-            this.depthFirstSearch(edge, route.concat(edge.getDestination()), distance + edge.getDistance(), routeCollector);
+            this.depthFirstSearch(edge, route.concat(edge.getDestination()), distance + edge.getDistance());
         }
-    }
-
-    public boolean isReduce(Integer sourceDistance, Integer targetDistance) {
-        if (Objects.isNull(sourceDistance) || targetDistance < sourceDistance) {
-            return true;
-        }
-        return false;
     }
 
     private boolean isArrivedToDestination(String route) {
@@ -81,11 +74,18 @@ public class PointToPointShortestRouteStrategy implements RouteStrategy {
                 .collect(toList());
     }
 
-    private class RouteCollector {
+    private class ShortestRoute {
         private Integer distance;
         private String route;
 
-        public RouteCollector() {
+        public ShortestRoute() {
+        }
+
+        public boolean isShortest(Integer distance) {
+            if (Objects.isNull(this.distance) || distance < this.distance) {
+                return true;
+            }
+            return false;
         }
 
         public void setDistance(Integer distance) {
