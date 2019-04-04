@@ -42,11 +42,11 @@ public class PointToPointShortestRouteStrategy implements RouteStrategy {
     }
 
     private void depthFirstSearch(Edge partOfRoute, String route, Integer distance, ResultCollector resultCollector) {
-        if (!resultCollector.isMatch(distance) || this.isRepeatedly(route)) {
+        if (!this.isDecreased(resultCollector.getDistance(), distance) || this.isRepeatedly(route)) {
             return;
         }
 
-        if (this.isArrivedToDestination(route) && resultCollector.isMatch(distance)) {
+        if (this.isArrivedToDestination(route) && this.isDecreased(resultCollector.getDistance(), distance)) {
             resultCollector.setDistance(distance);
             resultCollector.setRoute(route);
             return;
@@ -54,8 +54,15 @@ public class PointToPointShortestRouteStrategy implements RouteStrategy {
 
         List<Edge> edges = this.getEdgesOfOrigin(partOfRoute.getDestination());
         for (Edge edge : edges) {
-            this.depthFirstSearch(edge, route + edge.getDestination(), distance + edge.getDistance(), resultCollector);
+            this.depthFirstSearch(edge, route.concat(edge.getDestination()), distance + edge.getDistance(), resultCollector);
         }
+    }
+
+    public boolean isDecreased(Integer sourceDistance, Integer targetDistance) {
+        if (Objects.isNull(sourceDistance) || targetDistance < sourceDistance) {
+            return true;
+        }
+        return false;
     }
 
     private boolean isArrivedToDestination(String route) {
@@ -79,13 +86,6 @@ public class PointToPointShortestRouteStrategy implements RouteStrategy {
         private String route;
 
         public ResultCollector() {
-        }
-
-        public boolean isMatch(Integer distance) {
-            if (Objects.isNull(this.distance) || distance < this.distance) {
-                return true;
-            }
-            return false;
         }
 
         public void setDistance(Integer distance) {
