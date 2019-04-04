@@ -39,19 +39,9 @@ public class GraphTest {
     }
 
     @Test
-    public void should_return_2_when_calculate_all_routes_from_c_to_c_and_no_more_than_three_stops() throws Exception {
-        String route = "CC";
-        final int LIMIT_OF_STOPS = 3;
-        ConditionEnum conditionEnum = ConditionEnum.LessThanOrEqual;
-        RouteStrategy strategy = RouteStrategyFactory.createPointToPointStopsConstraintRouteStrategy(edges, route, LIMIT_OF_STOPS, conditionEnum);
-        Integer times = this.digraph.calculate(strategy);
-        assertThat(times).isEqualTo(2);
-    }
-
-    @Test
     public void should_return_times_of_routes_when_calculate_all_routes_from_origin_to_destination() throws Exception {
         List<ResultAndRouteStrategy> strategies = Arrays.asList(
-                new ResultAndRouteStrategy(3, RouteStrategyFactory.createPointToPointStopsConstraintRouteStrategy(edges, "AC", 4, ConditionEnum.Equal)),
+                new ResultAndRouteStrategy(2, RouteStrategyFactory.createPointToPointStopsConstraintRouteStrategy(edges, "CC", 3, ConditionEnum.LessThanOrEqual)),
                 new ResultAndRouteStrategy(3, RouteStrategyFactory.createPointToPointStopsConstraintRouteStrategy(edges, "AC", 4, ConditionEnum.Equal))
         );
 
@@ -82,7 +72,7 @@ public class GraphTest {
         }
     }
 
-    private class ResultAndRouteStrategy {
+    private static class ResultAndRouteStrategy {
         private Integer result;
         private RouteStrategy routeStrategy;
 
