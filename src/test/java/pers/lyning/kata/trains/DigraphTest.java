@@ -10,7 +10,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 /**
  * @author lyning
  */
-public class GraphTest {
+public class DigraphTest {
 
     private final List<Edge> edges = Arrays.asList(
             new Edge("A", "B", 5),
@@ -47,7 +47,7 @@ public class GraphTest {
 
         for (ResultAndRouteStrategy resultAndRouteStrategy : strategies) {
             Integer timesOfRoutes = this.digraph.calculate(resultAndRouteStrategy.getRouteStrategy());
-            assertThat(timesOfRoutes).isEqualTo(3);
+            assertThat(timesOfRoutes).isEqualTo(resultAndRouteStrategy.getResult());
         }
     }
 
