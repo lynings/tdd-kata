@@ -9,16 +9,16 @@ import java.util.Optional;
  */
 public class PointToPointDistanceRouteStrategy implements RouteStrategy {
 
-    private final Digraph digraph;
+    private Digraph digraph;
     private String route;
 
-    public PointToPointDistanceRouteStrategy(Digraph digraph, String route) {
-        this.digraph = digraph;
+    public PointToPointDistanceRouteStrategy(String route) {
         this.route = route;
     }
 
     @Override
-    public Integer calculate() throws Exception {
+    public Integer calculate(Digraph digraph) throws Exception {
+        this.digraph = digraph;
         List<Edge> routes = this.matchRoute();
         Integer distance = routes
                 .stream()

@@ -8,19 +8,19 @@ import java.util.Objects;
  */
 public class PointToPointShortestRouteStrategy implements RouteStrategy {
 
-    private final Digraph digraph;
+    private Digraph digraph;
     private final Route route;
     private final ShortestRoute shortestRoute;
     private final Integer MAX_NUMBER_OF_STOP_STATION = 10;
 
-    public PointToPointShortestRouteStrategy(Digraph digraph, String route) {
-        this.digraph = digraph;
-        this.route = new Route(route.split("")[0], route.split("")[1]);
+    public PointToPointShortestRouteStrategy(Route route) {
+        this.route = route;
         this.shortestRoute = new ShortestRoute();
     }
 
     @Override
-    public Integer calculate() {
+    public Integer calculate(Digraph digraph) {
+        this.digraph = digraph;
         return this.getShortestDistance();
     }
 

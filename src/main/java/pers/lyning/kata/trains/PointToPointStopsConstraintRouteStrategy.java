@@ -9,18 +9,18 @@ import java.util.Set;
  */
 public class PointToPointStopsConstraintRouteStrategy implements RouteStrategy {
 
-    private final Digraph digraph;
+    private Digraph digraph;
     private final Route route;
     private final StopsConstraint stopsConstraint;
 
-    public PointToPointStopsConstraintRouteStrategy(Digraph digraph, String route, StopsConstraint stopsConstraint) {
-        this.digraph = digraph;
-        this.route = new Route(route.split("")[0], route.split("")[1]);
+    public PointToPointStopsConstraintRouteStrategy(Route route, StopsConstraint stopsConstraint) {
+        this.route = route;
         this.stopsConstraint = stopsConstraint;
     }
 
     @Override
-    public Integer calculate() {
+    public Integer calculate(Digraph digraph) {
+        this.digraph = digraph;
         Set<String> routes = this.getRoutes();
         return routes.size();
     }

@@ -9,20 +9,20 @@ import java.util.Set;
  */
 public class PointToPointDistanceConstraintRouteStrategy implements RouteStrategy {
 
-    private final Digraph digraph;
+    private Digraph digraph;
     private final Route route;
     private final Set<String> routes;
     private final DistanceConstraint distanceConstraint;
 
-    public PointToPointDistanceConstraintRouteStrategy(Digraph digraph, String route, DistanceConstraint distanceConstraint) {
-        this.digraph = digraph;
-        this.route = new Route(route.split("")[0], route.split("")[1]);
+    public PointToPointDistanceConstraintRouteStrategy(Route route, DistanceConstraint distanceConstraint) {
+        this.route = route;
         this.distanceConstraint = distanceConstraint;
         routes = new HashSet<>();
     }
 
     @Override
-    public Integer calculate() {
+    public Integer calculate(Digraph digraph) {
+        this.digraph = digraph;
         return this.calculateTimesOfRoutes();
     }
 

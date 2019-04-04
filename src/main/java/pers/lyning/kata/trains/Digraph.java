@@ -16,7 +16,7 @@ public class Digraph {
     }
 
     public Integer calculate(RouteStrategy strategy) throws Exception {
-        return strategy.calculate();
+        return strategy.calculate(this);
     }
 
     public List<Edge> getEdgesOfOrigin(String origin) {

@@ -8,10 +8,11 @@ package pers.lyning.kata.trains;
 public interface RouteStrategy {
 
     /**
-     * 计算路线接口
+     * 计算
      *
+     * @param digraph 有向图
      * @return
      * @throws Exception
      */
-    Integer calculate() throws Exception;
+    Integer calculate(Digraph digraph) throws Exception;
 }
