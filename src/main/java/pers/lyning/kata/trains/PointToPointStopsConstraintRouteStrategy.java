@@ -46,8 +46,8 @@ public class PointToPointStopsConstraintRouteStrategy implements RouteStrategy {
             return;
         }
 
-        List<Edge> edgeList = this.digraph.getEdgesOfOrigin(origin.getEndNode());
-        for (Edge edge : edgeList) {
+        List<Edge> edges = this.digraph.getEdgesOfOrigin(origin.getEndNode());
+        for (Edge edge : edges) {
             this.depthFirstSearch(edge, route + edge.getEndNode(), routes);
         }
     }
@@ -56,4 +56,3 @@ public class PointToPointStopsConstraintRouteStrategy implements RouteStrategy {
         return (route.length() - route.split(edge).length) / 2 > this.stopsConstraint.getNumberOfStops();
     }
 }
-

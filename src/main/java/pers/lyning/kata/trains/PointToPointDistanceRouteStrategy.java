@@ -1,7 +1,5 @@
 package pers.lyning.kata.trains;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 /**
@@ -19,30 +17,24 @@ public class PointToPointDistanceRouteStrategy implements RouteStrategy {
     @Override
     public Integer calculate(Digraph digraph) throws Exception {
         this.digraph = digraph;
-        List<Edge> routes = this.matchRoute();
-        Integer distance = routes
-                .stream()
-                .map(Edge::getDistance)
-                .reduce(Integer::sum)
-                .get();
-        return distance;
+        return this.getDistance();
     }
 
-    private List<Edge> matchRoute() throws Exception {
-        List<Edge> routes = new ArrayList<>();
+    private Integer getDistance() throws Exception {
+        Integer distance = 0;
         String[] nodeArr = route.split("");
         for (int i = 1, len = nodeArr.length; i < len; i++) {
             String edge = nodeArr[i - 1] + nodeArr[i];
             Optional<Edge> edgeOptional = this.findEdge(edge);
             if (edgeOptional.isPresent()) {
-                routes.add(edgeOptional.get());
+                distance += edgeOptional.get().getDistance();
             }
         }
 
-        if (routes.size() != nodeArr.length - 1) {
+        if (distance == 0) {
             throw new Exception("NO SUCH ROUTE");
         }
-        return routes;
+        return distance;
     }
 
     private Optional<Edge> findEdge(String route) {

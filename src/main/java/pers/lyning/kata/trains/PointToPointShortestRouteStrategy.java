@@ -21,12 +21,8 @@ public class PointToPointShortestRouteStrategy implements RouteStrategy {
     @Override
     public Integer calculate(Digraph digraph) {
         this.digraph = digraph;
-        return this.getShortestDistance();
-    }
-
-    private Integer getShortestDistance() {
         this.depthFirstSearch();
-        return shortestRoute.getDistance();
+        return this.shortestRoute.getDistance();
     }
 
     private void depthFirstSearch() {
