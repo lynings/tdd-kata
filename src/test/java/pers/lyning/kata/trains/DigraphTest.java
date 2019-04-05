@@ -2,8 +2,8 @@ package pers.lyning.kata.trains;
 
 import org.junit.Test;
 import pers.lyning.kata.trains.factory.RouteStrategyFactory;
-import pers.lyning.kata.trains.strategy.ConditionEnum;
-import pers.lyning.kata.trains.strategy.RouteStrategy;
+import pers.lyning.kata.trains.strategy.RouteSpecification;
+import pers.lyning.kata.trains.strategy.Strategy;
 
 import java.util.Arrays;
 import java.util.List;
@@ -44,8 +44,8 @@ public class DigraphTest {
     @Test
     public void should_return_times_of_routes_when_calculate_all_routes_from_origin_to_destination() throws Exception {
         List<ResultAndRouteStrategy> strategies = Arrays.asList(
-                new ResultAndRouteStrategy(2, RouteStrategyFactory.createPointToPointStopsConstraintRouteStrategy(new Route("C", "C"), 3, ConditionEnum.LessThanOrEqual)),
-                new ResultAndRouteStrategy(3, RouteStrategyFactory.createPointToPointStopsConstraintRouteStrategy(new Route("A", "C"), 4, ConditionEnum.Equal))
+                new ResultAndRouteStrategy(2, RouteStrategyFactory.createPointToPointStopsConstraintRouteStrategy(new Route("C", "C"), new RouteSpecification(3, RouteSpecification.ConstraintEnum.LessThanOrEqual))),
+                new ResultAndRouteStrategy(3, RouteStrategyFactory.createPointToPointStopsConstraintRouteStrategy(new Route("A", "C"), new RouteSpecification(4, RouteSpecification.ConstraintEnum.Equal)))
         );
 
         for (ResultAndRouteStrategy resultAndRouteStrategy : strategies) {
@@ -58,8 +58,8 @@ public class DigraphTest {
     public void should_return_7_when_calculate_all_the_routes_of_c_to_c() throws Exception {
         Route route = new Route("C", "C");
         final int MAX_DISTANCE = 30;
-        ConditionEnum conditionEnum = ConditionEnum.LessThan;
-        RouteStrategy strategy = RouteStrategyFactory.createPointToPointDistanceConstraintRouteStrategy(route, MAX_DISTANCE, conditionEnum);
+        RouteSpecification routeSpecification = new RouteSpecification(MAX_DISTANCE, RouteSpecification.ConstraintEnum.LessThan);
+        Strategy strategy = RouteStrategyFactory.createPointToPointDistanceConstraintRouteStrategy(route, routeSpecification);
         Integer times = this.digraph.calculate(strategy);
         assertThat(times).isEqualTo(7);
     }
@@ -77,9 +77,9 @@ public class DigraphTest {
 
     private static class ResultAndRouteStrategy {
         private Integer result;
-        private RouteStrategy routeStrategy;
+        private Strategy routeStrategy;
 
-        public ResultAndRouteStrategy(Integer result, RouteStrategy routeStrategy) {
+        public ResultAndRouteStrategy(Integer result, Strategy routeStrategy) {
             this.result = result;
             this.routeStrategy = routeStrategy;
         }
@@ -88,7 +88,7 @@ public class DigraphTest {
             return result;
         }
 
-        public RouteStrategy getRouteStrategy() {
+        public Strategy getRouteStrategy() {
             return routeStrategy;
         }
     }

@@ -10,20 +10,20 @@ import java.util.Objects;
 /**
  * @author lyning
  */
-public class PointToPointShortestRouteStrategy implements RouteStrategy {
+public class CalculationShortestDistanceStrategy implements Strategy {
 
     private Digraph digraph;
     private final Route route;
     private final ShortestRoute shortestRoute;
     private final Integer MAX_NUMBER_OF_STOP_STATION = 10;
 
-    public PointToPointShortestRouteStrategy(Route route) {
+    public CalculationShortestDistanceStrategy(Route route) {
         this.route = route;
         this.shortestRoute = new ShortestRoute();
     }
 
     @Override
-    public Integer calculate(Digraph digraph) {
+    public Integer execute(Digraph digraph) {
         this.digraph = digraph;
         this.depthFirstSearch();
         return this.shortestRoute.getDistance();

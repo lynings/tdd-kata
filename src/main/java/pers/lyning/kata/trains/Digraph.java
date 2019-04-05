@@ -1,6 +1,6 @@
 package pers.lyning.kata.trains;
 
-import pers.lyning.kata.trains.strategy.RouteStrategy;
+import pers.lyning.kata.trains.strategy.Strategy;
 
 import java.util.List;
 
@@ -17,8 +17,8 @@ public class Digraph {
         this.edges = edges;
     }
 
-    public Integer calculate(RouteStrategy strategy) throws Exception {
-        return strategy.calculate(this);
+    public Integer calculate(Strategy strategy) throws Exception {
+        return strategy.execute(this);
     }
 
     public List<Edge> getEdgesOfOrigin(String origin) {

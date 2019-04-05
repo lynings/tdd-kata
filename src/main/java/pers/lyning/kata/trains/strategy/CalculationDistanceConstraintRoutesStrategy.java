@@ -1,6 +1,8 @@
 package pers.lyning.kata.trains.strategy;
 
-import pers.lyning.kata.trains.*;
+import pers.lyning.kata.trains.Digraph;
+import pers.lyning.kata.trains.Edge;
+import pers.lyning.kata.trains.Route;
 
 import java.util.HashSet;
 import java.util.List;
@@ -9,39 +11,39 @@ import java.util.Set;
 /**
  * @author lyning
  */
-public class PointToPointDistanceConstraintRouteStrategy implements RouteStrategy {
+public class CalculationDistanceConstraintRoutesStrategy implements Strategy {
 
     private Digraph digraph;
     private final Route route;
     private final Set<String> routes;
-    private final DistanceConstraint distanceConstraint;
+    private final RouteSpecification routeSpecification;
 
-    public PointToPointDistanceConstraintRouteStrategy(Route route, DistanceConstraint distanceConstraint) {
+    public CalculationDistanceConstraintRoutesStrategy(Route route, RouteSpecification routeSpecification) {
         this.route = route;
-        this.distanceConstraint = distanceConstraint;
+        this.routeSpecification = routeSpecification;
         routes = new HashSet<>();
     }
 
     @Override
-    public Integer calculate(Digraph digraph) {
+    public Integer execute(Digraph digraph) {
         this.digraph = digraph;
-        return this.calculateTimesOfRoutes();
+        this.depthFirstSearch();
+        return routes.size();
     }
 
-    private Integer calculateTimesOfRoutes() {
+    private void depthFirstSearch() {
         List<Edge> edgeList = this.digraph.getEdgesOfOrigin(route.getOrigin());
         for (Edge edge : edgeList) {
             this.depthFirstSearch(edge, edge.getName(), edge.getDistance());
         }
-        return routes.size();
     }
 
     private void depthFirstSearch(Edge origin, String route, Integer distance) {
-        if (!this.distanceConstraint.isValid(distance)) {
+        if (!this.routeSpecification.isValid(distance)) {
             return;
         }
 
-        if (this.route.isEquals(route) && this.distanceConstraint.isValid(distance)) {
+        if (this.route.isEquals(route) && this.routeSpecification.isValid(distance)) {
             routes.add(route);
         }
 

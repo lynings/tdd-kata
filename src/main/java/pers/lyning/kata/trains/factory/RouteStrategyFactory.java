@@ -8,19 +8,19 @@ import pers.lyning.kata.trains.strategy.*;
  */
 public class RouteStrategyFactory {
 
-    public static RouteStrategy createPointToPointDistanceRouteStrategy(String route) {
-        return new PointToPointDistanceRouteStrategy(route);
+    public static Strategy createPointToPointDistanceRouteStrategy(String route) {
+        return new CalculationSingleRouteDistanceStrategy(route);
     }
 
-    public static RouteStrategy createPointToPointStopsConstraintRouteStrategy(Route route, int limitOfStops, ConditionEnum conditionEnum) {
-        return new PointToPointStopsConstraintRouteStrategy(route, new StopsConstraint(limitOfStops, conditionEnum));
+    public static Strategy createPointToPointStopsConstraintRouteStrategy(Route route, RouteSpecification specification) {
+        return new CalculationStopsConstraintRoutesStrategy(route, specification);
     }
 
-    public static RouteStrategy createPointToPointDistanceConstraintRouteStrategy(Route route, int distance, ConditionEnum conditionEnum) {
-        return new PointToPointDistanceConstraintRouteStrategy(route, new DistanceConstraint(distance, conditionEnum));
+    public static Strategy createPointToPointDistanceConstraintRouteStrategy(Route route, RouteSpecification specification) {
+        return new CalculationDistanceConstraintRoutesStrategy(route, specification);
     }
 
-    public static RouteStrategy createPointToPointShortestRouteStrategy(Route route) {
-        return new PointToPointShortestRouteStrategy(route);
+    public static Strategy createPointToPointShortestRouteStrategy(Route route) {
+        return new CalculationShortestDistanceStrategy(route);
     }
 }

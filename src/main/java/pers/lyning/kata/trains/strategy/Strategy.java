@@ -7,14 +7,14 @@ import pers.lyning.kata.trains.Digraph;
  *
  * @author lyning
  */
-public interface RouteStrategy {
+public interface Strategy {
 
     /**
-     * 计算
+     * 执行
      *
-     * @param digraph 有向图
+     * @param context 有向图
      * @return
      * @throws Exception
      */
-    Integer calculate(Digraph digraph) throws Exception;
+    Integer execute(Digraph context) throws Exception;
 }

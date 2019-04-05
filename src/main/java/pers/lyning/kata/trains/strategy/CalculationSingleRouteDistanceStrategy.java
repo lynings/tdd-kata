@@ -8,17 +8,17 @@ import java.util.Optional;
 /**
  * @author lyning
  */
-public class PointToPointDistanceRouteStrategy implements RouteStrategy {
+public class CalculationSingleRouteDistanceStrategy implements Strategy {
 
     private Digraph digraph;
     private String route;
 
-    public PointToPointDistanceRouteStrategy(String route) {
+    public CalculationSingleRouteDistanceStrategy(String route) {
         this.route = route;
     }
 
     @Override
-    public Integer calculate(Digraph digraph) throws Exception {
+    public Integer execute(Digraph digraph) throws Exception {
         this.digraph = digraph;
         return this.getDistance();
     }
