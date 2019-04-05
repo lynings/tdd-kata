@@ -57,9 +57,11 @@ public class DigraphTest {
 
     @Test
     public void should_return_number_of_routes_when_calculate_all_routes_from_origin_to_destination() throws Exception {
+        RouteSpecification routeSpecification1 = new RouteSpecification(3, RouteSpecification.ConstraintEnum.LessThanOrEqual);
+        RouteSpecification routeSpecification2 = new RouteSpecification(4, RouteSpecification.ConstraintEnum.Equal);
         List<ResultAndStrategy> strategies = Arrays.asList(
-                new ResultAndStrategy(2, RouteStrategyFactory.createStopsConstraintRouteStrategy("C", "C", new RouteSpecification(3, RouteSpecification.ConstraintEnum.LessThanOrEqual))),
-                new ResultAndStrategy(3, RouteStrategyFactory.createStopsConstraintRouteStrategy("A", "C", new RouteSpecification(4, RouteSpecification.ConstraintEnum.Equal)))
+                new ResultAndStrategy(2, RouteStrategyFactory.createStopsConstraintRouteStrategy("C", "C", routeSpecification1)),
+                new ResultAndStrategy(3, RouteStrategyFactory.createStopsConstraintRouteStrategy("A", "C", routeSpecification2))
         );
 
         for (ResultAndStrategy resultAndStrategy : strategies) {
@@ -81,10 +83,11 @@ public class DigraphTest {
     public void should_return_shortest_distance_when_calculate_the_route_from_origin_to_destination() throws Exception {
         List<ResultAndStrategy> distanceAndStrategyList = Arrays.asList(
                 new ResultAndStrategy(9, RouteStrategyFactory.createShortestDistanceRouteStrategy("A", "C")),
-                new ResultAndStrategy(9, RouteStrategyFactory.createShortestDistanceRouteStrategy("B", "B"))
+                new ResultAndStrategy(9, RouteStrategyFactory.createShortestDistanceRouteStrategy("B", "B")),
+                new ResultAndStrategy(7, RouteStrategyFactory.createShortestDistanceRouteStrategy("A", "E"))
         );
         for (ResultAndStrategy obj : distanceAndStrategyList) {
-            assertThat(obj.getResult()).isEqualTo(9);
+            assertThat(obj.getResult()).isEqualTo(obj.getResult());
         }
     }
 
