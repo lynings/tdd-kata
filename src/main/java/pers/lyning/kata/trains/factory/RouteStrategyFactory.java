@@ -12,15 +12,15 @@ public class RouteStrategyFactory {
         return new DistanceRouteStrategy(route);
     }
 
-    public static RouteStrategy createStopsConstraintRouteStrategy(Route route, RouteSpecification specification) {
-        return new StopsConstraintRouteStrategy(route, specification);
+    public static RouteStrategy createStopsConstraintRouteStrategy(String origin, String destination, RouteSpecification specification) {
+        return new StopsConstraintRouteStrategy(new Route(origin, destination), specification);
     }
 
-    public static RouteStrategy createDistanceConstraintRouteStrategy(Route route, RouteSpecification specification) {
-        return new DistanceConstraintRouteStrategy(route, specification);
+    public static RouteStrategy createDistanceConstraintRouteStrategy(String origin, String destination, RouteSpecification specification) {
+        return new DistanceConstraintRouteStrategy(new Route(origin, destination), specification);
     }
 
-    public static RouteStrategy createShortestDistanceRouteStrategy(Route route) {
-        return new ShortestDistanceRouteStrategy(route);
+    public static RouteStrategy createShortestDistanceRouteStrategy(String origin, String destination) {
+        return new ShortestDistanceRouteStrategy(new Route(origin, destination));
     }
 }

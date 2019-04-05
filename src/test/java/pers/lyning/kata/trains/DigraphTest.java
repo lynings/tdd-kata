@@ -58,8 +58,8 @@ public class DigraphTest {
     @Test
     public void should_return_number_of_routes_when_calculate_all_routes_from_origin_to_destination() throws Exception {
         List<ResultAndStrategy> strategies = Arrays.asList(
-                new ResultAndStrategy(2, RouteStrategyFactory.createStopsConstraintRouteStrategy(new Route("C", "C"), new RouteSpecification(3, RouteSpecification.ConstraintEnum.LessThanOrEqual))),
-                new ResultAndStrategy(3, RouteStrategyFactory.createStopsConstraintRouteStrategy(new Route("A", "C"), new RouteSpecification(4, RouteSpecification.ConstraintEnum.Equal)))
+                new ResultAndStrategy(2, RouteStrategyFactory.createStopsConstraintRouteStrategy("C", "C", new RouteSpecification(3, RouteSpecification.ConstraintEnum.LessThanOrEqual))),
+                new ResultAndStrategy(3, RouteStrategyFactory.createStopsConstraintRouteStrategy("A", "C", new RouteSpecification(4, RouteSpecification.ConstraintEnum.Equal)))
         );
 
         for (ResultAndStrategy resultAndStrategy : strategies) {
@@ -70,10 +70,9 @@ public class DigraphTest {
 
     @Test
     public void should_return_7_when_calculate_all_the_routes_of_C_to_C() throws Exception {
-        Route route = new Route("C", "C");
         final int MAX_DISTANCE = 30;
         RouteSpecification routeSpecification = new RouteSpecification(MAX_DISTANCE, RouteSpecification.ConstraintEnum.LessThan);
-        RouteStrategy routeStrategy = RouteStrategyFactory.createDistanceConstraintRouteStrategy(route, routeSpecification);
+        RouteStrategy routeStrategy = RouteStrategyFactory.createDistanceConstraintRouteStrategy("C", "C", routeSpecification);
         Integer times = this.digraph.calculate(routeStrategy);
         assertThat(times).isEqualTo(7);
     }
@@ -81,8 +80,8 @@ public class DigraphTest {
     @Test
     public void should_return_shortest_distance_when_calculate_the_route_from_origin_to_destination() throws Exception {
         List<ResultAndStrategy> distanceAndStrategyList = Arrays.asList(
-                new ResultAndStrategy(9, RouteStrategyFactory.createShortestDistanceRouteStrategy(new Route("A", "C"))),
-                new ResultAndStrategy(9, RouteStrategyFactory.createShortestDistanceRouteStrategy(new Route("B", "B")))
+                new ResultAndStrategy(9, RouteStrategyFactory.createShortestDistanceRouteStrategy("A", "C")),
+                new ResultAndStrategy(9, RouteStrategyFactory.createShortestDistanceRouteStrategy("B", "B"))
         );
         for (ResultAndStrategy obj : distanceAndStrategyList) {
             assertThat(obj.getResult()).isEqualTo(9);
