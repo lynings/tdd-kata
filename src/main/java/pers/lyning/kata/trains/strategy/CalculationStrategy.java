@@ -3,7 +3,7 @@ package pers.lyning.kata.trains.strategy;
 import pers.lyning.kata.trains.Digraph;
 
 /**
- * 路线策略接口
+ * 路线计算策略接口
  *
  * @author lyning
  */
