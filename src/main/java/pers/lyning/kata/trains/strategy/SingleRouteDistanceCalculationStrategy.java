@@ -8,12 +8,12 @@ import java.util.Optional;
 /**
  * @author lyning
  */
-public class CalculationSingleRouteDistanceStrategy implements Strategy {
+public class SingleRouteDistanceCalculationStrategy implements CalculationStrategy {
 
     private Digraph digraph;
     private String route;
 
-    public CalculationSingleRouteDistanceStrategy(String route) {
+    public SingleRouteDistanceCalculationStrategy(String route) {
         this.route = route;
     }
 

@@ -11,14 +11,14 @@ import java.util.Set;
 /**
  * @author lyning
  */
-public class CalculationDistanceConstraintRoutesStrategy implements Strategy {
+public class DistanceConstraintRoutesCalculationStrategy implements CalculationStrategy {
 
     private Digraph digraph;
     private final Route route;
     private final Set<String> routes;
     private final RouteSpecification routeSpecification;
 
-    public CalculationDistanceConstraintRoutesStrategy(Route route, RouteSpecification routeSpecification) {
+    public DistanceConstraintRoutesCalculationStrategy(Route route, RouteSpecification routeSpecification) {
         this.route = route;
         this.routeSpecification = routeSpecification;
         routes = new HashSet<>();

@@ -11,13 +11,13 @@ import java.util.Set;
 /**
  * @author lyning
  */
-public class CalculationStopsConstraintRoutesStrategy implements Strategy {
+public class StopsConstraintRoutesCalculationStrategy implements CalculationStrategy {
 
     private Digraph digraph;
     private final Route route;
     private final RouteSpecification routeSpecification;
 
-    public CalculationStopsConstraintRoutesStrategy(Route route, RouteSpecification routeSpecification) {
+    public StopsConstraintRoutesCalculationStrategy(Route route, RouteSpecification routeSpecification) {
         this.route = route;
         this.routeSpecification = routeSpecification;
     }
@@ -40,8 +40,8 @@ public class CalculationStopsConstraintRoutesStrategy implements Strategy {
     }
 
     private void depthFirstSearch(Edge partOfRoute, String route, Set<String> routes) {
-        // 打破循环，避免路线陷入无线循环
-        if (this.isInfiniteLoop(partOfRoute.getName(), route)) {
+        // 用于打破循环，避免路线陷入无线循环
+        if (this.isInfiniteLoop(route)) {
             return;
         }
 
@@ -56,7 +56,7 @@ public class CalculationStopsConstraintRoutesStrategy implements Strategy {
         }
     }
 
-    private boolean isInfiniteLoop(String edge, String route) {
-        return (route.length() - route.split(edge).length) / 2 > this.routeSpecification.getValue();
+    private boolean isInfiniteLoop(String route) {
+        return route.length() > this.digraph.getEdges().size();
     }
 }

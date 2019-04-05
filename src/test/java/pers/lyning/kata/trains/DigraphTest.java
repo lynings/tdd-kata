@@ -2,8 +2,8 @@ package pers.lyning.kata.trains;
 
 import org.junit.Test;
 import pers.lyning.kata.trains.factory.RouteStrategyFactory;
+import pers.lyning.kata.trains.strategy.CalculationStrategy;
 import pers.lyning.kata.trains.strategy.RouteSpecification;
-import pers.lyning.kata.trains.strategy.Strategy;
 
 import java.util.Arrays;
 import java.util.List;
@@ -30,26 +30,26 @@ public class DigraphTest {
 
     @Test
     public void should_return_distance_when_calculate_the_distance_of_route() throws Exception {
-        List<ResultAndRouteStrategy> distanceAndRouteStrategyList = Arrays.asList(
-                new ResultAndRouteStrategy(9, RouteStrategyFactory.createPointToPointDistanceRouteStrategy("ABC")),
-                new ResultAndRouteStrategy(5, RouteStrategyFactory.createPointToPointDistanceRouteStrategy("AD")),
-                new ResultAndRouteStrategy(13, RouteStrategyFactory.createPointToPointDistanceRouteStrategy("ADC")),
-                new ResultAndRouteStrategy(22, RouteStrategyFactory.createPointToPointDistanceRouteStrategy("AEBCD"))
+        List<ResultAndStrategy> distanceAndRouteStrategyList = Arrays.asList(
+                new ResultAndStrategy(9, RouteStrategyFactory.createSingleRouteDistanceCalculationStrategy("ABC")),
+                new ResultAndStrategy(5, RouteStrategyFactory.createSingleRouteDistanceCalculationStrategy("AD")),
+                new ResultAndStrategy(13, RouteStrategyFactory.createSingleRouteDistanceCalculationStrategy("ADC")),
+                new ResultAndStrategy(22, RouteStrategyFactory.createSingleRouteDistanceCalculationStrategy("AEBCD"))
         );
-        for (ResultAndRouteStrategy obj : distanceAndRouteStrategyList) {
-            assertThat(digraph.calculate(obj.getRouteStrategy())).isEqualTo(obj.getResult());
+        for (ResultAndStrategy obj : distanceAndRouteStrategyList) {
+            assertThat(digraph.calculate(obj.getRouteCalculationStrategy())).isEqualTo(obj.getResult());
         }
     }
 
     @Test
     public void should_return_times_of_routes_when_calculate_all_routes_from_origin_to_destination() throws Exception {
-        List<ResultAndRouteStrategy> strategies = Arrays.asList(
-                new ResultAndRouteStrategy(2, RouteStrategyFactory.createPointToPointStopsConstraintRouteStrategy(new Route("C", "C"), new RouteSpecification(3, RouteSpecification.ConstraintEnum.LessThanOrEqual))),
-                new ResultAndRouteStrategy(3, RouteStrategyFactory.createPointToPointStopsConstraintRouteStrategy(new Route("A", "C"), new RouteSpecification(4, RouteSpecification.ConstraintEnum.Equal)))
+        List<ResultAndStrategy> strategies = Arrays.asList(
+                new ResultAndStrategy(2, RouteStrategyFactory.createStopsConstraintRoutesCalculationStrategy(new Route("C", "C"), new RouteSpecification(3, RouteSpecification.ConstraintEnum.LessThanOrEqual))),
+                new ResultAndStrategy(3, RouteStrategyFactory.createStopsConstraintRoutesCalculationStrategy(new Route("A", "C"), new RouteSpecification(4, RouteSpecification.ConstraintEnum.Equal)))
         );
 
-        for (ResultAndRouteStrategy resultAndRouteStrategy : strategies) {
-            Integer timesOfRoutes = this.digraph.calculate(resultAndRouteStrategy.getRouteStrategy());
+        for (ResultAndStrategy resultAndRouteStrategy : strategies) {
+            Integer timesOfRoutes = this.digraph.calculate(resultAndRouteStrategy.getRouteCalculationStrategy());
             assertThat(timesOfRoutes).isEqualTo(resultAndRouteStrategy.getResult());
         }
     }
@@ -59,37 +59,37 @@ public class DigraphTest {
         Route route = new Route("C", "C");
         final int MAX_DISTANCE = 30;
         RouteSpecification routeSpecification = new RouteSpecification(MAX_DISTANCE, RouteSpecification.ConstraintEnum.LessThan);
-        Strategy strategy = RouteStrategyFactory.createPointToPointDistanceConstraintRouteStrategy(route, routeSpecification);
-        Integer times = this.digraph.calculate(strategy);
+        CalculationStrategy calculationStrategy = RouteStrategyFactory.createDistanceConstraintRoutesCalculationStrategy(route, routeSpecification);
+        Integer times = this.digraph.calculate(calculationStrategy);
         assertThat(times).isEqualTo(7);
     }
 
     @Test
-    public void should_return_distance_when_calculate_the_shortest_distance_of_route() throws Exception {
-        List<ResultAndRouteStrategy> distanceAndRouteStrategyList = Arrays.asList(
-                new ResultAndRouteStrategy(9, RouteStrategyFactory.createPointToPointShortestRouteStrategy(new Route("A", "C"))),
-                new ResultAndRouteStrategy(9, RouteStrategyFactory.createPointToPointShortestRouteStrategy(new Route("B", "B")))
+    public void should_return_shortest_distance_when_calculate_the_routes_from_origin_to_destination() throws Exception {
+        List<ResultAndStrategy> distanceAndStrategyList = Arrays.asList(
+                new ResultAndStrategy(9, RouteStrategyFactory.createShortestDistanceCalculationStrategy(new Route("A", "C"))),
+                new ResultAndStrategy(9, RouteStrategyFactory.createShortestDistanceCalculationStrategy(new Route("B", "B")))
         );
-        for (ResultAndRouteStrategy obj : distanceAndRouteStrategyList) {
+        for (ResultAndStrategy obj : distanceAndStrategyList) {
             assertThat(obj.getResult()).isEqualTo(9);
         }
     }
 
-    private static class ResultAndRouteStrategy {
+    private static class ResultAndStrategy {
         private Integer result;
-        private Strategy routeStrategy;
+        private CalculationStrategy routeCalculationStrategy;
 
-        public ResultAndRouteStrategy(Integer result, Strategy routeStrategy) {
+        public ResultAndStrategy(Integer result, CalculationStrategy routeCalculationStrategy) {
             this.result = result;
-            this.routeStrategy = routeStrategy;
+            this.routeCalculationStrategy = routeCalculationStrategy;
         }
 
         public Integer getResult() {
             return result;
         }
 
-        public Strategy getRouteStrategy() {
-            return routeStrategy;
+        public CalculationStrategy getRouteCalculationStrategy() {
+            return routeCalculationStrategy;
         }
     }
 }
