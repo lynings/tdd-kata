@@ -30,10 +30,10 @@ public class DistanceRouteStrategy implements RouteStrategy {
         Integer distance = 0;
         String[] nodeArr = route.split("");
         for (int i = 1, len = nodeArr.length; i < len; i++) {
-            String edge = nodeArr[i - 1] + nodeArr[i];
-            Optional<Route> edgeOptional = this.findRoute(edge);
-            if (edgeOptional.isPresent()) {
-                distance += edgeOptional.get().getDistance();
+            String route = nodeArr[i - 1] + nodeArr[i];
+            Optional<Route> routeOptional = this.findRoute(route);
+            if (routeOptional.isPresent()) {
+                distance += routeOptional.get().getDistance();
             } else {
                 return NO_SUCH_ROUTE;
             }
@@ -42,10 +42,10 @@ public class DistanceRouteStrategy implements RouteStrategy {
     }
 
     private Optional<Route> findRoute(String route) {
-        Optional<Route> edgeOptional = this.digraph.getRoutes()
+        Optional<Route> routeOptional = this.digraph.getRoutes()
                 .stream()
                 .filter(o -> o.getName().equals(route))
                 .findFirst();
-        return edgeOptional;
+        return routeOptional;
     }
 }

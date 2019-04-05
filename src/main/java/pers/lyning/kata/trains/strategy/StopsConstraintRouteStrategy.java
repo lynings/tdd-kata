@@ -40,20 +40,20 @@ public class StopsConstraintRouteStrategy implements RouteStrategy {
         return routeSet;
     }
 
-    private void depthFirstSearch(Route currentRoute, String route, Set<String> routes) {
+    private void depthFirstSearch(Route currentRoute, String route, Set<String> routeSet) {
         // 用于打破循环，避免路线陷入无线循环
         if (this.isInfiniteLoop(route)) {
             return;
         }
 
         if (this.route.isEquals(route) && this.routeSpecification.isValid(route.length() - 1)) {
-            routes.add(route);
+            routeSet.add(route);
             return;
         }
 
-        List<Route> edges = this.digraph.getRoutesOfOrigin(currentRoute.getDestination());
-        for (Route nextRoute : edges) {
-            this.depthFirstSearch(nextRoute, route + nextRoute.getDestination(), routes);
+        List<Route> routes = this.digraph.getRoutesOfOrigin(currentRoute.getDestination());
+        for (Route nextRoute : routes) {
+            this.depthFirstSearch(nextRoute, route + nextRoute.getDestination(), routeSet);
         }
     }
 

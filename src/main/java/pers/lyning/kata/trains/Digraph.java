@@ -34,13 +34,13 @@ public class Digraph {
     private boolean isDuplicateRoute() {
         return this.getRoutes()
                 .stream()
-                .map(edge -> edge.getName())
+                .map(route -> route.getName())
                 .collect(toSet()).size() != this.getRoutes().size();
     }
 
     private boolean isDuplicateNodeInRoute() throws Exception {
-        for (Route edge : this.getRoutes()) {
-            if (edge.getOrigin().equals(edge.getDestination())) {
+        for (Route route : this.getRoutes()) {
+            if (route.getOrigin().equals(route.getDestination())) {
                 return true;
             }
         }

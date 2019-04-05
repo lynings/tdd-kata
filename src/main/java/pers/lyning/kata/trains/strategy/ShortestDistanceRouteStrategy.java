@@ -30,8 +30,8 @@ public class ShortestDistanceRouteStrategy implements RouteStrategy {
 
     private void depthFirstSearch() {
         List<Route> routes = this.digraph.getRoutesOfOrigin(this.route.getOrigin());
-        for (Route edge : routes) {
-            this.depthFirstSearch(edge, edge.getName(), edge.getDistance());
+        for (Route route : routes) {
+            this.depthFirstSearch(route, route.getName(), route.getDistance());
         }
     }
 
