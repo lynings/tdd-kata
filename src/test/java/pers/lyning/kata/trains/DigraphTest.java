@@ -30,27 +30,28 @@ public class DigraphTest {
 
     @Test
     public void should_return_distance_when_calculate_the_distance_of_route() throws Exception {
-        List<ResultAndStrategy> distanceAndRouteStrategyList = Arrays.asList(
+        List<ResultAndStrategy> distanceAndStrategyList = Arrays.asList(
                 new ResultAndStrategy(9, RouteStrategyFactory.createSingleRouteDistanceCalculationStrategy("ABC")),
                 new ResultAndStrategy(5, RouteStrategyFactory.createSingleRouteDistanceCalculationStrategy("AD")),
                 new ResultAndStrategy(13, RouteStrategyFactory.createSingleRouteDistanceCalculationStrategy("ADC")),
                 new ResultAndStrategy(22, RouteStrategyFactory.createSingleRouteDistanceCalculationStrategy("AEBCD"))
         );
-        for (ResultAndStrategy obj : distanceAndRouteStrategyList) {
-            assertThat(digraph.calculate(obj.getRouteCalculationStrategy())).isEqualTo(obj.getResult());
+        for (ResultAndStrategy resultAndStrategy : distanceAndStrategyList) {
+            Integer distance = digraph.calculate(resultAndStrategy.getRouteCalculationStrategy());
+            assertThat(distance).isEqualTo(resultAndStrategy.getResult());
         }
     }
 
     @Test
-    public void should_return_times_of_routes_when_calculate_all_routes_from_origin_to_destination() throws Exception {
+    public void should_return_number_of_routes_when_calculate_all_routes_from_origin_to_destination() throws Exception {
         List<ResultAndStrategy> strategies = Arrays.asList(
                 new ResultAndStrategy(2, RouteStrategyFactory.createStopsConstraintRoutesCalculationStrategy(new Route("C", "C"), new RouteSpecification(3, RouteSpecification.ConstraintEnum.LessThanOrEqual))),
                 new ResultAndStrategy(3, RouteStrategyFactory.createStopsConstraintRoutesCalculationStrategy(new Route("A", "C"), new RouteSpecification(4, RouteSpecification.ConstraintEnum.Equal)))
         );
 
-        for (ResultAndStrategy resultAndRouteStrategy : strategies) {
-            Integer timesOfRoutes = this.digraph.calculate(resultAndRouteStrategy.getRouteCalculationStrategy());
-            assertThat(timesOfRoutes).isEqualTo(resultAndRouteStrategy.getResult());
+        for (ResultAndStrategy resultAndStrategy : strategies) {
+            Integer timesOfRoutes = this.digraph.calculate(resultAndStrategy.getRouteCalculationStrategy());
+            assertThat(timesOfRoutes).isEqualTo(resultAndStrategy.getResult());
         }
     }
 
@@ -65,7 +66,7 @@ public class DigraphTest {
     }
 
     @Test
-    public void should_return_shortest_distance_when_calculate_the_routes_from_origin_to_destination() throws Exception {
+    public void should_return_shortest_distance_when_calculate_the_route_from_origin_to_destination() throws Exception {
         List<ResultAndStrategy> distanceAndStrategyList = Arrays.asList(
                 new ResultAndStrategy(9, RouteStrategyFactory.createShortestDistanceCalculationStrategy(new Route("A", "C"))),
                 new ResultAndStrategy(9, RouteStrategyFactory.createShortestDistanceCalculationStrategy(new Route("B", "B")))
