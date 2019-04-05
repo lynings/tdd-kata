@@ -21,18 +21,18 @@ public class DigraphTest {
     @Rule
     public final ExpectedException expectedEx = ExpectedException.none();
 
-    private final List<Edge> edges = Arrays.asList(
-            new Edge("A", "B", 5),
-            new Edge("B", "C", 4),
-            new Edge("C", "D", 8),
-            new Edge("D", "C", 8),
-            new Edge("D", "E", 6),
-            new Edge("A", "D", 5),
-            new Edge("C", "E", 2),
-            new Edge("E", "B", 3),
-            new Edge("A", "E", 7)
+    private final List<Route> routes = Arrays.asList(
+            new Route("A", "B", 5),
+            new Route("B", "C", 4),
+            new Route("C", "D", 8),
+            new Route("D", "C", 8),
+            new Route("D", "E", 6),
+            new Route("A", "D", 5),
+            new Route("C", "E", 2),
+            new Route("E", "B", 3),
+            new Route("A", "E", 7)
     );
-    private final Digraph digraph = new Digraph(edges);
+    private final Digraph digraph = new Digraph(routes);
 
     @Test
     public void should_return_distance_when_calculate_the_distance_of_route() throws Exception {
@@ -94,9 +94,9 @@ public class DigraphTest {
         expectedEx.expectMessage("duplicated route!");
 
         Digraph digraph = new Digraph(Arrays.asList(
-                new Edge("A", "B", 5),
-                new Edge("B", "C", 4),
-                new Edge("A", "B", 5)
+                new Route("A", "B", 5),
+                new Route("B", "C", 4),
+                new Route("A", "B", 5)
         ));
         RouteStrategy routeStrategy = RouteStrategyFactory.createDistanceRouteStrategy("ABC");
         digraph.calculate(routeStrategy);
@@ -108,9 +108,9 @@ public class DigraphTest {
         expectedEx.expectMessage("origin and destination cannot be the same!");
 
         Digraph digraph = new Digraph(Arrays.asList(
-                new Edge("A", "B", 5),
-                new Edge("B", "C", 4),
-                new Edge("D", "D", 2)
+                new Route("A", "B", 5),
+                new Route("B", "C", 4),
+                new Route("D", "D", 2)
         ));
         RouteStrategy routeStrategy = RouteStrategyFactory.createDistanceRouteStrategy("ABC");
         digraph.calculate(routeStrategy);

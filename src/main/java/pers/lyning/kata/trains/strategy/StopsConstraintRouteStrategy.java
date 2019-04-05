@@ -1,7 +1,6 @@
 package pers.lyning.kata.trains.strategy;
 
 import pers.lyning.kata.trains.Digraph;
-import pers.lyning.kata.trains.Edge;
 import pers.lyning.kata.trains.Route;
 
 import java.util.HashSet;
@@ -32,16 +31,16 @@ public class StopsConstraintRouteStrategy implements RouteStrategy {
     }
 
     private Set<String> getRoutes() {
-        Set<String> routes = new HashSet<>();
+        Set<String> routeSet = new HashSet<>();
 
-        List<Edge> edges = this.digraph.getEdgesOfOrigin(this.route.getOrigin());
-        for (Edge edge : edges) {
-            this.depthFirstSearch(edge, edge.getName(), routes);
+        List<Route> routes = this.digraph.getRoutesOfOrigin(this.route.getOrigin());
+        for (Route route : routes) {
+            this.depthFirstSearch(route, route.getName(), routeSet);
         }
-        return routes;
+        return routeSet;
     }
 
-    private void depthFirstSearch(Edge partOfRoute, String route, Set<String> routes) {
+    private void depthFirstSearch(Route currentRoute, String route, Set<String> routes) {
         // 用于打破循环，避免路线陷入无线循环
         if (this.isInfiniteLoop(route)) {
             return;
@@ -52,13 +51,13 @@ public class StopsConstraintRouteStrategy implements RouteStrategy {
             return;
         }
 
-        List<Edge> edges = this.digraph.getEdgesOfOrigin(partOfRoute.getEndNode());
-        for (Edge edge : edges) {
-            this.depthFirstSearch(edge, route + edge.getEndNode(), routes);
+        List<Route> edges = this.digraph.getRoutesOfOrigin(currentRoute.getDestination());
+        for (Route nextRoute : edges) {
+            this.depthFirstSearch(nextRoute, route + nextRoute.getDestination(), routes);
         }
     }
 
     private boolean isInfiniteLoop(String route) {
-        return route.length() > this.digraph.getEdges().size();
+        return route.length() > this.digraph.getRoutes().size();
     }
 }

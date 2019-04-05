@@ -27,18 +27,18 @@ public class TrainMain {
                 RouteStrategyFactory.createDistanceConstraintRouteStrategy("C", "C", new RouteSpecification(30, RouteSpecification.ConstraintEnum.LessThan))
         );
 
-        List<Edge> edges = Arrays.asList(
-                new Edge("A", "B", 5),
-                new Edge("B", "C", 4),
-                new Edge("C", "D", 8),
-                new Edge("D", "C", 8),
-                new Edge("D", "E", 6),
-                new Edge("A", "D", 5),
-                new Edge("C", "E", 2),
-                new Edge("E", "B", 3),
-                new Edge("A", "E", 7)
+        List<Route> routes = Arrays.asList(
+                new Route("A", "B", 5),
+                new Route("B", "C", 4),
+                new Route("C", "D", 8),
+                new Route("D", "C", 8),
+                new Route("D", "E", 6),
+                new Route("A", "D", 5),
+                new Route("C", "E", 2),
+                new Route("E", "B", 3),
+                new Route("A", "E", 7)
         );
-        Digraph digraph = new Digraph(edges);
+        Digraph digraph = new Digraph(routes);
 
         for (int index = 1; index <= routeStrategies.size(); index++) {
             Integer result = digraph.calculate(routeStrategies.get(index - 1));

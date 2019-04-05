@@ -1,7 +1,7 @@
 package pers.lyning.kata.trains.strategy;
 
 import pers.lyning.kata.trains.Digraph;
-import pers.lyning.kata.trains.Edge;
+import pers.lyning.kata.trains.Route;
 
 import java.util.Optional;
 
@@ -31,7 +31,7 @@ public class DistanceRouteStrategy implements RouteStrategy {
         String[] nodeArr = route.split("");
         for (int i = 1, len = nodeArr.length; i < len; i++) {
             String edge = nodeArr[i - 1] + nodeArr[i];
-            Optional<Edge> edgeOptional = this.findEdge(edge);
+            Optional<Route> edgeOptional = this.findRoute(edge);
             if (edgeOptional.isPresent()) {
                 distance += edgeOptional.get().getDistance();
             } else {
@@ -41,8 +41,8 @@ public class DistanceRouteStrategy implements RouteStrategy {
         return distance;
     }
 
-    private Optional<Edge> findEdge(String route) {
-        Optional<Edge> edgeOptional = this.digraph.getEdges()
+    private Optional<Route> findRoute(String route) {
+        Optional<Route> edgeOptional = this.digraph.getRoutes()
                 .stream()
                 .filter(o -> o.getName().equals(route))
                 .findFirst();

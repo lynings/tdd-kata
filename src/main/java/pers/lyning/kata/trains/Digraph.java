@@ -12,10 +12,10 @@ import static java.util.stream.Collectors.toSet;
  */
 public class Digraph {
 
-    private List<Edge> edges;
+    private List<Route> routes;
 
-    public Digraph(List<Edge> edges) {
-        this.edges = edges;
+    public Digraph(List<Route> routes) {
+        this.routes = routes;
     }
 
     public Integer calculate(RouteStrategy routeStrategy) throws Exception {
@@ -24,37 +24,37 @@ public class Digraph {
     }
 
     private void validate() throws Exception {
-        if (this.isDuplicateEdge()) {
+        if (this.isDuplicateRoute()) {
             throw new Exception("duplicated route!");
-        } else if (this.isDuplicateNodeInEdge()) {
+        } else if (this.isDuplicateNodeInRoute()) {
             throw new Exception("origin and destination cannot be the same!");
         }
     }
 
-    private boolean isDuplicateEdge() {
-        return this.getEdges()
+    private boolean isDuplicateRoute() {
+        return this.getRoutes()
                 .stream()
                 .map(edge -> edge.getName())
-                .collect(toSet()).size() != this.getEdges().size();
+                .collect(toSet()).size() != this.getRoutes().size();
     }
 
-    private boolean isDuplicateNodeInEdge() throws Exception {
-        for (Edge edge : this.getEdges()) {
-            if (edge.getStartNode().equals(edge.getEndNode())) {
+    private boolean isDuplicateNodeInRoute() throws Exception {
+        for (Route edge : this.getRoutes()) {
+            if (edge.getOrigin().equals(edge.getDestination())) {
                 return true;
             }
         }
         return false;
     }
 
-    public List<Edge> getEdgesOfOrigin(String origin) {
-        return this.edges
+    public List<Route> getRoutesOfOrigin(String origin) {
+        return this.getRoutes()
                 .stream()
-                .filter(o -> o.getStartNode().equals(origin))
+                .filter(o -> o.getOrigin().equals(origin))
                 .collect(toList());
     }
 
-    public List<Edge> getEdges() {
-        return edges;
+    public List<Route> getRoutes() {
+        return this.routes;
     }
 }

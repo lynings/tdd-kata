@@ -1,7 +1,6 @@
 package pers.lyning.kata.trains.strategy;
 
 import pers.lyning.kata.trains.Digraph;
-import pers.lyning.kata.trains.Edge;
 import pers.lyning.kata.trains.Route;
 
 import java.util.HashSet;
@@ -34,13 +33,13 @@ public class DistanceConstraintRouteStrategy implements RouteStrategy {
     }
 
     private void depthFirstSearch() {
-        List<Edge> edgeList = this.digraph.getEdgesOfOrigin(route.getOrigin());
-        for (Edge edge : edgeList) {
-            this.depthFirstSearch(edge, edge.getName(), edge.getDistance());
+        List<Route> routes = this.digraph.getRoutesOfOrigin(route.getOrigin());
+        for (Route route : routes) {
+            this.depthFirstSearch(route, route.getName(), route.getDistance());
         }
     }
 
-    private void depthFirstSearch(Edge origin, String route, Integer distance) {
+    private void depthFirstSearch(Route currentRoute, String route, Integer distance) {
         if (!this.routeSpecification.isValid(distance)) {
             return;
         }
@@ -49,9 +48,9 @@ public class DistanceConstraintRouteStrategy implements RouteStrategy {
             routes.add(route);
         }
 
-        List<Edge> edges = this.digraph.getEdgesOfOrigin(origin.getEndNode());
-        for (Edge edge : edges) {
-            this.depthFirstSearch(edge, route.concat(edge.getEndNode()), distance + edge.getDistance());
+        List<Route> routes = this.digraph.getRoutesOfOrigin(currentRoute.getDestination());
+        for (Route nextRoute : routes) {
+            this.depthFirstSearch(nextRoute, route.concat(nextRoute.getDestination()), distance + nextRoute.getDistance());
         }
     }
 }
