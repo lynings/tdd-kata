@@ -25,7 +25,7 @@ public class SingleRouteDistanceCalculationStrategy implements CalculationStrate
         return this.getDistance();
     }
 
-    private Integer getDistance() throws Exception {
+    private Integer getDistance() {
         Integer distance = 0;
         String[] nodeArr = route.split("");
         for (int i = 1, len = nodeArr.length; i < len; i++) {
@@ -34,10 +34,6 @@ public class SingleRouteDistanceCalculationStrategy implements CalculationStrate
             if (edgeOptional.isPresent()) {
                 distance += edgeOptional.get().getDistance();
             }
-        }
-
-        if (distance == 0) {
-            throw new Exception("NO SUCH ROUTE");
         }
         return distance;
     }
