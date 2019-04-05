@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.Set;
 
 /**
+ * 用于计算从起点到终点的所有可行路线，不过路线收到距离长短的限制
+ *
  * @author lyning
  */
 public class DistanceConstraintRoutesCalculationStrategy implements CalculationStrategy {

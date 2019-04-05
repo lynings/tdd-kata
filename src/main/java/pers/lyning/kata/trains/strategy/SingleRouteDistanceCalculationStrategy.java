@@ -6,6 +6,8 @@ import pers.lyning.kata.trains.Edge;
 import java.util.Optional;
 
 /**
+ * 用于计算从起点到终点存在的单一可行路线
+ *
  * @author lyning
  */
 public class SingleRouteDistanceCalculationStrategy implements CalculationStrategy {

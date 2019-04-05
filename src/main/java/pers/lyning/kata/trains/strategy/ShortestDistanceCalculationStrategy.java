@@ -8,13 +8,14 @@ import java.util.List;
 import java.util.Objects;
 
 /**
+ * 用于计算从起点到终点的路线的最短距离
+ *
  * @author lyning
  */
 public class ShortestDistanceCalculationStrategy implements CalculationStrategy {
 
     private Digraph digraph;
     private final Route route;
-    private final Integer MAX_REPEATEDLY = 10;
     private Integer shortestDistance;
 
     public ShortestDistanceCalculationStrategy(Route route) {
