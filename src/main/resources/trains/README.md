@@ -3,7 +3,7 @@
 The local commuter railroad services a number of towns inKiwiland.  
 Because of monetary concerns, all of the tracks are 'one-way.' 
 That is, a route from Kaitaia to Invercargill does not imply the existence of a route from Invercargill to Kaitaia.  
-In fact, even if bothof these routes do happen to exist, they are distinct and are not necessarily the same distance!
+In fact, even if both of these routes do happen to exist, they are distinct and are not necessarily the same distance!
 
 The purpose of this problem is to help the railroad provide its customers with information about the routes.  
 In particular, you will compute the distance along a certain route, 
@@ -75,12 +75,12 @@ Output #10: 7
 - [x] 在给定的测试数据的情境下，验证 A-D 路线的距离必须等于 5。
 - [x] 在给定的测试数据的情境下，验证 A-D-C 路线的距离必须等于 13。
 - [x] 在给定的测试数据的情境下，验证 A-E-B-C-D 路线的距离必须等于 22。
-- [ ] 在给定的测试数据的情境下，没有 A-E-D 路线。
+- [x] 在给定的测试数据的情境下，没有 A-E-D 路线。
 - [x] 在给定的测试数据的情境下，并且每条路线不超过 3 个站点，计算 C-C 路线一共有 C-D-C 和 C-E-B-C 两条路线。
 - [x] 在给定的测试数据的情境下，并且每条路线必须经过 4 个站点，计算 A-C 路线一共有 A-B-C-D-C、A-D-C-D-C 和 A-D-E-B-C 三条路线。
 - [x] 在给定的测试数据的情境下，验证 A-C 的最短距离等于 9。
 - [x] 在给定的测试数据的情境下，验证 B-B 的最短距离等于 9。
 - [x] 在给定的测试数据的情境下，并且距离小于30，验证 C-C 包含 CDC, CEBC, CEBCDC, CDCEBC, CDEBC, CEBCEBC, CEBCEBCEBC 七种不同的路线。
-- [ ] 同一条路线不能出现一次以上。
-- [ ] 同一条路线不会出现起点和终点相同。
+- [x] 同一条路线不能出现一次以上。
+- [x] 同一条路线不会出现起点和终点相同。
 - [x] 重构 PointToPointDistanceRouteStrategy 和 PointToPointShortestRouteStrategy

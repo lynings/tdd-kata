@@ -12,13 +12,13 @@ import java.util.Objects;
  *
  * @author lyning
  */
-public class ShortestDistanceCalculationStrategy implements CalculationStrategy {
+public class ShortestDistanceRouteStrategy implements RouteStrategy {
 
     private Digraph digraph;
     private final Route route;
     private Integer shortestDistance;
 
-    public ShortestDistanceCalculationStrategy(Route route) {
+    public ShortestDistanceRouteStrategy(Route route) {
         this.route = route;
     }
 

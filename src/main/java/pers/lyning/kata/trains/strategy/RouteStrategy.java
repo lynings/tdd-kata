@@ -7,7 +7,7 @@ import pers.lyning.kata.trains.Digraph;
  *
  * @author lyning
  */
-public interface CalculationStrategy {
+public interface RouteStrategy {
 
     /**
      * 执行

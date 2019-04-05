@@ -10,17 +10,18 @@ import java.util.Optional;
  *
  * @author lyning
  */
-public class SingleRouteDistanceCalculationStrategy implements CalculationStrategy {
+public class DistanceRouteStrategy implements RouteStrategy {
 
     private Digraph digraph;
     private String route;
+    public static final Integer NO_SUCH_ROUTE = -1;
 
-    public SingleRouteDistanceCalculationStrategy(String route) {
+    public DistanceRouteStrategy(String route) {
         this.route = route;
     }
 
     @Override
-    public Integer execute(Digraph digraph) throws Exception {
+    public Integer execute(Digraph digraph) {
         this.digraph = digraph;
         return this.getDistance();
     }
@@ -33,6 +34,8 @@ public class SingleRouteDistanceCalculationStrategy implements CalculationStrate
             Optional<Edge> edgeOptional = this.findEdge(edge);
             if (edgeOptional.isPresent()) {
                 distance += edgeOptional.get().getDistance();
+            } else {
+                return NO_SUCH_ROUTE;
             }
         }
         return distance;

@@ -13,13 +13,13 @@ import java.util.Set;
  *
  * @author lyning
  */
-public class StopsConstraintRoutesCalculationStrategy implements CalculationStrategy {
+public class StopsConstraintRouteStrategy implements RouteStrategy {
 
     private Digraph digraph;
     private final Route route;
     private final RouteSpecification routeSpecification;
 
-    public StopsConstraintRoutesCalculationStrategy(Route route, RouteSpecification routeSpecification) {
+    public StopsConstraintRouteStrategy(Route route, RouteSpecification routeSpecification) {
         this.route = route;
         this.routeSpecification = routeSpecification;
     }

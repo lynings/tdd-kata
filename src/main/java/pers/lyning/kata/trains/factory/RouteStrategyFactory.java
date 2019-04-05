@@ -8,19 +8,19 @@ import pers.lyning.kata.trains.strategy.*;
  */
 public class RouteStrategyFactory {
 
-    public static CalculationStrategy createSingleRouteDistanceCalculationStrategy(String route) {
-        return new SingleRouteDistanceCalculationStrategy(route);
+    public static RouteStrategy createDistanceRouteStrategy(String route) {
+        return new DistanceRouteStrategy(route);
     }
 
-    public static CalculationStrategy createStopsConstraintRoutesCalculationStrategy(Route route, RouteSpecification specification) {
-        return new StopsConstraintRoutesCalculationStrategy(route, specification);
+    public static RouteStrategy createStopsConstraintRouteStrategy(Route route, RouteSpecification specification) {
+        return new StopsConstraintRouteStrategy(route, specification);
     }
 
-    public static CalculationStrategy createDistanceConstraintRoutesCalculationStrategy(Route route, RouteSpecification specification) {
-        return new DistanceConstraintRoutesCalculationStrategy(route, specification);
+    public static RouteStrategy createDistanceConstraintRouteStrategy(Route route, RouteSpecification specification) {
+        return new DistanceConstraintRouteStrategy(route, specification);
     }
 
-    public static CalculationStrategy createShortestDistanceCalculationStrategy(Route route) {
-        return new ShortestDistanceCalculationStrategy(route);
+    public static RouteStrategy createShortestDistanceRouteStrategy(Route route) {
+        return new ShortestDistanceRouteStrategy(route);
     }
 }
