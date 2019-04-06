@@ -9,6 +9,7 @@ import java.util.List;
 public class Game {
 
     private final Integer PINS = 10;
+    private final Integer FRAMES = 10;
     private List<Integer> pins = new ArrayList<>();
 
     public void roll(Integer pins) {
@@ -16,34 +17,42 @@ public class Game {
     }
 
     public Integer getScore() {
-        int frame = 1;
         int score = 0;
-        for (int number = 0; number < pins.size(); number++) {
-            if (frame < 10) {
-                if (this.isStrike(pins.get(number))) {
-                    score += (pins.get(number) + pins.get(number + 1) + pins.get(number + 2));
-                } else if (this.isSpare(pins.get(number), pins.get(number + 1))) {
-                    score += (pins.get(number) + pins.get(number + 1) + pins.get(number + 2));
-                    number += 1;
+        int rollIndex = 0;
+        for (int frameIndex = 1; frameIndex <= FRAMES; frameIndex++) {
+            if (frameIndex < FRAMES) {
+                if (this.isStrike(rollIndex)) {
+                    score += (PINS + this.strikeBonus(rollIndex));
+                    rollIndex += 1;
+                } else if (this.isSpare(rollIndex)) {
+                    score += (PINS + this.spareBonus(rollIndex));
+                    rollIndex += 2;
                 } else {
-                    score += (pins.get(number) + pins.get(number + 1));
-                    number += 1;
+                    score += (pins.get(rollIndex) + pins.get(rollIndex + 1));
+                    rollIndex += 2;
                 }
-                frame += 1;
             } else {
-                for (; number < pins.size(); number++) {
-                    score += pins.get(number);
+                for (; rollIndex < pins.size(); rollIndex++) {
+                    score += pins.get(rollIndex);
                 }
             }
         }
         return score;
     }
 
-    private boolean isStrike(Integer pins) {
-        return PINS.equals(pins);
+    private Integer strikeBonus(int rollIndex) {
+        return this.pins.get(rollIndex + 1) + this.pins.get(rollIndex + 2);
     }
 
-    private boolean isSpare(Integer firstPins, Integer secondPins) {
-        return PINS.equals(firstPins + secondPins);
+    private Integer spareBonus(Integer rollIndex) {
+        return this.pins.get(rollIndex + 1);
+    }
+
+    private boolean isStrike(Integer rollIndex) {
+        return PINS.equals(pins.get(rollIndex));
+    }
+
+    private boolean isSpare(Integer rollIndex) {
+        return PINS.equals(this.pins.get(rollIndex) + this.pins.get(rollIndex + 1));
     }
 }
