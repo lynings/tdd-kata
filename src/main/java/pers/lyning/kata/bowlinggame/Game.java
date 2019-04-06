@@ -20,21 +20,15 @@ public class Game {
         int score = 0;
         int rollIndex = 0;
         for (int frameIndex = 1; frameIndex <= FRAMES; frameIndex++) {
-            if (frameIndex < FRAMES) {
-                if (this.isStrike(rollIndex)) {
-                    score += (PINS + this.strikeBonus(rollIndex));
-                    rollIndex += 1;
-                } else if (this.isSpare(rollIndex)) {
-                    score += (PINS + this.spareBonus(rollIndex));
-                    rollIndex += 2;
-                } else {
-                    score += (pins.get(rollIndex) + pins.get(rollIndex + 1));
-                    rollIndex += 2;
-                }
+            if (this.isStrike(rollIndex)) {
+                score += (PINS + this.strikeBonus(rollIndex));
+                rollIndex += 1;
+            } else if (this.isSpare(rollIndex)) {
+                score += (PINS + this.spareBonus(rollIndex));
+                rollIndex += 2;
             } else {
-                for (; rollIndex < pins.size(); rollIndex++) {
-                    score += pins.get(rollIndex);
-                }
+                score += (pins.get(rollIndex) + pins.get(rollIndex + 1));
+                rollIndex += 2;
             }
         }
         return score;
@@ -45,7 +39,7 @@ public class Game {
     }
 
     private Integer spareBonus(Integer rollIndex) {
-        return this.pins.get(rollIndex + 1);
+        return this.pins.get(rollIndex + 2);
     }
 
     private boolean isStrike(Integer rollIndex) {
