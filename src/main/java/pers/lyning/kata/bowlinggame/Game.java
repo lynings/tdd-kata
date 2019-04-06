@@ -4,11 +4,13 @@ package pers.lyning.kata.bowlinggame;
  * @author lyning
  */
 public class Game {
-    public void roll(int pins) {
-        return;
+    private Integer score = 0;
+
+    public void roll(Integer pins) {
+        score += pins;
     }
 
     public Integer getScore() {
-        return 0;
+        return score;
     }
 }
