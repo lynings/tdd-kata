@@ -40,4 +40,14 @@ public class GameTest {
         }
         assertThat(game.getScore()).isEqualTo(300);
     }
+
+    @Test
+    public void should_return_155_score_when_each_frame_knock_down_10_pins_on_second_try() throws Exception {
+        Game game = new Game();
+        for (int num = 1; num <= 20; num++) {
+            game.roll(5);
+        }
+        game.roll(10);
+        assertThat(game.getScore()).isEqualTo(155);
+    }
 }

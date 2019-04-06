@@ -22,10 +22,14 @@ public class Game {
             if (frame < 10) {
                 if (this.isStrike(pins.get(number))) {
                     score += (pins.get(number) + pins.get(number + 1) + pins.get(number + 2));
-                    frame += 1;
+                } else if (this.isSpare(pins.get(number), pins.get(number + 1))) {
+                    score += (pins.get(number) + pins.get(number + 1) + pins.get(number + 2));
+                    number += 1;
                 } else {
-                    score += pins.get(number);
+                    score += (pins.get(number) + pins.get(number + 1));
+                    number += 1;
                 }
+                frame += 1;
             } else {
                 for (; number < pins.size(); number++) {
                     score += pins.get(number);
