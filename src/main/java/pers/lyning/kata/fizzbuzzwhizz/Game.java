@@ -8,18 +8,41 @@ import java.util.List;
  */
 public class Game {
     private static final Integer MIN_NUMBER_OF_PLAYERS = 1;
-    private final Rule rule;
-    private Integer totalPlayers;
+    private final UniqueNumbers uniqueNumbers;
+    private Integer totalPlayers = 0;
 
-    public Game(Integer totalPlayers, UniqueNumbers uniqueNumbers) {
-        this.totalPlayers = totalPlayers;
-        this.rule = new Rule(uniqueNumbers);
+    public Game(Integer firstNumber, Integer secondNumber, Integer thirdNumber) throws Exception {
+        this.uniqueNumbers = new UniqueNumbers(firstNumber, secondNumber, thirdNumber);
     }
 
-    public List<String> countOff() throws Exception {
-        this.validate();
+    private boolean isDivisible(Integer divisor, Integer dividend) {
+        return divisor % dividend == 0;
+    }
 
+    private boolean isContainFirstNumber(Integer number) {
+        if (number.toString().contains(uniqueNumbers.getFirst().getNumber().toString())) {
+            return true;
+        }
+        return false;
+    }
+
+    public List<String> countOff(Integer totalPlayers) throws Exception {
+        this.totalPlayers = totalPlayers;
+        this.validate();
         return this.takeTurns();
+    }
+
+    private String match(Integer order) {
+        if (isContainFirstNumber(order)) {
+            return uniqueNumbers.getFirst().getWord();
+        }
+        return uniqueNumbers
+                .getNumberAndWords()
+                .stream()
+                .filter(item -> isDivisible(order, item.getNumber()))
+                .map(item -> item.getWord())
+                .reduce((w1, w2) -> w1 + w2)
+                .orElse(order.toString());
     }
 
     /**
@@ -30,7 +53,7 @@ public class Game {
     private List<String> takeTurns() {
         List<String> results = new ArrayList<>(this.totalPlayers);
         for (Integer number = 1; number <= this.totalPlayers; number++) {
-            results.add(this.rule.match(number));
+            results.add(this.match(number));
         }
         return results;
     }

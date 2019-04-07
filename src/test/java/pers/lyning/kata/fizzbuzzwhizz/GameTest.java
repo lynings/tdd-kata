@@ -13,7 +13,7 @@ public class GameTest {
     @org.junit.Rule
     public final ExpectedException expectedEx = ExpectedException.none();
 
-    final Game game = new Game(100, new UniqueNumbers(3, 5, 7));
+    final Game game = new Game(3, 5, 7);
 
     public GameTest() throws Exception {
     }
@@ -21,7 +21,7 @@ public class GameTest {
     /******************** play test start ********************/
     @Test
     public void should_return_1_answer_when_given_1_player_play_the_game() throws Exception {
-        List<String> results = game.countOff();
+        List<String> results = game.countOff(1);
 
         assertThat(results).isNotEmpty();
         assertThat(results.size()).isEqualTo(1);
@@ -32,7 +32,7 @@ public class GameTest {
     public void should_return_10_answer_when_given_10_players_play_the_game() throws Exception {
         List<String> tResults = Arrays.asList("1", "2", "Fizz", "4", "Buzz", "Fizz", "Whizz", "8", "Fizz", "Buzz");
 
-        List<String> results = game.countOff();
+        List<String> results = game.countOff(tResults.size());
 
         assertThat(results).isNotEmpty();
         assertThat(results.size()).isEqualTo(10);
@@ -56,7 +56,7 @@ public class GameTest {
                 "Whizz", "92", "Fizz", "94", "Buzz", "Fizz", "97", "Whizz", "Fizz", "Buzz"
         );
 
-        List<String> results = game.countOff();
+        List<String> results = game.countOff(tResults.size());
 
         assertThat(results).isNotEmpty();
         assertThat(results.size()).isEqualTo(100);
@@ -70,7 +70,7 @@ public class GameTest {
         expectedEx.expect(Exception.class);
         expectedEx.expectMessage("游戏至少需要一名玩家！");
 
-        this.game.countOff();
+        this.game.countOff(0);
     }
     /******************** play test end ********************/
 }
