@@ -43,7 +43,7 @@ public class DigraphTest {
                 new ResultAndStrategy(22, RouteStrategyFactory.createDistanceRouteStrategy("AEBCD"))
         );
         for (ResultAndStrategy resultAndStrategy : distanceAndStrategyList) {
-            Integer distance = digraph.calculate(resultAndStrategy.getRouteRouteStrategy());
+            Integer distance = digraph.calculate(resultAndStrategy.getRouteStrategy());
             assertThat(distance).isEqualTo(resultAndStrategy.getResult());
         }
     }
@@ -65,7 +65,7 @@ public class DigraphTest {
         );
 
         for (ResultAndStrategy resultAndStrategy : strategies) {
-            Integer timesOfRoutes = this.digraph.calculate(resultAndStrategy.getRouteRouteStrategy());
+            Integer timesOfRoutes = this.digraph.calculate(resultAndStrategy.getRouteStrategy());
             assertThat(timesOfRoutes).isEqualTo(resultAndStrategy.getResult());
         }
     }
@@ -87,7 +87,8 @@ public class DigraphTest {
                 new ResultAndStrategy(7, RouteStrategyFactory.createShortestDistanceRouteStrategy("A", "E"))
         );
         for (ResultAndStrategy obj : distanceAndStrategyList) {
-            assertThat(obj.getResult()).isEqualTo(obj.getResult());
+            Integer distance = this.digraph.calculate(obj.getRouteStrategy());
+            assertThat(distance).isEqualTo(obj.getResult());
         }
     }
 
@@ -132,7 +133,7 @@ public class DigraphTest {
             return result;
         }
 
-        public RouteStrategy getRouteRouteStrategy() {
+        public RouteStrategy getRouteStrategy() {
             return routeRouteStrategy;
         }
     }
