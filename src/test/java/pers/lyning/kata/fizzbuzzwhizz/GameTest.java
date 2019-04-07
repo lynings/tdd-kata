@@ -72,5 +72,29 @@ public class GameTest {
 
         this.game.countOff(0);
     }
+
+    @Test
+    public void should_fail_when_given_2_and_7_were_entered() throws Exception {
+        expectedEx.expect(Exception.class);
+        expectedEx.expectMessage("请输入三个不同的个位数字！");
+
+        new Game(2, 7, null);
+    }
+
+    @Test
+    public void should_fail_when_contain_unique_numbers_less_than_1() throws Exception {
+        expectedEx.expect(Exception.class);
+        expectedEx.expectMessage("数字不能小于1或大于9！");
+
+        new Game(0, 3, 7);
+    }
+
+    @Test
+    public void should_fail_when_contain_numbers_greater_than_9() throws Exception {
+        expectedEx.expect(Exception.class);
+        expectedEx.expectMessage("数字不能小于1或大于9！");
+
+        new Game(1, 3, 10);
+    }
     /******************** play test end ********************/
 }
