@@ -12,6 +12,9 @@ public class ChristmasLight {
      * 圣诞灯矩阵
      */
     private int[][] lightsMatrix = new int[1000][1000];
+    private final int TOGGLE_INCREASE_BRIGHTNESS = 2;
+    private final int TURN_ON_INCREASE_BRIGHTNESS = 1;
+    private final int TURN_OFF_DECREASE_BRIGHTNESS = -1;
 
     /**
      * increase brightness by 1
@@ -19,13 +22,7 @@ public class ChristmasLight {
      * @param score
      */
     public void turnOn(Score score) {
-        Position start = score.getStart();
-        Position end = score.getEnd();
-        for (int x = start.getX(); x <= end.getX(); x++) {
-            for (int y = start.getY(); y <= end.getY(); y++) {
-                lightsMatrix[x][y] += 1;
-            }
-        }
+        increaseBrightness(score, TURN_ON_INCREASE_BRIGHTNESS);
     }
 
     /**
@@ -34,15 +31,7 @@ public class ChristmasLight {
      * @param score
      */
     public void turnOff(Score score) {
-        Position start = score.getStart();
-        Position end = score.getEnd();
-        for (int x = start.getX(); x <= end.getX(); x++) {
-            for (int y = start.getY(); y <= end.getY(); y++) {
-                if (lightsMatrix[x][y] > 0) {
-                    lightsMatrix[x][y] -= 1;
-                }
-            }
-        }
+        decreaseBrightness(score, TURN_OFF_DECREASE_BRIGHTNESS);
     }
 
     /**
@@ -51,13 +40,21 @@ public class ChristmasLight {
      * @param score
      */
     public void toggle(Score score) {
+        this.increaseBrightness(score, TOGGLE_INCREASE_BRIGHTNESS);
+    }
+
+    private void increaseBrightness(Score score, int brightness) {
         Position start = score.getStart();
         Position end = score.getEnd();
         for (int x = start.getX(); x <= end.getX(); x++) {
             for (int y = start.getY(); y <= end.getY(); y++) {
-                lightsMatrix[x][y] += 2;
+                lightsMatrix[x][y] += brightness;
             }
         }
+    }
+
+    private void decreaseBrightness(Score score, int brightness) {
+        increaseBrightness(score, brightness);
     }
 
     public int getLights() {
@@ -76,7 +73,9 @@ public class ChristmasLight {
         int totalBrightness = 0;
         for (int x = 0; x < lightsMatrix.length; x++) {
             for (int y = 0; y < lightsMatrix[x].length; y++) {
-                totalBrightness += lightsMatrix[x][y];
+                if (lightsMatrix[x][y] > 0) {
+                    totalBrightness += lightsMatrix[x][y];
+                }
             }
         }
         return totalBrightness;
