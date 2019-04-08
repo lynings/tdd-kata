@@ -2,8 +2,6 @@ package pers.lyning.kata.christmaslights;
 
 
 /**
- * README link /Users/mac/Code/TDD/tdd-kata/src/main/resources/christmaslights/README.md
- *
  * @author lyning
  */
 public class ChristmasLight {
