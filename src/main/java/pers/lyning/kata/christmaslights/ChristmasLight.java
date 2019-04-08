@@ -21,6 +21,16 @@ public class ChristmasLight {
         }
     }
 
+    public void turnOff(Score score) {
+        Position start = score.getStart();
+        Position end = score.getEnd();
+        for (int x = start.getX(); x <= end.getX(); x++) {
+            for (int y = start.getY(); y <= end.getY(); y++) {
+                lightsMatrix[x][y] = 0;
+            }
+        }
+    }
+
     public Integer getLights() {
         Integer numberOfOnLights = 0;
         for (int x = 0; x < lightsMatrix.length; x++) {
