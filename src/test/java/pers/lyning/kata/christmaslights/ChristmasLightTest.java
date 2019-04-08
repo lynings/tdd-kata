@@ -65,6 +65,16 @@ public class ChristmasLightTest {
         assertThat(brightness).isEqualTo(1000000);
     }
 
+    @Test
+    public void should_return_999996_lights_when_after_following_the_instructions() {
+        turnOn(Score.create().start(0, 0).end(999, 999));
+        toggle(Score.create().start(0, 0).end(999, 0));
+        turnOff(Score.create().start(0, 0).end(999, 999));
+        turnOn(Score.create().start(0, 1).end(999, 999));
+        turnOff(Score.create().start(499, 499).end(500, 500));
+        assertThat(christmasLight.getLights()).isEqualTo(999996);
+    }
+
     private void turnOn(Score score) {
         christmasLight.turnOn(score);
     }
