@@ -9,7 +9,7 @@ public class ChristmasLight {
     /**
      * 圣诞灯矩阵
      */
-    private Integer[][] lightsMatrix = new Integer[3][3];
+    private int[][] lightsMatrix = new int[1000][1000];
 
     public void turnOn(Score score) {
         Position start = score.getStart();
