@@ -55,4 +55,12 @@ public class ChristmasLightTest {
         Integer brightness = christmasLight.totalBrightness();
         assertThat(brightness).isEqualTo(13);
     }
+
+    @Test
+    public void should_return_1000000_brightness_when_turn_on_00_999999() {
+        ChristmasLight christmasLight = new ChristmasLight();
+        christmasLight.turnOn(Score.create().start(0, 0).end(999, 999));
+        Integer brightness = christmasLight.totalBrightness();
+        assertThat(brightness).isEqualTo(1000000);
+    }
 }
