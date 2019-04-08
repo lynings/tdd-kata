@@ -51,11 +51,11 @@ public class ChristmasLightTest {
     }
 
     @Test
-    public void should_return_13_brightness_when_turn_on_00_22_and_toggle_11_22() {
+    public void should_return_17_brightness_when_turn_on_00_22_and_toggle_11_22() {
         turnOn(Score.create().start(0, 0).end(2, 2));
         toggle(Score.create().start(1, 1).end(2, 2));
         Integer brightness = christmasLight.totalBrightness();
-        assertThat(brightness).isEqualTo(13);
+        assertThat(brightness).isEqualTo(17);
     }
 
     @Test
@@ -76,13 +76,13 @@ public class ChristmasLightTest {
     }
 
     @Test
-    public void should_return_999996_brightness_when_after_following_the_instructions() {
+    public void should_return_1000996_brightness_when_after_following_the_instructions() {
         turnOn(Score.create().start(0, 0).end(999, 999));
         toggle(Score.create().start(0, 0).end(999, 0));
         turnOff(Score.create().start(0, 0).end(999, 999));
         turnOn(Score.create().start(0, 1).end(999, 999));
         turnOff(Score.create().start(499, 499).end(500, 500));
-        assertThat(christmasLight.totalBrightness()).isEqualTo(999996);
+        assertThat(christmasLight.totalBrightness()).isEqualTo(1000996);
     }
 
     private void turnOn(Score score) {
