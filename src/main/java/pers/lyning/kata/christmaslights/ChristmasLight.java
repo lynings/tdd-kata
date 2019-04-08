@@ -26,7 +26,9 @@ public class ChristmasLight {
         Position end = score.getEnd();
         for (int x = start.getX(); x <= end.getX(); x++) {
             for (int y = start.getY(); y <= end.getY(); y++) {
-                lightsMatrix[x][y] = 0;
+                if (lightsMatrix[x][y] > 0) {
+                    lightsMatrix[x][y] -= 1;
+                }
             }
         }
     }
@@ -41,5 +43,15 @@ public class ChristmasLight {
             }
         }
         return numberOfOnLights;
+    }
+
+    public void toggle(Score score) {
+        Position start = score.getStart();
+        Position end = score.getEnd();
+        for (int x = start.getX(); x <= end.getX(); x++) {
+            for (int y = start.getY(); y <= end.getY(); y++) {
+                lightsMatrix[x][y] += 1;
+            }
+        }
     }
 }
