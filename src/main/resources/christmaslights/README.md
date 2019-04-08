@@ -36,9 +36,9 @@ After following the instructions, how many lights are lit?
 
 ### Part two
 
-turn on 一盏灯亮度为1。
-toggle 一盏灯亮度为2。
-turn off 的灯亮度为0。
+turn on 一盏灯亮度 +1。
+toggle 一盏灯亮度 +2。
+turn off 的灯亮度 -1，亮度最小为 0。
 
 For example:
 
