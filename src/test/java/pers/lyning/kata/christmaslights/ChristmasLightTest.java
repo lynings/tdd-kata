@@ -1,5 +1,6 @@
 package pers.lyning.kata.christmaslights;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -9,58 +10,70 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 public class ChristmasLightTest {
 
+    private ChristmasLight christmasLight;
+
+    @Before
+    public void setUp() throws Exception {
+        this.christmasLight = new ChristmasLight();
+    }
+
     @Test
     public void should_return_9_lights_when_turn_on_00_22() {
-        ChristmasLight christmasLight = new ChristmasLight();
-        Score score = Score.create().start(0, 0).end(2, 2);
-        christmasLight.turnOn(score);
+        turnOn(Score.create().start(0, 0).end(2, 2));
         Integer numberOfLights = christmasLight.getLights();
         assertThat(numberOfLights).isEqualTo(9);
     }
 
     @Test
     public void should_return_5_lights_when_turn_on_00_22_after_turn_off_11_22() {
-        ChristmasLight christmasLight = new ChristmasLight();
-        christmasLight.turnOn(Score.create().start(0, 0).end(2, 2));
-        christmasLight.turnOff(Score.create().start(1, 1).end(2, 2));
+        turnOn(Score.create().start(0, 0).end(2, 2));
+        turnOff(Score.create().start(1, 1).end(2, 2));
         Integer numberOfLights = christmasLight.getLights();
         assertThat(numberOfLights).isEqualTo(5);
     }
 
     @Test
     public void should_return_4_lights_when_turn_on_00_22_and_toggle_11_22_then_turn_off_00_22() {
-        ChristmasLight christmasLight = new ChristmasLight();
-        christmasLight.turnOn(Score.create().start(0, 0).end(2, 2));
-        christmasLight.toggle(Score.create().start(1, 1).end(2, 2));
-        christmasLight.turnOff(Score.create().start(0, 0).end(2, 2));
+        turnOn(Score.create().start(0, 0).end(2, 2));
+        toggle(Score.create().start(1, 1).end(2, 2));
+        turnOff(Score.create().start(0, 0).end(2, 2));
         Integer numberOfLights = christmasLight.getLights();
         assertThat(numberOfLights).isEqualTo(4);
     }
 
     @Test
     public void should_return_9_lights_when_turn_on_00_22_and_toggle_11_22_then_turn_off_33_44() {
-        ChristmasLight christmasLight = new ChristmasLight();
-        christmasLight.turnOn(Score.create().start(0, 0).end(2, 2));
-        christmasLight.toggle(Score.create().start(1, 1).end(2, 2));
-        christmasLight.turnOff(Score.create().start(3, 3).end(4, 4));
+        turnOn(Score.create().start(0, 0).end(2, 2));
+        toggle(Score.create().start(1, 1).end(2, 2));
+        turnOff(Score.create().start(3, 3).end(4, 4));
         Integer numberOfLights = christmasLight.getLights();
         assertThat(numberOfLights).isEqualTo(9);
     }
 
     @Test
     public void should_return_13_brightness_when_turn_on_00_22_and_toggle_11_22() {
-        ChristmasLight christmasLight = new ChristmasLight();
-        christmasLight.turnOn(Score.create().start(0, 0).end(2, 2));
-        christmasLight.toggle(Score.create().start(1, 1).end(2, 2));
+        turnOn(Score.create().start(0, 0).end(2, 2));
+        toggle(Score.create().start(1, 1).end(2, 2));
         Integer brightness = christmasLight.totalBrightness();
         assertThat(brightness).isEqualTo(13);
     }
 
     @Test
     public void should_return_1000000_brightness_when_turn_on_00_999999() {
-        ChristmasLight christmasLight = new ChristmasLight();
-        christmasLight.turnOn(Score.create().start(0, 0).end(999, 999));
+        turnOn(Score.create().start(0, 0).end(999, 999));
         Integer brightness = christmasLight.totalBrightness();
         assertThat(brightness).isEqualTo(1000000);
+    }
+
+    private void turnOn(Score score) {
+        christmasLight.turnOn(score);
+    }
+
+    private void turnOff(Score score) {
+        christmasLight.turnOff(score);
+    }
+
+    private void toggle(Score score) {
+        christmasLight.toggle(score);
     }
 }
