@@ -46,4 +46,13 @@ public class ChristmasLightTest {
         Integer numberOfLights = christmasLight.getLights();
         assertThat(numberOfLights).isEqualTo(9);
     }
+
+    @Test
+    public void should_return_13_when_turn_on_00_22_and_toggle_11_22() {
+        ChristmasLight christmasLight = new ChristmasLight();
+        christmasLight.turnOn(Score.create().start(0, 0).end(2, 2));
+        christmasLight.toggle(Score.create().start(1, 1).end(2, 2));
+        Integer brightness = christmasLight.totalBrightness();
+        assertThat(brightness).isEqualTo(13);
+    }
 }
