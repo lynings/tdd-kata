@@ -33,7 +33,7 @@ public class DistanceConstraintRouteStrategy implements RouteStrategy {
     }
 
     private void depthFirstSearch() {
-        List<Route> routes = this.digraph.getRoutesOfOrigin(route.getOrigin());
+        List<Route> routes = this.digraph.selectRouteWithOrigin(route.getOrigin());
         for (Route route : routes) {
             this.depthFirstSearch(route, route.getName(), route.getDistance());
         }
@@ -48,7 +48,7 @@ public class DistanceConstraintRouteStrategy implements RouteStrategy {
             routes.add(route);
         }
 
-        List<Route> routes = this.digraph.getRoutesOfOrigin(currentRoute.getDestination());
+        List<Route> routes = this.digraph.selectRouteWithOrigin(currentRoute.getDestination());
         for (Route nextRoute : routes) {
             this.depthFirstSearch(nextRoute, route.concat(nextRoute.getDestination()), distance + nextRoute.getDistance());
         }

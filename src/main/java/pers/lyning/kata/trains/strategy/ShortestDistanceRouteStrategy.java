@@ -29,7 +29,7 @@ public class ShortestDistanceRouteStrategy implements RouteStrategy {
     }
 
     private void depthFirstSearch() {
-        List<Route> routes = this.digraph.getRoutesOfOrigin(this.route.getOrigin());
+        List<Route> routes = this.digraph.selectRouteWithOrigin(this.route.getOrigin());
         for (Route route : routes) {
             this.depthFirstSearch(route, route.getName(), route.getDistance());
         }
@@ -46,7 +46,7 @@ public class ShortestDistanceRouteStrategy implements RouteStrategy {
             return;
         }
 
-        List<Route> routes = this.digraph.getRoutesOfOrigin(currentRoute.getDestination());
+        List<Route> routes = this.digraph.selectRouteWithOrigin(currentRoute.getDestination());
         for (Route nextRoute : routes) {
             this.depthFirstSearch(nextRoute, route.concat(nextRoute.getDestination()), distance + nextRoute.getDistance());
         }

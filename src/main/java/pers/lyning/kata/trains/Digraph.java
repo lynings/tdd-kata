@@ -47,7 +47,7 @@ public class Digraph {
         return false;
     }
 
-    public List<Route> getRoutesOfOrigin(String origin) {
+    public List<Route> selectRouteWithOrigin(String origin) {
         return this.getRoutes()
                 .stream()
                 .filter(o -> o.getOrigin().equals(origin))

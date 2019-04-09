@@ -33,7 +33,7 @@ public class StopsConstraintRouteStrategy implements RouteStrategy {
     private Set<String> getRoutes() {
         Set<String> routeSet = new HashSet<>();
 
-        List<Route> routes = this.digraph.getRoutesOfOrigin(this.route.getOrigin());
+        List<Route> routes = this.digraph.selectRouteWithOrigin(this.route.getOrigin());
         for (Route route : routes) {
             this.depthFirstSearch(route, route.getName(), routeSet);
         }
@@ -51,7 +51,7 @@ public class StopsConstraintRouteStrategy implements RouteStrategy {
             return;
         }
 
-        List<Route> routes = this.digraph.getRoutesOfOrigin(currentRoute.getDestination());
+        List<Route> routes = this.digraph.selectRouteWithOrigin(currentRoute.getDestination());
         for (Route nextRoute : routes) {
             this.depthFirstSearch(nextRoute, route + nextRoute.getDestination(), routeSet);
         }
