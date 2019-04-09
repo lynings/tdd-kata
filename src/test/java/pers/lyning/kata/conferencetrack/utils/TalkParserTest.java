@@ -11,12 +11,12 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ConferenceParserTest {
+public class TalkParserTest {
 
     @Test
     public void parse() throws IOException {
         File file = new File(ConferenceManagerTest.class.getResource("/conferencetrack/talk_list.txt").getPath());
-        List<Talk> talks = ConferenceParser.parse(new FileInputStream(file));
+        List<Talk> talks = TalkParser.parse(new FileInputStream(file));
         assertThat(talks).isNotEmpty();
         assertThat(talks.size()).isEqualTo(19);
     }

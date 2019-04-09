@@ -1,72 +1,39 @@
 package pers.lyning.kata.conferencetrack;
 
-import pers.lyning.kata.conferencetrack.utils.RandomUnit;
-
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
-import java.util.Optional;
-
-import static java.util.stream.Collectors.toList;
 
 /**
  * @author lyning
  */
 public class ConferenceManager {
-    private final int MORNING_DURATION_TIME = 180;
-    private final int AFTERNOON_DURATION_TIME = 240;
 
     public Conference planning(List<Talk> talks) {
-        Conference conference = new Conference();
-        while (talks.size() != 0) {
-            Session morning = planningMorning(talks);
-            Session afternoon = planningAfternoon(talks);
-            conference.addSession(morning, afternoon);
-        }
+        ConferencePlanner conferencePlanner = new ConferencePlanner();
+        Conference conference = conferencePlanner.execute(talks);
         return conference;
     }
 
-    private Session planningAfternoon(List<Talk> talks) {
-        Session afternoon = this.planningBySession(talks, AFTERNOON_DURATION_TIME);
-        afternoon.addTalk(new Talk("Networking Event", 0));
-        return afternoon;
-    }
-
-    private Session planningMorning(List<Talk> talks) {
-        Session morning = planningBySession(talks, MORNING_DURATION_TIME);
-        morning.addTalk(new Talk("Lunch", 0));
-        return morning;
-    }
-
-    private Session planningBySession(List<Talk> talks, Integer sessionDurationMinutes) {
-        Session session = new Session(sessionDurationMinutes);
-        while (session.getRemainingMinutes() != 0 && talks.size() > 0) {
-            Optional<Talk> talkOptional = this.searchAny(talks, session.getRemainingMinutes());
-            if (!talkOptional.isPresent()) {
-                talks.addAll(session.getTalks());
-                session = new Session(sessionDurationMinutes);
-            } else {
-                Talk talk = talkOptional.get();
-                session.addTalk(talk);
-                talks.remove(talk);
-            }
+    public void display(Conference conference) {
+        for (int index = 1; index <= conference.getTracks().size(); index++) {
+            System.out.println("Track " + index + ":");
+            Track track = conference.getTracks().get(index - 1);
+            this.display(track.getMorning(), ConferenceConfig.MORNING_SESSION_START_HOURS);
+            this.display(track.getAfternoon(), ConferenceConfig.AFTERNOON_SESSION_START_HOURS);
         }
-        return session;
+
     }
 
-    private Optional<Talk> searchAny(List<Talk> talks, Integer durationMinutes) {
-        // 确定接下来参与计算的 talk 的范围
-        List<Talk> talkList = defineNeighborhood(talks, durationMinutes);
-        if (talkList.isEmpty()) {
-            return Optional.empty();
+    private void display(Session session, int startHour) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.add(Calendar.MINUTE, startHour * 60);
+        SimpleDateFormat sdf = new SimpleDateFormat("h:mma");
+        for (Talk talk : session.getTalks()) {
+            System.out.println(sdf.format(calendar.getTime()) + " " + talk.getTitle());
+            calendar.add(Calendar.MINUTE, talk.getDurationMinutes());
         }
-        // 随机获取符合要求的 talk
-        int random = RandomUnit.random(0, talkList.size() - 1);
-        return Optional.of(talkList.get(random));
-    }
-
-    private List<Talk> defineNeighborhood(List<Talk> talks, Integer durationMinutes) {
-        return talks
-                .stream()
-                .filter(talk -> talk.getDurationMinutes() <= durationMinutes)
-                .collect(toList());
     }
 }

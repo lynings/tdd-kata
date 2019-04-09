@@ -1,5 +1,6 @@
 package pers.lyning.kata.conferencetrack.utils;
 
+import pers.lyning.kata.conferencetrack.ConferenceConfig;
 import pers.lyning.kata.conferencetrack.Talk;
 
 import java.io.IOException;
@@ -13,13 +14,13 @@ import static java.util.stream.Collectors.toList;
 /**
  * @author lyning
  */
-public class ConferenceParser {
+public class TalkParser {
 
     public static List<Talk> parse(InputStream inputStream) throws IOException {
         String talkString = getStringFromInputStream(inputStream);
         return Arrays.asList(talkString.split("\\n\\n|\\n"))
                 .stream()
-                .map(talk -> new Talk(talk, talk.indexOf("lightning") >= 0 ? 5 : Integer.valueOf(talk.split(" ")[talk.split(" ").length - 1].replace("min", ""))))
+                .map(talk -> new Talk(talk, getMinutes(talk)))
                 .collect(toList());
     }
 
@@ -33,5 +34,19 @@ public class ConferenceParser {
         reader.close();
         inputStream.close();
         return sb.toString();
+    }
+
+    private static int getMinutes(String talk) {
+        if (isLightning(talk)) {
+            return ConferenceConfig.LIGHTNING_DURATION_MINUTES;
+        }
+
+        String[] talkArr = talk.split(" ");
+        String minutes = talkArr[talkArr.length - 1].replace("min", "");
+        return Integer.valueOf(minutes);
+    }
+
+    private static boolean isLightning(String talk) {
+        return talk.indexOf("lightning") >= 0;
     }
 }

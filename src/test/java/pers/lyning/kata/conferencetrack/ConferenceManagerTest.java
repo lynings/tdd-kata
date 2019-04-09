@@ -1,13 +1,14 @@
 package pers.lyning.kata.conferencetrack;
 
 import org.junit.Before;
-import org.junit.BeforeClass;
+import org.junit.Rule;
 import org.junit.Test;
-import pers.lyning.kata.conferencetrack.utils.ConferenceParser;
+import pers.lyning.kata.conferencetrack.utils.TalkParser;
+import pers.lyning.kata.testing.SystemOutputCapture;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -17,18 +18,18 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 public class ConferenceManagerTest {
 
-    private static List<Talk> talks = null;
-    private ConferenceManager conferenceManager;
+    @Rule
+    public final SystemOutputCapture outputCapture = SystemOutputCapture.init();
 
-    @BeforeClass
-    public static void setUpOneTime() throws IOException {
-        File file = new File(ConferenceManagerTest.class.getResource("/conferencetrack/talk_list.txt").getPath());
-        talks = ConferenceParser.parse(new FileInputStream(file));
-    }
+    private List<Talk> talks = null;
+    private ConferenceManager conferenceManager;
 
     @Before
     public void setUp() throws Exception {
         this.conferenceManager = new ConferenceManager();
+
+        String testDataFilePath = ConferenceManagerTest.class.getResource("/conferencetrack/talk_list.txt").getPath();
+        talks = TalkParser.parse(new FileInputStream(new File(testDataFilePath)));
     }
 
     @Test
@@ -61,6 +62,20 @@ public class ConferenceManagerTest {
 
             assertThat(track.getAfternoon().getRemainingMinutes()).isBetween(0, 59);
             assertThat(getLastTalk(track.getMorning().getTalks()).getTitle().contains("NETWORKING EVENT"));
+        }
+    }
+
+    @Test
+    public void check_display_conference() {
+        Conference conference = this.conferenceManager.planning(talks);
+        this.conferenceManager.display(conference);
+        for (Track track : conference.getTracks()) {
+            List<Talk> talkList = new ArrayList<>();
+            talkList.addAll(track.getMorning().getTalks());
+            talkList.addAll(track.getAfternoon().getTalks());
+            for (Talk talk : talkList) {
+                assertThat(outputCapture.toString()).contains(talk.getTitle());
+            }
         }
     }
 

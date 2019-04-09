@@ -123,5 +123,5 @@ class ConferenceTrack {
 - [x] 验证 Morning sessions begin at 9am and must finish before 12 noon, for lunch.   
 - [x] 验证 Afternoon sessions begin at 1pm and must finish in time for the networking event.
 - [x] 验证 The networking event can start no earlier than 4:00 and no later than 5:00.
-- [ ] 把规划的职责交给 ConferencePlanner.
-- [ ] 增加规划结果转换功能，目的是为了符合案例要求的输出.
+- [x] 把规划的职责交给 ConferencePlanner.
+- [x] 增加规划结果转换功能，目的是为了符合案例要求的输出.
