@@ -19,7 +19,6 @@ public class ConferenceParser {
         String talkString = getStringFromInputStream(inputStream);
         return Arrays.asList(talkString.split("\\n\\n|\\n"))
                 .stream()
-                .map(talk -> talk.replace("\n", ""))
                 .map(talk -> new Talk(talk, talk.indexOf("lightning") >= 0 ? 5 : Integer.valueOf(talk.split(" ")[talk.split(" ").length - 1].replace("min", ""))))
                 .collect(toList());
     }
