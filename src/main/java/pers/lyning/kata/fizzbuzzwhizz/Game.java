@@ -11,8 +11,12 @@ public class Game {
     private final UniqueNumbers uniqueNumbers;
     private Integer totalPlayers = 0;
 
-    public Game(Integer firstNumber, Integer secondNumber, Integer thirdNumber) throws Exception {
+    private Game(Integer firstNumber, Integer secondNumber, Integer thirdNumber) throws Exception {
         this.uniqueNumbers = new UniqueNumbers(firstNumber, secondNumber, thirdNumber);
+    }
+
+    public static Game of(Integer firstNumber, Integer secondNumber, Integer thirdNumber) throws Exception {
+        return new Game(firstNumber, secondNumber, thirdNumber);
     }
 
     private boolean isDivisible(Integer divisor, Integer dividend) {
