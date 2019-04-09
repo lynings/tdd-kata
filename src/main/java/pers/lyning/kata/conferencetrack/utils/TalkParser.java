@@ -16,7 +16,7 @@ import static java.util.stream.Collectors.toList;
  */
 public class TalkParser {
 
-    public static List<Talk> parse(InputStream inputStream) throws IOException {
+    public List<Talk> parse(InputStream inputStream) throws IOException {
         String talkString = getStringFromInputStream(inputStream);
         return Arrays.asList(talkString.split("\\n\\n|\\n"))
                 .stream()
@@ -24,7 +24,7 @@ public class TalkParser {
                 .collect(toList());
     }
 
-    private static String getStringFromInputStream(InputStream inputStream) throws IOException {
+    private String getStringFromInputStream(InputStream inputStream) throws IOException {
         InputStreamReader reader = new InputStreamReader(inputStream, "UTF-8");
 
         StringBuffer sb = new StringBuffer();
@@ -36,7 +36,7 @@ public class TalkParser {
         return sb.toString();
     }
 
-    private static int getMinutes(String talk) {
+    private int getMinutes(String talk) {
         if (isLightning(talk)) {
             return ConferenceConfig.LIGHTNING_DURATION_MINUTES;
         }
@@ -46,7 +46,7 @@ public class TalkParser {
         return Integer.valueOf(minutes);
     }
 
-    private static boolean isLightning(String talk) {
+    private boolean isLightning(String talk) {
         return talk.indexOf("lightning") >= 0;
     }
 }

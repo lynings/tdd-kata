@@ -23,13 +23,14 @@ public class ConferenceManagerTest {
 
     private List<Talk> talks = null;
     private ConferenceManager conferenceManager;
+    private TalkParser talkParser = new TalkParser();
 
     @Before
     public void setUp() throws Exception {
         this.conferenceManager = new ConferenceManager();
 
         String testDataFilePath = ConferenceManagerTest.class.getResource("/conferencetrack/talk_list.txt").getPath();
-        talks = TalkParser.parse(new FileInputStream(new File(testDataFilePath)));
+        talks = talkParser.parse(new FileInputStream(new File(testDataFilePath)));
     }
 
     @Test

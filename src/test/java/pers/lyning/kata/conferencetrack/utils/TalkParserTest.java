@@ -13,10 +13,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class TalkParserTest {
 
+    private TalkParser talkParser = new TalkParser();
+
     @Test
     public void parse() throws IOException {
         File file = new File(ConferenceManagerTest.class.getResource("/conferencetrack/talk_list.txt").getPath());
-        List<Talk> talks = TalkParser.parse(new FileInputStream(file));
+        List<Talk> talks = talkParser.parse(new FileInputStream(file));
         assertThat(talks).isNotEmpty();
         assertThat(talks.size()).isEqualTo(19);
     }
