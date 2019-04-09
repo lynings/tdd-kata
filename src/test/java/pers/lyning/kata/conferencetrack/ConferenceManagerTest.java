@@ -34,7 +34,6 @@ public class ConferenceManagerTest {
     @Test
     public void check_morning_sessions_begin_at_9am_and_must_finish_before_12_noon_for_lunch() {
         Conference conference = this.conferenceManager.planning(talks);
-        assertThat(conference).isNotNull();
         for (Track track : conference.getTracks()) {
             assertThat(track.getMorning().getRemainingMinutes()).isEqualTo(0);
             int morningDurationMinute = this.sumDurationMinutesOfTalks(track.getMorning().getTalks());
@@ -47,7 +46,6 @@ public class ConferenceManagerTest {
     @Test
     public void check_afternoon_sessions_begin_must_finish_in_time_for_the_networking_event() {
         Conference conference = this.conferenceManager.planning(talks);
-        assertThat(conference).isNotNull();
         for (Track track : conference.getTracks()) {
             assertThat(getLastTalk(track.getMorning().getTalks()).getTitle().contains("NETWORKING EVENT"));
         }
@@ -56,7 +54,6 @@ public class ConferenceManagerTest {
     @Test
     public void check_the_networking_event_can_start_no_earlier_than_4mp_and_no_later_than_5mp() {
         Conference conference = this.conferenceManager.planning(talks);
-        assertThat(conference).isNotNull();
         for (Track track : conference.getTracks()) {
             int morningDurationMinute = this.sumDurationMinutesOfTalks(track.getAfternoon().getTalks());
             assertThat(morningDurationMinute).isLessThanOrEqualTo(240);
