@@ -18,10 +18,6 @@ public class Session {
         this.remainingMinutes = remainingMinutes;
     }
 
-    public boolean hasRemainingTime(Talk talk) {
-        return talk.getDurationMinutes() <= this.remainingMinutes;
-    }
-
     public void addTalk(Talk talk) {
         this.talks.add(talk);
         this.remainingMinutes -= talk.getDurationMinutes();
