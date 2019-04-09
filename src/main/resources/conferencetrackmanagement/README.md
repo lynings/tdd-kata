@@ -1,5 +1,5 @@
 ## Conference Track Management
-You are planning a big programming conference and have received many proposals which have passed the initial screen process but you're having trouble fitting them into the time constraints of the day -- there are so many possibilities! So you write a program to do it for you.
+You are planning a big programming conference and have received many proposals which have passed the initial screen process but you're having trouble fitting them into the time constraints of the track -- there are so many possibilities! So you write a program to do it for you.
 
 - The conference has multiple tracks each of which has a morning and afternoon session.
 - Each session contains multiple talks.
@@ -120,6 +120,8 @@ class ConferenceTrack {
 ```
 
 ## 任务分解
-- [ ] 验证 Morning sessions begin at 9am and must finish before 12 noon, for lunch.   
-- [ ] 验证 Afternoon sessions begin at 1pm and must finish in time for the networking event.
-- [ ] 验证 The networking event can start no earlier than 4:00 and no later than 5:00.
+- [x] 验证 Morning sessions begin at 9am and must finish before 12 noon, for lunch.   
+- [x] 验证 Afternoon sessions begin at 1pm and must finish in time for the networking event.
+- [x] 验证 The networking event can start no earlier than 4:00 and no later than 5:00.
+- [ ] 把规划的职责交给 ConferencePlanner.
+- [ ] 增加规划结果转换功能，目的是为了符合案例要求的输出.
