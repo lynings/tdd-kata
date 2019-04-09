@@ -109,10 +109,12 @@ Track 2:
 
 04:00PM Rails for Python Developers lightning
 
+05:00PM Networking Event
+
 ## 程序设计
 ```java
 class ConferenceTrack {
-    public List<Track> planning(String conferences);
+    public Conference planning(List<Talk> talkList);
 }
 
 ```
