@@ -113,7 +113,7 @@ Track 2:
 
 ## 程序设计
 ```java
-class ConferenceTrack {
+class ConferenceManager {
     public Conference planning(List<Talk> talkList);
 }
 
