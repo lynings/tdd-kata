@@ -15,9 +15,6 @@ public class RandomUnit {
      * @return
      */
     public static int random(int min, int max) {
-        if (max == 0) {
-            return 0;
-        }
         return (new Random().nextInt(max + 1)) % (max - min + 1) + min;
     }
 }
