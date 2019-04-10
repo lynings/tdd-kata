@@ -8,7 +8,7 @@ import java.util.Map;
  */
 public class SymbolConverter {
 
-    private static final Map<String, Integer> table = new HashMap() {{
+    public static final Map<String, Integer> table = new HashMap() {{
         put("I", 1);
         put("V", 5);
         put("X", 10);

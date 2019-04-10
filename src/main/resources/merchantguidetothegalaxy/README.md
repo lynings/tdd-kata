@@ -108,18 +108,15 @@ class SymbolCalculator {
 - [x] 验证 MM=1000+1000=2000.
 - [x] 验证 IV=5-1=4.
 - [x] MMVI是1000 + 1000 + 5 + 1 = 2006.
-- [ ] MCMXLIV = 1000 +（1000-100）+（50-10）+（5-1）= 1944.
-- [ ] XXXIX = 50 + 50 + 50 + (50 - 1) = 199.
-- [ ] 验证输入 glob is I 时返回 I.
-- [ ] 验证输入 prok is V 时返回 V.
-- [ ] 验证输入 pish is X 时返回 X.
-- [ ] 验证输入 tegj is L 时返回 L.
+- [x] IVMM是 5 - 1 + 1000 + 1000 = 2004.
+- [x] MCMXLIV = 1000 +（1000-100）+（50-10）+（5-1）= 1944.
+- [x] XXXIX = 10 + 10 + 10 + (10 - 1) = 39.
+- [x] 转换星际单位和罗马数字之间的注释的文本行.
 - [ ] 验证在给定的测试数据下，pish tegj glob glob is 42.
 - [ ] 验证在给定的测试数据下，glob prok Silver is 68 Credits.
 - [ ] 验证在给定的测试数据下，glob prok Gold is 57800 Credits.
 - [ ] 验证在给定的测试数据下，glob prok Iron is 782 Credits.
 - [ ] 当输入不正确时，输出 I have no idea what you are talking about.
-- [ ] 解析星际单位和罗马数字之间转换的注释的文本行.
 - [ ] 验证“D”，“L”和“V”永远不会重复.
 - [ ] 除了特殊情况，符号“I”，“X”，“C”和“M”可以连续出现三次.
 - [ ] 验证 “X”只能被“L”和“C”减去.

@@ -12,8 +12,17 @@ public class SymbolCalculator {
         Integer result = 0;
         for (int index = 1, len = symbolsArr.length; index < len; index++) {
             if (this.greaterThanOrEqualTo(symbolsArr[index - 1], symbolsArr[index])) {
-                result += this.add(symbolsArr[index - 1], symbolsArr[index]);
-                index += 1;
+                if ((index + 1) < len) {
+                    if (this.greaterThanOrEqualTo(symbolsArr[index], symbolsArr[index + 1])) {
+                        result += this.add(symbolsArr[index - 1], symbolsArr[index]);
+                        index += 1;
+                    } else {
+                        result += this.symbolConverter.convert(symbolsArr[index - 1]);
+                    }
+                } else {
+                    result += this.add(symbolsArr[index - 1], symbolsArr[index]);
+                    index += 1;
+                }
             } else {
                 result += this.subtract(symbolsArr[index], symbolsArr[index - 1]);
                 index += 1;
@@ -22,10 +31,9 @@ public class SymbolCalculator {
         return result;
     }
 
-    private boolean greaterThanOrEqualTo(String sourceSymbol, String targetSymbol) {
-        return this.subtract(sourceSymbol, targetSymbol) >= 0;
+    private boolean greaterThanOrEqualTo(String fromSymbol, String toSymbol) {
+        return this.subtract(fromSymbol, toSymbol) >= 0;
     }
-
 
     private Integer add(String symbolA, String symbolB) {
         Integer numberA = symbolConverter.convert(symbolA);
