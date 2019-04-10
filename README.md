@@ -7,3 +7,4 @@
 3. [Bowling Game](src/main/resources/bowlinggame/README.md)
 4. [Christmas Lights](src/main/resources/christmaslights/README.md)
 5. [Conference Track Management](src/main/resources/conferencetrackmanagement/README.md)
+6. [Merchant's Guide to the Galaxy](src/main/resources/merchantguidetothegalaxy/README.md)
