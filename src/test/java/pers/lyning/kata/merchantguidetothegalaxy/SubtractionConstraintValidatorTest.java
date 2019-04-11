@@ -19,14 +19,6 @@ public class SubtractionConstraintValidatorTest {
     }
 
     @Test
-    public void check_I_cannot_be_subtracted_from_L_C_D_M() {
-        assertThat(validator.validate("IL")).isFalse();
-        assertThat(validator.validate("IC")).isFalse();
-        assertThat(validator.validate("ID")).isFalse();
-        assertThat(validator.validate("IM")).isFalse();
-    }
-
-    @Test
     public void check_symbol_length_must_equals_2() {
         assertThat(validator.validate("IVL")).isFalse();
         assertThat(validator.validate("IXC")).isFalse();
@@ -39,21 +31,13 @@ public class SubtractionConstraintValidatorTest {
     }
 
     @Test
-    public void check_D_cannot_be_subtracted_from_V_X_L_C() {
-        assertThat(validator.validate("DV")).isFalse();
-        assertThat(validator.validate("DX")).isFalse();
-        assertThat(validator.validate("DL")).isFalse();
-        assertThat(validator.validate("DC")).isFalse();
-    }
-
-    @Test
     public void check_X_can_be_subtracted_from_L_and_C_only() {
         assertThat(validator.validate("XL")).isTrue();
         assertThat(validator.validate("XC")).isTrue();
     }
 
     @Test
-    public void check_X_cannot_be_subtracted_from_L_C_D_M() {
+    public void check_X_cannot_be_subtracted_from_I_V_D_M() {
         assertThat(validator.validate("XI")).isFalse();
         assertThat(validator.validate("XV")).isFalse();
         assertThat(validator.validate("XD")).isFalse();
@@ -61,7 +45,7 @@ public class SubtractionConstraintValidatorTest {
     }
 
     @Test
-    public void all_symbols_cannot_be_subtracted_from_V_L_D() {
+    public void check_all_symbols_cannot_be_subtract_V_L_D() {
         assertThat(validator.validate("VX")).isFalse();
         assertThat(validator.validate("LC")).isFalse();
         assertThat(validator.validate("DM")).isFalse();

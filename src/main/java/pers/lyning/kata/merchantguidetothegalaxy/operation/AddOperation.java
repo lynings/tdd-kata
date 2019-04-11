@@ -10,22 +10,22 @@ import java.util.Objects;
 public class AddOperation implements SymbolOperation {
 
     private String symbolA;
-    private String symbolB;
+    private String addedSymbolB;
 
     public AddOperation(String symbolA) {
         this(symbolA, null);
     }
 
-    public AddOperation(String symbolA, String symbolB) {
+    public AddOperation(String symbolA, String addedSymbolB) {
         this.symbolA = symbolA;
-        this.symbolB = symbolB;
+        this.addedSymbolB = addedSymbolB;
     }
 
     @Override
     public int operate() {
-        return Objects.isNull(symbolB)
+        return Objects.isNull(addedSymbolB)
                 ? SymbolTable.getValue(symbolA)
-                : this.add(symbolA, symbolB);
+                : this.add(symbolA, addedSymbolB);
     }
 
     private Integer add(String symbolA, String symbolB) {

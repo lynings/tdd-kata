@@ -20,14 +20,15 @@ public class InputHandlerTest {
         String text = FileContentReader.getString(file);
 
         InputHandler inputHandler = new InputHandler();
-        inputHandler.convert(text);
+        inputHandler.handle(text);
         List<String> questions = inputHandler.getQuestions();
         assertThat(questions).isNotEmpty();
         assertThat(questions.size()).isEqualTo(5);
-        for (String question : questions) {
-            assertThat(question).startsWith("how");
-            assertThat(question).endsWith("?");
-        }
+        assertThat(questions.get(0)).isEqualTo("how much is pish tegj glob glob ?");
+        assertThat(questions.get(1)).isEqualTo("how many Credits is glob prok Silver ?");
+        assertThat(questions.get(2)).isEqualTo("how many Credits is glob prok Gold ?");
+        assertThat(questions.get(3)).isEqualTo("how many Credits is glob prok Iron ?");
+        assertThat(questions.get(4)).isEqualTo("how much wood could a woodchuck chuck if a woodchuck could chuckwood ?");
 
         Map<String, String> wordToSymbolMap = inputHandler.getWordToSymbolMap();
         assertThat(wordToSymbolMap.size()).isEqualTo(4);
@@ -36,10 +37,10 @@ public class InputHandlerTest {
         assertThat(wordToSymbolMap.get("pish")).isEqualTo("X");
         assertThat(wordToSymbolMap.get("tegj")).isEqualTo("L");
 
-        Map<String, Double> metalsToAvgCreditsMap = inputHandler.getMetalsToAvgCreditsMap();
-        assertThat(metalsToAvgCreditsMap.size()).isEqualTo(3);
-        assertThat(metalsToAvgCreditsMap.get("Silver")).isEqualTo(17.0);
-        assertThat(metalsToAvgCreditsMap.get("Gold")).isEqualTo(14450.0);
-        assertThat(metalsToAvgCreditsMap.get("Iron")).isEqualTo(195.5);
+        List<String> metalsCreditsLineList = inputHandler.getMetalsCreditsLineList();
+        assertThat(metalsCreditsLineList.size()).isEqualTo(3);
+        assertThat(metalsCreditsLineList.get(0)).isEqualTo("glob glob Silver is 34 Credits");
+        assertThat(metalsCreditsLineList.get(1)).isEqualTo("glob prok Gold is 57800 Credits");
+        assertThat(metalsCreditsLineList.get(2)).isEqualTo("pish pish Iron is 3910 Credits");
     }
 }

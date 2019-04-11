@@ -22,7 +22,8 @@ public class GalaxyGuideTest {
         File file = new File(this.getClass().getResource("/merchantguidetothegalaxy/should_convert_success_full_input.txt").getPath());
         String text = FileContentReader.getString(file);
         GalaxyGuide galaxyGuide = new GalaxyGuide();
-        galaxyGuide.receiveConvert(text);
+        galaxyGuide.receive(text);
+        galaxyGuide.display();
 
         assertThat(outputCapture.toString())
                 .contains("pish tegj glob glob is 42")

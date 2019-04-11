@@ -27,7 +27,7 @@ public class SubtractOperation implements SymbolOperation {
 
     private void validate() throws RuntimeException {
         SymbolsConstraintValidator validator = new SubtractionConstraintValidator();
-        if (validator.validate(subtractSymbol.concat(subtractSymbol))) {
+        if (!validator.validate(subtractSymbol.concat(symbol))) {
             throw new RuntimeException(subtractSymbol + " cannot subtracted by " + symbol);
         }
     }

@@ -9,17 +9,17 @@ public class InputHandler {
 
     private List<String> questions = new ArrayList<>();
     private Map<String, String> wordToSymbolMap = new HashMap<>();
-    private Map<String, Double> metalsToAvgCreditsMap = new HashMap<>();
+    private List<String> metalsCreditsLineList = new ArrayList<>();
     private String[] textLines = null;
 
-    public void convert(String multipleLineText) throws Exception {
+    public void handle(String multipleLineText) throws Exception {
         textLines = multipleLineText.split("\\n\\n|\\n");
         this.convertIfWordToSymbol();
-        this.convertIfMetalsToCredits();
-        this.convertIfQuestion();
+        this.assembleMetalsCreditsText();
+        this.assembleQuestion();
     }
 
-    private void convertIfQuestion() {
+    private void assembleQuestion() {
         for (String text : textLines) {
             if (text.startsWith("how") && text.endsWith("?")) {
                 this.questions.add(text);
@@ -27,22 +27,10 @@ public class InputHandler {
         }
     }
 
-    private void convertIfMetalsToCredits() throws Exception {
-        SymbolCalculator symbolCalculator = new SymbolCalculator();
+    private void assembleMetalsCreditsText() throws Exception {
         for (String line : textLines) {
             if (line.endsWith("Credits")) {
-                String[] arr = line.split(" is ");
-                String[] leftArr = arr[0].split(" ");
-                String[] rightArr = arr[1].split(" ");
-                String symbols = "";
-                for (int i = 0; i < leftArr.length - 1; i++) {
-                    symbols += this.wordToSymbolMap.get(leftArr[i]);
-                }
-                double number = symbolCalculator.calc(symbols);
-                double credits = Integer.valueOf(rightArr[0]);
-                double avg = credits / number;
-                String metals = leftArr[leftArr.length - 1];
-                this.metalsToAvgCreditsMap.put(metals, avg);
+                metalsCreditsLineList.add(line);
             }
         }
     }
@@ -69,7 +57,7 @@ public class InputHandler {
         return wordToSymbolMap;
     }
 
-    public Map<String, Double> getMetalsToAvgCreditsMap() {
-        return metalsToAvgCreditsMap;
+    public List<String> getMetalsCreditsLineList() {
+        return metalsCreditsLineList;
     }
 }
