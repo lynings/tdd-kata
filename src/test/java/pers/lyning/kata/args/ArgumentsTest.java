@@ -67,10 +67,18 @@ public class ArgumentsTest {
     }
 
     @Test
-    public void should_return_boolean_when_args_is_minus_f_xxx() {
+    public void should_return_true_when_file_existed() {
         String args = "-f -t /Users/mac/Code/TDD/tdd-kata -n README.md";
         Arguments arguments = new Arguments(args);
         boolean result = arguments.getValue("f");
         assertThat(result).isTrue();
+    }
+
+    @Test
+    public void should_return_false_when_file_not_found() {
+        String args = "-f -t /Users/mac/Code/TDD/tdd-kata -n test.md";
+        Arguments arguments = new Arguments(args);
+        boolean result = arguments.getValue("f");
+        assertThat(result).isFalse();
     }
 }
