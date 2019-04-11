@@ -41,3 +41,23 @@ have some tests that suitable default values are correctly assigned if flags giv
 Comments from those who are working on this Kata
 
 In Robert C. Martin’s book there is a full worked solution written in Java. He mentions in a footnote on page 200 that he has also solved it in Ruby. His Java code is available on github.com/unclebob/javaargs/tree/master, and the Ruby version is available on github.com/unclebob/rubyargs/tree/master
+
+## 程序设计
+```java
+class Arguments {
+    public Arguments(String args);
+    public T getValue(String flag);
+}
+```
+
+## 任务分解
+- [x] 实现解析数字，例如：-n 10
+- [x] 实现解析字符创，例如：-s Hello World!!!
+- [x] 实现解析字符串列表，例如：-g Hello World!!!
+- [x] 实现解析数字列表，例如：-d 1 -2 -3 4 10
+- [ ] 实现解析存放唯一字符串集合，例如 -u TDD is not difficult and TDD is not simple.
+- [ ] 实现解析map结构，例如 -m name:lyning,age:25.
+- [ ] 实现解析多种数据结构，例如：-n 10 -s Hello World!!! -m name:lyning,age:25
+- [ ] 实现解析判断文件是否存在，例如: -f /Users/mac/Code/TDD/tdd-kata
+- [ ] 增加一个ArgumentException用于同一各个XXXParser的抛出异常
+- [ ] 异常验证
