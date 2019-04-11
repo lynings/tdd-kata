@@ -58,6 +58,6 @@ class Arguments {
 - [ ] 实现解析存放唯一字符串集合，例如 -u TDD is not difficult and TDD is not simple.
 - [ ] 实现解析map结构，例如 -m name:lyning,age:25.
 - [ ] 实现解析多种数据结构，例如：-n 10 -s Hello World!!! -m name:lyning,age:25
-- [ ] 实现解析判断文件是否存在，例如: -f /Users/mac/Code/TDD/tdd-kata
+- [x] 实现解析判断文件是否存在，例如: -f -t /Users/mac/Code/TDD/tdd-kata -n README.md
 - [ ] 增加一个ArgumentException用于同一各个XXXParser的抛出异常
-- [ ] 异常验证
+- [ ] 有效性验证

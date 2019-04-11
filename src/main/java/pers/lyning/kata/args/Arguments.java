@@ -21,6 +21,7 @@ public class Arguments {
         this.flagToArgsParserMap.put("-i", new IntegerArgumentParser());
         this.flagToArgsParserMap.put("-g", new StringListArgumentsParser());
         this.flagToArgsParserMap.put("-d", new IntegerListArgumentParser());
+        this.flagToArgsParserMap.put("-f", new FileArgumentParser());
     }
 
     private Object parse(String flag) {

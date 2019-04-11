@@ -65,4 +65,12 @@ public class ArgumentsTest {
         assertThat(list.get(3)).isEqualTo(4);
         assertThat(list.get(4)).isEqualTo(10);
     }
+
+    @Test
+    public void should_return_boolean_when_args_is_minus_f_xxx() {
+        String args = "-f -t /Users/mac/Code/TDD/tdd-kata -n README.md";
+        Arguments arguments = new Arguments(args);
+        boolean result = arguments.getValue("f");
+        assertThat(result).isTrue();
+    }
 }
