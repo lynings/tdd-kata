@@ -1,7 +1,7 @@
 package pers.lyning.kata.merchantguidetothegalaxy.operation;
 
-import pers.lyning.kata.merchantguidetothegalaxy.validator.SubtractionConstraintValidator;
 import pers.lyning.kata.merchantguidetothegalaxy.SymbolTable;
+import pers.lyning.kata.merchantguidetothegalaxy.validator.SubtractionConstraintValidator;
 import pers.lyning.kata.merchantguidetothegalaxy.validator.SymbolsConstraintValidator;
 
 /**
@@ -9,31 +9,32 @@ import pers.lyning.kata.merchantguidetothegalaxy.validator.SymbolsConstraintVali
  */
 public class SubtractOperation implements SymbolOperation {
 
-    private String symbolA;
-    private String symbolB;
 
-    public SubtractOperation(String symbolA, String symbolB) {
-        this.symbolA = symbolA;
-        this.symbolB = symbolB;
+    private final String symbol;
+    private final String subtractSymbol;
+
+    public SubtractOperation(String symbol, String subtractSymbol) {
+        this.symbol = symbol;
+        this.subtractSymbol = subtractSymbol;
     }
 
     @Override
     public int operate() {
         this.validate();
 
-        return this.subtract(symbolA, symbolB);
+        return this.subtract(symbol, subtractSymbol);
     }
 
     private void validate() throws RuntimeException {
         SymbolsConstraintValidator validator = new SubtractionConstraintValidator();
-        if (validator.validate(symbolA.concat(symbolB))) {
-            throw new RuntimeException(symbolB + " cannot subtracted by " + symbolA);
+        if (validator.validate(subtractSymbol.concat(subtractSymbol))) {
+            throw new RuntimeException(subtractSymbol + " cannot subtracted by " + symbol);
         }
     }
 
-    private Integer subtract(String symbolA, String symbolB) {
-        Integer numberA = SymbolTable.getValue(symbolA);
-        Integer numberB = SymbolTable.getValue(symbolB);
-        return numberA - numberB;
+    private Integer subtract(String symbol, String subtractSymbol) {
+        Integer number = SymbolTable.getValue(symbol);
+        Integer subtractNumber = SymbolTable.getValue(subtractSymbol);
+        return number - subtractNumber;
     }
 }
