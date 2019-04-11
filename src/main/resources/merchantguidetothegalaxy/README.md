@@ -112,11 +112,11 @@ class SymbolCalculator {
 - [x] MCMXLIV = 1000 +（1000-100）+（50-10）+（5-1）= 1944.
 - [x] XXXIX = 10 + 10 + 10 + (10 - 1) = 39.
 - [x] 转换星际单位和罗马数字之间的注释的文本行.
-- [ ] 验证在给定的测试数据下，pish tegj glob glob is 42.
-- [ ] 验证在给定的测试数据下，glob prok Silver is 68 Credits.
-- [ ] 验证在给定的测试数据下，glob prok Gold is 57800 Credits.
-- [ ] 验证在给定的测试数据下，glob prok Iron is 782 Credits.
-- [ ] 当输入不正确时，输出 I have no idea what you are talking about.
+- [x] 验证在给定的测试数据下，pish tegj glob glob is 42.
+- [x] 验证在给定的测试数据下，glob prok Silver is 68 Credits.
+- [x] 验证在给定的测试数据下，glob prok Gold is 57800 Credits.
+- [x] 验证在给定的测试数据下，glob prok Iron is 782 Credits.
+- [x] 当输入不正确时，输出 I have no idea what you are talking about.
 - [ ] 验证“D”，“L”和“V”永远不会重复.
 - [ ] 除了特殊情况，符号“I”，“X”，“C”和“M”可以连续出现三次.
 - [ ] 验证 “X”只能被“L”和“C”减去.
