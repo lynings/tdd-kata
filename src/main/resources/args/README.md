@@ -46,7 +46,7 @@ In Robert C. Martin’s book there is a full worked solution written in Java. He
 ```java
 class Arguments {
     public Arguments(String args);
-    public T getValue(String flag);
+    public <T> T getValue(String flag);
 }
 ```
 
