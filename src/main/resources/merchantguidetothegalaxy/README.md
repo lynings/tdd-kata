@@ -124,3 +124,4 @@ class SymbolCalculator {
 - [x] 验证 “I”只能被“V”和“X”减去.
 - [x] 验证永远不能减去“V”，“L”和“D”
 - [ ] 重构GalaxyGuide.receiveConvert(text)
+- [ ] 重构InputHandler
