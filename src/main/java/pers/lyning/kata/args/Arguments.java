@@ -30,7 +30,8 @@ public class Arguments {
 
     private Object parse(String flag) {
         String newArgs = this.getArgsOfFlag(flag);
-        return this.flagToArgsParserMap.get(flag).parse(newArgs.trim());
+        ArgumentParser<Object> argumentParser = this.flagToArgsParserMap.get(flag);
+        return argumentParser.parse(newArgs.trim());
     }
 
     private String getArgsOfFlag(String flag) {
