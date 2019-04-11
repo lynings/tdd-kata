@@ -21,7 +21,7 @@ public class InputHandler {
 
     private void assembleQuestion() {
         for (String text : textLines) {
-            if (text.startsWith("how") && text.endsWith("?")) {
+            if (text.endsWith("?")) {
                 this.questions.add(text);
             }
         }
