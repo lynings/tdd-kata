@@ -1,11 +1,10 @@
 package pers.lyning.kata.merchantguidetothegalaxy;
 
 import org.junit.Test;
+import pers.lyning.kata.utils.FileContentReader;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
 
@@ -19,10 +18,10 @@ public class InputConverterTest {
     @Test
     public void should_convert_success() throws IOException {
         File file = new File(this.getClass().getResource("/merchantguidetothegalaxy/should_convert_success_full_input.txt").getPath());
-        InputStream inputStream = new FileInputStream(file);
+        String text = FileContentReader.getString(file);
 
         InputConverter inputConverter = new InputConverter();
-        inputConverter.convert(inputStream);
+        inputConverter.convert(text);
         List<String> questions = inputConverter.getQuestions();
         assertThat(questions).isNotEmpty();
         assertThat(questions.size()).isEqualTo(5);

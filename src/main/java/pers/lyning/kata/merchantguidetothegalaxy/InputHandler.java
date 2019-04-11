@@ -1,8 +1,5 @@
 package pers.lyning.kata.merchantguidetothegalaxy;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -18,8 +15,7 @@ public class InputConverter {
     private Map<String, Double> metalsToAvgCreditsMap = new HashMap<>();
     private String[] textArr = null;
 
-    public void convert(InputStream inputStream) throws IOException {
-        String text = getStringFromInputStream(inputStream);
+    public void convert(String text) {
         textArr = text.split("\\n\\n|\\n");
         this.convertIfWordToSymbol();
         this.convertIfMetalsToCredits();
@@ -63,18 +59,6 @@ public class InputConverter {
                 }
             }
         }
-    }
-
-    private String getStringFromInputStream(InputStream inputStream) throws IOException {
-        InputStreamReader reader = new InputStreamReader(inputStream, "UTF-8");
-
-        StringBuffer sb = new StringBuffer();
-        while (reader.ready()) {
-            sb.append((char) reader.read());
-        }
-        reader.close();
-        inputStream.close();
-        return sb.toString();
     }
 
     public List<String> getQuestions() {
