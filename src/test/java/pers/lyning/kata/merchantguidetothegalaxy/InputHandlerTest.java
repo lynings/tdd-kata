@@ -4,7 +4,6 @@ import org.junit.Test;
 import pers.lyning.kata.utils.FileContentReader;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -16,7 +15,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class InputHandlerTest {
 
     @Test
-    public void should_convert_success() throws IOException {
+    public void should_convert_success() throws Exception {
         File file = new File(this.getClass().getResource("/merchantguidetothegalaxy/should_convert_success_full_input.txt").getPath());
         String text = FileContentReader.getString(file);
 

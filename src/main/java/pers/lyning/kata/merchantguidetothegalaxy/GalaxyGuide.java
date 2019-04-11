@@ -10,9 +10,9 @@ public class GalaxyGuide {
 
     private SymbolCalculator symbolCalculator = new SymbolCalculator();
 
-    public void receiveConvert(String text) {
+    public void receiveConvert(String multipleLineText) throws Exception {
         InputHandler inputHandler = new InputHandler();
-        inputHandler.convert(text);
+        inputHandler.convert(multipleLineText);
         List<String> questions = inputHandler.getQuestions();
         for (String question : questions) {
             try {

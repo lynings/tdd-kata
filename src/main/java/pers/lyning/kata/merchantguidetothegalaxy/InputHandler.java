@@ -1,9 +1,6 @@
 package pers.lyning.kata.merchantguidetothegalaxy;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author lyning
@@ -13,28 +10,28 @@ public class InputHandler {
     private List<String> questions = new ArrayList<>();
     private Map<String, String> wordToSymbolMap = new HashMap<>();
     private Map<String, Double> metalsToAvgCreditsMap = new HashMap<>();
-    private String[] textArr = null;
+    private String[] textLines = null;
 
-    public void convert(String text) {
-        textArr = text.split("\\n\\n|\\n");
+    public void convert(String multipleLineText) throws Exception {
+        textLines = multipleLineText.split("\\n\\n|\\n");
         this.convertIfWordToSymbol();
         this.convertIfMetalsToCredits();
         this.convertIfQuestion();
     }
 
     private void convertIfQuestion() {
-        for (String text : textArr) {
+        for (String text : textLines) {
             if (text.startsWith("how") && text.endsWith("?")) {
                 this.questions.add(text);
             }
         }
     }
 
-    private void convertIfMetalsToCredits() {
+    private void convertIfMetalsToCredits() throws Exception {
         SymbolCalculator symbolCalculator = new SymbolCalculator();
-        for (String text : textArr) {
-            if (text.endsWith("Credits")) {
-                String[] arr = text.split(" is ");
+        for (String line : textLines) {
+            if (line.endsWith("Credits")) {
+                String[] arr = line.split(" is ");
                 String[] leftArr = arr[0].split(" ");
                 String[] rightArr = arr[1].split(" ");
                 String symbols = "";
@@ -51,15 +48,18 @@ public class InputHandler {
     }
 
     private void convertIfWordToSymbol() {
-        for (String text : textArr) {
-            for (String symbol : SymbolConverter.table.keySet()) {
-                if (text.endsWith(symbol)) {
-                    this.wordToSymbolMap.put(text.split(" is ")[0], symbol);
-                    break;
-                }
+        for (String line : textLines) {
+            String symbol = this.getLastWord(line);
+            if (!Objects.isNull(SymbolTable.getValue(symbol))) {
+                this.wordToSymbolMap.put(line.split(" is ")[0], symbol);
             }
         }
     }
+
+    private String getLastWord(String line) {
+        return line.split(" ")[line.split(" ").length - 1];
+    }
+
 
     public List<String> getQuestions() {
         return questions;

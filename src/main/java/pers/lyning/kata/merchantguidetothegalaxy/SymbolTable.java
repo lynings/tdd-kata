@@ -6,9 +6,9 @@ import java.util.Map;
 /**
  * @author lyning
  */
-public class SymbolConverter {
+public class SymbolTable {
 
-    public static final Map<String, Integer> table = new HashMap() {{
+    private static final Map<String, Integer> table = new HashMap() {{
         put("I", 1);
         put("V", 5);
         put("X", 10);
@@ -18,7 +18,7 @@ public class SymbolConverter {
         put("M", 1000);
     }};
 
-    public Integer convert(String symbol) {
+    public static Integer getValue(String symbol) {
         return table.get(symbol);
     }
 }

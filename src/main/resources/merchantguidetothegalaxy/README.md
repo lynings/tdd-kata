@@ -117,10 +117,10 @@ class SymbolCalculator {
 - [x] 验证在给定的测试数据下，glob prok Gold is 57800 Credits.
 - [x] 验证在给定的测试数据下，glob prok Iron is 782 Credits.
 - [x] 当输入不正确时，输出 I have no idea what you are talking about.
-- [ ] 验证“D”，“L”和“V”永远不会重复.
-- [ ] 除了特殊情况，符号“I”，“X”，“C”和“M”可以连续出现三次.
-- [ ] 验证 “X”只能被“L”和“C”减去.
-- [ ] 验证“C”只能被“D”和“M”中减去.
-- [ ] 验证 “I”只能被“V”和“X”减去.
-- [ ] 验证永远不能减去“V”，“L”和“D”
+- [X] “D”，“L”和“V”不能重复出现.
+- [X] 除了特殊情况，符号“I”，“X”，“C”和“M”可以连续出现三次.
+- [x] 验证 “X”只能被“L”和“C”减去.
+- [x] 验证“C”只能被“D”和“M”中减去.
+- [x] 验证 “I”只能被“V”和“X”减去.
+- [x] 验证永远不能减去“V”，“L”和“D”
 - [ ] 重构GalaxyGuide.receiveConvert(text)
