@@ -16,6 +16,10 @@ public class Arguments {
         this.config();
     }
 
+    public <T> T getValue(String flag) {
+        return (T) this.parse("-" + flag);
+    }
+
     private void config() {
         this.flagToArgsParserMap.put("-s", new StringArgumentParser());
         this.flagToArgsParserMap.put("-i", new IntegerArgumentParser());
@@ -49,9 +53,5 @@ public class Arguments {
 
     private boolean isFlag(String word) {
         return flagToArgsParserMap.containsKey(word);
-    }
-
-    public <T> T getValue(String flag) {
-        return (T) this.parse("-" + flag);
     }
 }
