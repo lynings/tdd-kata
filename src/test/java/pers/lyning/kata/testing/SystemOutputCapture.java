@@ -21,6 +21,7 @@ public class SystemOutputCapture extends ExternalResource {
     @Override
     protected void after() {
         System.setOut(sysOut);
+        System.out.println(outContent.toString());
     }
 
     public static SystemOutputCapture init() {
