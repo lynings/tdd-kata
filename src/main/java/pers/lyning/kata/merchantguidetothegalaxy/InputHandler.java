@@ -8,7 +8,7 @@ import java.util.Map;
 /**
  * @author lyning
  */
-public class InputConverter {
+public class InputHandler {
 
     private List<String> questions = new ArrayList<>();
     private Map<String, String> wordToSymbolMap = new HashMap<>();
@@ -41,8 +41,8 @@ public class InputConverter {
                 for (int i = 0; i < leftArr.length - 1; i++) {
                     symbols += this.wordToSymbolMap.get(leftArr[i]);
                 }
-                int number = symbolCalculator.calc(symbols);
-                int credits = Integer.valueOf(rightArr[0]);
+                double number = symbolCalculator.calc(symbols);
+                double credits = Integer.valueOf(rightArr[0]);
                 double avg = credits / number;
                 String metals = leftArr[leftArr.length - 1];
                 this.metalsToAvgCreditsMap.put(metals, avg);
