@@ -40,7 +40,7 @@ public class Arguments {
         for (int i = 0, len = argsArr.length; i < len; i++) {
             if (flag.equals(argsArr[i])) {
                 for (int j = i + 1; j < len; j++) {
-                    if (this.isFlag(argsArr[j])) {
+                    if (this.hasFlag(argsArr[j])) {
                         break;
                     } else {
                         newArgs.append(" " + argsArr[j]);
@@ -52,7 +52,7 @@ public class Arguments {
         return newArgs.toString();
     }
 
-    private boolean isFlag(String word) {
+    private boolean hasFlag(String word) {
         return flagToArgsParserMap.containsKey(word);
     }
 }
