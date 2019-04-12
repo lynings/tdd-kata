@@ -34,8 +34,21 @@ public class ArgsTest {
     }
 
     @Test
-    public void should_return_specifies_one_string() throws Exception {
+    public void should_return_specifies_string() throws Exception {
         Args args = new Args("s*", new String[]{"-s", "a"});
         assertThat(args.<String>getValue("s")).isEqualTo("a");
     }
+
+    @Test
+    public void should_return_default_integer_value() throws Exception {
+        Args args = new Args("i#", new String[]{"-i"});
+        assertThat(args.<Integer>getValue("i")).isEqualTo(0);
+    }
+
+    @Test
+    public void should_return_specifies_integer() throws Exception {
+        Args args = new Args("i#", new String[]{"-i", "123"});
+        assertThat(args.<Integer>getValue("i")).isEqualTo(123);
+    }
+
 }

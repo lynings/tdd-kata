@@ -23,7 +23,8 @@ public class Args {
     }
 
     private void configParser() {
-        schemaToArgsParser.put("*", new StringArgsParser());
+        this.schemaToArgsParser.put("*", new StringArgsParser());
+        this.schemaToArgsParser.put("#", new IntegerArgsParser());
     }
 
     private void parseSchema() {
