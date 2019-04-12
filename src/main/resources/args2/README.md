@@ -60,8 +60,8 @@ In Robert C. Martin’s book there is a full worked solution written in Java. He
 |char[*] |one element of a string array.|
 |char[#] |one element of a int array.|
 |char[##] |one element of a double array.|
-|char& |set arg.|
-|char&& |map arg.|
+|char[&] |set arg.|
+|char[&&] |map arg.|
 
 ## 程序设计
 ```java
