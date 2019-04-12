@@ -7,6 +7,8 @@ import java.util.List;
  * @author lyning
  */
 public class Session {
+
+    private final int REMAINING_MINUTES_CONSTANT;
     /**
      * session 剩余时间
      */
@@ -16,6 +18,7 @@ public class Session {
 
     public Session(int remainingMinutes) {
         this.remainingMinutes = remainingMinutes;
+        REMAINING_MINUTES_CONSTANT = remainingMinutes;
     }
 
     public void addTalk(Talk talk) {
@@ -29,5 +32,14 @@ public class Session {
 
     public int getRemainingMinutes() {
         return remainingMinutes;
+    }
+
+    public boolean hasRemainingMinutes() {
+        return this.getRemainingMinutes() > 0;
+    }
+
+    public void clear() {
+        this.getTalks().clear();
+        this.remainingMinutes = REMAINING_MINUTES_CONSTANT;
     }
 }

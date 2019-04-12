@@ -7,7 +7,6 @@ import pers.lyning.kata.conferencetrack.utils.TalkParser;
 import pers.lyning.kata.testing.SystemOutputCapture;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,7 +29,7 @@ public class ConferenceManagerTest {
         this.conferenceManager = new ConferenceManager();
 
         String testDataFilePath = ConferenceManagerTest.class.getResource("/conferencetrack/talk_list.txt").getPath();
-        talks = talkParser.parse(new FileInputStream(new File(testDataFilePath)));
+        talks = talkParser.parse(new File(testDataFilePath));
     }
 
     @Test

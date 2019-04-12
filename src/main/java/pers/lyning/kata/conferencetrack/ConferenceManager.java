@@ -16,7 +16,7 @@ public class ConferenceManager {
     }
 
     public void display(Conference conference) {
-        for (int index = 0; index <= conference.getTracks().size(); index++) {
+        for (int index = 0, len = conference.getTracks().size(); index < len; index++) {
             System.out.println("Track " + (index + 1) + ":");
             Track track = conference.getTracks().get(index);
             this.display(track.getMorning(), ConferenceConfig.MORNING_SESSION_START_HOURS);

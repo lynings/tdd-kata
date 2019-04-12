@@ -14,7 +14,7 @@ public class ConferencePlanner {
 
     public Conference execute(List<Talk> talks) {
         Conference conference = new Conference();
-        while (talks.size() != 0) {
+        while (!talks.isEmpty()) {
             Session morning = planningMorning(talks);
             Session afternoon = planningAfternoon(talks);
             conference.addSession(morning, afternoon);
@@ -36,7 +36,7 @@ public class ConferencePlanner {
 
     private Session planningBySession(List<Talk> talks, Integer sessionDurationMinutes) {
         Session session = new Session(sessionDurationMinutes);
-        while (session.getRemainingMinutes() != 0 && talks.size() > 0) {
+        while (session.hasRemainingMinutes() && !talks.isEmpty()) {
             Optional<Talk> talkOptional = this.searchAnyTalk(talks, session.getRemainingMinutes());
             if (talkOptional.isPresent()) {
                 Talk talk = talkOptional.get();
@@ -44,7 +44,7 @@ public class ConferencePlanner {
                 talks.remove(talk);
             } else {
                 talks.addAll(session.getTalks());
-                session = new Session(sessionDurationMinutes);
+                session.clear();
             }
         }
         return session;
@@ -52,16 +52,16 @@ public class ConferencePlanner {
 
     private Optional<Talk> searchAnyTalk(List<Talk> talks, Integer durationMinutes) {
         // 确定接下来参与计算的 talk 的范围
-        List<Talk> talkGroup = defineNeighborhood(talks, durationMinutes);
+        List<Talk> talkGroup = this.defineTalksScope(talks, durationMinutes);
         if (talkGroup.isEmpty()) {
             return Optional.empty();
         }
-        // 随机获取符合要求的 talk
+        // 随机获取符合要求的 talk，目的是寻找所有可能的结果
         int random = RandomUnit.random(0, talkGroup.size() - 1);
         return Optional.of(talkGroup.get(random));
     }
 
-    private List<Talk> defineNeighborhood(List<Talk> talks, Integer durationMinutes) {
+    private List<Talk> defineTalksScope(List<Talk> talks, Integer durationMinutes) {
         return talks
                 .stream()
                 .filter(talk -> talk.getDurationMinutes() <= durationMinutes)
