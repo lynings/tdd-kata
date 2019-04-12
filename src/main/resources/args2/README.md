@@ -98,9 +98,9 @@ public class Args {
 - [ ] Set 解析器（schema: [&]）
     - [ ] 默认返回 empty set
     - [ ] 返回 args 指定的值，并且不能重复
-- [ ] Map 解析器（schema: [&&]）
-    - [ ] 默认返回 empty map
-    - [ ] 指定并返回 key:value 格式的数据
+- [x] Map 解析器（schema: [&&]）
+    - [x] 默认返回 empty map
+    - [x] 指定并返回 key:value 格式的数据
 - [ ] 同时接受并处理多种args，例如：-n 10 -s Hello World!!! -m name:lyning,age:25
 - [ ] 增加一个ArgsException用于统一抛出异常
 - [ ] 有效性验证

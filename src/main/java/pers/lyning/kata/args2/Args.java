@@ -30,6 +30,7 @@ public class Args {
         this.schemaToArgsParser.put("[*]", new StringArraysArgsParser());
         this.schemaToArgsParser.put("[#]", new IntegerArraysArgsParser());
         this.schemaToArgsParser.put("[##]", new DoubleArraysArgsParser());
+        this.schemaToArgsParser.put("&&", new MapArgsParser());
     }
 
     private void parseSchema() {

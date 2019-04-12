@@ -2,6 +2,8 @@ package pers.lyning.kata.args2;
 
 import org.junit.Test;
 
+import java.util.Map;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
@@ -124,5 +126,21 @@ public class ArgsTest {
         assertThat(values[0]).isEqualTo(0.0);
         assertThat(values[1]).isEqualTo(1.5);
         assertThat(values[2]).isEqualTo(-2.5);
+    }
+
+    @Test
+    public void should_return_default_empty_map_arrays() throws Exception {
+        Args args = new Args("m&&", new String[]{"-m"});
+        assertThat(args.<Map<String, String>>getValue("m")).isEmpty();
+    }
+
+    @Test
+    public void should_return_specified_map_arrays() throws Exception {
+        Args args = new Args("m&&", new String[]{"-m", "name:lyning,age:25"});
+        Map<String, String> values = args.getValue("m");
+        assertThat(values).isNotEmpty();
+        assertThat(values.size()).isEqualTo(2);
+        assertThat(values.get("name")).isEqualTo("lyning");
+        assertThat(values.get("age")).isEqualTo("25");
     }
 }
