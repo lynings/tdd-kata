@@ -95,9 +95,9 @@ public class Args {
 - [x] 浮点数数组解析器（schema: [##]）
     - [x] 默认返回 empty 数组
     - [x] 返回 args 指定的浮点数数组
-- [ ] Set 解析器（schema: [&]）
-    - [ ] 默认返回 empty set
-    - [ ] 返回 args 指定的值，并且不能重复
+- [x] Set 解析器（schema: [&]）
+    - [x] 默认返回 empty set
+    - [x] 返回 args 指定的值，并且不能重复
 - [x] Map 解析器（schema: [&&]）
     - [x] 默认返回 empty map
     - [x] 指定并返回 key:value 格式的数据

@@ -3,6 +3,7 @@ package pers.lyning.kata.args2;
 import org.junit.Test;
 
 import java.util.Map;
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -142,5 +143,22 @@ public class ArgsTest {
         assertThat(values.size()).isEqualTo(2);
         assertThat(values.get("name")).isEqualTo("lyning");
         assertThat(values.get("age")).isEqualTo("25");
+    }
+
+    @Test
+    public void should_return_default_empty_set() throws Exception {
+        Args args = new Args("s&", new String[]{"-s"});
+        assertThat(args.<Set<String>>getValue("s")).isEmpty();
+    }
+
+    @Test
+    public void should_return_specified_set() throws Exception {
+        Args args = new Args("s&", new String[]{"-s", "a a b b c c"});
+        Set<String> values = args.getValue("s");
+        assertThat(values).isNotEmpty();
+        assertThat(values.size()).isEqualTo(3);
+        assertThat(values.contains("a")).isTrue();
+        assertThat(values.contains("b")).isTrue();
+        assertThat(values.contains("c")).isTrue();
     }
 }
