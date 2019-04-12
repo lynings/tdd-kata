@@ -41,7 +41,8 @@ public class ConferenceManagerTest {
             int morningDurationMinute = this.sumDurationMinutesOfTalks(track.getMorning().getTalks());
             assertThat(morningDurationMinute).isEqualTo(180);
 
-            assertThat(getLastTalk(track.getMorning().getTalks()).getTitle().contains("Lunch"));
+            Talk lastTalk = getLastTalk(track.getMorning().getTalks());
+            assertThat(lastTalk.getTitle().contains("Lunch"));
         }
     }
 
@@ -49,7 +50,8 @@ public class ConferenceManagerTest {
     public void check_afternoon_sessions_begin_must_finish_in_time_for_the_networking_event() {
         Conference conference = this.conferenceManager.planning(talks);
         for (Track track : conference.getTracks()) {
-            assertThat(getLastTalk(track.getMorning().getTalks()).getTitle().contains("NETWORKING EVENT"));
+            Talk lastTalk = getLastTalk(track.getMorning().getTalks());
+            assertThat(lastTalk.getTitle().contains("NETWORKING EVENT"));
         }
     }
 
@@ -57,12 +59,14 @@ public class ConferenceManagerTest {
     public void check_the_networking_event_can_start_no_earlier_than_4mp_and_no_later_than_5mp() {
         Conference conference = this.conferenceManager.planning(talks);
         for (Track track : conference.getTracks()) {
+            Talk lastTalk = getLastTalk(track.getMorning().getTalks());
+            assertThat(lastTalk.getTitle().contains("NETWORKING EVENT"));
+
             int morningDurationMinute = this.sumDurationMinutesOfTalks(track.getAfternoon().getTalks());
             assertThat(morningDurationMinute).isLessThanOrEqualTo(240);
             assertThat(morningDurationMinute).isGreaterThan(180);
-
             assertThat(track.getAfternoon().getRemainingMinutes()).isBetween(0, 59);
-            assertThat(getLastTalk(track.getMorning().getTalks()).getTitle().contains("NETWORKING EVENT"));
+
         }
     }
 
