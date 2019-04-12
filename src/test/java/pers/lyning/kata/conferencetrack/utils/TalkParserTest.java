@@ -5,7 +5,6 @@ import pers.lyning.kata.conferencetrack.ConferenceManagerTest;
 import pers.lyning.kata.conferencetrack.Talk;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.List;
 
@@ -18,7 +17,7 @@ public class TalkParserTest {
     @Test
     public void parse() throws IOException {
         File file = new File(ConferenceManagerTest.class.getResource("/conferencetrack/talk_list.txt").getPath());
-        List<Talk> talks = talkParser.parse(new FileInputStream(file));
+        List<Talk> talks = talkParser.parse(file);
         assertThat(talks).isNotEmpty();
         assertThat(talks.size()).isEqualTo(19);
     }
