@@ -131,13 +131,13 @@ public class ArgsTest {
 
     @Test
     public void should_return_default_empty_map() throws Exception {
-        Args args = new Args("m&&", new String[]{"-m"});
+        Args args = new Args("m[&&]", new String[]{"-m"});
         assertThat(args.<Map<String, String>>getValue("m")).isEmpty();
     }
 
     @Test
     public void should_return_specified_map() throws Exception {
-        Args args = new Args("m&&", new String[]{"-m", "name:lyning,age:25"});
+        Args args = new Args("m[&&]", new String[]{"-m", "name:lyning,age:25"});
         Map<String, String> values = args.getValue("m");
         assertThat(values).isNotEmpty();
         assertThat(values.size()).isEqualTo(2);
@@ -147,18 +147,64 @@ public class ArgsTest {
 
     @Test
     public void should_return_default_empty_set() throws Exception {
-        Args args = new Args("s&", new String[]{"-s"});
+        Args args = new Args("s[&]", new String[]{"-s"});
         assertThat(args.<Set<String>>getValue("s")).isEmpty();
     }
 
     @Test
     public void should_return_specified_set() throws Exception {
-        Args args = new Args("s&", new String[]{"-s", "a a b b c c"});
+        Args args = new Args("s[&]", new String[]{"-s", "a a b b c c"});
         Set<String> values = args.getValue("s");
         assertThat(values).isNotEmpty();
         assertThat(values.size()).isEqualTo(3);
         assertThat(values.contains("a")).isTrue();
         assertThat(values.contains("b")).isTrue();
         assertThat(values.contains("c")).isTrue();
+    }
+
+    @Test
+    public void multiple_flag() {
+        Args args = new Args("a*,b#,c##,d[*],e[#],f[##],g[&],h[&&],", new String[]{
+                "-a", "你好",
+                "-b", "10",
+                "-c", "3.14",
+                "-d", "你 好 呀",
+                "-e", "1 2 3",
+                "-f", "1.0 2.0 3.5",
+                "-g", "a b c c",
+                "-h", "name:lyning,age:25",
+        });
+        assertThat(args.<String>getValue("a")).isEqualTo("你好");
+        assertThat(args.<Integer>getValue("b")).isEqualTo(10);
+        assertThat(args.<Double>getValue("c")).isEqualTo(3.14);
+
+        String[] stringArr = args.getValue("d");
+        assertThat(stringArr.length).isEqualTo(3);
+        assertThat(stringArr[0]).isEqualTo("你");
+        assertThat(stringArr[1]).isEqualTo("好");
+        assertThat(stringArr[2]).isEqualTo("呀");
+
+        Integer[] intArr = args.getValue("e");
+        assertThat(intArr.length).isEqualTo(3);
+        assertThat(intArr[0]).isEqualTo(1);
+        assertThat(intArr[1]).isEqualTo(2);
+        assertThat(intArr[2]).isEqualTo(3);
+
+        Double[] doubleArr = args.getValue("f");
+        assertThat(doubleArr.length).isEqualTo(3);
+        assertThat(doubleArr[0]).isEqualTo(1.0);
+        assertThat(doubleArr[1]).isEqualTo(2.0);
+        assertThat(doubleArr[2]).isEqualTo(3.5);
+
+        Set<String> set = args.getValue("g");
+        assertThat(set.size()).isEqualTo(3);
+        assertThat(set.contains("a")).isTrue();
+        assertThat(set.contains("b")).isTrue();
+        assertThat(set.contains("c")).isTrue();
+
+        Map<String, String> map = args.getValue("h");
+        assertThat(map.size()).isEqualTo(2);
+        assertThat(map.get("name")).isEqualTo("lyning");
+        assertThat(map.get("age")).isEqualTo("25");
     }
 }
