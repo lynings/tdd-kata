@@ -101,7 +101,7 @@ public class Args {
 - [x] Map 解析器（schema: [&&]）
     - [x] 默认返回 empty map
     - [x] 指定并返回 key:value 格式的数据
-- [x] 同时接受并处理多种args，例如：-n 10 -s Hello World!!! -m name:lyning,age:25
+- [x] 同时接收并处理多种args，例如：-n 10 -s Hello World!!! -m name:lyning,age:25
 - [x] 增加一个ArgsException用于统一抛出异常
 - [ ] 有效性验证
     - [ ] 验证无效 schema 
