@@ -91,4 +91,21 @@ public class ArgsTest {
         assertThat(values[1]).isEqualTo("is");
         assertThat(values[2]).isEqualTo("args");
     }
+
+    @Test
+    public void should_return_default_empty_int_arrays() throws Exception {
+        Args args = new Args("i[#]", new String[]{"-i"});
+        assertThat(args.<Integer[]>getValue("i")).isEmpty();
+    }
+
+    @Test
+    public void should_return_specified_int_arrays() throws Exception {
+        Args args = new Args("i[#]", new String[]{"-i", "0 1 -2"});
+        Integer[] values = args.getValue("i");
+        assertThat(values).isNotEmpty();
+        assertThat(values.length).isEqualTo(3);
+        assertThat(values[0]).isEqualTo(0);
+        assertThat(values[1]).isEqualTo(1);
+        assertThat(values[2]).isEqualTo(-2);
+    }
 }
