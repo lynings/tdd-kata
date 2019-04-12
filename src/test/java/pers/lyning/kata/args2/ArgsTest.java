@@ -66,13 +66,13 @@ public class ArgsTest {
     }
 
     @Test
-    public void should_return_default_false_value() throws Exception {
+    public void should_return_false_not_exist_boolean_value() throws Exception {
         Args args = new Args("l", new String[]{"-l"});
         assertThat(args.<Boolean>getValue("l")).isFalse();
     }
 
     @Test
-    public void should_return_true() throws Exception {
+    public void should_return_true_when_existed_boolean_value() throws Exception {
         Args args = new Args("l", new String[]{"-l", "1"});
         assertThat(args.<Boolean>getValue("l")).isTrue();
     }
@@ -129,13 +129,13 @@ public class ArgsTest {
     }
 
     @Test
-    public void should_return_default_empty_map_arrays() throws Exception {
+    public void should_return_default_empty_map() throws Exception {
         Args args = new Args("m&&", new String[]{"-m"});
         assertThat(args.<Map<String, String>>getValue("m")).isEmpty();
     }
 
     @Test
-    public void should_return_specified_map_arrays() throws Exception {
+    public void should_return_specified_map() throws Exception {
         Args args = new Args("m&&", new String[]{"-m", "name:lyning,age:25"});
         Map<String, String> values = args.getValue("m");
         assertThat(values).isNotEmpty();
