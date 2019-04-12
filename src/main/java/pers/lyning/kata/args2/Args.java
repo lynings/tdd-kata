@@ -52,9 +52,13 @@ public class Args {
         for (int index = 0, len = args.length; index < len; index++) {
             if (args[index].startsWith("-")) {
                 String flag = args[index];
-                String value = index + 1 > args.length - 1 || args[index + 1].startsWith("-") ? null : args[index += 1];
+                String value = this.hasValue(index) ? args[index += 1] : null;
                 this.flagToValuesMap.put(flag.substring(1), value);
             }
         }
+    }
+
+    private boolean hasValue(int index) {
+        return index + 1 <= args.length - 1;
     }
 }
