@@ -14,18 +14,16 @@ You should write a parser for this kind of arguments. This parser takes a schema
 Once the schema has been specified, the program should pass the actual argument list to the args parser. It will verify that the arguments match the schema. The program can then ask the args parser for each of the values, using the names of the flags. The values are returned with the correct types, as specified in the schema.
 
 For example if the program is to be called with these arguments:
-```shell
+
 -l -p 8080 -d /usr/logs
-```
+
 this indicates a schema with 3 flags: l, p, d. The “l” (logging) flag has no values associated with it, it is a boolean flag, True if present, False if not. the “p” (port) flag has an integer value, and the “d” (directory) flag has a string value.
 
 If a flag mentioned in the schema is missing in the arguments, a suitable default value should be returned. For example “False” for a boolean, 0 for a number, and “” for a string. If the arguments given do not match the schema, it is important that a good error message is given, explaining exactly what is wrong.
 
 If you are feeling ambitious, extend your code to support lists eg
 
-```shell
 -g this,is,a,list -d 1,2,-3,5
-```
 
 So the “g” flag indicates a list of strings, [“this”, “is”, “a”, “list”] and the “d” flag indicates a list of integers, [1, 2, -3, 5].
 
@@ -44,66 +42,22 @@ Comments from those who are working on this Kata
 
 In Robert C. Martin’s book there is a full worked solution written in Java. He mentions in a footnote on page 200 that he has also solved it in Ruby. His Java code is available on github.com/unclebob/javaargs/tree/master, and the Ruby version is available on github.com/unclebob/rubyargs/tree/master
 
-## 案例分析
-- arguments consist of  flags and values
-- flags should be on character, preceded by a minus sign, each flag should have zero, or one value associated with it
-- parser args, takes a schema. Then return correct types and values
-- when schema mismatch flag, then return suitable default value and type
-
-## Schema
-|schema|description|
-|----|----|
-|char    |Boolean arg.|
-|char*   |String arg.|
-|char#   |Integer arg.|
-|char##  |double arg.|
-|char[*] |one element of a string array.|
-|char[#] |one element of a int array.|
-|char[##] |one element of a double array.|
-|char& |set arg.|
-|char&& |map arg.|
-
 ## 程序设计
 ```java
-public class Args {
-    public Arguments(String schema, String args);
-    public <T> T getValue(String flag);
-    public boolean hasFlag(String flag);
+class Arguments {
+    public Arguments(String args);
+    public T getValue(String flag);
 }
 ```
 
 ## 任务分解
-- [ ] 判断 flag 是否存在
-- [ ] 字符创解析器（schema: *）
-    - [ ] 默认返回 ""
-    - [ ] 返回 args 指定的字符串
-- [ ] 整数解析器（schema: #）
-    - [ ] 默认返回 0
-    - [ ] 返回 args 指定的整数
-- [ ] 浮点数解析器（schema: ##）
-    - [ ] 默认返回 0.0
-    - [ ] 返回 args 指定的浮点数
-- [ ] Boolean 解析器（schema: <flag>）
-    - [ ] 默认返回 false
-    - [ ] 当存在时返回 true
-- [ ] 字符串数组解析器（schema: [*]）
-    - [ ] 默认返回 empty 数组
-    - [ ] 返回 args 指定的字符串数组
-- [ ] 整数数组解析器（schema: [#]）
-    - [ ] 默认返回 empty 数组
-    - [ ] 返回 args 指定的整数数组
-- [ ] 浮点数数组解析器（schema: [##]）
-    - [ ] 默认返回 empty 数组
-    - [ ] 返回 args 指定的浮点数数组
-- [ ] Set 解析器（schema: [&]）
-    - [ ] 默认返回 empty set
-    - [ ] 返回 args 指定的值，并且不能重复
-- [ ] Map 解析器（schema: [&&]）
-    - [ ] 默认返回 empty map
-    - [ ] 指定并返回 key:value 格式的数据
-- [ ] 同时接受并处理多种args，例如：-n 10 -s Hello World!!! -m name:lyning,age:25
-- [ ] 增加一个ArgsException用于统一抛出异常
+- [x] 实现解析数字，例如：-n 10
+- [x] 实现解析字符创，例如：-s Hello World!!!
+- [x] 实现解析字符串列表，例如：-g Hello World!!!
+- [x] 实现解析数字列表，例如：-d 1 -2 -3 4 10
+- [ ] 实现解析存放唯一字符串集合，例如 -u TDD is not difficult and TDD is not simple.
+- [ ] 实现解析map结构，例如 -m name:lyning,age:25.
+- [ ] 实现解析多种数据结构，例如：-n 10 -s Hello World!!! -m name:lyning,age:25
+- [x] 实现解析判断文件是否存在，例如: -f -t /Users/mac/Code/TDD/tdd-kata -n README.md
+- [ ] 增加一个ArgumentException用于同一各个XXXParser的抛出异常
 - [ ] 有效性验证
-    - [ ] 验证无效 schema 
-    - [ ] 验证无效 args
-    - [ ] 验证无效 flag
