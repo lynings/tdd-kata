@@ -37,28 +37,28 @@ public class ConferencePlanner {
     private Session planningBySession(List<Talk> talks, Integer sessionDurationMinutes) {
         Session session = new Session(sessionDurationMinutes);
         while (session.getRemainingMinutes() != 0 && talks.size() > 0) {
-            Optional<Talk> talkOptional = this.searchAny(talks, session.getRemainingMinutes());
-            if (!talkOptional.isPresent()) {
-                talks.addAll(session.getTalks());
-                session = new Session(sessionDurationMinutes);
-            } else {
+            Optional<Talk> talkOptional = this.searchAnyTalk(talks, session.getRemainingMinutes());
+            if (talkOptional.isPresent()) {
                 Talk talk = talkOptional.get();
                 session.addTalk(talk);
                 talks.remove(talk);
+            } else {
+                talks.addAll(session.getTalks());
+                session = new Session(sessionDurationMinutes);
             }
         }
         return session;
     }
 
-    private Optional<Talk> searchAny(List<Talk> talks, Integer durationMinutes) {
+    private Optional<Talk> searchAnyTalk(List<Talk> talks, Integer durationMinutes) {
         // 确定接下来参与计算的 talk 的范围
-        List<Talk> talkList = defineNeighborhood(talks, durationMinutes);
-        if (talkList.isEmpty()) {
+        List<Talk> talkGroup = defineNeighborhood(talks, durationMinutes);
+        if (talkGroup.isEmpty()) {
             return Optional.empty();
         }
         // 随机获取符合要求的 talk
-        int random = RandomUnit.random(0, talkList.size() - 1);
-        return Optional.of(talkList.get(random));
+        int random = RandomUnit.random(0, talkGroup.size() - 1);
+        return Optional.of(talkGroup.get(random));
     }
 
     private List<Talk> defineNeighborhood(List<Talk> talks, Integer durationMinutes) {
