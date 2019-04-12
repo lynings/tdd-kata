@@ -34,7 +34,7 @@ public class ArgsTest {
     }
 
     @Test
-    public void should_return_specifies_string() throws Exception {
+    public void should_return_specified_string() throws Exception {
         Args args = new Args("s*", new String[]{"-s", "a"});
         assertThat(args.<String>getValue("s")).isEqualTo("a");
     }
@@ -46,9 +46,21 @@ public class ArgsTest {
     }
 
     @Test
-    public void should_return_specifies_integer() throws Exception {
+    public void should_return_specified_integer() throws Exception {
         Args args = new Args("i#", new String[]{"-i", "123"});
         assertThat(args.<Integer>getValue("i")).isEqualTo(123);
+    }
+
+    @Test
+    public void should_return_default_double_value() throws Exception {
+        Args args = new Args("d##", new String[]{"-d"});
+        assertThat(args.<Double>getValue("d")).isEqualTo(0.0);
+    }
+
+    @Test
+    public void should_return_specified_double() throws Exception {
+        Args args = new Args("d##", new String[]{"-d", "123.5"});
+        assertThat(args.<Double>getValue("d")).isEqualTo(123.5);
     }
 
 }
