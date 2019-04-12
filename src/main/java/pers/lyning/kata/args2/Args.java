@@ -27,6 +27,7 @@ public class Args {
         this.schemaToArgsParser.put("*", new StringArgsParser());
         this.schemaToArgsParser.put("#", new IntegerArgsParser());
         this.schemaToArgsParser.put("##", new DoubleArgsParser());
+        this.schemaToArgsParser.put("[*]", new StringArraysArgsParser());
     }
 
     private void parseSchema() {

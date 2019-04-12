@@ -86,9 +86,9 @@ public class Args {
 - [x] Boolean 解析器（schema: <flag>）
     - [x] 默认返回 false
     - [x] 当存在时返回 true
-- [ ] 字符串数组解析器（schema: [*]）
-    - [ ] 默认返回 empty 数组
-    - [ ] 返回 args 指定的字符串数组
+- [x] 字符串数组解析器（schema: [*]）
+    - [x] 默认返回 empty 数组
+    - [x] 返回 args 指定的字符串数组
 - [ ] 整数数组解析器（schema: [#]）
     - [ ] 默认返回 empty 数组
     - [ ] 返回 args 指定的整数数组

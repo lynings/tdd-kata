@@ -75,4 +75,20 @@ public class ArgsTest {
         assertThat(args.<Boolean>getValue("l")).isTrue();
     }
 
+    @Test
+    public void should_return_default_empty_string_arrays() throws Exception {
+        Args args = new Args("s[*]", new String[]{"-s"});
+        assertThat(args.<String[]>getValue("s")).isEmpty();
+    }
+
+    @Test
+    public void should_return_specified_string_arrays() throws Exception {
+        Args args = new Args("s[*]", new String[]{"-s", "This is args"});
+        String[] values = args.getValue("s");
+        assertThat(values).isNotEmpty();
+        assertThat(values.length).isEqualTo(3);
+        assertThat(values[0]).isEqualTo("This");
+        assertThat(values[1]).isEqualTo("is");
+        assertThat(values[2]).isEqualTo("args");
+    }
 }
