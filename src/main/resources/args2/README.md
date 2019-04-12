@@ -83,9 +83,9 @@ public class Args {
 - [x] 浮点数解析器（schema: ##）
     - [x] 默认返回 0.0
     - [x] 返回 args 指定的浮点数
-- [ ] Boolean 解析器（schema: <flag>）
-    - [ ] 默认返回 false
-    - [ ] 当存在时返回 true
+- [x] Boolean 解析器（schema: <flag>）
+    - [x] 默认返回 false
+    - [x] 当存在时返回 true
 - [ ] 字符串数组解析器（schema: [*]）
     - [ ] 默认返回 empty 数组
     - [ ] 返回 args 指定的字符串数组

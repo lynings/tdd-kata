@@ -63,4 +63,16 @@ public class ArgsTest {
         assertThat(args.<Double>getValue("d")).isEqualTo(123.5);
     }
 
+    @Test
+    public void should_return_default_false_value() throws Exception {
+        Args args = new Args("l", new String[]{"-l"});
+        assertThat(args.<Boolean>getValue("l")).isFalse();
+    }
+
+    @Test
+    public void should_return_true() throws Exception {
+        Args args = new Args("l", new String[]{"-l", "1"});
+        assertThat(args.<Boolean>getValue("l")).isTrue();
+    }
+
 }

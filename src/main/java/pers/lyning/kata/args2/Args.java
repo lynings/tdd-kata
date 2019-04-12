@@ -23,6 +23,7 @@ public class Args {
     }
 
     private void configParser() {
+        this.schemaToArgsParser.put("", new BooleanArgsParser());
         this.schemaToArgsParser.put("*", new StringArgsParser());
         this.schemaToArgsParser.put("#", new IntegerArgsParser());
         this.schemaToArgsParser.put("##", new DoubleArgsParser());
