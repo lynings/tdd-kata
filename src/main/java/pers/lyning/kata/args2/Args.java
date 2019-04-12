@@ -1,6 +1,5 @@
 package pers.lyning.kata.args2;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -33,17 +32,6 @@ public class Args {
         this.schemaToArgsParser.put("&&", new MapArgsParser());
     }
 
-    private void parseSchema() {
-        String[] schemaArr = this.schema.split(",");
-        for (String str : schemaArr) {
-            this.flagToSchemaMap.put(str.substring(0, 1), str.substring(1));
-        }
-    }
-
-    public boolean hasFlag(String flag) {
-        return Arrays.asList(args).indexOf("-" + flag) > -1;
-    }
-
     public <T> T getValue(String flag) {
         if (!this.hasFlag(flag)) {
             throw new ArgsException("INVALID FLAG");
@@ -54,6 +42,16 @@ public class Args {
         return (T) argsParser.parse(value);
     }
 
+    public boolean hasFlag(String flag) {
+        return this.flagToSchemaMap.containsKey(flag);
+    }
+
+    private void parseSchema() {
+        String[] schemaArr = this.schema.split(",");
+        for (String str : schemaArr) {
+            this.flagToSchemaMap.put(str.substring(0, 1), str.substring(1));
+        }
+    }
 
     private void parseArgs() {
         for (int index = 0, len = args.length; index < len; index++) {
