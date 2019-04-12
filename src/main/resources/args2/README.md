@@ -92,9 +92,9 @@ public class Args {
 - [x] 整数数组解析器（schema: [#]）
     - [x] 默认返回 empty 数组
     - [x] 返回 args 指定的整数数组
-- [ ] 浮点数数组解析器（schema: [##]）
-    - [ ] 默认返回 empty 数组
-    - [ ] 返回 args 指定的浮点数数组
+- [x] 浮点数数组解析器（schema: [##]）
+    - [x] 默认返回 empty 数组
+    - [x] 返回 args 指定的浮点数数组
 - [ ] Set 解析器（schema: [&]）
     - [ ] 默认返回 empty set
     - [ ] 返回 args 指定的值，并且不能重复

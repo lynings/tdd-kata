@@ -108,4 +108,21 @@ public class ArgsTest {
         assertThat(values[1]).isEqualTo(1);
         assertThat(values[2]).isEqualTo(-2);
     }
+
+    @Test
+    public void should_return_default_empty_double_arrays() throws Exception {
+        Args args = new Args("d[##]", new String[]{"-d"});
+        assertThat(args.<Double[]>getValue("d")).isEmpty();
+    }
+
+    @Test
+    public void should_return_specified_double_arrays() throws Exception {
+        Args args = new Args("d[##]", new String[]{"-d", "0 1.5 -2.5"});
+        Double[] values = args.getValue("d");
+        assertThat(values).isNotEmpty();
+        assertThat(values.length).isEqualTo(3);
+        assertThat(values[0]).isEqualTo(0.0);
+        assertThat(values[1]).isEqualTo(1.5);
+        assertThat(values[2]).isEqualTo(-2.5);
+    }
 }
