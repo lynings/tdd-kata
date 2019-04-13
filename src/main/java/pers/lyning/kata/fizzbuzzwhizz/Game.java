@@ -19,6 +19,12 @@ public class Game {
         return new Game(firstNumber, secondNumber, thirdNumber);
     }
 
+    public List<String> countOff(Integer totalPlayers) throws Exception {
+        this.totalPlayers = totalPlayers;
+        this.validate();
+        return this.takeTurns();
+    }
+
     private boolean isDivisible(Integer divisor, Integer dividend) {
         return divisor % dividend == 0;
     }
@@ -28,12 +34,6 @@ public class Game {
             return true;
         }
         return false;
-    }
-
-    public List<String> countOff(Integer totalPlayers) throws Exception {
-        this.totalPlayers = totalPlayers;
-        this.validate();
-        return this.takeTurns();
     }
 
     private String match(Integer order) {

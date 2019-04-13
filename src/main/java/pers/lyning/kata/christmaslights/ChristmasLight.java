@@ -41,20 +41,6 @@ public class ChristmasLight {
         this.increaseBrightness(score, TOGGLE_INCREASE_BRIGHTNESS);
     }
 
-    private void increaseBrightness(Score score, int brightness) {
-        Position start = score.getStart();
-        Position end = score.getEnd();
-        for (int x = start.getX(); x <= end.getX(); x++) {
-            for (int y = start.getY(); y <= end.getY(); y++) {
-                lightsMatrix[x][y] += brightness;
-            }
-        }
-    }
-
-    private void decreaseBrightness(Score score, int brightness) {
-        increaseBrightness(score, brightness);
-    }
-
     public int getLights() {
         int numberOfOnLights = 0;
         for (int x = 0; x < lightsMatrix.length; x++) {
@@ -77,5 +63,19 @@ public class ChristmasLight {
             }
         }
         return totalBrightness;
+    }
+
+    private void increaseBrightness(Score score, int brightness) {
+        Position start = score.getStart();
+        Position end = score.getEnd();
+        for (int x = start.getX(); x <= end.getX(); x++) {
+            for (int y = start.getY(); y <= end.getY(); y++) {
+                lightsMatrix[x][y] += brightness;
+            }
+        }
+    }
+
+    private void decreaseBrightness(Score score, int brightness) {
+        increaseBrightness(score, brightness);
     }
 }
