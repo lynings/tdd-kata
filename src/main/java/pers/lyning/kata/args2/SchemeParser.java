@@ -15,10 +15,10 @@ public class SchemeParser {
 
     public SchemeParser(String schema) {
         this.schema = schema;
-        this.parseSchema();
+        this.parse();
     }
 
-    private void parseSchema() {
+    private void parse() {
         String[] schemaArr = this.schema.split(",");
         for (String str : schemaArr) {
             this.flagToSchemaMap.put(str.substring(0, 1), str.substring(1));

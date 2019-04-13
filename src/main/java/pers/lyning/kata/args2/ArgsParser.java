@@ -13,10 +13,10 @@ public class ArgsParser {
 
     public ArgsParser(String[] args) {
         this.args = args;
-        this.parseArgs();
+        this.parse();
     }
 
-    private void parseArgs() {
+    private void parse() {
         for (int index = 0, len = args.length; index < len; index++) {
             if (this.isFlag(args[index])) {
                 String flag = args[index];
