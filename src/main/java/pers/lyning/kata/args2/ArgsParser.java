@@ -17,9 +17,9 @@ public class ArgsParser {
         if (!this.hasFlag(flag)) {
             throw new ArgsException("INVALID FLAG");
         }
-        ValueParser valueParser = this.getValueParser(flag);
         String value = this.args.getValue(flag);
-        return (T) valueParser.parse(value);
+        ValueParser<T> valueParser = this.getValueParser(flag);
+        return valueParser.parse(value);
     }
 
     public boolean hasFlag(String flag) {
