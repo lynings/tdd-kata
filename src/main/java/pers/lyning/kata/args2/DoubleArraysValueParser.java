@@ -13,9 +13,13 @@ public class DoubleArraysValueParser implements ValueParser<Double[]> {
         if (Objects.isNull(values)) {
             return new Double[]{};
         }
+        try {
         return Arrays.asList(values.split(" "))
                 .stream()
                 .map(Double::valueOf)
                 .toArray(Double[]::new);
+        }catch (Exception e) {
+            throw new ArgsException("The value of args must be an double arrays，such as -d[##] 1.0 2.5 3.14");
+        }
     }
 }

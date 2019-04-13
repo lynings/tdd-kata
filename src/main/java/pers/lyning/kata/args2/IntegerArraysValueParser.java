@@ -13,9 +13,13 @@ public class IntegerArraysValueParser implements ValueParser<Integer[]> {
         if (Objects.isNull(values)) {
             return new Integer[]{};
         }
-        return Arrays.asList(values.split(" "))
-                .stream()
-                .map(Integer::valueOf)
-                .toArray(Integer[]::new);
+        try {
+            return Arrays.asList(values.split(" "))
+                    .stream()
+                    .map(Integer::valueOf)
+                    .toArray(Integer[]::new);
+        } catch (Exception e) {
+            throw new ArgsException("The value of args must be an int arrays，such as -i[#] 0 1 2");
+        }
     }
 }

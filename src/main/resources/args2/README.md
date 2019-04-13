@@ -103,7 +103,7 @@ public class Args {
     - [x] 指定并返回 key:value 格式的数据
 - [x] 同时接收并处理多种args，例如：-n 10 -s Hello World!!! -m name:lyning,age:25
 - [x] 增加一个ArgsException用于统一抛出异常
-- [ ] 有效性验证
+- [x] 有效性验证
     - [x] 验证无效 schema 
-    - [ ] 验证无效 args
+    - [x] 验证无效 args
     - [x] 验证无效 flag

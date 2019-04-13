@@ -1,6 +1,8 @@
 package pers.lyning.kata.args2;
 
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import java.util.Map;
 import java.util.Set;
@@ -11,6 +13,9 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author lyning
  */
 public class ArgsParserTest {
+
+    @Rule
+    public final ExpectedException expectedEx = ExpectedException.none();
 
     @Test
     public void should_return_false_when_flag_not_found() {
@@ -55,6 +60,14 @@ public class ArgsParserTest {
     }
 
     @Test
+    public void should_fail_when_input_incorrect_integer_value() throws Exception {
+        expectedEx.expect(ArgsException.class);
+        expectedEx.expectMessage("The value of args must be an integer，such as -i 1");
+        ArgsParser parser = new ArgsParser("i#", new String[]{"-i", "a"});
+        parser.<Integer>getValue("i");
+    }
+
+    @Test
     public void should_return_default_integer_value() throws Exception {
         ArgsParser parser = new ArgsParser("i#", new String[]{"-i"});
         assertThat(parser.<Integer>getValue("i")).isEqualTo(0);
@@ -70,6 +83,14 @@ public class ArgsParserTest {
     public void should_return_default_double_value() throws Exception {
         ArgsParser parser = new ArgsParser("d##", new String[]{"-d"});
         assertThat(parser.<Double>getValue("d")).isEqualTo(0.0);
+    }
+
+    @Test
+    public void should_fail_when_input_incorrect_double_value() throws Exception {
+        expectedEx.expect(ArgsException.class);
+        expectedEx.expectMessage("The value of args must be an double，such as -d 2.5");
+        ArgsParser parser = new ArgsParser("d##", new String[]{"-d", "a"});
+        parser.<Integer>getValue("d");
     }
 
     @Test
@@ -125,6 +146,14 @@ public class ArgsParserTest {
     }
 
     @Test
+    public void should_fail_when_input_incorrect_int_arrays_value() throws Exception {
+        expectedEx.expect(ArgsException.class);
+        expectedEx.expectMessage("The value of args must be an int arrays，such as -i[#] 0 1 2");
+        ArgsParser parser = new ArgsParser("i[#]", new String[]{"-i", "0 1 2 a"});
+        parser.<Integer>getValue("i");
+    }
+
+    @Test
     public void should_return_default_empty_double_arrays() throws Exception {
         ArgsParser parser = new ArgsParser("d[##]", new String[]{"-d"});
         assertThat(parser.<Double[]>getValue("d")).isEmpty();
@@ -142,6 +171,14 @@ public class ArgsParserTest {
     }
 
     @Test
+    public void should_fail_when_input_incorrect_double_arrays_value() throws Exception {
+        expectedEx.expect(ArgsException.class);
+        expectedEx.expectMessage("The value of args must be an double arrays，such as -d[##] 1.0 2.5 3.14");
+        ArgsParser parser = new ArgsParser("d[##]", new String[]{"-d", "1.0 2.5 3.14 a"});
+        parser.<Integer>getValue("d");
+    }
+
+    @Test
     public void should_return_default_empty_map() throws Exception {
         ArgsParser parser = new ArgsParser("m[&&]", new String[]{"-m"});
         assertThat(parser.<Map<String, String>>getValue("m")).isEmpty();
@@ -155,6 +192,14 @@ public class ArgsParserTest {
         assertThat(values.size()).isEqualTo(2);
         assertThat(values.get("name")).isEqualTo("lyning");
         assertThat(values.get("age")).isEqualTo("25");
+    }
+
+    @Test
+    public void should_fail_when_input_incorrect_map_value() throws Exception {
+        expectedEx.expect(ArgsException.class);
+        expectedEx.expectMessage("The value of args must be an map，such as -m[&&] key1:val1,key2:val2,...");
+        ArgsParser parser = new ArgsParser("m[&&]", new String[]{"-m", "name:lyning,age"});
+        parser.<Integer>getValue("m");
     }
 
     @Test
