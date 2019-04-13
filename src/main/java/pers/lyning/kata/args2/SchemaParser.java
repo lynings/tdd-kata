@@ -8,12 +8,12 @@ import java.util.Map;
 /**
  * @author lyning
  */
-public class SchemeParser {
+public class SchemaParser {
 
     private final String schema;
     private Map<String, String> flagToSchemaMap = new HashMap<>();
 
-    public SchemeParser(String schema) {
+    public SchemaParser(String schema) {
         this.schema = schema;
         this.parse();
     }

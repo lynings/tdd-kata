@@ -9,12 +9,12 @@ import java.util.Map;
  */
 public class Args {
     private final ArgsParser argsParser;
-    private final SchemeParser schemaParser;
+    private final SchemaParser schemaParser;
     private Map<String, ValueParser> schemaToValueParser = new HashMap<>();
 
     public Args(String schema, String[] args) {
         this.argsParser = new ArgsParser(args);
-        this.schemaParser = new SchemeParser(schema);
+        this.schemaParser = new SchemaParser(schema);
         List<String> schemas = this.schemaParser.getSchemas();
         this.configValuesParsers(schemas);
     }
