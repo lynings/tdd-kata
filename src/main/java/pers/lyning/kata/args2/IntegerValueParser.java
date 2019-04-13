@@ -5,7 +5,7 @@ import java.util.Optional;
 /**
  * @author lyning
  */
-public class IntegerArgsParser implements ArgsParser<Integer> {
+public class IntegerValueParser implements ValueParser<Integer> {
 
     @Override
     public Integer parse(String values) {

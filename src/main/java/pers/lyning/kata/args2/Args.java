@@ -11,7 +11,7 @@ public class Args {
     private final String[] args;
     private Map<String, String> flagToValuesMap = new HashMap<>();
     private Map<String, String> flagToSchemaMap = new HashMap<>();
-    private Map<String, ArgsParser> schemaToArgsParser = new HashMap<>();
+    private Map<String, ValueParser> schemaToValueParser = new HashMap<>();
 
     public Args(String schema, String[] args) {
         this.schema = schema;
@@ -22,15 +22,15 @@ public class Args {
     }
 
     private void configParser() {
-        this.schemaToArgsParser.put("", new BooleanArgsParser());
-        this.schemaToArgsParser.put("*", new StringArgsParser());
-        this.schemaToArgsParser.put("#", new IntegerArgsParser());
-        this.schemaToArgsParser.put("##", new DoubleArgsParser());
-        this.schemaToArgsParser.put("[*]", new StringArraysArgsParser());
-        this.schemaToArgsParser.put("[#]", new IntegerArraysArgsParser());
-        this.schemaToArgsParser.put("[##]", new DoubleArraysArgsParser());
-        this.schemaToArgsParser.put("[&]", new SetArgsParser());
-        this.schemaToArgsParser.put("[&&]", new MapArgsParser());
+        this.schemaToValueParser.put("", new BooleanValueParser());
+        this.schemaToValueParser.put("*", new StringValueParser());
+        this.schemaToValueParser.put("#", new IntegerValueParser());
+        this.schemaToValueParser.put("##", new DoubleValueParser());
+        this.schemaToValueParser.put("[*]", new StringArraysValueParser());
+        this.schemaToValueParser.put("[#]", new IntegerArraysValueParser());
+        this.schemaToValueParser.put("[##]", new DoubleArraysValueParser());
+        this.schemaToValueParser.put("[&]", new SetValueParser());
+        this.schemaToValueParser.put("[&&]", new MapValueParser());
     }
 
     public <T> T getValue(String flag) {
@@ -39,8 +39,8 @@ public class Args {
         }
         String schema = this.flagToSchemaMap.get(flag);
         String value = this.flagToValuesMap.get(flag);
-        ArgsParser argsParser = this.schemaToArgsParser.get(schema);
-        return (T) argsParser.parse(value);
+        ValueParser valueParser = this.schemaToValueParser.get(schema);
+        return (T) valueParser.parse(value);
     }
 
     public boolean hasFlag(String flag) {

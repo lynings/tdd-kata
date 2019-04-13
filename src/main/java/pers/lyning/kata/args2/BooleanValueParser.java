@@ -5,7 +5,7 @@ import java.util.Objects;
 /**
  * @author lyning
  */
-public class BooleanArgsParser implements ArgsParser<Boolean> {
+public class BooleanValueParser implements ValueParser<Boolean> {
 
     @Override
     public Boolean parse(String values) {

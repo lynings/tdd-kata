@@ -10,7 +10,7 @@ import static java.util.stream.Collectors.toSet;
 /**
  * @author lyning
  */
-public class SetArgsParser implements ArgsParser<Set<String>> {
+public class SetValueParser implements ValueParser<Set<String>> {
 
     @Override
     public Set<String> parse(String values) {

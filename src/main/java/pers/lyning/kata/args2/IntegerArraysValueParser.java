@@ -6,7 +6,7 @@ import java.util.Objects;
 /**
  * @author lyning
  */
-public class IntegerArraysArgsParser implements ArgsParser<Integer[]> {
+public class IntegerArraysValueParser implements ValueParser<Integer[]> {
 
     @Override
     public Integer[] parse(String values) {

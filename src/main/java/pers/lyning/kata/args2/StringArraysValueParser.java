@@ -5,7 +5,7 @@ import java.util.Objects;
 /**
  * @author lyning
  */
-public class StringArraysArgsParser implements ArgsParser<String[]> {
+public class StringArraysValueParser implements ValueParser<String[]> {
 
     @Override
     public String[] parse(String values) {

@@ -6,7 +6,7 @@ import java.util.Objects;
 /**
  * @author lyning
  */
-public class DoubleArraysArgsParser implements ArgsParser<Double[]> {
+public class DoubleArraysValueParser implements ValueParser<Double[]> {
 
     @Override
     public Double[] parse(String values) {

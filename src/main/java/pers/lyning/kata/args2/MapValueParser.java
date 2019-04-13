@@ -7,7 +7,7 @@ import java.util.Objects;
 /**
  * @author lyning
  */
-public class MapArgsParser implements ArgsParser<Map<String, String>> {
+public class MapValueParser implements ValueParser<Map<String, String>> {
 
     @Override
     public Map<String, String> parse(String values) {

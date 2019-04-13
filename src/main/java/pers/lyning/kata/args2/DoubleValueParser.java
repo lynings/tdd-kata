@@ -5,7 +5,7 @@ import java.util.Optional;
 /**
  * @author lyning
  */
-public class DoubleArgsParser implements ArgsParser<Double> {
+public class DoubleValueParser implements ValueParser<Double> {
 
     @Override
     public Double parse(String values) {
