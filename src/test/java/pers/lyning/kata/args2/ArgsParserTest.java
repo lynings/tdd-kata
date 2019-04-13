@@ -10,112 +10,113 @@ import static org.assertj.core.api.Assertions.assertThat;
 /**
  * @author lyning
  */
-public class ArgsTest {
+public class ArgsParserTest {
 
     @Test
     public void should_return_false_when_flag_not_found() {
-        Args args = new Args("s*", new String[]{"-s", "a"});
-        assertThat(args.hasFlag("a")).isFalse();
+        ArgsParser parser = new ArgsParser("s*", new String[]{"-s", "a"});
+        assertThat(parser.hasFlag("a")).isFalse();
     }
 
     @Test
     public void should_return_true_when_existed_flag() {
-        Args args = new Args("s*", new String[]{"-s", "a"});
-        assertThat(args.hasFlag("s")).isTrue();
+        ArgsParser parser = new ArgsParser("s*", new String[]{"-s", "a"});
+        assertThat(parser.hasFlag("s")).isTrue();
     }
 
     @Test(expected = ArgsException.class)
     public void should_get_value_fail_when_flag_not_found() {
-        Args args = new Args("s*", new String[]{"-s", "a"});
-        assertThat(args.<String>getValue("a")).isEqualTo("");
+        ArgsParser parser = new ArgsParser("s*", new String[]{"-s", "a"});
+        assertThat(parser.<String>getValue("a")).isEqualTo("");
     }
 
     @Test(expected = ArgsException.class)
     public void should_fail_when_value_parser_not_implemented() {
-        new Args("s^^^", new String[]{"-s", "test"});
+        ArgsParser parser = new ArgsParser("s^^^", new String[]{"-s", "test"});
+        parser.getValue("s");
     }
 
     @Test(expected = ArgsException.class)
     public void should_fail_when_value_parser_not_found() {
-        Args args = new Args("s*", new String[]{"-s", "test"});
-        args.getValue("a");
+        ArgsParser parser = new ArgsParser("s*", new String[]{"-s", "test"});
+        parser.getValue("a");
     }
 
     @Test
     public void should_return_empty_string() throws Exception {
-        Args args = new Args("s*", new String[]{"-s"});
-        assertThat(args.<String>getValue("s")).isEqualTo("");
+        ArgsParser parser = new ArgsParser("s*", new String[]{"-s"});
+        assertThat(parser.<String>getValue("s")).isEqualTo("");
     }
 
     @Test
     public void should_return_specified_string() throws Exception {
-        Args args = new Args("s*", new String[]{"-s", "a"});
-        assertThat(args.<String>getValue("s")).isEqualTo("a");
+        ArgsParser parser = new ArgsParser("s*", new String[]{"-s", "a"});
+        assertThat(parser.<String>getValue("s")).isEqualTo("a");
     }
 
     @Test
     public void should_return_default_integer_value() throws Exception {
-        Args args = new Args("i#", new String[]{"-i"});
-        assertThat(args.<Integer>getValue("i")).isEqualTo(0);
+        ArgsParser parser = new ArgsParser("i#", new String[]{"-i"});
+        assertThat(parser.<Integer>getValue("i")).isEqualTo(0);
     }
 
     @Test
     public void should_return_specified_integer() throws Exception {
-        Args args = new Args("i#", new String[]{"-i", "123"});
-        assertThat(args.<Integer>getValue("i")).isEqualTo(123);
+        ArgsParser parser = new ArgsParser("i#", new String[]{"-i", "123"});
+        assertThat(parser.<Integer>getValue("i")).isEqualTo(123);
     }
 
     @Test
     public void should_return_default_double_value() throws Exception {
-        Args args = new Args("d##", new String[]{"-d"});
-        assertThat(args.<Double>getValue("d")).isEqualTo(0.0);
+        ArgsParser parser = new ArgsParser("d##", new String[]{"-d"});
+        assertThat(parser.<Double>getValue("d")).isEqualTo(0.0);
     }
 
     @Test
     public void should_return_specified_double() throws Exception {
-        Args args = new Args("d##", new String[]{"-d", "123.5"});
-        assertThat(args.<Double>getValue("d")).isEqualTo(123.5);
+        ArgsParser parser = new ArgsParser("d##", new String[]{"-d", "123.5"});
+        assertThat(parser.<Double>getValue("d")).isEqualTo(123.5);
     }
 
     @Test
     public void should_return_false_not_exist_boolean_value() throws Exception {
-        Args args = new Args("l", new String[]{"-l"});
-        assertThat(args.<Boolean>getValue("l")).isFalse();
+        ArgsParser parser = new ArgsParser("l", new String[]{"-l"});
+        assertThat(parser.<Boolean>getValue("l")).isFalse();
     }
 
     @Test
     public void should_return_true_when_existed_boolean_value() throws Exception {
-        Args args = new Args("l", new String[]{"-l", "1"});
-        assertThat(args.<Boolean>getValue("l")).isTrue();
+        ArgsParser parser = new ArgsParser("l", new String[]{"-l", "1"});
+        assertThat(parser.<Boolean>getValue("l")).isTrue();
     }
 
     @Test
     public void should_return_default_empty_string_arrays() throws Exception {
-        Args args = new Args("s[*]", new String[]{"-s"});
-        assertThat(args.<String[]>getValue("s")).isEmpty();
+        ArgsParser parser = new ArgsParser("s[*]", new String[]{"-s"});
+        assertThat(parser.<String[]>getValue("s")).isEmpty();
     }
 
     @Test
     public void should_return_specified_string_arrays() throws Exception {
-        Args args = new Args("s[*]", new String[]{"-s", "This is args"});
-        String[] values = args.getValue("s");
+        ArgsParser parser = new ArgsParser("s[*]", new String[]{"-s", "This is parser"});
+        String[] values = parser.getValue("s");
         assertThat(values).isNotEmpty();
         assertThat(values.length).isEqualTo(3);
         assertThat(values[0]).isEqualTo("This");
         assertThat(values[1]).isEqualTo("is");
-        assertThat(values[2]).isEqualTo("args");
+        assertThat(values[2]).isEqualTo("parser");
     }
 
     @Test
     public void should_return_default_empty_int_arrays() throws Exception {
-        Args args = new Args("i[#]", new String[]{"-i"});
-        assertThat(args.<Integer[]>getValue("i")).isEmpty();
+        ArgsParser parser = new ArgsParser("i[#]", new String[]{"-i"});
+        assertThat(parser.<Integer[]>getValue("i")).isEmpty();
     }
 
     @Test
     public void should_return_specified_int_arrays() throws Exception {
-        Args args = new Args("i[#]", new String[]{"-i", "0 1 -2"});
-        Integer[] values = args.getValue("i");
+        ArgsParser parser = new ArgsParser("i[#]", new String[]{"-i", "0 1 -2"});
+        Integer[] values = parser.getValue("i");
         assertThat(values).isNotEmpty();
         assertThat(values.length).isEqualTo(3);
         assertThat(values[0]).isEqualTo(0);
@@ -125,14 +126,14 @@ public class ArgsTest {
 
     @Test
     public void should_return_default_empty_double_arrays() throws Exception {
-        Args args = new Args("d[##]", new String[]{"-d"});
-        assertThat(args.<Double[]>getValue("d")).isEmpty();
+        ArgsParser parser = new ArgsParser("d[##]", new String[]{"-d"});
+        assertThat(parser.<Double[]>getValue("d")).isEmpty();
     }
 
     @Test
     public void should_return_specified_double_arrays() throws Exception {
-        Args args = new Args("d[##]", new String[]{"-d", "0 1.5 -2.5"});
-        Double[] values = args.getValue("d");
+        ArgsParser parser = new ArgsParser("d[##]", new String[]{"-d", "0 1.5 -2.5"});
+        Double[] values = parser.getValue("d");
         assertThat(values).isNotEmpty();
         assertThat(values.length).isEqualTo(3);
         assertThat(values[0]).isEqualTo(0.0);
@@ -142,14 +143,14 @@ public class ArgsTest {
 
     @Test
     public void should_return_default_empty_map() throws Exception {
-        Args args = new Args("m[&&]", new String[]{"-m"});
-        assertThat(args.<Map<String, String>>getValue("m")).isEmpty();
+        ArgsParser parser = new ArgsParser("m[&&]", new String[]{"-m"});
+        assertThat(parser.<Map<String, String>>getValue("m")).isEmpty();
     }
 
     @Test
     public void should_return_specified_map() throws Exception {
-        Args args = new Args("m[&&]", new String[]{"-m", "name:lyning,age:25"});
-        Map<String, String> values = args.getValue("m");
+        ArgsParser parser = new ArgsParser("m[&&]", new String[]{"-m", "name:lyning,age:25"});
+        Map<String, String> values = parser.getValue("m");
         assertThat(values).isNotEmpty();
         assertThat(values.size()).isEqualTo(2);
         assertThat(values.get("name")).isEqualTo("lyning");
@@ -158,14 +159,14 @@ public class ArgsTest {
 
     @Test
     public void should_return_default_empty_set() throws Exception {
-        Args args = new Args("s[&]", new String[]{"-s"});
-        assertThat(args.<Set<String>>getValue("s")).isEmpty();
+        ArgsParser parser = new ArgsParser("s[&]", new String[]{"-s"});
+        assertThat(parser.<Set<String>>getValue("s")).isEmpty();
     }
 
     @Test
     public void should_return_specified_set() throws Exception {
-        Args args = new Args("s[&]", new String[]{"-s", "a a b b c c"});
-        Set<String> values = args.getValue("s");
+        ArgsParser parser = new ArgsParser("s[&]", new String[]{"-s", "a a b b c c"});
+        Set<String> values = parser.getValue("s");
         assertThat(values).isNotEmpty();
         assertThat(values.size()).isEqualTo(3);
         assertThat(values.contains("a")).isTrue();
@@ -175,7 +176,7 @@ public class ArgsTest {
 
     @Test
     public void multiple_flag() {
-        Args args = new Args("a*,b#,c##,d[*],e[#],f[##],g[&],h[&&],", new String[]{
+        ArgsParser parser = new ArgsParser("a*,b#,c##,d[*],e[#],f[##],g[&],h[&&],", new String[]{
                 "-a", "你好",
                 "-b", "10",
                 "-c", "3.14",
@@ -185,35 +186,35 @@ public class ArgsTest {
                 "-g", "a b c c",
                 "-h", "name:lyning,age:25",
         });
-        assertThat(args.<String>getValue("a")).isEqualTo("你好");
-        assertThat(args.<Integer>getValue("b")).isEqualTo(10);
-        assertThat(args.<Double>getValue("c")).isEqualTo(3.14);
+        assertThat(parser.<String>getValue("a")).isEqualTo("你好");
+        assertThat(parser.<Integer>getValue("b")).isEqualTo(10);
+        assertThat(parser.<Double>getValue("c")).isEqualTo(3.14);
 
-        String[] stringArr = args.getValue("d");
+        String[] stringArr = parser.getValue("d");
         assertThat(stringArr.length).isEqualTo(3);
         assertThat(stringArr[0]).isEqualTo("你");
         assertThat(stringArr[1]).isEqualTo("好");
         assertThat(stringArr[2]).isEqualTo("呀");
 
-        Integer[] intArr = args.getValue("e");
+        Integer[] intArr = parser.getValue("e");
         assertThat(intArr.length).isEqualTo(3);
         assertThat(intArr[0]).isEqualTo(1);
         assertThat(intArr[1]).isEqualTo(2);
         assertThat(intArr[2]).isEqualTo(3);
 
-        Double[] doubleArr = args.getValue("f");
+        Double[] doubleArr = parser.getValue("f");
         assertThat(doubleArr.length).isEqualTo(3);
         assertThat(doubleArr[0]).isEqualTo(1.0);
         assertThat(doubleArr[1]).isEqualTo(2.0);
         assertThat(doubleArr[2]).isEqualTo(3.5);
 
-        Set<String> set = args.getValue("g");
+        Set<String> set = parser.getValue("g");
         assertThat(set.size()).isEqualTo(3);
         assertThat(set.contains("a")).isTrue();
         assertThat(set.contains("b")).isTrue();
         assertThat(set.contains("c")).isTrue();
 
-        Map<String, String> map = args.getValue("h");
+        Map<String, String> map = parser.getValue("h");
         assertThat(map.size()).isEqualTo(2);
         assertThat(map.get("name")).isEqualTo("lyning");
         assertThat(map.get("age")).isEqualTo("25");

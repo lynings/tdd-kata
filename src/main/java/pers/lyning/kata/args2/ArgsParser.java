@@ -1,45 +1,34 @@
 package pers.lyning.kata.args2;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * @author lyning
  */
 public class ArgsParser {
 
-    private final String[] args;
-    private Map<String, String> flagToValuesMap = new HashMap<>();
+    private final Args args;
+    private final Schema schema;
 
-    public ArgsParser(String[] args) {
-        this.args = args;
-        this.parse();
+    public ArgsParser(String schema, String[] args) {
+        this.args = Args.parse(args);
+        this.schema = Schema.parse(schema);
     }
 
-    private void parse() {
-        for (int index = 0, len = args.length; index < len; index++) {
-            if (this.isFlag(args[index])) {
-                String flag = args[index];
-                String value = this.hasValue(index) ? args[index += 1] : null;
-                this.flagToValuesMap.put(flag.substring(1), value);
-            }
+    public <T> T getValue(String flag) {
+        if (!this.hasFlag(flag)) {
+            throw new ArgsException("INVALID FLAG");
         }
-    }
-
-    public String getValue(String flag) {
-        return this.flagToValuesMap.get(flag);
+        ValueParser valueParser = this.getValueParser(flag);
+        String value = this.args.getValue(flag);
+        return (T) valueParser.parse(value);
     }
 
     public boolean hasFlag(String flag) {
-        return this.flagToValuesMap.containsKey(flag);
+        return this.args.containsFlag(flag);
     }
 
-    private boolean hasValue(int index) {
-        return index + 1 <= args.length - 1;
-    }
-
-    private boolean isFlag(String charString) {
-        return charString.startsWith("-")
-                && Character.isLetter(charString.charAt(1));
+    private ValueParser getValueParser(String flag) {
+        String schema = this.schema.get(flag);
+        ValueParser valueParser = ValueParserFactory.getInstance(schema);
+        return valueParser;
     }
 }
