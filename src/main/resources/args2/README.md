@@ -104,6 +104,6 @@ public class Args {
 - [x] 同时接收并处理多种args，例如：-n 10 -s Hello World!!! -m name:lyning,age:25
 - [x] 增加一个ArgsException用于统一抛出异常
 - [ ] 有效性验证
-    - [ ] 验证无效 schema 
+    - [x] 验证无效 schema 
     - [ ] 验证无效 args
-    - [ ] 验证无效 flag
+    - [x] 验证无效 flag

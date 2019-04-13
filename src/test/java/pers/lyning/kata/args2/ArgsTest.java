@@ -24,10 +24,21 @@ public class ArgsTest {
         assertThat(args.hasFlag("s")).isTrue();
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test(expected = ArgsException.class)
     public void should_get_value_fail_when_flag_not_found() {
         Args args = new Args("s*", new String[]{"-s", "a"});
         assertThat(args.<String>getValue("a")).isEqualTo("");
+    }
+
+    @Test(expected = ArgsException.class)
+    public void should_fail_when_value_parser_not_implemented() {
+        new Args("s^^^", new String[]{"-s", "test"});
+    }
+
+    @Test(expected = ArgsException.class)
+    public void should_fail_when_value_parser_not_found() {
+        Args args = new Args("s*", new String[]{"-s", "test"});
+        args.getValue("a");
     }
 
     @Test
