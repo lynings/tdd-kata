@@ -27,6 +27,10 @@ public class Words {
         return new Words(Sets.newHashSet(words));
     }
 
+    public static Words of(List<String> words) {
+        return new Words(Sets.newHashSet(words));
+    }
+
     public static Words parse(File file) throws IOException {
         String wordsString = FileContentReader.getString(file);
         return new Words(Arrays.asList(wordsString.split("\\n\\n|\\n"))

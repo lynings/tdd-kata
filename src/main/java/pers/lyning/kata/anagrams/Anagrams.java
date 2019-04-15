@@ -24,25 +24,21 @@ public class Anagrams {
     }
 
     public Words findLongestWords(List<Anagram> anagramList) {
-        String[] wordArr = anagramList
+        List<String> words = anagramList
                 .stream()
                 .max(Comparator.comparing(Anagram::length))
                 .get()
-                .list()
-                .stream()
-                .toArray(String[]::new);
-        return Words.of(wordArr);
+                .list();
+        return Words.of(words);
     }
 
     public Words findMostWords(List<Anagram> anagramList) {
-        String[] wordArr = anagramList
+        List<String> words = anagramList
                 .stream()
                 .max(Comparator.comparing(Anagram::size))
                 .get()
-                .list()
-                .stream()
-                .toArray(String[]::new);
-        return Words.of(wordArr);
+                .list();
+        return Words.of(words);
     }
 
     private List<List<String>> group(List<String> words) {
