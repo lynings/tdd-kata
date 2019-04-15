@@ -33,13 +33,14 @@ public class AnagramsTest {
     public void arranged_10_word_list() {
         Words words = Words.of(
                 "kinship", "pinkish",
-                "abc", "acb", "bca", "bac", "cab", "cba"
+                "abc", "acb", "bca", "bac", "cab", "cba",
+                "lyning", "ningly"
         );
         Anagrams anagrams = new Anagrams(words);
         List<Anagram> anagramList = anagrams.arranged();
 
         assertThat(anagramList).isNotEmpty();
-        assertThat(anagramList.size()).isEqualTo(2);
+        assertThat(anagramList.size()).isEqualTo(3);
         assertThat(this.countWords(anagramList)).isEqualTo(words.size());
         for (Anagram anagram : anagramList) {
             for (String word : anagram.list()) {
