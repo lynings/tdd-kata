@@ -65,7 +65,7 @@ In Robert C. Martin’s book there is a full worked solution written in Java. He
 
 ## 程序设计
 ```java
-public class Args {
+public class ArgsParser {
     public Arguments(String schema, String args);
     public <T> T getValue(String flag);
     public boolean hasFlag(String flag);
