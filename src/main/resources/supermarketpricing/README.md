@@ -29,6 +29,7 @@ The goal of this kata is to practice a looser style of experimental modelling. L
 |术语|描述|
 |----|----|
 |supermarkets|商场|
+|Goods|商品|
 |Price|商品的价格|
 |Cost|商品成本|
 |Stock|商品库存|
