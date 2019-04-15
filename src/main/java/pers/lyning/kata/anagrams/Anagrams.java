@@ -1,8 +1,10 @@
 package pers.lyning.kata.anagrams;
 
-import java.util.*;
+import java.util.Comparator;
+import java.util.List;
 
-import static java.util.stream.Collectors.*;
+import static java.util.stream.Collectors.groupingBy;
+import static java.util.stream.Collectors.toList;
 
 /**
  * @author lyning
@@ -15,37 +17,10 @@ public class Anagrams {
     }
 
     public List<Anagram> arranged() {
-        List<Anagram> anagramList = new ArrayList<>();
-        List<String> words = this.words.list();
-        Map<Integer, List<String>> lenToWordsMap = words
+        return this.group(this.words.list())
                 .stream()
-                .collect(groupingByConcurrent(String::length, toList()));
-        for (Map.Entry<Integer, List<String>> entry : lenToWordsMap.entrySet()) {
-            Map<String, List<String>> map = entry
-                    .getValue()
-                    .stream()
-                    .collect(groupingBy(word -> distinct(word), TreeMap::new, mapping(c -> c, toList())));
-            for (List<String> wordList : map.values()) {
-                while (wordList.size() != 0) {
-                    Iterator<String> wordsIterator = wordList.iterator();
-                    Anagram anagram = Anagram.of(wordsIterator.next());
-                    wordsIterator.remove();
-                    for (; wordsIterator.hasNext(); ) {
-                        String word = wordsIterator.next();
-                        if (anagram.is(word)) {
-                            anagram.add(word);
-                            wordsIterator.remove();
-                        }
-                    }
-                    anagramList.add(anagram);
-                }
-            }
-        }
-        return anagramList;
-    }
-
-    private String distinct(String word) {
-        return Arrays.asList(word.split("")).stream().distinct().sorted().collect(joining());
+                .map(Anagram::of)
+                .collect(toList());
     }
 
     public Words findLongestWords(List<Anagram> anagramList) {
@@ -68,5 +43,14 @@ public class Anagrams {
                 .stream()
                 .toArray(String[]::new);
         return Words.of(wordArr);
+    }
+
+    private List<List<String>> group(List<String> words) {
+        return words
+                .stream()
+                .collect(groupingBy(WordUtils::sort, toList()))
+                .values()
+                .stream()
+                .collect(toList());
     }
 }

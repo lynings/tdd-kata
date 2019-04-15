@@ -24,6 +24,10 @@ public class Anagram {
         return new Anagram(Sets.newHashSet(words));
     }
 
+    public static Anagram of(List<String> words) {
+        return new Anagram(Sets.newHashSet(words));
+    }
+
     public boolean contains(String word) {
         return this.words.contains(word);
     }
@@ -36,23 +40,12 @@ public class Anagram {
         return this.isAnagram(word);
     }
 
-    public void add(String word) {
-        this.words.add(word);
-    }
-
-    private String sortWord(String word) {
-        return Arrays.asList(word.split(""))
-                .stream()
-                .sorted()
-                .collect(joining());
-    }
-
     private boolean isAnagram(String word) {
         if (this.words.size() < 1) {
             return true;
         }
         String sourceWord = this.words.iterator().next();
-        return this.sortWord(sourceWord).equals(this.sortWord(word));
+        return WordUtils.sort(sourceWord).equals(WordUtils.sort(word));
     }
 
     public Integer length() {
