@@ -5,6 +5,7 @@ import pers.lyning.kata.conferencetrack.ConferenceManagerTest;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -14,6 +15,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 public class AnagramsTest {
 
+    /******************* arranged test start *****************/
     @Test
     public void arranged_kinship_pinkish_words() {
         Words words = Words.of("kinship", "pinkish");
@@ -106,4 +108,56 @@ public class AnagramsTest {
     private int countWords(List<Anagram> anagramList) {
         return anagramList.stream().map(a -> a.list().size()).reduce(Integer::sum).get();
     }
+    /******************* arranged test end *****************/
+
+
+    /******************* findLongestWords test start *****************/
+    @Test
+    public void should_return_anagrams_when_find_longest_words() {
+        Words words = Words.of(
+                "kinship", "pinkish",
+                "enlist", "inlets", "listen", "silent",
+                "boaster", "boaters", "borates",
+                "fresher", "refresh",
+                "sinks", "skins",
+                "knits", "stink",
+                "rots", "sort",
+                "anagrams"
+        );
+        Anagrams anagrams = new Anagrams(words);
+        List<Anagram> anagramList = anagrams.arranged();
+
+        Words longestWords = anagrams.findLongestWords(anagramList);
+        assertThat(longestWords.size()).isEqualTo(1);
+        assertThat(longestWords.list()).isEqualTo(Arrays.asList("anagrams"));
+    }
+    /******************* findLongestWords test end *****************/
+
+
+    /******************* findMostWords test start *****************/
+    @Test
+    public void should_return_6_when_find_most_words() {
+        Words words = Words.of(
+                "kinship", "pinkish",
+                "enlist", "inlets", "listen", "silent",
+                "boaster", "boaters", "borates",
+                "fresher", "refresh",
+                "sinks", "skins",
+                "knits", "stink",
+                "rots", "sort",
+                "abc", "acb", "bca", "bac", "cab", "cba"
+        );
+        Anagrams anagrams = new Anagrams(words);
+        List<Anagram> anagramList = anagrams.arranged();
+
+        Words mostWords = anagrams.findMostWords(anagramList);
+        assertThat(mostWords.size()).isEqualTo(6);
+        assertThat(mostWords.contains("abc")).isTrue();
+        assertThat(mostWords.contains("acb")).isTrue();
+        assertThat(mostWords.contains("bca")).isTrue();
+        assertThat(mostWords.contains("bac")).isTrue();
+        assertThat(mostWords.contains("cab")).isTrue();
+        assertThat(mostWords.contains("cba")).isTrue();
+    }
+    /******************* findMostWords test end *****************/
 }

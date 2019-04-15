@@ -54,4 +54,15 @@ public class Anagram {
         String sourceWord = this.words.iterator().next();
         return this.sortWord(sourceWord).equals(this.sortWord(word));
     }
+
+    public Integer length() {
+        if (this.words.size() < 1) {
+            return 0;
+        }
+        return this.words.iterator().next().length();
+    }
+
+    public Integer size() {
+        return this.words.size();
+    }
 }

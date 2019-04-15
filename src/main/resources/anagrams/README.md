@@ -74,5 +74,6 @@ public class Words {
 - [x] 验证 words.size().
 - [x] 验证 words.contains(word).
 - [x] 验证 arranged 少量单词，然后不断增加单词量.
-- [ ] 验证最长的 anagram 等于 anagram.
-- [ ] 验证获取最多的 anagram 等于 6.
+- [x] 验证最长的 anagram 等于 anagram.
+- [x] 验证获取最多的 anagram 等于 6.
+- [ ] 重构 arranged 算法

@@ -47,4 +47,26 @@ public class Anagrams {
     private String distinct(String word) {
         return Arrays.asList(word.split("")).stream().distinct().sorted().collect(joining());
     }
+
+    public Words findLongestWords(List<Anagram> anagramList) {
+        String[] wordArr = anagramList
+                .stream()
+                .max(Comparator.comparing(Anagram::length))
+                .get()
+                .list()
+                .stream()
+                .toArray(String[]::new);
+        return Words.of(wordArr);
+    }
+
+    public Words findMostWords(List<Anagram> anagramList) {
+        String[] wordArr = anagramList
+                .stream()
+                .max(Comparator.comparing(Anagram::size))
+                .get()
+                .list()
+                .stream()
+                .toArray(String[]::new);
+        return Words.of(wordArr);
+    }
 }
