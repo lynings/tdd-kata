@@ -113,7 +113,7 @@ public class AnagramsTest {
 
     /******************* findLongestWords test start *****************/
     @Test
-    public void should_return_anagrams_when_find_longest_words() {
+    public void should_return_longest_words() {
         Words words = Words.of(
                 "kinship", "pinkish",
                 "enlist", "inlets", "listen", "silent",
@@ -136,7 +136,7 @@ public class AnagramsTest {
 
     /******************* findMostWords test start *****************/
     @Test
-    public void should_return_6_when_find_most_words() {
+    public void should_return_most_words() {
         Words words = Words.of(
                 "kinship", "pinkish",
                 "enlist", "inlets", "listen", "silent",

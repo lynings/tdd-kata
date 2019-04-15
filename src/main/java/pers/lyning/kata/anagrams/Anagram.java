@@ -3,11 +3,8 @@ package pers.lyning.kata.anagrams;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
-
-import static java.util.stream.Collectors.joining;
 
 /**
  * @author lyning
@@ -41,17 +38,11 @@ public class Anagram {
     }
 
     private boolean isAnagram(String word) {
-        if (this.words.size() < 1) {
-            return true;
-        }
         String sourceWord = this.words.iterator().next();
         return WordUtils.sort(sourceWord).equals(WordUtils.sort(word));
     }
 
     public Integer length() {
-        if (this.words.size() < 1) {
-            return 0;
-        }
         return this.words.iterator().next().length();
     }
 
