@@ -57,6 +57,12 @@ public class ArgsParserTest {
     }
 
     @Test
+    public void should_return_true() {
+        ArgsParser argsParser = new ArgsParser("l", new String[]{"-l 1"});
+        assertThat(argsParser.<Boolean>getValue("l")).isTrue();
+    }
+
+    @Test
     public void should_empty_string_arrays() {
         ArgsParser argsParser = new ArgsParser("s[*]", new String[]{"-s"});
         String[] strArr = argsParser.getValue("s");
