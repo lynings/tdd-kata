@@ -13,17 +13,6 @@ public class Args {
         this.flagToValueMap = flagToValueMap;
     }
 
-    public String getValue(String flag) {
-        if (!this.containsFlag(flag)) {
-            throw new ArgsException("INVALID FLAG");
-        }
-        return this.flagToValueMap.get(flag);
-    }
-
-    public boolean containsFlag(String flag) {
-        return this.flagToValueMap.containsKey(flag);
-    }
-
     public static Args parse(String[] args) {
         Map<String, String> flagToValueMap = new HashMap<>();
         for (int index = 0, len = args.length; index < len; index++) {
@@ -43,5 +32,16 @@ public class Args {
     private static boolean isFlag(String charString) {
         return charString.startsWith("-")
                 && Character.isLetter(charString.charAt(1));
+    }
+
+    public String getValue(String flag) {
+        if (!this.containsFlag(flag)) {
+            throw new ArgsException("INVALID FLAG");
+        }
+        return this.flagToValueMap.get(flag);
+    }
+
+    public boolean containsFlag(String flag) {
+        return this.flagToValueMap.containsKey(flag);
     }
 }

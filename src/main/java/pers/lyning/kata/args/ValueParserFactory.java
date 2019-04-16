@@ -1,32 +1,30 @@
 package pers.lyning.kata.args;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * @author lyning
  */
 public class ValueParserFactory {
 
+    private static final Map<String, ValueParser> schemaToValueParserMap = new HashMap<>();
+
+    static {
+        schemaToValueParserMap.put("", new BooleanValueParser());
+        schemaToValueParserMap.put("*", new StringValueParser());
+        schemaToValueParserMap.put("##", new DoubleValueParser());
+        schemaToValueParserMap.put("[*]", new StringArraysValueParser());
+        schemaToValueParserMap.put("[#]", new IntegerArraysValueParser());
+        schemaToValueParserMap.put("[##]", new DoubleArraysValueParser());
+        schemaToValueParserMap.put("[&]", new SetValueParser());
+        schemaToValueParserMap.put("[&&]", new MapValueParser());
+    }
+
     public static ValueParser getInstance(String schema) {
-        switch (schema) {
-            case "":
-                return new BooleanValueParser();
-            case "*":
-                return new StringValueParser();
-            case "#":
-                return new IntegerValueParser();
-            case "##":
-                return new DoubleValueParser();
-            case "[*]":
-                return new StringArraysValueParser();
-            case "[#]":
-                return new IntegerArraysValueParser();
-            case "[##]":
-                return new DoubleArraysValueParser();
-            case "[&]":
-                return new SetValueParser();
-            case "[&&]":
-                return new MapValueParser();
-            default:
-                throw new ArgsException("SCHEMA NOT IMPLEMENTED");
+        if (!schemaToValueParserMap.containsKey(schema)) {
+            throw new ArgsException("SCHEMA NOT IMPLEMENTED");
         }
+        return schemaToValueParserMap.get(schema);
     }
 }
