@@ -1,4 +1,4 @@
-package pers.lyning.kata.args;
+package pers.lyning.kata.args.exception;
 
 /**
  * @author lyning

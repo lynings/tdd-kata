@@ -1,4 +1,4 @@
-package pers.lyning.kata.args;
+package pers.lyning.kata.args.valueparser;
 
 /**
  * @param <T>

@@ -1,5 +1,7 @@
 package pers.lyning.kata.args;
 
+import pers.lyning.kata.args.exception.ArgsException;
+
 import java.util.HashMap;
 import java.util.Map;
 

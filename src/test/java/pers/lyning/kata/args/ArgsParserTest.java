@@ -3,6 +3,7 @@ package pers.lyning.kata.args;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+import pers.lyning.kata.args.exception.ArgsException;
 
 import java.util.Map;
 import java.util.Set;

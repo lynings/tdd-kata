@@ -1,4 +1,6 @@
-package pers.lyning.kata.args;
+package pers.lyning.kata.args.valueparser;
+
+import pers.lyning.kata.args.exception.ArgsException;
 
 import java.util.Optional;
 
