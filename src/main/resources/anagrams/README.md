@@ -40,7 +40,7 @@ Apart from having some fun with words, this kata should make you think somewhat 
 |Anagrams|字谜游戏|
 |Anagram|由颠倒字母顺序而构成的字|
 |Word|单词|
-|arranged|整体、分类|
+|arranged|整理、分类|
 
 ## 程序设计 
 ```java
