@@ -272,7 +272,15 @@ public class ArgsParserTest {
         ArgsParser argsParser = new ArgsParser("h[help]", new String[]{"-h", "[*]"});
         Map<String, String> schemaToDescriptionMap = argsParser.getValue("h");
         assertThat(schemaToDescriptionMap.size()).isEqualTo(1);
-        assertThat(schemaToDescriptionMap.get("[*]")).isEqualTo("default return empty string array(such as schema: s[*], args: -s), when value existed then return specified string array(such as schema: s[*], args: -s hello world).");
+        assertThat(schemaToDescriptionMap.get("[*]")).isEqualTo(ValueParserFactory.getInstance("[*]").getDescription());
+    }
+
+    @Test
+    public void should_return_help_schema_description() {
+        ArgsParser argsParser = new ArgsParser("h[help]", new String[]{"-h", "[help]"});
+        Map<String, String> schemaToDescriptionMap = argsParser.getValue("h");
+        assertThat(schemaToDescriptionMap.size()).isEqualTo(1);
+        assertThat(schemaToDescriptionMap.get("[help]")).isEqualTo(ValueParserFactory.getInstance("[help]").getDescription());
     }
 
     @Test
