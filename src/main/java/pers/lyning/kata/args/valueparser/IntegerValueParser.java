@@ -23,6 +23,6 @@ public class IntegerValueParser implements ValueParser<Integer> {
 
     @Override
     public String getDescription() {
-        return "default return 0(such as schema: i#, args: -i), when value existed then return specified int value(such as schema: i#, args: -i 1).";
+        return "schema '#' default return 0(such as schema: i#, args: -i), when value existed then return specified int value(such as schema: i#, args: -i 1).";
     }
 }

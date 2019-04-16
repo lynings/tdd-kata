@@ -17,6 +17,6 @@ public class StringArraysValueParser implements ValueParser<String[]> {
 
     @Override
     public String getDescription() {
-        return "default return empty string array(such as schema: s[*], args: -s), when value existed then return specified string array(such as schema: s[*], args: -s hello world).";
+        return "schema '[*]' default return empty string array(such as schema: s[*], args: -s), when value existed then return specified string array(such as schema: s[*], args: -s hello world).";
     }
 }

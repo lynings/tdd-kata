@@ -27,6 +27,6 @@ public class DoubleArraysValueParser implements ValueParser<Double[]> {
 
     @Override
     public String getDescription() {
-        return "default return empty double array(such as schema: d[##], args: -d), when value existed then return specified double array(such as schema: d[##], args: -d 1.0 2.5 3.4).";
+        return "schema '[##]' default return empty double array(such as schema: d[##], args: -d), when value existed then return specified double array(such as schema: d[##], args: -d 1.0 2.5 3.4).";
     }
 }

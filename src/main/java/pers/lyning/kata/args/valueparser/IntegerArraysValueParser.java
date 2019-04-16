@@ -27,6 +27,6 @@ public class IntegerArraysValueParser implements ValueParser<Integer[]> {
 
     @Override
     public String getDescription() {
-        return "default return empty int array(such as schema: i[#], args: -i), when value existed then return specified int array(such as schema: i[#], args: -d 1 2 3 -4).";
+        return "schema '[#]' default return empty int array(such as schema: i[#], args: -i), when value existed then return specified int array(such as schema: i[#], args: -d 1 2 3 -4).";
     }
 }

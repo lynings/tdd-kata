@@ -24,12 +24,15 @@ public class HelpValueParser implements ValueParser<Map<String, String>> {
     }};
 
     @Override
-    public Map<String, String> parse(final String schema) {
+    public Map<String, String> parse(final String schemas) {
         return Optional
-                .ofNullable(schema)
+                .ofNullable(schemas)
                 .map((s) -> {
                     Map<String, String> map = new HashMap<>(1);
-                    map.put(s, this.schemaToDescriptionMap.get(s));
+                    String[] schemaArr = s.split(" ");
+                    for (String schema : schemaArr) {
+                        map.put(schema, this.schemaToDescriptionMap.get(schema));
+                    }
                     return map;
                 })
                 .orElse(this.schemaToDescriptionMap);
@@ -37,6 +40,6 @@ public class HelpValueParser implements ValueParser<Map<String, String>> {
 
     @Override
     public String getDescription() {
-        return "default return all schema description(such as schema:h[help], args:-h), otherwise return specified schema description(such as schema:h[help], args:-h [*]).";
+        return "schema '[help]' default return all schema description(such as schema:h[help], args:-h), otherwise return specified schema description(such as schema:h[help], args:-h [*]).";
     }
 }

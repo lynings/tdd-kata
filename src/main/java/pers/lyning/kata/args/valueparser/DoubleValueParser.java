@@ -23,6 +23,6 @@ public class DoubleValueParser implements ValueParser<Double> {
 
     @Override
     public String getDescription() {
-        return "default return 0.0(such as schema: d##, args: -d), when value existed then return specified double value(such as schema: d##, args: -d 1.0).";
+        return "schema '##' default return 0.0(such as schema: d##, args: -d), when value existed then return specified double value(such as schema: d##, args: -d 1.0).";
     }
 }

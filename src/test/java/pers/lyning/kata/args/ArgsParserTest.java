@@ -276,10 +276,12 @@ public class ArgsParserTest {
     }
 
     @Test
-    public void should_return_help_schema_description() {
-        ArgsParser argsParser = new ArgsParser("h[help]", new String[]{"-h", "[help]"});
+    public void should_return_multiple_schema_description() {
+        ArgsParser argsParser = new ArgsParser("h[help]", new String[]{"-h", "[&] [#] [help]"});
         Map<String, String> schemaToDescriptionMap = argsParser.getValue("h");
-        assertThat(schemaToDescriptionMap.size()).isEqualTo(1);
+        assertThat(schemaToDescriptionMap.size()).isEqualTo(3);
+        assertThat(schemaToDescriptionMap.get("[&]")).isEqualTo(ValueParserFactory.getInstance("[&]").getDescription());
+        assertThat(schemaToDescriptionMap.get("[#]")).isEqualTo(ValueParserFactory.getInstance("[#]").getDescription());
         assertThat(schemaToDescriptionMap.get("[help]")).isEqualTo(ValueParserFactory.getInstance("[help]").getDescription());
     }
 

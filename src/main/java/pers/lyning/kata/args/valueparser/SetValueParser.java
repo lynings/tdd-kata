@@ -25,6 +25,6 @@ public class SetValueParser implements ValueParser<Set<String>> {
 
     @Override
     public String getDescription() {
-        return "default return empty set(such as schema: s[&], args: -s), when value existed then return specified set value(such as schema: s[&], args: -s a a b c).";
+        return "schema '[&]' default return empty set(such as schema: s[&], args: -s), when value existed then return specified set value(such as schema: s[&], args: -s a a b c).";
     }
 }

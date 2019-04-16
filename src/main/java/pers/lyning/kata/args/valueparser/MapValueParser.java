@@ -31,6 +31,6 @@ public class MapValueParser implements ValueParser<Map<String, String>> {
 
     @Override
     public String getDescription() {
-        return "default return empty map(such as schema: m[&&], args: -m), when value existed then return specified map value(such as schema: m[&&], args: -m name:lyning,age:25).";
+        return "schema '[&&]' default return empty map(such as schema: m[&&], args: -m), when value existed then return specified map value(such as schema: m[&&], args: -m name:lyning,age:25).";
     }
 }
