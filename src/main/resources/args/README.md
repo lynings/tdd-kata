@@ -101,6 +101,9 @@ public class ArgsParser {
 - [x] Map 解析器（schema: [&&]）
     - [x] 默认返回 empty map
     - [x] 指定并返回 key:value 格式的数据
+- [x] help 解析器（schema: [help]）
+    - [x] 默认返回 all schema description, 例如 schema: h[help], args: -h
+    - [x] 返回指定 schema 的描述，例如 schema: h[help], args: -h [*]
 - [x] 同时接收并处理多种args，例如：-n 10 -s Hello World!!! -m name:lyning,age:25
 - [x] 增加一个ArgsException用于统一抛出异常
 - [x] 有效性验证
