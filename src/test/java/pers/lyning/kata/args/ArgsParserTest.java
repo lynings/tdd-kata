@@ -4,6 +4,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import pers.lyning.kata.args.exception.ArgsException;
+import pers.lyning.kata.args.factory.ValueParserFactory;
 
 import java.util.Map;
 import java.util.Set;
@@ -264,5 +265,23 @@ public class ArgsParserTest {
         assertThat(map.size()).isEqualTo(2);
         assertThat(map.get("name")).isEqualTo("lyning");
         assertThat(map.get("age")).isEqualTo("25");
+    }
+
+    @Test
+    public void should_return_string_array_schema_description() {
+        ArgsParser argsParser = new ArgsParser("h[help]", new String[]{"-h", "[*]"});
+        Map<String, String> schemaToDescriptionMap = argsParser.getValue("h");
+        assertThat(schemaToDescriptionMap.size()).isEqualTo(1);
+        assertThat(schemaToDescriptionMap.get("[*]")).isEqualTo("default return empty string array(such as schema: s[*], args: -s), when value existed then return specified string array(such as schema: s[*], args: -s hello world).");
+    }
+
+    @Test
+    public void should_return_all_schema_description() {
+        ArgsParser argsParser = new ArgsParser("h[help]", new String[]{"-h"});
+        Map<String, String> schemaToDescriptionMap = argsParser.getValue("h");
+        assertThat(schemaToDescriptionMap.size()).isEqualTo(10);
+        for (Map.Entry<String, String> entry : schemaToDescriptionMap.entrySet()) {
+            assertThat(entry.getValue()).isEqualTo(ValueParserFactory.getInstance(entry.getKey()).getDescription());
+        }
     }
 }

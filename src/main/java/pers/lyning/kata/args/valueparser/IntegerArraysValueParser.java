@@ -24,4 +24,9 @@ public class IntegerArraysValueParser implements ValueParser<Integer[]> {
             throw new ArgsException("The value of args must be an int arrays，such as -i[#] 0 1 2");
         }
     }
+
+    @Override
+    public String getDescription() {
+        return "default return empty int array(such as schema: i[#], args: -i), when value existed then return specified int array(such as schema: i[#], args: -d 1 2 3 -4).";
+    }
 }

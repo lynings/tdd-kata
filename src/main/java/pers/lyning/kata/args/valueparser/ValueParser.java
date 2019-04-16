@@ -13,4 +13,11 @@ public interface ValueParser<T> {
      * @return
      */
     T parse(String values);
+
+    /**
+     * 获取描述信息
+     *
+     * @return
+     */
+    String getDescription();
 }

@@ -11,4 +11,9 @@ public class BooleanValueParser implements ValueParser<Boolean> {
     public Boolean parse(String values) {
         return !Objects.isNull(values);
     }
+
+    @Override
+    public String getDescription() {
+        return "default return false(such as schema: b, args: -b), when value existed then return true(such as schema: b, args: -b 1).";
+    }
 }

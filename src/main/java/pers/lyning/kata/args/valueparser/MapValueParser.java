@@ -28,4 +28,9 @@ public class MapValueParser implements ValueParser<Map<String, String>> {
             throw new ArgsException("The value of args must be an map，such as -m[&&] key1:val1,key2:val2,...");
         }
     }
+
+    @Override
+    public String getDescription() {
+        return "default return empty map(such as schema: m[&&], args: -m), when value existed then return specified map value(such as schema: m[&&], args: -m name:lyning,age:25).";
+    }
 }

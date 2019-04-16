@@ -20,4 +20,9 @@ public class DoubleValueParser implements ValueParser<Double> {
             throw new ArgsException("The value of args must be an double，such as -d 2.5");
         }
     }
+
+    @Override
+    public String getDescription() {
+        return "default return 0.0(such as schema: d##, args: -d), when value existed then return specified double value(such as schema: d##, args: -d 1.0).";
+    }
 }

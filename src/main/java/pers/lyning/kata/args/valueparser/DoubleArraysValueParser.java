@@ -24,4 +24,9 @@ public class DoubleArraysValueParser implements ValueParser<Double[]> {
             throw new ArgsException("The value of args must be an double arrays，such as -d[##] 1.0 2.5 3.14");
         }
     }
+
+    @Override
+    public String getDescription() {
+        return "default return empty double array(such as schema: d[##], args: -d), when value existed then return specified double array(such as schema: d[##], args: -d 1.0 2.5 3.4).";
+    }
 }

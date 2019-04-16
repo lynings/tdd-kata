@@ -13,4 +13,9 @@ public class StringValueParser implements ValueParser<String> {
                 .ofNullable(values)
                 .orElse("");
     }
+
+    @Override
+    public String getDescription() {
+        return "default return empty string(such as schema: s*, args: -s), when value existed then return specified string value(such as schema: s*, args: -s HelloWorld!!!).";
+    }
 }
