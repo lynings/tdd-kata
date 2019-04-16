@@ -62,6 +62,7 @@ In Robert C. Martin’s book there is a full worked solution written in Java. He
 |char[##] |one element of a double array.|
 |char[&] |set arg.|
 |char[&&] |map arg.|
+|char[help] |schema description.|
 
 ## 程序设计
 ```java
