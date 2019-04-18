@@ -12,6 +12,9 @@ public class SystemOutputCapture extends ExternalResource {
     private PrintStream sysOut;
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 
+    private SystemOutputCapture() {
+    }
+
     @Override
     protected void before() throws Throwable {
         sysOut = System.out;

@@ -15,7 +15,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class GalaxyGuideTest {
 
     @Rule
-    public SystemOutputCapture outputCapture = new SystemOutputCapture();
+    public SystemOutputCapture outputCapture = SystemOutputCapture.init();
 
     @Test
     public void should_return_42_when_given_pish_tegj_glob_glob() throws Exception {
