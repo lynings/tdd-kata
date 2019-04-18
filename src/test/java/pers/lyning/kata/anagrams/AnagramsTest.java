@@ -128,7 +128,7 @@ public class AnagramsTest {
         Anagrams anagrams = new Anagrams(words);
         List<Anagram> anagramList = anagrams.arranged();
 
-        Words longestWords = anagrams.findLongestWords(anagramList);
+        Words longestWords = anagrams.findLongest(anagramList);
         assertThat(longestWords.size()).isEqualTo(1);
         assertThat(longestWords.list()).isEqualTo(Arrays.asList("anagrams"));
     }
@@ -151,7 +151,7 @@ public class AnagramsTest {
         Anagrams anagrams = new Anagrams(words);
         List<Anagram> anagramList = anagrams.arranged();
 
-        Words mostWords = anagrams.findMostWords(anagramList);
+        Words mostWords = anagrams.findMost(anagramList);
         assertThat(mostWords.size()).isEqualTo(6);
         assertThat(mostWords.contains("abc")).isTrue();
         assertThat(mostWords.contains("acb")).isTrue();

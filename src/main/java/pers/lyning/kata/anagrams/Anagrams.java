@@ -23,7 +23,7 @@ public class Anagrams {
                 .collect(toList());
     }
 
-    public Words findLongestWords(List<Anagram> anagramList) {
+    public Words findLongest(List<Anagram> anagramList) {
         List<String> words = anagramList
                 .stream()
                 .max(Comparator.comparing(Anagram::length))
@@ -32,7 +32,7 @@ public class Anagrams {
         return Words.of(words);
     }
 
-    public Words findMostWords(List<Anagram> anagramList) {
+    public Words findMost(List<Anagram> anagramList) {
         List<String> words = anagramList
                 .stream()
                 .max(Comparator.comparing(Anagram::size))
