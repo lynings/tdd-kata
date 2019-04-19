@@ -37,6 +37,7 @@ public class CountdownIntegrationTest {
         Future future = countdown.start();
         this.untilCompletedFor(future);
         assertThat(countdown.isRunning()).isFalse();
+        assertThat(countdown.getRemainingTime()).isEqualTo(0);
     }
 
     private void untilCompletedFor(Future future) {

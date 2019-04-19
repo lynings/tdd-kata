@@ -38,4 +38,8 @@ public class CountdownTimer {
             this.tick.call("");
         }
     }
+
+    public long remainingTime() {
+        return this.second;
+    }
 }

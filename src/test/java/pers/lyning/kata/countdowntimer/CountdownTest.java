@@ -41,12 +41,19 @@ public class CountdownTest {
     }
 
     @Test
+    public void should_remaining_10_seconds() {
+        countdown.start();
+        assertThat(countdown.getRemainingTime()).isEqualTo(10);
+    }
+
+    @Test
     public void should_call_the_tick_once_every_second() {
         countdown.start();
         this.timeForward(1);
         assertThat(outputCapture.toString().trim()).isEqualTo("tick called");
         this.timeForward(1);
         assertThat(outputCapture.toString().trim()).isEqualTo("tick called\ntick called");
+        assertThat(countdown.getRemainingTime()).isEqualTo(8);
     }
 
     @Test

@@ -36,6 +36,11 @@ public class CountdownTimerFake extends CountdownTimer {
         }
     }
 
+    @Override
+    public long remainingTime() {
+        return this.second;
+    }
+
     private void stop() {
         this.stopCallback.call("");
         this.timerFuture.cancel(true);

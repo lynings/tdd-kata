@@ -30,6 +30,10 @@ public class Countdown {
         return this.state == StateEnum.RUNNING;
     }
 
+    public long getRemainingTime() {
+        return this.countdownTimer.remainingTime();
+    }
+
     private void stop() {
         this.state = StateEnum.STOPPED;
         this.timerFuture.cancel(true);
