@@ -22,7 +22,7 @@ public class CountdownTimer {
 
     public Future schedule(Runnable stopCallback) {
         final Runnable runnable = () -> {
-            reduceTime();
+            this.triggerReduceTime();
             if (this.remainingTime() <= 0) {
                 stopCallback.run();
             }
@@ -31,7 +31,7 @@ public class CountdownTimer {
         return this.scheduledFuture;
     }
 
-    private void reduceTime() {
+    private void triggerReduceTime() {
         if (this.second > 0) {
             this.second -= 1;
             this.tick.run();

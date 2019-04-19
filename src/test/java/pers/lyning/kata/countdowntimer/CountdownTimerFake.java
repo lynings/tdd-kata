@@ -27,7 +27,7 @@ public class CountdownTimerFake extends CountdownTimer {
         return this.timerFuture;
     }
 
-    public void reduceTime() {
+    public void triggerReduceTime() {
         this.second -= 1;
         this.tick.run();
         if (this.second <= 0) {
