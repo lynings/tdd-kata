@@ -18,10 +18,7 @@ public class CountdownIntegrationTest {
     @Rule
     public final SystemOutputCapture outputCapture = SystemOutputCapture.init();
 
-    private final Callback tick = out -> {
-        System.out.println("tick called");
-        return out;
-    };
+    private final Runnable tick = () -> System.out.println("tick called");
 
     @Test
     public void should_called_tick() {

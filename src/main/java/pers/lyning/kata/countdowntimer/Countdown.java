@@ -1,7 +1,5 @@
 package pers.lyning.kata.countdowntimer;
 
-import javafx.util.Callback;
-
 import java.util.concurrent.Future;
 
 /**
@@ -12,14 +10,11 @@ public class Countdown {
     CountdownTimer countdownTimer;
     private Future timerFuture;
     private StateEnum state = StateEnum.NONE;
-    private final Callback stopCallback;
+    private final Runnable stopCallback;
 
-    public Countdown(int second, Callback tick) {
+    public Countdown(int second, Runnable tick) {
         this.countdownTimer = new CountdownTimer(tick, second);
-        this.stopCallback = o -> {
-            this.stop();
-            return o;
-        };
+        this.stopCallback = () -> this.stop();
     }
 
     public Future start() {

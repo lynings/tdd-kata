@@ -1,7 +1,5 @@
 package pers.lyning.kata.countdowntimer;
 
-import javafx.util.Callback;
-
 import java.util.concurrent.Future;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
@@ -12,21 +10,21 @@ import java.util.concurrent.TimeUnit;
  */
 public class CountdownTimer {
     private long second;
-    private final Callback tick;
+    private final Runnable tick;
     private final ScheduledThreadPoolExecutor scheduledThreadPoolExecutor = new ScheduledThreadPoolExecutor(1);
     private ScheduledFuture<?> scheduledFuture;
 
 
-    public CountdownTimer(Callback tick, long second) {
+    public CountdownTimer(Runnable tick, long second) {
         this.tick = tick;
         this.second = second;
     }
 
-    public Future schedule(Callback stopCallback) {
+    public Future schedule(Runnable stopCallback) {
         final Runnable runnable = () -> {
             reduceTime();
             if (this.remainingTime() <= 0) {
-                stopCallback.call("");
+                stopCallback.run();
             }
         };
         this.scheduledFuture = this.scheduledThreadPoolExecutor.scheduleAtFixedRate(runnable, 0, second, TimeUnit.SECONDS);
@@ -36,7 +34,7 @@ public class CountdownTimer {
     private void reduceTime() {
         if (this.second > 0) {
             this.second -= 1;
-            this.tick.call("");
+            this.tick.run();
         }
     }
 

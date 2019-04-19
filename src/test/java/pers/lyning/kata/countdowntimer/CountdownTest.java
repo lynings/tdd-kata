@@ -1,6 +1,5 @@
 package pers.lyning.kata.countdowntimer;
 
-import javafx.util.Callback;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -20,10 +19,7 @@ public class CountdownTest {
 
     @Before
     public void setUp() throws Exception {
-        Callback tick = (call) -> {
-            System.out.println("tick called");
-            return call;
-        };
+        Runnable tick = () -> System.out.println("tick called");
         this.countdown = new Countdown(10, tick);
         this.countdownTimerFake = new CountdownTimerFake(tick, 10);
         this.countdown.countdownTimer = this.countdownTimerFake;

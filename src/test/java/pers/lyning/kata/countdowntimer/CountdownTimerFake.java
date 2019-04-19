@@ -1,7 +1,6 @@
 package pers.lyning.kata.countdowntimer;
 
 import com.google.common.util.concurrent.Futures;
-import javafx.util.Callback;
 
 import java.util.concurrent.Future;
 
@@ -11,18 +10,18 @@ import java.util.concurrent.Future;
 public class CountdownTimerFake extends CountdownTimer {
 
     private long second;
-    private final Callback tick;
+    private final Runnable tick;
     private Future timerFuture;
-    private Callback stopCallback;
+    private Runnable stopCallback;
 
-    public CountdownTimerFake(Callback tick, long second) {
+    public CountdownTimerFake(Runnable tick, long second) {
         super(tick, second);
         this.tick = tick;
         this.second = second;
     }
 
     @Override
-    public Future schedule(Callback stopCallback) {
+    public Future schedule(Runnable stopCallback) {
         this.stopCallback = stopCallback;
         this.timerFuture = Futures.immediateCancelledFuture();
         return this.timerFuture;
@@ -30,7 +29,7 @@ public class CountdownTimerFake extends CountdownTimer {
 
     public void reduceTime() {
         this.second -= 1;
-        this.tick.call("");
+        this.tick.run();
         if (this.second <= 0) {
             this.stop();
         }
@@ -42,7 +41,7 @@ public class CountdownTimerFake extends CountdownTimer {
     }
 
     private void stop() {
-        this.stopCallback.call("");
+        this.stopCallback.run();
         this.timerFuture.cancel(true);
     }
 }
