@@ -10,7 +10,8 @@ import java.util.concurrent.Future;
 public class Countdown {
 
     CountdownTimer countdownTimer;
-    private StateEnum state = StateEnum.NONE;
+    private volatile StateEnum state = StateEnum.NONE;
+    private Future timerFuture;
 
     public Countdown(int second, Callback tick) {
         this.countdownTimer = new CountdownTimer(tick, second);
@@ -18,22 +19,21 @@ public class Countdown {
 
     public Future start() {
         this.state = StateEnum.RUNNING;
-        Future future = this.countdownTimer.schedule((out) -> {
+        timerFuture = this.countdownTimer.schedule((out) -> {
             this.stop();
             return out;
         });
-        return future;
+        return timerFuture;
+    }
+
+    public boolean isRunning() {
+        return this.state == StateEnum.RUNNING;
     }
 
     private void stop() {
         this.state = StateEnum.STOPPED;
-
+        this.timerFuture.cancel(true);
     }
-
-    public boolean isRunning() {
-        return state == StateEnum.RUNNING;
-    }
-
 
     private enum StateEnum {
         NONE,

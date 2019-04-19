@@ -12,14 +12,14 @@ public class CountdownTimerFake extends CountdownTimer {
 
     private volatile long second;
     private final Callback tick;
-    private Future future;
+    private Future timerFuture;
     private Callback stopCallback;
 
     @Override
     public Future schedule(Callback stopCallback) {
         this.stopCallback = stopCallback;
-        future = Futures.immediateCancelledFuture();
-        return this.future;
+        timerFuture = Futures.immediateCancelledFuture();
+        return this.timerFuture;
     }
 
     public CountdownTimerFake(Callback tick, long second) {
@@ -32,8 +32,12 @@ public class CountdownTimerFake extends CountdownTimer {
         this.second -= 1;
         this.tick.call("");
         if (this.second <= 0) {
-            this.stopCallback.call("");
-            this.future.cancel(true);
+            this.stop();
         }
+    }
+
+    private void stop() {
+        this.stopCallback.call("");
+        this.timerFuture.cancel(true);
     }
 }

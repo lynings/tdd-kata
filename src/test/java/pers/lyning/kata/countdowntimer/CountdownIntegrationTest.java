@@ -31,7 +31,7 @@ public class CountdownIntegrationTest {
         assertThat(outputCapture.toString().trim()).isEqualTo("tick called");
     }
 
-    @Test(timeout = 3000)
+    @Test(timeout = 2100)
     public void should_stopped_when_countdown_2_seconds() {
         Countdown countdown = new Countdown(2, tick);
         Future future = countdown.start();
