@@ -10,7 +10,7 @@ import java.util.concurrent.Future;
  */
 public class CountdownTimerFake extends CountdownTimer {
 
-    private volatile long second;
+    private long second;
     private final Callback tick;
     private Future timerFuture;
     private Callback stopCallback;
