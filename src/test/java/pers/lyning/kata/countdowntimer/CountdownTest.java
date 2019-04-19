@@ -24,9 +24,9 @@ public class CountdownTest {
             System.out.println("tick called");
             return call;
         };
+        this.countdown = new Countdown(10, tick);
         this.countdownTimerFake = new CountdownTimerFake(tick, 10);
-        countdown = new Countdown(10, tick);
-        countdown.countdownTimer = countdownTimerFake;
+        this.countdown.countdownTimer = this.countdownTimerFake;
     }
 
     @Test
