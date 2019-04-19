@@ -12,22 +12,20 @@ import java.util.concurrent.TimeUnit;
  */
 public class CountdownTimer {
     private final Callback callback;
-    private long period;
-    private final TimeUnit unit;
+    private long second;
     private final ScheduledThreadPoolExecutor scheduledThreadPoolExecutor = new ScheduledThreadPoolExecutor(1);
     private ScheduledFuture<?> scheduledFuture;
 
 
-    public CountdownTimer(Callback callback, long period, TimeUnit unit) {
+    public CountdownTimer(Callback callback, long second) {
         this.callback = callback;
-        this.period = period;
-        this.unit = unit;
+        this.second = second;
     }
 
     public Future schedule() {
         this.scheduledFuture = this.scheduledThreadPoolExecutor.scheduleAtFixedRate(() -> {
             forward();
-        }, 0, period, unit);
+        }, 0, second, TimeUnit.SECONDS);
         return this.scheduledFuture;
     }
 
@@ -36,9 +34,9 @@ public class CountdownTimer {
     }
 
     private void forward() {
-        this.period -= 1;
+        this.second -= 1;
         this.callback.call("");
-        if (this.period <= 0) {
+        if (this.second <= 0) {
             this.cancel();
         }
     }

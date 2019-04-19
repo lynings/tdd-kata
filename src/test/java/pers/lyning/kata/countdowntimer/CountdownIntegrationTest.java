@@ -3,7 +3,6 @@ package pers.lyning.kata.countdowntimer;
 import javafx.util.Callback;
 import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 import pers.lyning.kata.testing.SystemOutputCapture;
 
 import java.util.concurrent.Future;
@@ -16,8 +15,6 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 public class CountdownIntegrationTest {
 
-    @Rule
-    public final ExpectedException expectedEx = ExpectedException.none();
     @Rule
     public final SystemOutputCapture outputCapture = SystemOutputCapture.init();
 

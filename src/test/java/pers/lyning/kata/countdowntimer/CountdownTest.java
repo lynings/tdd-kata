@@ -4,10 +4,7 @@ import javafx.util.Callback;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 import pers.lyning.kata.testing.SystemOutputCapture;
-
-import java.util.concurrent.TimeUnit;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -16,8 +13,6 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 public class CountdownTest {
 
-    @Rule
-    public final ExpectedException expectedEx = ExpectedException.none();
     @Rule
     public final SystemOutputCapture outputCapture = SystemOutputCapture.init();
     private Countdown countdown;
@@ -29,7 +24,7 @@ public class CountdownTest {
             System.out.println("tick called");
             return call;
         };
-        this.countdownTimerFake = new CountdownTimerFake(tick, 10, TimeUnit.SECONDS);
+        this.countdownTimerFake = new CountdownTimerFake(tick, 10);
         countdown = new Countdown(10, tick);
         countdown.countdownTimer = countdownTimerFake;
     }

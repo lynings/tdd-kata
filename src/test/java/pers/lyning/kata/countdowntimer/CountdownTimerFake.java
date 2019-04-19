@@ -11,8 +11,8 @@ import java.util.concurrent.TimeUnit;
  */
 public class CountdownTimerFake extends CountdownTimer {
 
-    private volatile long period;
-    private Callback callback;
+    private volatile long second;
+    private final Callback callback;
     private Future future;
 
     @Override
@@ -21,16 +21,16 @@ public class CountdownTimerFake extends CountdownTimer {
         return this.future;
     }
 
-    public CountdownTimerFake(Callback callback, long period, TimeUnit unit) {
-        super(callback, period, unit);
+    public CountdownTimerFake(Callback callback, long period) {
+        super(callback, period, TimeUnit.SECONDS);
         this.callback = callback;
-        this.period = period;
+        this.second = second;
     }
 
     public void forward() {
-        this.period -= 1;
+        this.second -= 1;
         this.callback.call("");
-        if (this.period <= 0) {
+        if (this.second <= 0) {
             this.future.cancel(true);
         }
     }

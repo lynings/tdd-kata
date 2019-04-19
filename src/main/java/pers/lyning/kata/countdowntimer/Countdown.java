@@ -3,19 +3,18 @@ package pers.lyning.kata.countdowntimer;
 import javafx.util.Callback;
 
 import java.util.concurrent.Future;
-import java.util.concurrent.TimeUnit;
 
 /**
  * @author lyning
  */
 public class Countdown {
 
+    CountdownTimer countdownTimer;
     private StateEnum state = StateEnum.NONE;
     private Thread thread;
-    CountdownTimer countdownTimer;
 
     public Countdown(int second, Callback tick) {
-        this.countdownTimer = new CountdownTimer(tick, second, TimeUnit.SECONDS);
+        this.countdownTimer = new CountdownTimer(tick, second);
     }
 
     public Future start() {
