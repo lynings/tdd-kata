@@ -15,17 +15,17 @@ public class CountdownTimerFake extends CountdownTimer {
     private Future timerFuture;
     private Callback stopCallback;
 
+    public CountdownTimerFake(Callback tick, long second) {
+        super(tick, second);
+        this.tick = tick;
+        this.second = second;
+    }
+
     @Override
     public Future schedule(Callback stopCallback) {
         this.stopCallback = stopCallback;
         timerFuture = Futures.immediateCancelledFuture();
         return this.timerFuture;
-    }
-
-    public CountdownTimerFake(Callback tick, long second) {
-        super(tick, second);
-        this.tick = tick;
-        this.second = second;
     }
 
     public void forward() {
