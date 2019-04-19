@@ -9,7 +9,8 @@
 5. [Conference Track Management](src/main/resources/conferencetrackmanagement/README.md)
 6. [Merchant's Guide to the Galaxy](src/main/resources/merchantguidetothegalaxy/README.md)
 7. [Args](src/main/resources/args/README.md)
-7. [Anagrams](src/main/resources/anagrams/README.md)
+8. [Anagrams](src/main/resources/anagrams/README.md)
+9. [Countdown](src/main/resources/countdowntimer/README.md)
 
 
 ## What’s a Code Kata?
