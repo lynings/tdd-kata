@@ -10,7 +10,7 @@ import java.util.concurrent.Future;
 public class Countdown {
 
     CountdownTimer countdownTimer;
-    private volatile StateEnum state = StateEnum.NONE;
+    private StateEnum state = StateEnum.NONE;
     private Future timerFuture;
 
     public Countdown(int second, Callback tick) {
