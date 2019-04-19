@@ -10,15 +10,16 @@ import java.util.concurrent.Future;
 public class Countdown {
 
     CountdownTimer countdownTimer;
-    private StateEnum state = StateEnum.NONE;
     private Future timerFuture;
-    private final Callback stopCallback = o -> {
-        this.stop();
-        return o;
-    };
+    private StateEnum state = StateEnum.NONE;
+    private final Callback stopCallback;
 
     public Countdown(int second, Callback tick) {
         this.countdownTimer = new CountdownTimer(tick, second);
+        this.stopCallback = o -> {
+            this.stop();
+            return o;
+        };
     }
 
     public Future start() {
