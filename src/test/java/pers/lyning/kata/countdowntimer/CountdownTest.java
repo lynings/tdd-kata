@@ -1,12 +1,13 @@
 package pers.lyning.kata.countdowntimer;
 
+import javafx.util.Callback;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import pers.lyning.kata.testing.SystemOutputCapture;
 
-import java.util.concurrent.Future;
-import java.util.function.Consumer;
+import java.util.concurrent.TimeUnit;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -19,68 +20,50 @@ public class CountdownTest {
     public final ExpectedException expectedEx = ExpectedException.none();
     @Rule
     public final SystemOutputCapture outputCapture = SystemOutputCapture.init();
+    private Countdown countdown;
+    private CountdownTimerFake countdownTimerFake;
+
+    @Before
+    public void setUp() throws Exception {
+        Callback tick = (call) -> {
+            System.out.println("tick called");
+            return call;
+        };
+        this.countdownTimerFake = new CountdownTimerFake(tick, 10, TimeUnit.SECONDS);
+        countdown = new Countdown(10, tick);
+        countdown.countdownTimer = countdownTimerFake;
+    }
 
     @Test
     public void should_not_running() {
-        Consumer<String> tick = a -> System.out.println(a);
-        Countdown countdown = new Countdown(10, tick);
         assertThat(countdown.isRunning()).isFalse();
     }
 
     @Test
     public void should_running() {
-        Consumer<String> tick = a -> System.out.println(a);
-        Countdown countdown = new Countdown(10, tick);
         countdown.start();
         assertThat(countdown.isRunning()).isTrue();
     }
 
     @Test
-    public void should_destroyed() {
-        Consumer<String> tick = a -> System.out.println(a);
-        Countdown countdown = new Countdown(10, tick);
+    public void should_call_the_tick_once_every_second() {
         countdown.start();
-        countdown.destroy();
-        assertThat(countdown.isRunning()).isFalse();
+        this.timeForward(1);
+        assertThat(outputCapture.toString().trim()).isEqualTo("tick called");
+        this.timeForward(1);
+        assertThat(outputCapture.toString().trim()).isEqualTo("tick called\ntick called");
     }
 
     @Test
-    public void should_called_tick() {
-        Consumer tick = out -> System.out.println("called");
-        Countdown countdown = new Countdown(1, tick);
-        Future future = countdown.start();
-        while (!future.isDone()) {
-            assertThat(countdown.isRunning()).isTrue();
-        }
-
-        assertThat(outputCapture.toString()).contains("called");
+    public void should_stopped_countdown_10_seconds() {
+        countdown.start();
+        this.timeForward(10);
+        assertThat(this.countdown.isRunning()).isFalse();
     }
 
-    @Test(timeout = 3000)
-    public void should_timeout_error() {
-        expectedEx.expect(Exception.class);
-
-        Consumer tick = out -> System.out.println("called");
-        Countdown countdown = new Countdown(4, tick);
-        Future future = countdown.start();
-        while (!future.isDone()) {
-            assertThat(countdown.isRunning()).isTrue();
-        }
-    }
-
-    @Test(timeout = 3000)
-    public void should_countdown_3_seconds() {
-        Consumer tick = out -> System.out.println("called");
-        Countdown countdown = new Countdown(3, tick);
-        Future future = countdown.start();
-        while (!future.isDone()) {
-            assertThat(countdown.isRunning()).isTrue();
-        }
-    }
-
-    private void untilCompletionFor(Future future) {
-        while (!future.isDone()) {
-            future.isDone();
+    private void timeForward(int seconds) {
+        for (int second = 0; second < seconds; second++) {
+            this.countdownTimerFake.forward();
         }
     }
 }

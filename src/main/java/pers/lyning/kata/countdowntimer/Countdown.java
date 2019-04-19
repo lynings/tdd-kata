@@ -1,38 +1,34 @@
 package pers.lyning.kata.countdowntimer;
 
+import javafx.util.Callback;
+
 import java.util.concurrent.Future;
-import java.util.concurrent.ScheduledFuture;
-import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
-import java.util.function.Consumer;
 
 /**
  * @author lyning
  */
 public class Countdown {
 
-    private volatile int remainingSecond;
-    private final Consumer<String> tick;
-    private ScheduledFuture<?> future;
     private StateEnum state = StateEnum.NONE;
-    private final ScheduledThreadPoolExecutor scheduledThreadPoolExecutor;
+    private Thread thread;
+    CountdownTimer countdownTimer;
 
-    public Countdown(int second, Consumer<String> tick) {
-        this.remainingSecond = second;
-        this.tick = tick;
-        this.scheduledThreadPoolExecutor = new ScheduledThreadPoolExecutor(1);
+    public Countdown(int second, Callback tick) {
+        this.countdownTimer = new CountdownTimer(tick, second, TimeUnit.SECONDS);
     }
 
     public Future start() {
         this.state = StateEnum.RUNNING;
-        this.future = this.scheduledThreadPoolExecutor.scheduleAtFixedRate(() -> {
-            this.tick.accept("");
-            this.remainingSecond -= 1;
-            if (this.remainingSecond == 0) {
-                future.cancel(true);
-                this.state = StateEnum.DESTROYED;
+        Future future = this.countdownTimer.schedule();
+        this.thread = new Thread(() -> {
+            while (!future.isDone()) {
+                // nothing
             }
-        }, 0, 1, TimeUnit.SECONDS);
+            this.state = StateEnum.STOPPED;
+            this.thread.interrupt();
+        });
+        this.thread.start();
         return future;
     }
 
@@ -40,14 +36,9 @@ public class Countdown {
         return state == StateEnum.RUNNING;
     }
 
-    public void destroy() {
-        this.state = StateEnum.DESTROYED;
-        this.future.cancel(true);
-    }
-
     private enum StateEnum {
         NONE,
         RUNNING,
-        DESTROYED
+        STOPPED
     }
 }
