@@ -47,7 +47,7 @@ public class CountdownTest {
     }
 
     @Test
-    public void should_call_the_tick_once_every_second() {
+    public void should_call_2_tick_and_remaining_8_seconds() {
         countdown.start();
         this.timeForward(1);
         assertThat(outputCapture.toString().trim()).isEqualTo("tick called");
