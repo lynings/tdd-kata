@@ -50,7 +50,7 @@ public class CountdownTest {
     }
 
     @Test
-    public void should_stopped_countdown_10_seconds() {
+    public void should_stopped_when_countdown_10_seconds() {
         countdown.start();
         this.timeForward(10);
         assertThat(this.countdown.isRunning()).isFalse();
