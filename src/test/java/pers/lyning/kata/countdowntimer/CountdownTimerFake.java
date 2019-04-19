@@ -4,7 +4,6 @@ import com.google.common.util.concurrent.Futures;
 import javafx.util.Callback;
 
 import java.util.concurrent.Future;
-import java.util.concurrent.TimeUnit;
 
 /**
  * @author lyning
@@ -12,25 +11,28 @@ import java.util.concurrent.TimeUnit;
 public class CountdownTimerFake extends CountdownTimer {
 
     private volatile long second;
-    private final Callback callback;
+    private final Callback tick;
     private Future future;
+    private Callback stopCallback;
 
     @Override
-    public Future schedule() {
+    public Future schedule(Callback stopCallback) {
+        this.stopCallback = stopCallback;
         future = Futures.immediateCancelledFuture();
         return this.future;
     }
 
-    public CountdownTimerFake(Callback callback, long period) {
-        super(callback, period, TimeUnit.SECONDS);
-        this.callback = callback;
+    public CountdownTimerFake(Callback tick, long second) {
+        super(tick, second);
+        this.tick = tick;
         this.second = second;
     }
 
     public void forward() {
         this.second -= 1;
-        this.callback.call("");
+        this.tick.call("");
         if (this.second <= 0) {
+            this.stopCallback.call("");
             this.future.cancel(true);
         }
     }

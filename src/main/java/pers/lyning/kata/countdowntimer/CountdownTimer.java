@@ -22,9 +22,12 @@ public class CountdownTimer {
         this.second = second;
     }
 
-    public Future schedule() {
+    public Future schedule(Callback stopCallback) {
         this.scheduledFuture = this.scheduledThreadPoolExecutor.scheduleAtFixedRate(() -> {
             forward();
+            if (this.scheduledFuture.isDone()) {
+                stopCallback.call("");
+            }
         }, 0, second, TimeUnit.SECONDS);
         return this.scheduledFuture;
     }

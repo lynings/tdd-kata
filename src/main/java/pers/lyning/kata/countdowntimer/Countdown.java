@@ -11,7 +11,6 @@ public class Countdown {
 
     CountdownTimer countdownTimer;
     private StateEnum state = StateEnum.NONE;
-    private Thread thread;
 
     public Countdown(int second, Callback tick) {
         this.countdownTimer = new CountdownTimer(tick, second);
@@ -19,21 +18,22 @@ public class Countdown {
 
     public Future start() {
         this.state = StateEnum.RUNNING;
-        Future future = this.countdownTimer.schedule();
-        this.thread = new Thread(() -> {
-            while (!future.isDone()) {
-                // nothing
-            }
-            this.state = StateEnum.STOPPED;
-            this.thread.interrupt();
+        Future future = this.countdownTimer.schedule((out) -> {
+            this.stop();
+            return out;
         });
-        this.thread.start();
         return future;
+    }
+
+    private void stop() {
+        this.state = StateEnum.STOPPED;
+
     }
 
     public boolean isRunning() {
         return state == StateEnum.RUNNING;
     }
+
 
     private enum StateEnum {
         NONE,
