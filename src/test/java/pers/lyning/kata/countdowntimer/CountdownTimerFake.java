@@ -24,7 +24,7 @@ public class CountdownTimerFake extends CountdownTimer {
     @Override
     public Future schedule(Callback stopCallback) {
         this.stopCallback = stopCallback;
-        timerFuture = Futures.immediateCancelledFuture();
+        this.timerFuture = Futures.immediateCancelledFuture();
         return this.timerFuture;
     }
 
