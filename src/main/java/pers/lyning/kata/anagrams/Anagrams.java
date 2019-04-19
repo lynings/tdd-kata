@@ -47,6 +47,7 @@ public class Anagrams {
                 .collect(groupingBy(WordUtils::sort, toList()))
                 .values()
                 .stream()
+                .filter(group -> group.size() > 1)
                 .collect(toList());
     }
 }
