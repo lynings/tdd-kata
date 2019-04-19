@@ -23,16 +23,17 @@ public class CountdownTimer {
     }
 
     public Future schedule(Callback stopCallback) {
-        this.scheduledFuture = this.scheduledThreadPoolExecutor.scheduleAtFixedRate(() -> {
-            forward();
-            if (this.second <= 0) {
+        final Runnable runnable = () -> {
+            reduceTime();
+            if (this.remainingTime() <= 0) {
                 stopCallback.call("");
             }
-        }, 0, second, TimeUnit.SECONDS);
+        };
+        this.scheduledFuture = this.scheduledThreadPoolExecutor.scheduleAtFixedRate(runnable, 0, second, TimeUnit.SECONDS);
         return this.scheduledFuture;
     }
 
-    private void forward() {
+    private void reduceTime() {
         if (this.second > 0) {
             this.second -= 1;
             this.tick.call("");

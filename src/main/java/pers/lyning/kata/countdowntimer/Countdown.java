@@ -12,6 +12,10 @@ public class Countdown {
     CountdownTimer countdownTimer;
     private StateEnum state = StateEnum.NONE;
     private Future timerFuture;
+    private final Callback stopCallback = o -> {
+        this.stop();
+        return o;
+    };
 
     public Countdown(int second, Callback tick) {
         this.countdownTimer = new CountdownTimer(tick, second);
@@ -19,11 +23,8 @@ public class Countdown {
 
     public Future start() {
         this.state = StateEnum.RUNNING;
-        timerFuture = this.countdownTimer.schedule((out) -> {
-            this.stop();
-            return out;
-        });
-        return timerFuture;
+        this.timerFuture = this.countdownTimer.schedule(stopCallback);
+        return this.timerFuture;
     }
 
     public boolean isRunning() {

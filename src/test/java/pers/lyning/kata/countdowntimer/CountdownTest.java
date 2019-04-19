@@ -31,41 +31,41 @@ public class CountdownTest {
 
     @Test
     public void should_not_running() {
-        assertThat(countdown.isRunning()).isFalse();
+        assertThat(this.countdown.isRunning()).isFalse();
     }
 
     @Test
     public void should_running() {
-        countdown.start();
-        assertThat(countdown.isRunning()).isTrue();
+        this.countdown.start();
+        assertThat(this.countdown.isRunning()).isTrue();
     }
 
     @Test
     public void should_remaining_10_seconds() {
-        countdown.start();
-        assertThat(countdown.getRemainingTime()).isEqualTo(10);
+        this.countdown.start();
+        assertThat(this.countdown.getRemainingTime()).isEqualTo(10);
     }
 
     @Test
     public void should_call_2_tick_and_remaining_8_seconds() {
-        countdown.start();
-        this.timeForward(1);
-        assertThat(outputCapture.toString().trim()).isEqualTo("tick called");
-        this.timeForward(1);
-        assertThat(outputCapture.toString().trim()).isEqualTo("tick called\ntick called");
-        assertThat(countdown.getRemainingTime()).isEqualTo(8);
+        this.countdown.start();
+        this.reduceTime(1);
+        assertThat(this.outputCapture.toString().trim()).isEqualTo("tick called");
+        this.reduceTime(1);
+        assertThat(this.outputCapture.toString().trim()).isEqualTo("tick called\ntick called");
+        assertThat(this.countdown.getRemainingTime()).isEqualTo(8);
     }
 
     @Test
     public void should_stopped_when_countdown_10_seconds() {
-        countdown.start();
-        this.timeForward(10);
+        this.countdown.start();
+        this.reduceTime(10);
         assertThat(this.countdown.isRunning()).isFalse();
     }
 
-    private void timeForward(int seconds) {
+    private void reduceTime(int seconds) {
         for (int second = 0; second < seconds; second++) {
-            this.countdownTimerFake.forward();
+            this.countdownTimerFake.reduceTime();
         }
     }
 }

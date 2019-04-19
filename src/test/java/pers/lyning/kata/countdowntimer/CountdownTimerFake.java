@@ -28,7 +28,7 @@ public class CountdownTimerFake extends CountdownTimer {
         return this.timerFuture;
     }
 
-    public void forward() {
+    public void reduceTime() {
         this.second -= 1;
         this.tick.call("");
         if (this.second <= 0) {
