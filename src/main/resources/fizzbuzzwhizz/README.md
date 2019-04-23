@@ -1,4 +1,4 @@
-## 案例
+## FizzBuzzWhizz
 ![](https://user-gold-cdn.xitu.io/2019/2/25/169253f5136938b3?w=640&h=481&f=jpeg&s=236403)
 
 你是一名体育老师，在某次课距离下课还有五分钟时，你决定搞一个游戏。此时有 100 名学生在上课。游戏的规则是：
@@ -18,16 +18,63 @@
 
 输出（片段）：
 
-1,2,Fizz,4,Buzz,Fizz,Whizz,8,Fizz,Buzz,11,Fizz,Fizz,Whizz,FizzBuzz,16,17,Fizz,19,Buzz,…,100
+> "1", "2", "Fizz", "4", "Buzz", "Fizz", "Whizz", "8", "Fizz", "Buzz",
+"11", "Fizz", "Fizz", "Whizz", "FizzBuzz", "16", "17", "Fizz", "19", "Buzz",
+"FizzWhizz", "22", "Fizz", "Fizz", "Buzz", "26", "Fizz", "Whizz", "29", "Fizz",
+"Fizz", "Fizz", "Fizz", "Fizz", "Fizz", "Fizz", "Fizz", "Fizz", "Fizz", "Buzz",
+"41", "FizzWhizz", "Fizz", "44", "FizzBuzz", "46", "47", "Fizz", "Whizz", "Buzz",
+"Fizz", "52", "Fizz", "Fizz", "Buzz", "Whizz", "Fizz", "58", "59", "FizzBuzz",
+"61", "62", "Fizz", "64", "Buzz", "Fizz", "67", "68", "Fizz", "BuzzWhizz",
+"71", "Fizz", "Fizz", "74", "FizzBuzz", "76", "Whizz", "Fizz", "79", "Buzz",
+"Fizz", "82", "Fizz", "FizzWhizz", "Buzz", "86", "Fizz", "88", "89", "FizzBuzz",
+"Whizz", "92", "Fizz", "94", "Buzz", "Fizz", "97", "Whizz", "Fizz", "Buzz"
 
-1. 生成 3 个不重复的个位数数字。
-2. 定义游戏，并实现与规则的交互，最终得到所有输出
-3. ~~**<font color="red">!!!</font>** 定义游戏规则。~~
-    1. ~~如果是第一个特殊数字的倍数，就报 Fizz。~~
-    2. ~~如果是第二个特殊数字的倍数，就报 Buzz。~~
-    3. ~~如果是第三个特殊数字的倍数，就报 Whizz。~~
-    4. ~~如果同时是多个特殊数字的倍数，需要按特殊数字的顺序把对应的单词拼接起来再报出，比如 FizzBuzz、BuzzWhizz、FizzBuzzWhizz。~~
-    5. ~~如果包含第一个特殊数字，只报 Fizz **（忽略规则 1、2、3、4）**。~~
-    6. ~~如果不是特殊数字的倍数，并且不包含第一个特殊数字，就报对应的序号。~~
-    7. ~~重写 `Student` 类，使用 `Rule` 替换 `Student`。~~
-4. 验证入参。
+## 案例分析
+- 首先说出三个**不同**的特殊数，要求必须是个位数，比如 3、5、7
+- 学生顺序报数
+- 如果所报数字是第一个特殊数（3）的倍数，则报 Fizz
+- 如果所报数字是第二个特殊数（5）的倍数，则报 Buzz
+- 如果所报数字是第三个特殊数（7）的倍数，则报 Whizz
+- 如果所报数字是第一个特殊数和第二个特殊数的倍，则报 FizzBuzz
+- 如果同时是三个特殊数的倍数，那么要说 FizzBuzzWhizz
+- 所报数字包含了第一个特殊数，则报 Fizz（忽略规则 3 和规则 4，比如要报 35 的同学只报 Fizz，不报 BuzzWhizz）。
+- 如果所报数字不是任务号特殊数字的倍数，则报数字。
+
+|术语|描述|
+|----|----|
+|Game|游戏|
+|Number|数字|
+|SpecialNumber|特殊数字|
+|countOff|报数|
+|divisible|可被整除|
+
+## 程序设计 
+```java
+class Number {
+    public Number(Integer value);
+    public boolean isFizz();
+    public boolean isBuzz();
+    public boolean isWhizz();
+}
+
+class SpecialNumber {
+    public SpecialNumber(Integer number, String word);
+}
+
+class Game {
+    public Game(Integer firstNumber, Integer secondNumber, Integer thirdNumber);
+    public List<String> countOff(Integer players);
+}
+```
+
+## 任务分解
+- 完成 Number 类
+    - 创建 Number 类
+    - 增加 isFizz() 方法
+    - 增加 isBuzz() 方法
+    - 增加 isWhizz() 方法
+- 完成 Game 类
+    - 增加 Game 类
+    - 处理三个特殊数字
+    - 增加 create 静态工厂方法
+    - 增加 countOff 报数方法
