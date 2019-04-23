@@ -11,6 +11,7 @@
 7. [Args](src/main/resources/args/README.md)
 8. [Anagrams](src/main/resources/anagrams/README.md)
 9. [Countdown](src/main/resources/countdowntimer/README.md)
+9. [FizzBuzz](src/main/resources/fizzbuzz/README.md)
 
 
 ## What’s a Code Kata?
