@@ -1,6 +1,7 @@
 package pers.lyning.kata.args6;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Map;
 
 import static java.util.stream.Collectors.toMap;
@@ -16,6 +17,9 @@ public class Schema {
     }
 
     public static Schema parse(String schemas) {
+        if (schemas.isEmpty()) {
+            return new Schema(new HashMap<>(0));
+        }
         Map<String, String> flagToSchemaMap = Arrays
                 .asList(schemas.split(","))
                 .stream()

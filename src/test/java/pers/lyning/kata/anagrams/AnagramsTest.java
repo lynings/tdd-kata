@@ -112,14 +112,14 @@ public class AnagramsTest {
                 "sinks", "skins",
                 "knits", "stink",
                 "rots", "sort",
-                "anagrams"
+                "anagrams", "gramanas"
         );
         Anagrams anagrams = new Anagrams(words);
         List<Anagram> anagramList = anagrams.arranged();
 
         Words longestWords = anagrams.findLongest(anagramList);
-        assertThat(longestWords.size()).isEqualTo(1);
-        assertThat(longestWords.list()).isEqualTo(Arrays.asList("anagrams"));
+        assertThat(longestWords.size()).isEqualTo(2);
+        assertThat(longestWords.list()).isEqualTo(Arrays.asList("gramanas", "anagrams"));
     }
     /******************* findLongestWords test end *****************/
 
