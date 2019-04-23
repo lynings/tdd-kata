@@ -26,8 +26,8 @@ public class Number {
         return isDivisibleBy(3) && isDivisibleBy(5);
     }
 
-    private boolean isDivisibleBy(Integer i) {
-        return this.value % i == 0;
+    private boolean isDivisibleBy(Integer number) {
+        return this.value % number == 0;
     }
 
     public Integer value() {
