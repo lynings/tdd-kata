@@ -30,35 +30,37 @@
 "Whizz", "92", "Fizz", "94", "Buzz", "Fizz", "97", "Whizz", "Fizz", "Buzz"
 
 ## 案例分析
-- 首先说出三个**不同**的特殊数，要求必须是个位数，比如 3、5、7
+
+- 首先说出三个不同的特殊数，要求必须是个位数，比如 3、5、7。
 - 学生顺序报数
-- 如果所报数字是第一个特殊数（3）的倍数，则报 Fizz
-- 如果所报数字是第二个特殊数（5）的倍数，则报 Buzz
-- 如果所报数字是第三个特殊数（7）的倍数，则报 Whizz
-- 如果所报数字是第一个特殊数和第二个特殊数的倍，则报 FizzBuzz
-- 如果同时是三个特殊数的倍数，那么要说 FizzBuzzWhizz
-- 所报数字包含了第一个特殊数，则报 Fizz（忽略规则 3 和规则 4，比如要报 35 的同学只报 Fizz，不报 BuzzWhizz）。
-- 如果所报数字不是任务号特殊数字的倍数，则报数字。
+- 如果所报数字是第一个特殊数（3）的倍数，要说 Fizz。
+- 如果所报数字是第二个特殊数（5）的倍数，要说 Buzz；
+- 如果所报数字是第三个特殊数（7）的倍数，要说 Whizz。
+- 如果所报数字是第一个特殊数和第二个特殊数的倍数，要说 FizzBuzz，以此类推；如果同时是三个特殊数的倍数，那么要说 FizzBuzzWhizz。
+- 如果所报数字包含了第一个特殊数，要说 Fizz（忽略规则 3 和规则 4，比如要报 35 的同学只报 Fizz，不报 BuzzWhizz）。
 
 |术语|描述|
 |----|----|
 |Game|游戏|
-|Number|数字|
 |SpecialNumber|特殊数字|
+|Number|数字|
 |countOff|报数|
-|divisible|可被整除|
+|divisible|可被整除（倍数）|
 
-## 程序设计 
+## 初步设计
 ```java
 class Number {
     public Number(Integer value);
-    public boolean isFizz();
-    public boolean isBuzz();
-    public boolean isWhizz();
+    public boolean isDivisibleBy(Integer number);
 }
 
 class SpecialNumber {
     public SpecialNumber(Integer number, String word);
+}
+
+class WordMatcher {
+    public WordMatcher(SpecialNumber first, SpecialNumber second, SpecialNumber third);
+    public String match(Number number);
 }
 
 class Game {
@@ -68,13 +70,3 @@ class Game {
 ```
 
 ## 任务分解
-- 完成 Number 类
-    - 创建 Number 类
-    - 增加 isFizz() 方法
-    - 增加 isBuzz() 方法
-    - 增加 isWhizz() 方法
-- 完成 Game 类
-    - 增加 Game 类
-    - 处理三个特殊数字
-    - 增加 create 静态工厂方法
-    - 增加 countOff 报数方法
