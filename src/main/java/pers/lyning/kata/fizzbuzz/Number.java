@@ -14,9 +14,6 @@ public class Number {
         return isDivisibleBy(3) || this.contains(3);
     }
 
-    private boolean contains(Integer number) {
-        return this.value.toString().contains(number.toString());
-    }
 
     public boolean isBuzz() {
         return isDivisibleBy(5) || this.contains(5);
@@ -26,11 +23,15 @@ public class Number {
         return isDivisibleBy(3) && isDivisibleBy(5);
     }
 
+    public Integer value() {
+        return this.value;
+    }
+
     private boolean isDivisibleBy(Integer number) {
         return this.value % number == 0;
     }
 
-    public Integer value() {
-        return this.value;
+    private boolean contains(Integer number) {
+        return this.value.toString().contains(number.toString());
     }
 }
