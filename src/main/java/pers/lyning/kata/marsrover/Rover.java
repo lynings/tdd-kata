@@ -37,6 +37,7 @@ public class Rover {
     private void moveToPossiblePoint() {
         Optional<Position> positionOptional = Arrays.asList(DirectionEnum.values())
                 .stream()
+                .filter(direction -> direction != this.position.getDirection())
                 .map(direction -> {
                     this.position.setDirection(direction);
                     return this.nextPosition(FORWARD);
