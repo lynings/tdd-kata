@@ -20,12 +20,16 @@ public class Game {
                 .range(1, this.players + 1)
                 .boxed()
                 .map(Number::new)
-                .map(this::turn)
+                .map(this::matchWord)
                 .collect(toList());
     }
 
-    private String turn(Number number) {
+    private String matchWord(Number number) {
         if (number.isFizzBuzz()) {
+            return "FizzBuzz";
+        }
+
+        if (number.isFizz() && number.isBuzz()) {
             return "FizzBuzz";
         }
 
