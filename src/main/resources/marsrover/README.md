@@ -18,7 +18,7 @@ You’re part of the team that explores Mars by sending remotely controlled vehi
 - Be careful about edge cases and exceptions. We can not afford to lose a mars rover, just because the developers overlooked a null pointer.
 
 ## 问题澄清
-1. wrapping from one edge of the grid to another. (planets are spheres after all) 的意思是把 grid 当成一个球体看待（不是平面），例如向左走
+1. wrapping from one edge of the grid to another. (planets are spheres after all) 这里的意思是向左走到尽头会回到右边，向上走到尽头会回到下面。
 
 ## 案例分析
 
