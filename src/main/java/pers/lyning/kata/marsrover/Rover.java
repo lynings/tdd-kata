@@ -1,18 +1,20 @@
 package pers.lyning.kata.marsrover;
 
+import pers.lyning.kata.marsrover.exceptions.CommandIncorrectException;
+
+import static pers.lyning.kata.marsrover.CommandConstant.*;
+
 /**
  * @author lyning
  */
 public class Rover {
-    private Position position;
+    private final GridPositioner gridPositioner;
     private final ObstacleDetector obstacleDetector;
-    private final String FORWARD = "F";
-    private final String BACKWARD = "B";
-    private final String TURN_LEFT = "L";
-    private final String TURN_RIGHT = "R";
+    private Position position;
 
-    public Rover(Position position, Grid grid) {
-        this.position = position;
+    public Rover(Position initialPosition, Grid grid) {
+        this.position = initialPosition;
+        this.gridPositioner = new GridPositioner(grid);
         this.obstacleDetector = new ObstacleDetector(grid);
     }
 
@@ -57,21 +59,9 @@ public class Rover {
     }
 
     private Position forward(Position position) {
-        switch (position.getDirection()) {
-            case NORTH:
-                position.setY(position.getY() + 1);
-                break;
-            case SOUTH:
-                position.setY(position.getY() - 1);
-                break;
-            case WEST:
-                position.setX(position.getX() - 1);
-                break;
-            case EAST:
-                position.setX(position.getX() + 1);
-                break;
-        }
-        return position;
+        int steps = 1;
+        Position nextPosition = this.gridPositioner.search(position, steps);
+        return nextPosition;
     }
 
     private Position backward(Position position) {

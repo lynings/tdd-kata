@@ -3,6 +3,7 @@ package pers.lyning.kata.marsrover;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+import pers.lyning.kata.marsrover.exceptions.CommandIncorrectException;
 import pers.lyning.kata.testing.SystemOutputCapture;
 
 import java.util.Arrays;

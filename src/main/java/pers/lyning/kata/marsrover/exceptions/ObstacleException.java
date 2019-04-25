@@ -1,4 +1,4 @@
-package pers.lyning.kata.marsrover;
+package pers.lyning.kata.marsrover.exceptions;
 
 /**
  * @author lyning
