@@ -6,14 +6,14 @@ package pers.lyning.kata.marsrover;
 public class Position {
     private Integer x;
     private Integer y;
-    private Direction direction;
+    private DirectionEnum direction;
 
     public Position(Integer x, Integer y) {
         this.x = x;
         this.y = y;
     }
 
-    public Position(Integer x, Integer y, Direction direction) {
+    public Position(Integer x, Integer y, DirectionEnum direction) {
         this.x = x;
         this.y = y;
         this.direction = direction;
@@ -37,7 +37,7 @@ public class Position {
         return y;
     }
 
-    public Direction getDirection() {
+    public DirectionEnum getDirection() {
         return direction;
     }
 
@@ -49,7 +49,7 @@ public class Position {
         this.y = y;
     }
 
-    public void setDirection(Direction direction) {
+    public void setDirection(DirectionEnum direction) {
         this.direction = direction;
     }
 }

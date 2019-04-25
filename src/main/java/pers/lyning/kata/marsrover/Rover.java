@@ -32,7 +32,7 @@ public class Rover {
     }
 
     private void moveToLastPossiblePoint() {
-        for (Direction direction : Direction.values()) {
+        for (DirectionEnum direction : DirectionEnum.values()) {
             this.position.setDirection(direction);
             Position nextPosition = this.nextPosition(FORWARD);
             if (this.obstacleDetector.check(nextPosition)) {
@@ -65,8 +65,8 @@ public class Rover {
     }
 
     private Position backward(Position position) {
-        Direction currentDirection = position.getDirection();
-        Direction reverseDirection = DirectionLocator.turn180(position.getDirection());
+        DirectionEnum currentDirection = position.getDirection();
+        DirectionEnum reverseDirection = DirectionLocator.turn180(position.getDirection());
         position.setDirection(reverseDirection);
         this.forward(position);
         position.setDirection(currentDirection);
@@ -74,15 +74,15 @@ public class Rover {
     }
 
     private Position turnLeft(Position position) {
-        Direction prevPosition = position.getDirection();
-        Direction nextDirection = DirectionLocator.turnLeft90(prevPosition);
+        DirectionEnum prevPosition = position.getDirection();
+        DirectionEnum nextDirection = DirectionLocator.turnLeft90(prevPosition);
         position.setDirection(nextDirection);
         return position;
     }
 
     private Position turnRight(Position position) {
-        Direction prevPosition = position.getDirection();
-        Direction nextDirection = DirectionLocator.turnRight90(prevPosition);
+        DirectionEnum prevPosition = position.getDirection();
+        DirectionEnum nextDirection = DirectionLocator.turnRight90(prevPosition);
         position.setDirection(nextDirection);
         return position;
     }

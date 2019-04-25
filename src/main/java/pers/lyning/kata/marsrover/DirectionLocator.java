@@ -7,26 +7,26 @@ import java.util.List;
  * @author lyning
  */
 public class DirectionLocator {
-    private static final List<Direction> directions = Arrays.asList(
-            Direction.NORTH,
-            Direction.WEST,
-            Direction.SOUTH,
-            Direction.EAST
+    private static final List<DirectionEnum> directions = Arrays.asList(
+            DirectionEnum.NORTH,
+            DirectionEnum.WEST,
+            DirectionEnum.SOUTH,
+            DirectionEnum.EAST
     );
 
-    public static Direction turn180(Direction direction) {
+    public static DirectionEnum turn180(DirectionEnum direction) {
         int index = directions.indexOf(direction);
         int nextIndex = (index + 2) % 4;
         return directions.get(nextIndex);
     }
 
-    public static Direction turnLeft90(Direction direction) {
+    public static DirectionEnum turnLeft90(DirectionEnum direction) {
         int index = directions.indexOf(direction);
         int nextIndex = (index + 1) % 4;
         return directions.get(nextIndex);
     }
 
-    public static Direction turnRight90(Direction direction) {
+    public static DirectionEnum turnRight90(DirectionEnum direction) {
         int index = directions.indexOf(direction);
         int nextIndex = index == 0
                 ? directions.size() - 1

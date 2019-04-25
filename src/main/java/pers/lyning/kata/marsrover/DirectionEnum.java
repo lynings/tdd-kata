@@ -3,7 +3,7 @@ package pers.lyning.kata.marsrover;
 /**
  * @author lyning
  */
-public enum Direction {
+public enum DirectionEnum {
     SOUTH,
     NORTH,
     WEST,
