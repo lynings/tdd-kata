@@ -21,8 +21,8 @@ public class Rover {
         this.obstacleDetector = new ObstacleDetector(grid);
     }
 
-    public Position receive(String[] commands) {
-        for (String command : commands) {
+    public Position receive(char ...commands) {
+        for (char command : commands) {
             Position nextPosition = this.nextPosition(command);
             if (this.obstacleDetector.check(nextPosition)) {
                 this.obstacleDetector.report(nextPosition);
@@ -47,7 +47,7 @@ public class Rover {
         this.position = positionOptional.get();
     }
 
-    private Position nextPosition(String command) {
+    private Position nextPosition(char command) {
         Position position = Position.deepCopy(this.position);
         switch (command) {
             case FORWARD:

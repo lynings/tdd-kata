@@ -28,7 +28,7 @@ public class RoverTest {
     public void a_step_forward_to_north() {
         Position initialPosition = new Position(0, 0, DirectionEnum.NORTH);
         Rover rover = new Rover(initialPosition, grid);
-        Position currentPosition = rover.receive(new String[]{"F"});
+        Position currentPosition = rover.receive('F');
 
         assertThat(currentPosition.getX()).isEqualTo(0);
         assertThat(currentPosition.getY()).isEqualTo(1);
@@ -38,7 +38,7 @@ public class RoverTest {
     public void a_step_forward_to_south() {
         Position initialPosition = new Position(1, 1, DirectionEnum.SOUTH);
         Rover rover = new Rover(initialPosition, grid);
-        Position currentPosition = rover.receive(new String[]{"F"});
+        Position currentPosition = rover.receive('F');
 
         assertThat(currentPosition.getX()).isEqualTo(1);
         assertThat(currentPosition.getY()).isEqualTo(0);
@@ -48,7 +48,7 @@ public class RoverTest {
     public void a_step_forward_to_west() {
         Position initialPosition = new Position(1, 1, DirectionEnum.WEST);
         Rover rover = new Rover(initialPosition, grid);
-        Position currentPosition = rover.receive(new String[]{"F"});
+        Position currentPosition = rover.receive('F');
 
         assertThat(currentPosition.getX()).isEqualTo(0);
         assertThat(currentPosition.getY()).isEqualTo(1);
@@ -58,7 +58,7 @@ public class RoverTest {
     public void a_step_forward_to_east() {
         Position initialPosition = new Position(1, 1, DirectionEnum.EAST);
         Rover rover = new Rover(initialPosition, grid);
-        Position currentPosition = rover.receive(new String[]{"F"});
+        Position currentPosition = rover.receive('F');
 
         assertThat(currentPosition.getX()).isEqualTo(2);
         assertThat(currentPosition.getY()).isEqualTo(1);
@@ -68,7 +68,7 @@ public class RoverTest {
     public void a_step_backward_to_north() {
         Position initialPosition = new Position(1, 1, DirectionEnum.NORTH);
         Rover rover = new Rover(initialPosition, grid);
-        Position currentPosition = rover.receive(new String[]{"B"});
+        Position currentPosition = rover.receive('B');
 
         assertThat(currentPosition.getX()).isEqualTo(1);
         assertThat(currentPosition.getY()).isEqualTo(0);
@@ -78,7 +78,7 @@ public class RoverTest {
     public void a_step_backward_to_south() {
         Position initialPosition = new Position(1, 1, DirectionEnum.SOUTH);
         Rover rover = new Rover(initialPosition, grid);
-        Position currentPosition = rover.receive(new String[]{"B"});
+        Position currentPosition = rover.receive('B');
 
         assertThat(currentPosition.getX()).isEqualTo(1);
         assertThat(currentPosition.getY()).isEqualTo(2);
@@ -88,7 +88,7 @@ public class RoverTest {
     public void a_step_backward_to_west() {
         Position initialPosition = new Position(1, 1, DirectionEnum.WEST);
         Rover rover = new Rover(initialPosition, grid);
-        Position currentPosition = rover.receive(new String[]{"B"});
+        Position currentPosition = rover.receive('B');
 
         assertThat(currentPosition.getX()).isEqualTo(2);
         assertThat(currentPosition.getY()).isEqualTo(1);
@@ -98,7 +98,7 @@ public class RoverTest {
     public void a_step_backward_to_east() {
         Position initialPosition = new Position(1, 1, DirectionEnum.EAST);
         Rover rover = new Rover(initialPosition, grid);
-        Position currentPosition = rover.receive(new String[]{"B"});
+        Position currentPosition = rover.receive('B');
 
         assertThat(currentPosition.getX()).isEqualTo(0);
         assertThat(currentPosition.getY()).isEqualTo(1);
@@ -108,7 +108,7 @@ public class RoverTest {
     public void turn_left_should_return_west_when_given_direction_is_north() {
         Position initialPosition = new Position(0, 0, DirectionEnum.NORTH);
         Rover rover = new Rover(initialPosition, grid);
-        Position currentPosition = rover.receive(new String[]{"L"});
+        Position currentPosition = rover.receive('L');
 
         assertThat(currentPosition.getDirection()).isEqualTo(DirectionEnum.WEST);
     }
@@ -117,7 +117,7 @@ public class RoverTest {
     public void turn_left_should_return_south_when_given_direction_is_west() {
         Position initialPosition = new Position(0, 0, DirectionEnum.WEST);
         Rover rover = new Rover(initialPosition, grid);
-        Position currentPosition = rover.receive(new String[]{"L"});
+        Position currentPosition = rover.receive('L');
 
         assertThat(currentPosition.getDirection()).isEqualTo(DirectionEnum.SOUTH);
     }
@@ -126,7 +126,7 @@ public class RoverTest {
     public void turn_left_should_return_east_when_given_direction_is_south() {
         Position initialPosition = new Position(0, 0, DirectionEnum.SOUTH);
         Rover rover = new Rover(initialPosition, grid);
-        Position currentPosition = rover.receive(new String[]{"L"});
+        Position currentPosition = rover.receive('L');
 
         assertThat(currentPosition.getDirection()).isEqualTo(DirectionEnum.EAST);
     }
@@ -135,7 +135,7 @@ public class RoverTest {
     public void turn_left_should_return_north_when_given_direction_is_east() {
         Position initialPosition = new Position(0, 0, DirectionEnum.EAST);
         Rover rover = new Rover(initialPosition, grid);
-        Position currentPosition = rover.receive(new String[]{"L"});
+        Position currentPosition = rover.receive('L');
 
         assertThat(currentPosition.getDirection()).isEqualTo(DirectionEnum.NORTH);
     }
@@ -144,7 +144,7 @@ public class RoverTest {
     public void turn_right_should_return_east_when_given_direction_is_north() {
         Position initialPosition = new Position(0, 0, DirectionEnum.NORTH);
         Rover rover = new Rover(initialPosition, grid);
-        Position currentPosition = rover.receive(new String[]{"R"});
+        Position currentPosition = rover.receive('R');
 
         assertThat(currentPosition.getDirection()).isEqualTo(DirectionEnum.EAST);
     }
@@ -153,7 +153,7 @@ public class RoverTest {
     public void turn_right_should_return_south_when_given_direction_is_east() {
         Position initialPosition = new Position(0, 0, DirectionEnum.EAST);
         Rover rover = new Rover(initialPosition, grid);
-        Position currentPosition = rover.receive(new String[]{"R"});
+        Position currentPosition = rover.receive('R');
 
         assertThat(currentPosition.getDirection()).isEqualTo(DirectionEnum.SOUTH);
     }
@@ -162,7 +162,7 @@ public class RoverTest {
     public void turn_right_should_return_west_when_given_direction_is_south() {
         Position initialPosition = new Position(0, 0, DirectionEnum.SOUTH);
         Rover rover = new Rover(initialPosition, grid);
-        Position currentPosition = rover.receive(new String[]{"R"});
+        Position currentPosition = rover.receive('R');
 
         assertThat(currentPosition.getDirection()).isEqualTo(DirectionEnum.WEST);
     }
@@ -171,7 +171,7 @@ public class RoverTest {
     public void turn_right_should_return_north_when_given_direction_is_west() {
         Position initialPosition = new Position(0, 0, DirectionEnum.WEST);
         Rover rover = new Rover(initialPosition, grid);
-        Position currentPosition = rover.receive(new String[]{"R"});
+        Position currentPosition = rover.receive('R');
 
         assertThat(currentPosition.getDirection()).isEqualTo(DirectionEnum.NORTH);
     }
@@ -180,7 +180,7 @@ public class RoverTest {
     public void receive_FF() {
         Position initialPosition = new Position(0, 0, DirectionEnum.NORTH);
         Rover rover = new Rover(initialPosition, grid);
-        Position currentPosition = rover.receive(new String[]{"F", "F"});
+        Position currentPosition = rover.receive('F', 'F');
 
         assertThat(currentPosition.getX()).isEqualTo(0);
         assertThat(currentPosition.getY()).isEqualTo(2);
@@ -191,7 +191,7 @@ public class RoverTest {
     public void receive_FFR() {
         Position initialPosition = new Position(0, 0, DirectionEnum.NORTH);
         Rover rover = new Rover(initialPosition, grid);
-        Position currentPosition = rover.receive(new String[]{"F", "F", "R"});
+        Position currentPosition = rover.receive('F', 'F', 'R');
 
         assertThat(currentPosition.getX()).isEqualTo(0);
         assertThat(currentPosition.getY()).isEqualTo(2);
@@ -202,7 +202,7 @@ public class RoverTest {
     public void receive_FFLBB() {
         Position initialPosition = new Position(0, 0, DirectionEnum.NORTH);
         Rover rover = new Rover(initialPosition, grid);
-        Position currentPosition = rover.receive(new String[]{"F", "F", "L", "B", "B"});
+        Position currentPosition = rover.receive('F', 'F', 'L', 'B', 'B');
 
         assertThat(currentPosition.getX()).isEqualTo(2);
         assertThat(currentPosition.getY()).isEqualTo(2);
@@ -213,7 +213,7 @@ public class RoverTest {
     public void receive_FFLBBRFFFLBBB() {
         Position initialPosition = new Position(0, 0, DirectionEnum.NORTH);
         Rover rover = new Rover(initialPosition, grid);
-        Position currentPosition = rover.receive(new String[]{"F", "F", "L", "B", "B", "R", "F", "F", "F", "L", "B", "B", "B"});
+        Position currentPosition = rover.receive('F', 'F', 'L', 'B', 'B', 'R', 'F', 'F', 'F', 'L', 'B', 'B', 'B');
 
         assertThat(currentPosition.getX()).isEqualTo(0);
         assertThat(currentPosition.getY()).isEqualTo(0);
@@ -225,7 +225,7 @@ public class RoverTest {
         Position initialPosition = new Position(0, 0, DirectionEnum.NORTH);
         Grid grid = new Grid(new Range(5, 5), Arrays.asList(new Obstacle(1, 1)));
         Rover rover = new Rover(initialPosition, grid);
-        rover.receive(new String[]{"F", "R", "F"});
+        rover.receive('F', 'R', 'F');
 
         assertThat(outputCapture.toString()).isEqualTo("position(1,1) encounters an obstacle!");
     }
@@ -236,7 +236,7 @@ public class RoverTest {
 
         Position initialPosition = new Position(0, 0, DirectionEnum.NORTH);
         Rover rover = new Rover(initialPosition, grid);
-        Position currentPosition = rover.receive(new String[]{"F", "R", "F", "F"});
+        Position currentPosition = rover.receive('F', 'R', 'F', 'F');
 
         assertThat(currentPosition.getX()).isEqualTo(0);
         assertThat(currentPosition.getY()).isEqualTo(2);
@@ -251,7 +251,7 @@ public class RoverTest {
         Position initialPosition = new Position(0, 0, DirectionEnum.NORTH);
         // when
         Rover rover = new Rover(initialPosition, grid);
-        rover.receive(new String[]{"F", "R", "N"});
+        rover.receive('F', 'R', 'N');
         // then
     }
     /*** receive test end ***/
