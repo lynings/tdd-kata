@@ -12,14 +12,6 @@ public class Obstacle {
         this.y = y;
     }
 
-    public Integer getX() {
-        return this.x;
-    }
-
-    public Integer getY() {
-        return this.y;
-    }
-
     public boolean isEquals(Integer x, Integer y) {
         return this.x.equals(x) && this.y.equals(y);
     }

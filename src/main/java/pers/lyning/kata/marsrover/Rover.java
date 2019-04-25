@@ -2,6 +2,9 @@ package pers.lyning.kata.marsrover;
 
 import pers.lyning.kata.marsrover.exceptions.CommandIncorrectException;
 
+import java.util.Arrays;
+import java.util.Optional;
+
 import static pers.lyning.kata.marsrover.constants.CommandConstant.*;
 
 /**
@@ -23,7 +26,7 @@ public class Rover {
             Position nextPosition = this.nextPosition(command);
             if (this.obstacleDetector.check(nextPosition)) {
                 this.obstacleDetector.report(nextPosition);
-                this.moveToLastPossiblePoint();
+                this.moveToPossiblePoint();
                 break; // aborts
             }
             this.position = nextPosition;
@@ -31,15 +34,16 @@ public class Rover {
         return this.position;
     }
 
-    private void moveToLastPossiblePoint() {
-        for (DirectionEnum direction : DirectionEnum.values()) {
-            this.position.setDirection(direction);
-            Position nextPosition = this.nextPosition(FORWARD);
-            if (this.obstacleDetector.check(nextPosition)) {
-                this.position = nextPosition;
-                break;
-            }
-        }
+    private void moveToPossiblePoint() {
+        Optional<Position> positionOptional = Arrays.asList(DirectionEnum.values())
+                .stream()
+                .map(direction -> {
+                    this.position.setDirection(direction);
+                    return this.nextPosition(FORWARD);
+                })
+                .filter(position -> !this.obstacleDetector.check(position))
+                .findAny();
+        this.position = positionOptional.get();
     }
 
     private Position nextPosition(String command) {

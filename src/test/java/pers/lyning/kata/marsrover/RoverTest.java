@@ -238,8 +238,8 @@ public class RoverTest {
         Rover rover = new Rover(initialPosition, grid);
         Position currentPosition = rover.receive(new String[]{"F", "R", "F", "F"});
 
-        assertThat(currentPosition.getX()).isNotEqualTo(0);
-        assertThat(currentPosition.getY()).isNotEqualTo(2);
+        assertThat(currentPosition.getX()).isEqualTo(0);
+        assertThat(currentPosition.getY()).isEqualTo(2);
     }
 
     @Test
