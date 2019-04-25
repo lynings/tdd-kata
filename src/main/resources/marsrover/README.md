@@ -56,27 +56,26 @@ class ObstacleDetector {
     public boolean check(Square square);
 }
 class Rover {
-    private Rover(Position initialPosition, Grid grid);
-    public static Rover startup(Position position, Grid grid);
-    public Position receive(Command command);
-    public Position forward();
-    public Position backward();
-    public Position turnLeft();
-    public Position turnRight();
+    public Rover(Position initialPosition, Grid grid);
+    private Position receive(Command command);
+    private Position forward();
+    private Position backward();
+    private Position turnLeft();
+    private Position turnRight();
 }
 ```
 
 ## 任务分解
-- 创建 Grid
-- 增加 Grid(Range range) 构造
-- 增加 Grid(Range range, List<Obstacle> obstacles) 构造
-- 创建 ObstacleDetector
-- 增加 ObstacleDetector(Grid grid) 构造
-- 实现 obstacleDetector.check(Grid grid) 函数
-- 创建 Rover
-- 增加 Rover.startup(Position position, Grid grid)
-- 实现 rover.forward();
-- 实现 rover.backward();
-- 实现 rover.turnLeft();
-- 实现 rover.turnRight();
-- 处理 rover.receive(command);
+- [x] 创建 Grid
+- [x] 增加 Grid(Range range) 构造
+- [x] 增加 Grid(Range range, List<Obstacle> obstacles) 构造
+- [x] 创建 ObstacleDetector
+- [x] 增加 ObstacleDetector(Grid grid) 构造
+- [x] 实现 obstacleDetector.check(Grid grid) 函数
+- [x] 创建 Rover
+- [x] 增加 Rover.startup(Position position, Grid grid)
+- [x] 实现 rover.forward();
+- [x] 实现 rover.backward();
+- [x] 实现 rover.turnLeft();
+- [x] 实现 rover.turnRight();
+- [x] 处理 rover.receive(command);
