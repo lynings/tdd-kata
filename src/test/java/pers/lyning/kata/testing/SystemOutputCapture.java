@@ -32,6 +32,6 @@ public class SystemOutputCapture extends ExternalResource {
     }
 
     public String toString() {
-        return outContent.toString();
+        return outContent.toString().trim();
     }
 }
