@@ -2,7 +2,7 @@ package pers.lyning.kata.marsrover;
 
 import pers.lyning.kata.marsrover.exceptions.CommandIncorrectException;
 
-import static pers.lyning.kata.marsrover.CommandConstant.*;
+import static pers.lyning.kata.marsrover.constants.CommandConstant.*;
 
 /**
  * @author lyning

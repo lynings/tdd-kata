@@ -1,4 +1,4 @@
-package pers.lyning.kata.marsrover;
+package pers.lyning.kata.marsrover.constants;
 
 /**
  * @author lyning
