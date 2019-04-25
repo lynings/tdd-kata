@@ -74,15 +74,15 @@ public class Rover {
     }
 
     private Position turnLeft(Position position) {
-        DirectionEnum prevPosition = position.getDirection();
-        DirectionEnum nextDirection = DirectionLocator.turnLeft90(prevPosition);
+        DirectionEnum currentPosition = position.getDirection();
+        DirectionEnum nextDirection = DirectionLocator.turnLeft90(currentPosition);
         position.setDirection(nextDirection);
         return position;
     }
 
     private Position turnRight(Position position) {
-        DirectionEnum prevPosition = position.getDirection();
-        DirectionEnum nextDirection = DirectionLocator.turnRight90(prevPosition);
+        DirectionEnum currentPosition = position.getDirection();
+        DirectionEnum nextDirection = DirectionLocator.turnRight90(currentPosition);
         position.setDirection(nextDirection);
         return position;
     }
