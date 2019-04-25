@@ -25,7 +25,7 @@ public class RoverTest {
     /*** receive test start ***/
 
     @Test
-    public void forward_north() {
+    public void a_step_forward_to_north() {
         Position initialPosition = new Position(0, 0, DirectionEnum.NORTH);
         Rover rover = new Rover(initialPosition, grid);
         Position currentPosition = rover.receive(new String[]{"F"});
@@ -35,7 +35,7 @@ public class RoverTest {
     }
 
     @Test
-    public void forward_south() {
+    public void a_step_forward_to_south() {
         Position initialPosition = new Position(1, 1, DirectionEnum.SOUTH);
         Rover rover = new Rover(initialPosition, grid);
         Position currentPosition = rover.receive(new String[]{"F"});
@@ -45,7 +45,7 @@ public class RoverTest {
     }
 
     @Test
-    public void forward_west() {
+    public void a_step_forward_to_west() {
         Position initialPosition = new Position(1, 1, DirectionEnum.WEST);
         Rover rover = new Rover(initialPosition, grid);
         Position currentPosition = rover.receive(new String[]{"F"});
@@ -55,7 +55,7 @@ public class RoverTest {
     }
 
     @Test
-    public void forward_east() {
+    public void a_step_forward_to_east() {
         Position initialPosition = new Position(1, 1, DirectionEnum.EAST);
         Rover rover = new Rover(initialPosition, grid);
         Position currentPosition = rover.receive(new String[]{"F"});
@@ -65,7 +65,7 @@ public class RoverTest {
     }
 
     @Test
-    public void backward_north() {
+    public void a_step_backward_to_north() {
         Position initialPosition = new Position(1, 1, DirectionEnum.NORTH);
         Rover rover = new Rover(initialPosition, grid);
         Position currentPosition = rover.receive(new String[]{"B"});
@@ -75,7 +75,7 @@ public class RoverTest {
     }
 
     @Test
-    public void backward_south() {
+    public void a_step_backward_to_south() {
         Position initialPosition = new Position(1, 1, DirectionEnum.SOUTH);
         Rover rover = new Rover(initialPosition, grid);
         Position currentPosition = rover.receive(new String[]{"B"});
@@ -85,7 +85,7 @@ public class RoverTest {
     }
 
     @Test
-    public void backward_west() {
+    public void a_step_backward_to_west() {
         Position initialPosition = new Position(1, 1, DirectionEnum.WEST);
         Rover rover = new Rover(initialPosition, grid);
         Position currentPosition = rover.receive(new String[]{"B"});
@@ -95,7 +95,7 @@ public class RoverTest {
     }
 
     @Test
-    public void backward_east() {
+    public void a_step_backward_to_east() {
         Position initialPosition = new Position(1, 1, DirectionEnum.EAST);
         Rover rover = new Rover(initialPosition, grid);
         Position currentPosition = rover.receive(new String[]{"B"});
