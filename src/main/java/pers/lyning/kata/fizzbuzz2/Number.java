@@ -6,7 +6,7 @@ package pers.lyning.kata.fizzbuzz2;
 class Number {
     private Integer value;
 
-    public Number(Integer value) {
+    private Number(Integer value) {
         this.value = value;
     }
 
