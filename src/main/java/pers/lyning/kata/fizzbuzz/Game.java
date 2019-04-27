@@ -29,10 +29,6 @@ public class Game {
             return "FizzBuzz";
         }
 
-        if (number.isFizz() && number.isBuzz()) {
-            return "FizzBuzz";
-        }
-
         if (number.isFizz()) {
             return "Fizz";
         }

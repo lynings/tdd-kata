@@ -20,7 +20,8 @@ public class Number {
     }
 
     public boolean isFizzBuzz() {
-        return isDivisibleBy(3) && isDivisibleBy(5);
+        return isDivisibleBy(3) && isDivisibleBy(5)
+                || (isFizz() && this.isBuzz());
     }
 
     public Integer value() {
