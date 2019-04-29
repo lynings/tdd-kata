@@ -3,7 +3,7 @@ package pers.lyning.kata.tortoise;
 /**
  * @author lyning
  */
-public class Speed {
+class Speed {
     private double feet;
     private final double avgOfSeconds;
 

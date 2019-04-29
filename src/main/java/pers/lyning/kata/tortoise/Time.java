@@ -3,7 +3,7 @@ package pers.lyning.kata.tortoise;
 /**
  * @author lyning
  */
-public class Time {
+class Time {
     private int value;
 
     private Time(int value) {
