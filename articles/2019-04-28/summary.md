@@ -1,5 +1,7 @@
 ## 短函数有感
 
+![](./picture.jpg)
+
 前几天在“[TDD和重构练功房](https://mp.weixin.qq.com/s/y4wqiT1JrkzR3MVfLA1FqQ)”中看到熊老师发了一篇文章叫做"[长函数，有如王大妈的裹脚布](https://mp.weixin.qq.com/s/spfKpPid1-vacmQsk3bKvg)"，这篇文章认为长函数是一个 bad smell，同时对函数长短的标准进行了量化：
 > 一个常见的原则是将方法的行数控制在 **5 行之内**——《软件开发沉思录》
 
