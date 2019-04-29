@@ -13,6 +13,7 @@
 9. [Countdown](src/main/resources/countdowntimer/README.md)
 10. [FizzBuzz](src/main/resources/fizzbuzz/README.md)
 11. [MarsRover](src/main/resources/marsrover/README.md)
+12. [Tortoise Racing](src/main/resources/tortoiseracing/README.md)
 
 
 ## What’s a Code Kata?
