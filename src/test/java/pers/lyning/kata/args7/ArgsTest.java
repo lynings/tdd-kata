@@ -13,8 +13,8 @@ public class ArgsTest {
     public void should_return_true_when_argument_contains_l_flag() {
         // given
         String[] arguments = new String[]{"-l"};
-        // when
         Args args = Args.parse(arguments);
+        // when
         boolean result = args.hasFlag("l");
         // then
         assertThat(result).isTrue();
@@ -24,8 +24,8 @@ public class ArgsTest {
     public void should_return_true_when_argument_contains_p_flag() {
         // given
         String[] arguments = new String[]{"-p", "8080"};
-        // when
         Args args = Args.parse(arguments);
+        // when
         boolean result = args.hasFlag("p");
         // then
         assertThat(result).isTrue();
@@ -35,8 +35,8 @@ public class ArgsTest {
     public void should_return_value_when_value_is_not_null() {
         // given
         String[] arguments = new String[]{"-p", "8080"};
-        // when
         Args args = Args.parse(arguments);
+        // when
         String value = args.getValue("p");
         // then
         assertThat(value).isEqualTo("8080");
@@ -46,8 +46,8 @@ public class ArgsTest {
     public void should_return_null_when_value_is_null() {
         // given
         String[] arguments = new String[]{"-p"};
-        // when
         Args args = Args.parse(arguments);
+        // when
         String value = args.getValue("p");
         // then
         assertThat(value).isNull();
