@@ -8,7 +8,7 @@ import static java.util.stream.Collectors.toMap;
 /**
  * @author lyning
  */
-public class Schemas {
+class Schemas {
     private final Map<Character, String> flagToSchemaMap;
 
     private Schemas(Map<Character, String> flagToSchemaMap) {

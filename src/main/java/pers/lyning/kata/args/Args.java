@@ -10,7 +10,7 @@ import java.util.Map;
 /**
  * @author lyning
  */
-public class Args {
+class Args {
     private Map<Character, String> flagToValueMap;
 
     private Args(Map<Character, String> flagToValueMap) {
