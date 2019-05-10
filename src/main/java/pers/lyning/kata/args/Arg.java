@@ -7,7 +7,7 @@ import java.util.ListIterator;
 /**
  * @author lyning
  */
-public class Arg {
+class Arg {
     private final Character flag;
     private final String value;
 

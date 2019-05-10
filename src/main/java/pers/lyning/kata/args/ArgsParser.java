@@ -9,11 +9,11 @@ import pers.lyning.kata.args.valueparser.ValueParser;
 public class ArgsParser {
 
     private final Args args;
-    private final Schema schema;
+    private final Schemas schemas;
 
     public ArgsParser(String schema, String[] args) {
         this.args = Args.parse(args);
-        this.schema = Schema.parse(schema);
+        this.schemas = Schemas.parse(schema);
     }
 
     public <T> T getValue(Character flag) {
@@ -27,7 +27,7 @@ public class ArgsParser {
     }
 
     private ValueParser getValueParser(Character flag) {
-        String schema = this.schema.get(flag);
+        String schema = this.schemas.get(flag);
         ValueParser valueParser = ValueParserFactory.getInstance(schema);
         return valueParser;
     }
