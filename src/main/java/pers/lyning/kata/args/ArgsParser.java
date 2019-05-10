@@ -16,17 +16,17 @@ public class ArgsParser {
         this.schema = Schema.parse(schema);
     }
 
-    public <T> T getValue(String flag) {
+    public <T> T getValue(Character flag) {
         String value = this.args.getValue(flag);
         ValueParser<T> valueParser = this.getValueParser(flag);
         return valueParser.parse(value);
     }
 
-    public boolean hasFlag(String flag) {
+    public boolean hasFlag(Character flag) {
         return this.args.containsFlag(flag);
     }
 
-    private ValueParser getValueParser(String flag) {
+    private ValueParser getValueParser(Character flag) {
         String schema = this.schema.get(flag);
         ValueParser valueParser = ValueParserFactory.getInstance(schema);
         return valueParser;

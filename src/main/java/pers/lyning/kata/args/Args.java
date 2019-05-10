@@ -2,48 +2,38 @@ package pers.lyning.kata.args;
 
 import pers.lyning.kata.args.exception.ArgsException;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.ListIterator;
 import java.util.Map;
 
 /**
  * @author lyning
  */
 public class Args {
-    private Map<String, String> flagToValueMap;
+    private Map<Character, String> flagToValueMap;
 
-    private Args(Map<String, String> flagToValueMap) {
+    private Args(Map<Character, String> flagToValueMap) {
         this.flagToValueMap = flagToValueMap;
     }
 
     public static Args parse(String[] args) {
-        Map<String, String> flagToValueMap = new HashMap<>();
-        for (int index = 0, len = args.length; index < len; index++) {
-            if (isFlag(args[index])) {
-                String flag = args[index];
-                String value = hasValue(args, index) ? args[index += 1] : null;
-                flagToValueMap.put(flag.substring(1), value);
-            }
+        Map<Character, String> flagToValueMap = new HashMap<>();
+        for (ListIterator<String> iterator = Arrays.asList(args).listIterator(); iterator.hasNext(); ) {
+            Arg arg = Arg.parse(iterator);
+            flagToValueMap.put(arg.flag(), arg.value());
         }
         return new Args(flagToValueMap);
     }
 
-    private static boolean hasValue(String[] args, int index) {
-        return index + 1 <= args.length - 1;
-    }
-
-    private static boolean isFlag(String charString) {
-        return charString.startsWith("-")
-                && Character.isLetter(charString.charAt(1));
-    }
-
-    public String getValue(String flag) {
+    public String getValue(Character flag) {
         if (!this.containsFlag(flag)) {
             throw new ArgsException("INVALID FLAG");
         }
         return this.flagToValueMap.get(flag);
     }
 
-    public boolean containsFlag(String flag) {
+    public boolean containsFlag(Character flag) {
         return this.flagToValueMap.containsKey(flag);
     }
 }

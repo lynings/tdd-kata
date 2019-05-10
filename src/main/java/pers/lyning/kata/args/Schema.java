@@ -8,22 +8,22 @@ import java.util.Map;
  */
 public class Schema {
 
-    private final Map<String, String> flagToSchemaMap;
+    private final Map<Character, String> flagToSchemaMap;
 
-    private Schema(Map<String, String> flagToSchemaMap) {
+    private Schema(Map<Character, String> flagToSchemaMap) {
         this.flagToSchemaMap = flagToSchemaMap;
     }
 
     public static Schema parse(String schema) {
         String[] schemaArr = schema.split(",");
-        Map<String, String> flagToSchemaMap = new HashMap<>(schemaArr.length);
+        Map<Character, String> flagToSchemaMap = new HashMap<>(schemaArr.length);
         for (String str : schemaArr) {
-            flagToSchemaMap.put(str.substring(0, 1), str.substring(1));
+            flagToSchemaMap.put(str.substring(0, 1).charAt(0), str.substring(1));
         }
         return new Schema(flagToSchemaMap);
     }
 
-    public String get(String flag) {
+    public String get(Character flag) {
         return this.flagToSchemaMap.get(flag);
     }
 }
