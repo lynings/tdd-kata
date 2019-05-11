@@ -1,29 +1,33 @@
 package pers.lyning.kata.args;
 
-import java.util.Arrays;
-import java.util.Map;
+import pers.lyning.kata.args.exception.ArgsException;
 
-import static java.util.stream.Collectors.toMap;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author lyning
  */
 class Schemas {
     private final Map<Character, String> flagToSchemaMap;
+    private final String[] schemas;
 
-    private Schemas(Map<Character, String> flagToSchemaMap) {
-        this.flagToSchemaMap = flagToSchemaMap;
+    public Schemas(String schemas) {
+        this.schemas = schemas.split(",");
+        flagToSchemaMap = new HashMap<>();
+        this.parse();
     }
 
-    public static Schemas parse(String schema) {
-        Map<Character, String> flagToSchemaMap = Arrays.asList(schema.split(","))
-                .stream()
-                .map(Schema::new)
-                .collect(toMap(Schema::flag, Schema::name));
-        return new Schemas(flagToSchemaMap);
+    private void parse() {
+        for (String schema : schemas) {
+            flagToSchemaMap.put(schema.charAt(0), schema.substring(1));
+        }
     }
 
     public String get(Character flag) {
-        return this.flagToSchemaMap.get(flag);
+        if (!flagToSchemaMap.containsKey(flag)) {
+            throw new ArgsException("INCORRECT SCHEMA.");
+        }
+        return flagToSchemaMap.get(flag);
     }
 }

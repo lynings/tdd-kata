@@ -19,18 +19,6 @@ public class ArgsParserTest {
     @Rule
     public final ExpectedException expectedEx = ExpectedException.none();
 
-    @Test
-    public void should_return_false_when_flag_not_found() {
-        ArgsParser parser = new ArgsParser("s*", new String[]{"-s", "a"});
-        assertThat(parser.hasFlag('a')).isFalse();
-    }
-
-    @Test
-    public void should_return_true_when_existed_flag() {
-        ArgsParser parser = new ArgsParser("s*", new String[]{"-s", "a"});
-        assertThat(parser.hasFlag('s')).isTrue();
-    }
-
     @Test(expected = ArgsException.class)
     public void should_get_value_fail_when_flag_not_found() {
         ArgsParser parser = new ArgsParser("s*", new String[]{"-s", "a"});
