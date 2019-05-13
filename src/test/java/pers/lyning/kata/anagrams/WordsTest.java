@@ -12,7 +12,7 @@ public class WordsTest {
     @Test
     public void parse() throws Exception {
         File file = new File(WordsTest.class.getResource("/anagrams/wordlist_1633.txt").getPath());
-        Words words = Words.parse(file);
+        Words words = WordReader.from(file).asWords();
         assertThat(words).isNotNull();
         assertThat(words.size()).isEqualTo(1633);
     }

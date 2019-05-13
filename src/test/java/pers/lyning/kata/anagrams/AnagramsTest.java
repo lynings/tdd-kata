@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
+import static java.util.stream.Collectors.toList;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
@@ -15,43 +16,45 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 public class AnagramsTest {
 
-    /******************* arranged test start *****************/
+    /******************* arrange test start *****************/
     @Test
-    public void arranged_kinship_pinkish_words() {
+    public void arrange_kinship_pinkish_words() {
+        // given
         Words words = Words.of("kinship", "pinkish");
         Anagrams anagrams = new Anagrams(words);
-        List<Anagram> anagramList = anagrams.arranged();
 
-        assertThat(anagramList).isNotEmpty();
-        assertThat(anagramList.size()).isEqualTo(1);
-        assertThat(anagramList.get(0).list().size()).isEqualTo(words.size());
-        assertThat(anagramList.get(0).contains("kinship")).isTrue();
-        assertThat(anagramList.get(0).contains("pinkish")).isTrue();
+        // when
+        List<Anagram> anagramList = anagrams.arrange();
+
+        // then
+        assertAnagramsEquals(anagramList, Arrays.asList(Anagram.of("kinship", "pinkish")));
     }
 
     @Test
-    public void arranged_10_word_list() {
+    public void arrange_10_word_list() {
+        // given
         Words words = Words.of(
                 "kinship", "pinkish",
                 "abc", "acb", "bca", "bac", "cab", "cba",
                 "lyning", "ningly"
         );
         Anagrams anagrams = new Anagrams(words);
-        List<Anagram> anagramList = anagrams.arranged();
 
-        assertThat(anagramList).isNotEmpty();
-        assertThat(anagramList.size()).isEqualTo(3);
-        assertThat(this.countWords(anagramList)).isEqualTo(words.size());
-        for (Anagram anagram : anagramList) {
-            for (String word : anagram.list()) {
-                assertThat(words.contains(word)).isTrue();
-            }
-        }
+        // when
+        List<Anagram> anagramList = anagrams.arrange();
 
+        // then
+        List<Anagram> givenResults = Arrays.asList(
+                Anagram.of("kinship", "pinkish"),
+                Anagram.of("abc", "acb", "bca", "bac", "cab", "cba"),
+                Anagram.of("lyning", "ningly")
+        );
+        assertAnagramsEquals(anagramList, givenResults);
     }
 
     @Test
-    public void arranged_17_word_list() {
+    public void arrange_17_word_list() {
+        // given
         Words words = Words.of(
                 "kinship", "pinkish",
                 "enlist", "inlets", "listen", "silent",
@@ -62,48 +65,68 @@ public class AnagramsTest {
                 "rots", "sort"
         );
         Anagrams anagrams = new Anagrams(words);
-        List<Anagram> anagramList = anagrams.arranged();
 
-        assertThat(anagramList).isNotEmpty();
-        assertThat(anagramList.size()).isEqualTo(7);
-        assertThat(this.countWords(anagramList)).isEqualTo(words.size());
-        for (Anagram anagram : anagramList) {
-            for (String word : anagram.list()) {
-                assertThat(words.contains(word)).isTrue();
-            }
-        }
+        // when
+        List<Anagram> anagramList = anagrams.arrange();
+
+        // then
+        List<Anagram> givenResults = Arrays.asList(
+                Anagram.of("kinship", "pinkish"),
+                Anagram.of("enlist", "inlets", "listen", "silent"),
+                Anagram.of("boaster", "boaters", "borates"),
+                Anagram.of("fresher", "refresh"),
+                Anagram.of("sinks", "skins"),
+                Anagram.of("knits", "stink"),
+                Anagram.of("rots", "sort")
+        );
+        assertAnagramsEquals(anagramList, givenResults);
     }
 
     @Test
-    public void arranged_1633_word_list() throws IOException {
-        File file = new File(ConferenceManagerTest.class.getResource("/anagrams/wordlist_1633.txt").getPath());
-        Words words = Words.parse(file);
+    public void arrange_1633_word_list() throws IOException {
+        // given
+        File file = getFile("/anagrams/wordlist_1633.txt");
+        Words words = WordReader.from(file).asWords();
         Anagrams anagrams = new Anagrams(words);
-        List<Anagram> anagramList = anagrams.arranged();
+
+        // when
+        List<Anagram> anagramList = anagrams.arrange();
+
+        // then
         assertThat(anagramList).isNotEmpty();
         assertThat(anagramList.size()).isEqualTo(23);
     }
 
     @Test
-    public void arranged_338882_word_list() throws IOException {
-        File file = new File(ConferenceManagerTest.class.getResource("/anagrams/wordlist_338882.txt").getPath());
-        Words words = Words.parse(file);
+    public void arrange_338882_word_list() throws IOException {
+        // given
+        File file = getFile("/anagrams/wordlist_338882.txt");
+        Words words = WordReader.from(file).asWords();
         Anagrams anagrams = new Anagrams(words);
-        List<Anagram> anagramList = anagrams.arranged();
+
+        // when
+        List<Anagram> anagramList = anagrams.arrange();
+
+        // then
         assertThat(anagramList).isNotEmpty();
         assertThat(anagramList.size()).isEqualTo(20683);
         assertThat(this.countWords(anagramList)).isEqualTo(48162);
     }
 
     private int countWords(List<Anagram> anagramList) {
-        return anagramList.stream().map(a -> a.list().size()).reduce(Integer::sum).get();
+        return anagramList.stream().map(a -> a.asList().size()).reduce(Integer::sum).get();
     }
-    /******************* arranged test end *****************/
+
+    private File getFile(String s) {
+        return new File(ConferenceManagerTest.class.getResource(s).getPath());
+    }
+    /******************* arrange test end *****************/
 
 
-    /******************* findLongestWords test start *****************/
+    /******************* longest test start *****************/
     @Test
     public void should_return_longest_words() {
+        // given
         Words words = Words.of(
                 "kinship", "pinkish",
                 "enlist", "inlets", "listen", "silent",
@@ -115,18 +138,22 @@ public class AnagramsTest {
                 "anagrams", "gramanas"
         );
         Anagrams anagrams = new Anagrams(words);
-        List<Anagram> anagramList = anagrams.arranged();
+        List<Anagram> anagramList = anagrams.arrange();
 
-        Words longestWords = anagrams.findLongest(anagramList);
-        assertThat(longestWords.size()).isEqualTo(2);
-        assertThat(longestWords.list()).isEqualTo(Arrays.asList("gramanas", "anagrams"));
+        // when
+        Anagram longestAnagram = anagrams.longest(anagramList);
+
+        // then
+        Anagram givenResult = Anagram.of("gramanas", "anagrams");
+        assertAnagramsEquals(Arrays.asList(longestAnagram), Arrays.asList(givenResult));
     }
-    /******************* findLongestWords test end *****************/
+    /******************* longest test end *****************/
 
 
-    /******************* findMostWords test start *****************/
+    /******************* most test start *****************/
     @Test
     public void should_return_most_words() {
+        // given
         Words words = Words.of(
                 "kinship", "pinkish",
                 "enlist", "inlets", "listen", "silent",
@@ -138,16 +165,32 @@ public class AnagramsTest {
                 "abc", "acb", "bca", "bac", "cab", "cba"
         );
         Anagrams anagrams = new Anagrams(words);
-        List<Anagram> anagramList = anagrams.arranged();
+        List<Anagram> anagramList = anagrams.arrange();
 
-        Words mostWords = anagrams.findMost(anagramList);
-        assertThat(mostWords.size()).isEqualTo(6);
-        assertThat(mostWords.contains("abc")).isTrue();
-        assertThat(mostWords.contains("acb")).isTrue();
-        assertThat(mostWords.contains("bca")).isTrue();
-        assertThat(mostWords.contains("bac")).isTrue();
-        assertThat(mostWords.contains("cab")).isTrue();
-        assertThat(mostWords.contains("cba")).isTrue();
+        // when
+        Anagram anagram = anagrams.most(anagramList);
+
+        // then
+        Anagram givenResult = Anagram.of("abc", "acb", "bca", "bac", "cab", "cba");
+        assertAnagramsEquals(Arrays.asList(anagram), Arrays.asList(givenResult));
     }
-    /******************* findMostWords test end *****************/
+
+    /******************* most test end *****************/
+
+
+    private void assertAnagramsEquals(List<Anagram> sourceList, List<Anagram> targetList) {
+        List<String> sourceAnagrams = asStringList(sourceList);
+
+        List<String> targetAnagrams = asStringList(targetList);
+
+        assertThat(sourceAnagrams).isEqualTo(targetAnagrams);
+    }
+
+    private List<String> asStringList(List<Anagram> sourceList) {
+        return sourceList.stream()
+                .map(Anagram::asList)
+                .flatMap(list -> list.stream())
+                .sorted()
+                .collect(toList());
+    }
 }

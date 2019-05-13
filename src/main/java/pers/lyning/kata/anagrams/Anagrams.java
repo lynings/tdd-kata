@@ -2,52 +2,41 @@ package pers.lyning.kata.anagrams;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Stream;
 
-import static java.util.stream.Collectors.groupingBy;
 import static java.util.stream.Collectors.toList;
 
 /**
  * @author lyning
  */
 public class Anagrams {
-    private Words words;
+    private final Words words;
 
     public Anagrams(Words words) {
         this.words = words;
     }
 
-    public List<Anagram> arranged() {
-        return this.group(this.words.list())
-                .stream()
+    public List<Anagram> arrange() {
+        List<Words> wordsGroup = WordArranger.arrange(words);
+        return filterNonAnagrams(wordsGroup)
                 .map(Anagram::of)
                 .collect(toList());
     }
 
-    public Words findLongest(List<Anagram> anagramList) {
-        List<String> words = anagramList
-                .stream()
+    public Anagram longest(List<Anagram> anagrams) {
+        return anagrams.stream()
                 .max(Comparator.comparing(Anagram::length))
-                .get()
-                .list();
-        return Words.of(words);
+                .get();
     }
 
-    public Words findMost(List<Anagram> anagramList) {
-        List<String> words = anagramList
-                .stream()
+    public Anagram most(List<Anagram> anagrams) {
+        return anagrams.stream()
                 .max(Comparator.comparing(Anagram::size))
-                .get()
-                .list();
-        return Words.of(words);
+                .get();
     }
 
-    private List<List<String>> group(List<String> words) {
-        return words
-                .stream()
-                .collect(groupingBy(WordUtils::sort, toList()))
-                .values()
-                .stream()
-                .filter(group -> group.size() > 1)
-                .collect(toList());
+    private Stream<Words> filterNonAnagrams(List<Words> wordsGroup) {
+        return wordsGroup.stream()
+                .filter(words -> words.size() > 1);
     }
 }

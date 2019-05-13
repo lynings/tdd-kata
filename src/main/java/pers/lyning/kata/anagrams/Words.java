@@ -1,17 +1,10 @@
 package pers.lyning.kata.anagrams;
 
-import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
-import pers.lyning.kata.utils.FileContentReader;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
-
-import static java.util.stream.Collectors.toSet;
 
 /**
  * @author lyning
@@ -31,16 +24,6 @@ public class Words {
         return new Words(Sets.newHashSet(words));
     }
 
-    public static Words parse(File file) throws IOException {
-        String wordsString = FileContentReader.getString(file);
-        return new Words(Arrays.asList(wordsString.split("\\n\\n|\\n"))
-                .stream()
-                .map(s -> s.split(" "))
-                .flatMap(words -> Lists.newArrayList(words).stream())
-                .filter(word -> !Strings.isNullOrEmpty(word))
-                .collect(toSet()));
-    }
-
     public boolean contains(String word) {
         return this.words.contains(word);
     }
@@ -49,7 +32,11 @@ public class Words {
         return words.size();
     }
 
-    public List<String> list() {
+    public List<String> asList() {
         return Lists.newArrayList(this.words);
+    }
+
+    public String firstWord() {
+        return this.words.iterator().next();
     }
 }
