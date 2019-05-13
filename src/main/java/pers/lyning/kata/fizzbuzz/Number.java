@@ -1,10 +1,10 @@
-package pers.lyning.kata.fizzbuzz2;
+package pers.lyning.kata.fizzbuzz;
 
 /**
  * @author lyning
  */
 class Number {
-    private Integer value;
+    private final Integer value;
 
     private Number(Integer value) {
         this.value = value;
@@ -14,13 +14,13 @@ class Number {
         return new Number(number);
     }
 
-    public boolean isDivisibleBy(Integer number) {
-        return this.value % number == 0;
-    }
-
     public boolean isContains(Integer number) {
         return this.value
                 .toString()
                 .contains(number.toString());
+    }
+
+    public boolean isDivisibleBy(Integer number) {
+        return this.value % number == 0;
     }
 }

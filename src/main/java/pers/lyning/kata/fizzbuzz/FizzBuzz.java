@@ -1,4 +1,4 @@
-package pers.lyning.kata.fizzbuzz2;
+package pers.lyning.kata.fizzbuzz;
 
 import java.util.Arrays;
 import java.util.List;

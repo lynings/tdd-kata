@@ -1,4 +1,4 @@
-package pers.lyning.kata.fizzbuzz2;
+package pers.lyning.kata.fizzbuzz;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,6 +12,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 @RunWith(Parameterized.class)
 public class FizzBuzzTest {
 
+    private final Integer number;
+    private final String answer;
+    public FizzBuzzTest(Integer number, String answer) {
+        this.number = number;
+        this.answer = answer;
+    }
+
     @Parameterized.Parameters
     public static Object[][] data() {
         return new Object[][]{
@@ -24,14 +31,6 @@ public class FizzBuzzTest {
                 {51, "FizzBuzz"},
                 {52, "Buzz"},
         };
-    }
-
-    private Integer number;
-    private String answer;
-
-    public FizzBuzzTest(Integer number, String answer) {
-        this.number = number;
-        this.answer = answer;
     }
 
     @Test
