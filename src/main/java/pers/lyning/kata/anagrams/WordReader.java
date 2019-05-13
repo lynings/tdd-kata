@@ -6,33 +6,33 @@ import pers.lyning.kata.utils.FileContentReader;
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.List;
+import java.util.Set;
 import java.util.stream.Stream;
 
-import static java.util.stream.Collectors.toList;
+import static java.util.stream.Collectors.toSet;
 
 /**
  * @author lyning
  */
 class WordReader {
 
-    private final List<String> words;
+    private final Set<String> words;
 
-    public WordReader(List<String> words) {
+    public WordReader(Set<String> words) {
         this.words = words;
     }
 
     public static WordReader from(File file) throws IOException {
         String wordsString = FileContentReader.asString(file);
-        List<String> words = readAsWord(wordsString);
+        Set<String> words = readAsWord(wordsString);
         return new WordReader(words);
     }
 
-    private static List<String> readAsWord(String wordsString) {
+    private static Set<String> readAsWord(String wordsString) {
         return splitWord(wordsString)
                 .flatMap(words -> Sets.newHashSet(words).stream())
                 .filter(word -> !word.isEmpty())
-                .collect(toList());
+                .collect(toSet());
     }
 
     private static Stream<String[]> splitWord(String wordsString) {
@@ -41,7 +41,7 @@ class WordReader {
                 .map(s -> s.split(" "));
     }
 
-    public Words asWords() {
-        return Words.of(words);
+    public Set<Word> asWords() {
+        return words.stream().map(Word::new).collect(toSet());
     }
 }

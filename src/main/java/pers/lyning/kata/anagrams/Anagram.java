@@ -1,30 +1,35 @@
 package pers.lyning.kata.anagrams;
 
-import com.google.common.collect.Lists;
+import java.util.Arrays;
+import java.util.Set;
 
-import java.util.List;
+import static java.util.stream.Collectors.toSet;
 
 /**
  * @author lyning
  */
 class Anagram {
 
-    private final Words words;
+    private final Set<Word> words;
 
-    private Anagram(Words words) {
+    private Anagram(Set<Word> words) {
         this.words = words;
     }
 
-    public static Anagram of(Words words) {
+    public static Anagram of(String... words) {
+        Set<Word> wordSet = Arrays.asList(words)
+                .stream()
+                .map(Word::new)
+                .collect(toSet());
+        return new Anagram(wordSet);
+    }
+
+    public static Anagram of(Set<Word> words) {
         return new Anagram(words);
     }
 
-    public static Anagram of(String... words) {
-        return new Anagram(Words.of(words));
-    }
-
-    public List<String> asList() {
-        return Lists.newArrayList(words.get());
+    public Set<Word> words() {
+        return words;
     }
 
     public Integer length() {
@@ -36,6 +41,8 @@ class Anagram {
     }
 
     private String anyWord() {
-        return this.words.get().iterator().next();
+        return words.iterator()
+                .next()
+                .value();
     }
 }

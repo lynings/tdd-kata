@@ -2,26 +2,25 @@ package pers.lyning.kata.anagrams;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
-import static java.util.stream.Collectors.groupingBy;
-import static java.util.stream.Collectors.toList;
+import static java.util.stream.Collectors.*;
 
 /**
  * @author lyning
  */
 class WordArranger {
 
-    public static List<Words> arrange(Words words) {
+    public static List<Set<Word>> arrange(Set<Word> words) {
         return groupBySort(words)
                 .stream()
-                .map(Words::of)
                 .collect(toList());
     }
 
-    private static Collection<List<String>> groupBySort(Words words) {
-        return words.get()
-                .stream()
-                .collect(groupingBy(WordUtils::sort, toList()))
+    private static Collection<Set<Word>> groupBySort(Set<Word> words) {
+        return words.stream()
+                .distinct()
+                .collect(groupingBy(Word::asc, toSet()))
                 .values();
     }
 }

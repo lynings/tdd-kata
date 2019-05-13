@@ -2,6 +2,7 @@ package pers.lyning.kata.anagrams;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toList;
@@ -10,14 +11,14 @@ import static java.util.stream.Collectors.toList;
  * @author lyning
  */
 public class Anagrams {
-    private final Words words;
+    private final Set<Word> words;
 
-    public Anagrams(Words words) {
+    public Anagrams(Set<Word> words) {
         this.words = words;
     }
 
     public List<Anagram> arrange() {
-        List<Words> wordsGroup = WordArranger.arrange(words);
+        List<Set<Word>> wordsGroup = WordArranger.arrange(words);
         return filterAnagrams(wordsGroup)
                 .map(Anagram::of)
                 .collect(toList());
@@ -35,7 +36,7 @@ public class Anagrams {
                 .get();
     }
 
-    private Stream<Words> filterAnagrams(List<Words> wordsGroup) {
+    private Stream<Set<Word>> filterAnagrams(List<Set<Word>> wordsGroup) {
         return wordsGroup.stream()
                 .filter(words -> words.size() > 1);
     }
