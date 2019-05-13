@@ -32,7 +32,7 @@ class Anagram {
         return words;
     }
 
-    public Integer length() {
+    public Integer lengthOfWord() {
         return this.anyWord().length();
     }
 

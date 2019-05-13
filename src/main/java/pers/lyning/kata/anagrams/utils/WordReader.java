@@ -1,6 +1,7 @@
-package pers.lyning.kata.anagrams;
+package pers.lyning.kata.anagrams.utils;
 
 import com.google.common.collect.Sets;
+import pers.lyning.kata.anagrams.Word;
 import pers.lyning.kata.utils.FileContentReader;
 
 import java.io.File;
@@ -14,7 +15,7 @@ import static java.util.stream.Collectors.toSet;
 /**
  * @author lyning
  */
-class WordReader {
+public class WordReader {
 
     private final Set<String> words;
 

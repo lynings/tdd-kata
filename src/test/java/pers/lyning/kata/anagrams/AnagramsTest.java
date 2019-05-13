@@ -1,7 +1,8 @@
 package pers.lyning.kata.anagrams;
 
 import org.junit.Test;
-import pers.lyning.kata.conferencetrack.ConferenceManagerTest;
+import pers.lyning.kata.anagrams.utils.WordReader;
+import pers.lyning.kata.testing.TestResourceFinder;
 
 import java.io.File;
 import java.io.IOException;
@@ -10,7 +11,6 @@ import java.util.List;
 import java.util.Set;
 
 import static java.util.stream.Collectors.toList;
-import static java.util.stream.Collectors.toSet;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
@@ -22,12 +22,10 @@ public class AnagramsTest {
     @Test
     public void arrange_kinship_pinkish_words() {
         // given
-        Set<Word> words = asWords("kinship", "pinkish");
+        Set<Word> words = Words.asSet("kinship", "pinkish");
         Anagrams anagrams = new Anagrams(words);
-
         // when
         List<Anagram> anagramList = anagrams.arrange();
-
         // then
         assertAnagramsEquals(anagramList, Arrays.asList(Anagram.of(words)));
     }
@@ -35,16 +33,14 @@ public class AnagramsTest {
     @Test
     public void arrange_10_word_list() {
         // given
-        Set<Word> words = asWords(
+        Set<Word> words = Words.asSet(
                 "kinship", "pinkish",
                 "abc", "acb", "bca", "bac", "cab", "cba",
                 "lyning", "ningly"
         );
         Anagrams anagrams = new Anagrams(words);
-
         // when
         List<Anagram> anagramList = anagrams.arrange();
-
         // then
         List<Anagram> givenResults = Arrays.asList(
                 Anagram.of("kinship", "pinkish"),
@@ -57,7 +53,7 @@ public class AnagramsTest {
     @Test
     public void arrange_17_word_list() {
         // given
-        Set<Word> words = asWords(
+        Set<Word> words = Words.asSet(
                 "kinship", "pinkish",
                 "enlist", "inlets", "listen", "silent",
                 "boaster", "boaters", "borates",
@@ -67,10 +63,8 @@ public class AnagramsTest {
                 "rots", "sort"
         );
         Anagrams anagrams = new Anagrams(words);
-
         // when
         List<Anagram> anagramList = anagrams.arrange();
-
         // then
         List<Anagram> givenResults = Arrays.asList(
                 Anagram.of("kinship", "pinkish"),
@@ -87,13 +81,11 @@ public class AnagramsTest {
     @Test
     public void arrange_1633_word_list() throws IOException {
         // given
-        File file = getFile("/anagrams/wordlist_1633.txt");
-        Set<Word> words = WordReader.from(file).asWords();
+        File wordFile = TestResourceFinder.getFile("/anagrams/wordlist_1633.txt");
+        Set<Word> words = WordReader.from(wordFile).asWords();
         Anagrams anagrams = new Anagrams(words);
-
         // when
         List<Anagram> anagramList = anagrams.arrange();
-
         // then
         assertThat(anagramList).isNotEmpty();
         assertThat(anagramList.size()).isEqualTo(23);
@@ -102,13 +94,11 @@ public class AnagramsTest {
     @Test
     public void arrange_338882_word_list() throws IOException {
         // given
-        File file = getFile("/anagrams/wordlist_338882.txt");
-        Set<Word> words = WordReader.from(file).asWords();
+        File wordFile = TestResourceFinder.getFile("/anagrams/wordlist_338882.txt");
+        Set<Word> words = WordReader.from(wordFile).asWords();
         Anagrams anagrams = new Anagrams(words);
-
         // when
         List<Anagram> anagramList = anagrams.arrange();
-
         // then
         assertThat(anagramList).isNotEmpty();
         assertThat(anagramList.size()).isEqualTo(20683);
@@ -121,7 +111,7 @@ public class AnagramsTest {
     @Test
     public void should_return_longest_words() {
         // given
-        Set<Word> words = asWords(
+        Set<Word> words = Words.asSet(
                 "kinship", "pinkish",
                 "enlist", "inlets", "listen", "silent",
                 "boaster", "boaters", "borates",
@@ -133,10 +123,8 @@ public class AnagramsTest {
         );
         Anagrams anagrams = new Anagrams(words);
         List<Anagram> anagramList = anagrams.arrange();
-
         // when
         Anagram longestAnagram = anagrams.longest(anagramList);
-
         // then
         Anagram givenResult = Anagram.of("gramanas", "anagrams");
         assertAnagramsEquals(Arrays.asList(longestAnagram), Arrays.asList(givenResult));
@@ -148,7 +136,7 @@ public class AnagramsTest {
     @Test
     public void should_return_most_words() {
         // given
-        Set<Word> words = asWords(
+        Set<Word> words = Words.asSet(
                 "kinship", "pinkish",
                 "enlist", "inlets", "listen", "silent",
                 "boaster", "boaters", "borates",
@@ -160,10 +148,8 @@ public class AnagramsTest {
         );
         Anagrams anagrams = new Anagrams(words);
         List<Anagram> anagramList = anagrams.arrange();
-
         // when
         Anagram anagram = anagrams.most(anagramList);
-
         // then
         Anagram givenResult = Anagram.of("abc", "acb", "bca", "bac", "cab", "cba");
         assertAnagramsEquals(Arrays.asList(anagram), Arrays.asList(givenResult));
@@ -173,10 +159,6 @@ public class AnagramsTest {
 
     private int countWords(List<Anagram> anagramList) {
         return anagramList.stream().map(a -> a.words().size()).reduce(Integer::sum).get();
-    }
-
-    private File getFile(String s) {
-        return new File(ConferenceManagerTest.class.getResource(s).getPath());
     }
 
     private void assertAnagramsEquals(List<Anagram> sourceList, List<Anagram> targetList) {
@@ -194,12 +176,5 @@ public class AnagramsTest {
                 .map(word -> word.value())
                 .sorted()
                 .collect(toList());
-    }
-
-    private Set<Word> asWords(String... words) {
-        return Arrays.asList(words)
-                .stream()
-                .map(Word::new)
-                .collect(toSet());
     }
 }

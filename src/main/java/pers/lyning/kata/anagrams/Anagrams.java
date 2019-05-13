@@ -26,7 +26,7 @@ public class Anagrams {
 
     public Anagram longest(List<Anagram> anagrams) {
         return anagrams.stream()
-                .max(Comparator.comparing(Anagram::length))
+                .max(Comparator.comparing(Anagram::lengthOfWord))
                 .get();
     }
 

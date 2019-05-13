@@ -1,6 +1,4 @@
-package pers.lyning.kata.anagrams.utils;
-
-import pers.lyning.kata.anagrams.Word;
+package pers.lyning.kata.anagrams;
 
 import java.util.Collection;
 import java.util.List;
