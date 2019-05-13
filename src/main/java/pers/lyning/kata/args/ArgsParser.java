@@ -12,8 +12,8 @@ import java.util.Map;
  */
 public class ArgsParser {
 
-    private final Map<Character, String> flagToValueMap;
     private final String[] args;
+    private final Map<Character, String> flagToValueMap;
 
     public ArgsParser(String[] args) {
         this.args = args;

@@ -1,11 +1,7 @@
 package pers.lyning.kata.args;
 
-import pers.lyning.kata.args.exception.ArgsException;
 import pers.lyning.kata.args.factory.ValueParserFactory;
 import pers.lyning.kata.args.valueparser.ValueParser;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * @author lyning
@@ -22,7 +18,7 @@ public class Args {
 
     public <T> T getValue(Character flag) {
         String value = argsParser.getValue(flag);
-        ValueParser<T> valueParser = this.getValueParser(flag);
+        ValueParser<T> valueParser = getValueParser(flag);
         return valueParser.parse(value);
     }
 
