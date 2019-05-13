@@ -14,15 +14,17 @@ public class FizzBuzz {
     );
 
     public static String say(Integer number) {
-        return WORDS.stream()
-                .map(word -> word.match(number))
-                .filter(Optional::isPresent)
-                .map(Optional::get)
-                .reduce(FizzBuzz::mergeWord)
-                .orElse(number.toString());
+        return matchWord(number).orElse(number.toString());
     }
 
-    private static String mergeWord(String w1, String w2) {
+    private static String concatWord(String w1, String w2) {
         return w1.concat(w2);
+    }
+
+    private static Optional<String> matchWord(Integer number) {
+        return WORDS.stream()
+                .filter(word -> word.match(number))
+                .map(Word::toString)
+                .reduce(FizzBuzz::concatWord);
     }
 }

@@ -1,7 +1,5 @@
 package pers.lyning.kata.fizzbuzz;
 
-import java.util.Optional;
-
 /**
  * @author lyning
  */
@@ -22,11 +20,16 @@ class Word {
         return new Word(3, "Fizz");
     }
 
-    public Optional<String> match(Integer number) {
+    public boolean match(Integer number) {
         Number num = Number.of(number);
         if (num.isDivisibleBy(this.number) || num.isContains(this.number)) {
-            return Optional.of(this.name);
+            return true;
         }
-        return Optional.empty();
+        return false;
+    }
+
+    @Override
+    public String toString() {
+        return this.name;
     }
 }
