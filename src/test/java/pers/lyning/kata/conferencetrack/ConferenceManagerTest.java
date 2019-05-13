@@ -5,6 +5,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import pers.lyning.kata.conferencetrack.utils.TalkParser;
 import pers.lyning.kata.testing.SystemOutputCapture;
+import pers.lyning.kata.testing.TestResourceFinder;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -28,8 +29,8 @@ public class ConferenceManagerTest {
     public void setUp() throws Exception {
         this.conferenceManager = new ConferenceManager();
 
-        String testDataFilePath = ConferenceManagerTest.class.getResource("/conferencetrack/talk_list.txt").getPath();
-        talks = talkParser.parse(new File(testDataFilePath));
+        File file = TestResourceFinder.getFile("/conferencetrack/talk_list.txt");
+        talks = talkParser.parse(file);
     }
 
     @Test

@@ -59,7 +59,7 @@ public class NumberTest {
 
     @Test
     public void should_return_false_when_number_is_not_divisible_by_3_and_5() {
-        List<Integer> numbers = Arrays.asList(1, 2, 3, 31, 32, 51, 52);
+        List<Integer> numbers = Arrays.asList(1, 2, 3, 31, 32, 52);
         for (Integer num : numbers) {
             Number number = new Number(num);
             assertThat(number.isFizzBuzz()).isFalse();

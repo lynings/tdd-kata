@@ -1,6 +1,7 @@
 package pers.lyning.kata.merchantguidetothegalaxy;
 
 import org.junit.Test;
+import pers.lyning.kata.testing.TestResourceFinder;
 import pers.lyning.kata.utils.FileContentReader;
 
 import java.io.File;
@@ -16,8 +17,8 @@ public class InputHandlerTest {
 
     @Test
     public void should_convert_success() throws Exception {
-        File file = new File(this.getClass().getResource("/merchantguidetothegalaxy/should_convert_success_full_input.txt").getPath());
-        String text = FileContentReader.getString(file);
+        File file = TestResourceFinder.getFile("/merchantguidetothegalaxy/should_convert_success_full_input.txt");
+        String text = FileContentReader.asString(file);
 
         InputHandler inputHandler = new InputHandler();
         inputHandler.handle(text);
