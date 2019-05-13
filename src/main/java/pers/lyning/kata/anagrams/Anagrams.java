@@ -11,14 +11,14 @@ import static java.util.stream.Collectors.toList;
  * @author lyning
  */
 public class Anagrams {
-    private final Set<Word> words;
+    private final WordArranger wordArranger;
 
     public Anagrams(Set<Word> words) {
-        this.words = words;
+        this.wordArranger = new WordArranger(words);
     }
 
     public List<Anagram> arrange() {
-        List<Set<Word>> wordsGroup = WordArranger.arrange(this.words);
+        List<Set<Word>> wordsGroup = this.wordArranger.arrange();
         return this.filterAnagrams(wordsGroup)
                 .map(Anagram::of)
                 .collect(toList());

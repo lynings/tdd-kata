@@ -19,7 +19,7 @@ public class WordArrangerTest {
         // given
         Set<Word> words = Words.asSet("kinship", "pinkish");
         // when
-        List<Set<Word>> wordsGroup = WordArranger.arrange(words);
+        List<Set<Word>> wordsGroup = new WordArranger(words).arrange();
         // then
         assertThat(wordsGroup.size()).isEqualTo(1);
         assertThat(this.countWords(wordsGroup)).isEqualTo(words.size());
@@ -40,7 +40,7 @@ public class WordArrangerTest {
                 "lyning", "ningly"
         );
         // when
-        List<Set<Word>> wordsGroup = WordArranger.arrange(words);
+        List<Set<Word>> wordsGroup = new WordArranger(words).arrange();
         // then
         assertThat(wordsGroup.size()).isEqualTo(3);
         assertThat(this.countWords(wordsGroup)).isEqualTo(words.size());
@@ -52,7 +52,7 @@ public class WordArrangerTest {
         File wordFile = TestResourceFinder.getFile("/anagrams/wordlist_1633.txt");
         Set<Word> words = WordReader.from(wordFile).asWords();
         // when
-        List<Set<Word>> wordsGroup = WordArranger.arrange(words);
+        List<Set<Word>> wordsGroup = new WordArranger(words).arrange();
         // then
         assertThat(wordsGroup.size()).isEqualTo(1609);
         assertThat(this.countWords(wordsGroup)).isEqualTo(words.size());

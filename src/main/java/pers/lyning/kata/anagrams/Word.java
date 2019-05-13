@@ -16,7 +16,7 @@ public class Word {
     }
 
     public String asc() {
-        return Arrays.asList(this.toStringArray())
+        return Arrays.asList(this.value.split(""))
                 .stream()
                 .sorted()
                 .collect(joining());
@@ -24,9 +24,5 @@ public class Word {
 
     public String value() {
         return this.value;
-    }
-
-    private String[] toStringArray() {
-        return this.value.split("");
     }
 }
