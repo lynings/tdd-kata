@@ -29,7 +29,7 @@ class Anagram {
     }
 
     public Set<Word> words() {
-        return words;
+        return this.words;
     }
 
     public Integer lengthOfWord() {
@@ -41,7 +41,7 @@ class Anagram {
     }
 
     private String anyWord() {
-        return words.iterator()
+        return this.words.iterator()
                 .next()
                 .value();
     }

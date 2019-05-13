@@ -17,13 +17,13 @@ public class Args {
     }
 
     public <T> T getValue(Character flag) {
-        String value = argsParser.getValue(flag);
-        ValueParser<T> valueParser = getValueParser(flag);
+        String value = this.argsParser.getValue(flag);
+        ValueParser<T> valueParser = this.getValueParser(flag);
         return valueParser.parse(value);
     }
 
     private ValueParser getValueParser(Character flag) {
-        String schema = schemas.get(flag);
+        String schema = this.schemas.get(flag);
         ValueParser valueParser = ValueParserFactory.getInstance(schema);
         return valueParser;
     }

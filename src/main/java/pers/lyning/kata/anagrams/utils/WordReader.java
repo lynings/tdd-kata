@@ -42,6 +42,8 @@ public class WordReader {
     }
 
     public Set<Word> asWords() {
-        return words.stream().map(Word::new).collect(toSet());
+        return this.words.stream()
+                .map(Word::new)
+                .collect(toSet());
     }
 }

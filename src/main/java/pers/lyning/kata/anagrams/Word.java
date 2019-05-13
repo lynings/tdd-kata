@@ -9,24 +9,24 @@ import static java.util.stream.Collectors.joining;
  */
 public class Word {
 
-    private String value;
+    private final String value;
 
     public Word(String value) {
         this.value = value;
     }
 
     public String asc() {
-        return Arrays.asList(toStringArray())
+        return Arrays.asList(this.toStringArray())
                 .stream()
                 .sorted()
                 .collect(joining());
     }
 
-    private String[] toStringArray() {
-        return value.split("");
+    public String value() {
+        return this.value;
     }
 
-    public String value() {
-        return value;
+    private String[] toStringArray() {
+        return this.value.split("");
     }
 }
