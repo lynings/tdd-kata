@@ -17,7 +17,7 @@ import static java.util.stream.Collectors.toList;
 public class TalkParser {
 
     public List<Talk> parse(File file) throws IOException {
-        String talkString = FileContentReader.getString(file);
+        String talkString = FileContentReader.asString(file);
         return Arrays.asList(talkString.split("\\n\\n|\\n"))
                 .stream()
                 .map(talk -> new Talk(talk, getMinutes(talk)))
