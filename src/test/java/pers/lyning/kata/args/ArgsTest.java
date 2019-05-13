@@ -20,37 +20,41 @@ public class ArgsTest {
     public final ExpectedException expectedEx = ExpectedException.none();
 
     @Test(expected = ArgsException.class)
-    public void should_get_value_fail_when_flag_not_found() {
+    public void should_fail_when_flag_not_found() {
+        // given
         Args args = new Args("s*", new String[]{"-s", "a"});
-        assertThat(args.<String>getValue('a')).isEqualTo("");
+        // when
+        String value = args.getValue('a');
+        // then
+        assertThat(value).isEqualTo("");
     }
 
     @Test(expected = ArgsException.class)
-    public void should_fail_when_value_args_not_implemented() {
+    public void should_fail_when_schema_not_implemented() {
+        // given
         Args args = new Args("s^^^", new String[]{"-s", "test"});
+        // when
         args.getValue('s');
-    }
-
-    @Test(expected = ArgsException.class)
-    public void should_fail_when_value_args_not_found() {
-        Args args = new Args("s*", new String[]{"-s", "test"});
-        args.getValue('a');
+        // then throw a Exception
     }
 
     @Test
     public void should_return_empty_string() throws Exception {
+        // given
         Args args = new Args("s*", new String[]{"-s"});
         assertThat(args.<String>getValue('s')).isEqualTo("");
     }
 
     @Test
-    public void should_return_specified_string() throws Exception {
+    public void should_return_string_value() throws Exception {
+        // given
         Args args = new Args("s*", new String[]{"-s", "a"});
         assertThat(args.<String>getValue('s')).isEqualTo("a");
     }
 
     @Test
     public void should_fail_when_input_incorrect_integer_value() throws Exception {
+        // given
         expectedEx.expect(ArgsException.class);
         expectedEx.expectMessage("The value of args must be an integer，such as -i 1");
         Args args = new Args("i#", new String[]{"-i", "a"});
@@ -59,24 +63,28 @@ public class ArgsTest {
 
     @Test
     public void should_return_default_integer_value() throws Exception {
+        // given
         Args args = new Args("i#", new String[]{"-i"});
         assertThat(args.<Integer>getValue('i')).isEqualTo(0);
     }
 
     @Test
-    public void should_return_specified_integer() throws Exception {
+    public void should_return_integer_value() throws Exception {
+        // given
         Args args = new Args("i#", new String[]{"-i", "123"});
         assertThat(args.<Integer>getValue('i')).isEqualTo(123);
     }
 
     @Test
     public void should_return_default_double_value() throws Exception {
+        // given
         Args args = new Args("d##", new String[]{"-d"});
         assertThat(args.<Double>getValue('d')).isEqualTo(0.0);
     }
 
     @Test
     public void should_fail_when_input_incorrect_double_value() throws Exception {
+        // given
         expectedEx.expect(ArgsException.class);
         expectedEx.expectMessage("The value of args must be an double，such as -d 2.5");
         Args args = new Args("d##", new String[]{"-d", "a"});
@@ -84,31 +92,36 @@ public class ArgsTest {
     }
 
     @Test
-    public void should_return_specified_double() throws Exception {
+    public void should_return_double_value() throws Exception {
+        // given
         Args args = new Args("d##", new String[]{"-d", "123.5"});
         assertThat(args.<Double>getValue('d')).isEqualTo(123.5);
     }
 
     @Test
-    public void should_return_false_not_exist_boolean_value() throws Exception {
+    public void should_return_false() throws Exception {
+        // given
         Args args = new Args("l", new String[]{"-l"});
         assertThat(args.<Boolean>getValue('l')).isFalse();
     }
 
     @Test
-    public void should_return_true_when_existed_boolean_value() throws Exception {
+    public void should_return_true() throws Exception {
+        // given
         Args args = new Args("l", new String[]{"-l", "1"});
         assertThat(args.<Boolean>getValue('l')).isTrue();
     }
 
     @Test
-    public void should_return_default_empty_string_arrays() throws Exception {
+    public void should_return_empty_string_arrays() throws Exception {
+        // given
         Args args = new Args("s[*]", new String[]{"-s"});
         assertThat(args.<String[]>getValue('s')).isEmpty();
     }
 
     @Test
-    public void should_return_specified_string_arrays() throws Exception {
+    public void should_return_string_arrays() throws Exception {
+        // given
         Args args = new Args("s[*]", new String[]{"-s", "This is args"});
         String[] values = args.getValue('s');
         assertThat(values).isNotEmpty();
@@ -119,13 +132,15 @@ public class ArgsTest {
     }
 
     @Test
-    public void should_return_default_empty_int_arrays() throws Exception {
+    public void should_return_empty_int_arrays() throws Exception {
+        // given
         Args args = new Args("i[#]", new String[]{"-i"});
         assertThat(args.<Integer[]>getValue('i')).isEmpty();
     }
 
     @Test
-    public void should_return_specified_int_arrays() throws Exception {
+    public void should_return_int_arrays() throws Exception {
+        // given
         Args args = new Args("i[#]", new String[]{"-i", "0 1 -2"});
         Integer[] values = args.getValue('i');
         assertThat(values).isNotEmpty();
@@ -137,6 +152,7 @@ public class ArgsTest {
 
     @Test
     public void should_fail_when_input_incorrect_int_arrays_value() throws Exception {
+        // given
         expectedEx.expect(ArgsException.class);
         expectedEx.expectMessage("The value of args must be an int arrays，such as -i[#] 0 1 2");
         Args args = new Args("i[#]", new String[]{"-i", "0 1 2 a"});
@@ -144,13 +160,15 @@ public class ArgsTest {
     }
 
     @Test
-    public void should_return_default_empty_double_arrays() throws Exception {
+    public void should_return_empty_double_arrays() throws Exception {
+        // given
         Args args = new Args("d[##]", new String[]{"-d"});
         assertThat(args.<Double[]>getValue('d')).isEmpty();
     }
 
     @Test
-    public void should_return_specified_double_arrays() throws Exception {
+    public void should_return_double_arrays() throws Exception {
+        // given
         Args args = new Args("d[##]", new String[]{"-d", "0 1.5 -2.5"});
         Double[] values = args.getValue('d');
         assertThat(values).isNotEmpty();
@@ -162,6 +180,7 @@ public class ArgsTest {
 
     @Test
     public void should_fail_when_input_incorrect_double_arrays_value() throws Exception {
+        // given
         expectedEx.expect(ArgsException.class);
         expectedEx.expectMessage("The value of args must be an double arrays，such as -d[##] 1.0 2.5 3.14");
         Args args = new Args("d[##]", new String[]{"-d", "1.0 2.5 3.14 a"});
@@ -169,16 +188,22 @@ public class ArgsTest {
     }
 
     @Test
-    public void should_return_default_empty_map() throws Exception {
+    public void should_return_empty_map() throws Exception {
+        // given
         Args args = new Args("m[&&]", new String[]{"-m"});
-        assertThat(args.<Map<String, String>>getValue('m')).isEmpty();
+        // when
+        Map<String, String> value = args.getValue('m');
+        // given
+        assertThat(value).isEmpty();
     }
 
     @Test
-    public void should_return_specified_map() throws Exception {
+    public void should_return_map() throws Exception {
+        // given
         Args args = new Args("m[&&]", new String[]{"-m", "name:lyning,age:25"});
+        // when
         Map<String, String> values = args.getValue('m');
-        assertThat(values).isNotEmpty();
+        // then
         assertThat(values.size()).isEqualTo(2);
         assertThat(values.get("name")).isEqualTo("lyning");
         assertThat(values.get("age")).isEqualTo("25");
@@ -188,20 +213,30 @@ public class ArgsTest {
     public void should_fail_when_input_incorrect_map_value() throws Exception {
         expectedEx.expect(ArgsException.class);
         expectedEx.expectMessage("The value of args must be an map，such as -m[&&] key1:val1,key2:val2,...");
+        // given
         Args args = new Args("m[&&]", new String[]{"-m", "name:lyning,age"});
+        // when
         args.<Integer>getValue('m');
+        // then throw a exception
     }
 
     @Test
-    public void should_return_default_empty_set() throws Exception {
+    public void should_return_empty_set() throws Exception {
+        // given
         Args args = new Args("s[&]", new String[]{"-s"});
-        assertThat(args.<Set<String>>getValue('s')).isEmpty();
+        // when
+        Set<String> value = args.getValue('s');
+        // then
+        assertThat(value).isEmpty();
     }
 
     @Test
-    public void should_return_specified_set() throws Exception {
+    public void should_return_set() throws Exception {
+        // given
         Args args = new Args("s[&]", new String[]{"-s", "a a b b c c"});
+        // when
         Set<String> values = args.getValue('s');
+        // then
         assertThat(values).isNotEmpty();
         assertThat(values.size()).isEqualTo(3);
         assertThat(values.contains("a")).isTrue();
@@ -210,7 +245,7 @@ public class ArgsTest {
     }
 
     @Test
-    public void multiple_flag() {
+    public void multiple_schemas() {
         Args args = new Args("a*,b#,c##,d[*],e[#],f[##],g[&],h[&&],", new String[]{
                 "-a", "你好",
                 "-b", "10",
@@ -257,16 +292,22 @@ public class ArgsTest {
 
     @Test
     public void should_return_string_array_schema_description() {
-        Args argsParser = new Args("h[help]", new String[]{"-h", "[*]"});
-        Map<String, String> schemaToDescriptionMap = argsParser.getValue('h');
+        // given
+        Args args = new Args("h[help]", new String[]{"-h", "[*]"});
+        // when
+        Map<String, String> schemaToDescriptionMap = args.getValue('h');
+        // then
         assertThat(schemaToDescriptionMap.size()).isEqualTo(1);
         assertThat(schemaToDescriptionMap.get("[*]")).isEqualTo(ValueParserFactory.getInstance("[*]").getDescription());
     }
 
     @Test
     public void should_return_multiple_schema_description() {
-        Args argsParser = new Args("h[help]", new String[]{"-h", "[&] [#] [help]"});
-        Map<String, String> schemaToDescriptionMap = argsParser.getValue('h');
+        // given
+        Args args = new Args("h[help]", new String[]{"-h", "[&] [#] [help]"});
+        // when
+        Map<String, String> schemaToDescriptionMap = args.getValue('h');
+        // then
         assertThat(schemaToDescriptionMap.size()).isEqualTo(3);
         assertThat(schemaToDescriptionMap.get("[&]")).isEqualTo(ValueParserFactory.getInstance("[&]").getDescription());
         assertThat(schemaToDescriptionMap.get("[#]")).isEqualTo(ValueParserFactory.getInstance("[#]").getDescription());
@@ -275,8 +316,11 @@ public class ArgsTest {
 
     @Test
     public void should_return_all_schema_description() {
-        Args argsParser = new Args("h[help]", new String[]{"-h"});
-        Map<String, String> schemaToDescriptionMap = argsParser.getValue('h');
+        // given
+        Args args = new Args("h[help]", new String[]{"-h"});
+        // when
+        Map<String, String> schemaToDescriptionMap = args.getValue('h');
+        // then
         assertThat(schemaToDescriptionMap.size()).isEqualTo(10);
         for (Map.Entry<String, String> entry : schemaToDescriptionMap.entrySet()) {
             assertThat(entry.getValue()).isEqualTo(ValueParserFactory.getInstance(entry.getKey()).getDescription());
