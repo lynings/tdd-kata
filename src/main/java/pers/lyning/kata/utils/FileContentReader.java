@@ -7,7 +7,7 @@ import java.io.*;
  */
 public class FileContentReader {
 
-    public static String getString(File file) throws IOException {
+    public static String asString(File file) throws IOException {
         InputStream inputStream = new FileInputStream(file);
         InputStreamReader reader = new InputStreamReader(inputStream, "UTF-8");
 
