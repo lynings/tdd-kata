@@ -7,6 +7,7 @@ import pers.lyning.kata.testing.TestResourceFinder;
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
@@ -172,8 +173,8 @@ public class AnagramsTest {
     private List<String> toStringList(List<Anagram> sourceList) {
         return sourceList.stream()
                 .map(Anagram::words)
-                .flatMap(words -> words.stream())
-                .map(word -> word.value())
+                .flatMap(Collection::stream)
+                .map(Word::value)
                 .sorted()
                 .collect(toList());
     }

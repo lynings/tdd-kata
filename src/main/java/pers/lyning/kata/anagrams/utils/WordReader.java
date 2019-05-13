@@ -1,6 +1,5 @@
 package pers.lyning.kata.anagrams.utils;
 
-import com.google.common.collect.Sets;
 import pers.lyning.kata.anagrams.Word;
 import pers.lyning.kata.utils.FileContentReader;
 
@@ -31,7 +30,7 @@ public class WordReader {
 
     private static Set<String> readAsWord(String wordsString) {
         return splitWord(wordsString)
-                .flatMap(words -> Sets.newHashSet(words).stream())
+                .flatMap(Stream::of)
                 .filter(word -> !word.isEmpty())
                 .collect(toSet());
     }

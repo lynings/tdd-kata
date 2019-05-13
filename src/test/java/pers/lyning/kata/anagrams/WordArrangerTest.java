@@ -6,6 +6,7 @@ import pers.lyning.kata.testing.TestResourceFinder;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
@@ -47,13 +48,13 @@ public class WordArrangerTest {
         // when
         List<Set<Word>> wordsGroup = WordArranger.arrange(words);
         // then
-        assertThat(wordsGroup.size()).isEqualTo(23);
+        assertThat(wordsGroup.size()).isEqualTo(1609);
         assertThat(countWords(wordsGroup)).isEqualTo(words.size());
     }
 
     private long countWords(List<Set<Word>> wordsGroup) {
         return wordsGroup.stream()
-                .flatMap(words ->  words.stream())
+                .flatMap(Collection::stream)
                 .count();
     }
 }
