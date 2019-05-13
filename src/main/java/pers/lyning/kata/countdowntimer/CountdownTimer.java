@@ -9,15 +9,19 @@ import java.util.concurrent.TimeUnit;
  * @author lyning
  */
 public class CountdownTimer {
-    private long second;
-    private final Runnable tick;
     private final ScheduledThreadPoolExecutor scheduledThreadPoolExecutor = new ScheduledThreadPoolExecutor(1);
+    private final Runnable tick;
+    private long second;
     private ScheduledFuture<?> scheduledFuture;
 
 
     public CountdownTimer(Runnable tick, long second) {
         this.tick = tick;
         this.second = second;
+    }
+
+    public long remainingTime() {
+        return this.second;
     }
 
     public Future schedule(Runnable stopCallback) {
@@ -27,7 +31,7 @@ public class CountdownTimer {
                 stopCallback.run();
             }
         };
-        this.scheduledFuture = this.scheduledThreadPoolExecutor.scheduleAtFixedRate(runnable, 0, second, TimeUnit.SECONDS);
+        this.scheduledFuture = this.scheduledThreadPoolExecutor.scheduleAtFixedRate(runnable, 0, this.second, TimeUnit.SECONDS);
         return this.scheduledFuture;
     }
 
@@ -36,9 +40,5 @@ public class CountdownTimer {
             this.second -= 1;
             this.tick.run();
         }
-    }
-
-    public long remainingTime() {
-        return this.second;
     }
 }

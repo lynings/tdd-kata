@@ -9,29 +9,30 @@ import java.io.PrintStream;
  * @author lyning
  */
 public class SystemOutputCapture extends ExternalResource {
-    private PrintStream sysOut;
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+    private PrintStream sysOut;
 
     private SystemOutputCapture() {
-    }
-
-    @Override
-    protected void before() throws Throwable {
-        sysOut = System.out;
-        System.setOut(new PrintStream(outContent));
-    }
-
-    @Override
-    protected void after() {
-        System.setOut(sysOut);
-        System.out.println(outContent.toString());
     }
 
     public static SystemOutputCapture init() {
         return new SystemOutputCapture();
     }
 
+    @Override
     public String toString() {
-        return outContent.toString().trim();
+        return this.outContent.toString().trim();
+    }
+
+    @Override
+    protected void before() throws Throwable {
+        this.sysOut = System.out;
+        System.setOut(new PrintStream(this.outContent));
+    }
+
+    @Override
+    protected void after() {
+        System.setOut(this.sysOut);
+        System.out.println(this.outContent.toString());
     }
 }

@@ -14,9 +14,9 @@ import java.util.Set;
  */
 public class StopsConstraintRouteStrategy implements RouteStrategy {
 
-    private Digraph digraph;
     private final Route route;
     private final RouteSpecification routeSpecification;
+    private Digraph digraph;
 
     public StopsConstraintRouteStrategy(Route route, RouteSpecification routeSpecification) {
         this.route = route;
@@ -28,16 +28,6 @@ public class StopsConstraintRouteStrategy implements RouteStrategy {
         this.digraph = digraph;
         Set<String> routes = this.getRoutes();
         return routes.size();
-    }
-
-    private Set<String> getRoutes() {
-        Set<String> routeSet = new HashSet<>();
-
-        List<Route> routes = this.digraph.selectRouteWithOrigin(this.route.getOrigin());
-        for (Route route : routes) {
-            this.depthFirstSearch(route, route.getName(), routeSet);
-        }
-        return routeSet;
     }
 
     private void depthFirstSearch(Route currentRoute, String route, Set<String> routeSet) {
@@ -55,6 +45,16 @@ public class StopsConstraintRouteStrategy implements RouteStrategy {
         for (Route nextRoute : routes) {
             this.depthFirstSearch(nextRoute, route + nextRoute.getDestination(), routeSet);
         }
+    }
+
+    private Set<String> getRoutes() {
+        Set<String> routeSet = new HashSet<>();
+
+        List<Route> routes = this.digraph.selectRouteWithOrigin(this.route.getOrigin());
+        for (Route route : routes) {
+            this.depthFirstSearch(route, route.getName(), routeSet);
+        }
+        return routeSet;
     }
 
     private boolean isInfiniteLoop(String route) {

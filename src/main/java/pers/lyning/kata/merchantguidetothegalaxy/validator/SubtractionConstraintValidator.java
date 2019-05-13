@@ -10,39 +10,38 @@ import java.util.Set;
  */
 public class SubtractionConstraintValidator implements SymbolsConstraintValidator {
 
-    private final Map<String, Set<String>> symbolToCanSubtractedSymbolMap = new HashMap() {{
-        put("I", new HashSet() {{
-            add("V");
-            add("X");
-        }});
-        put("C", new HashSet() {{
-            add("D");
-            add("M");
-        }});
-        put("X", new HashSet() {{
-            add("L");
-            add("C");
-        }});
-    }};
-
     private final Set<String> CANNOT_SUBTRACTED_SYMBOLS = new HashSet() {{
-        add("V");
-        add("L");
-        add("D");
+        this.add("V");
+        this.add("L");
+        this.add("D");
     }};
-
     private final int SYMBOL_LENGTH = 2;
+    private final Map<String, Set<String>> symbolToCanSubtractedSymbolMap = new HashMap() {{
+        this.put("I", new HashSet() {{
+            this.add("V");
+            this.add("X");
+        }});
+        this.put("C", new HashSet() {{
+            this.add("D");
+            this.add("M");
+        }});
+        this.put("X", new HashSet() {{
+            this.add("L");
+            this.add("C");
+        }});
+    }};
 
     @Override
     public boolean validate(String symbols) {
         String[] symbolsArr = symbols.split("");
-        if (symbolsArr.length != SYMBOL_LENGTH) {
+        if (symbolsArr.length != this.SYMBOL_LENGTH) {
             return false;
         }
         String subtractedSymbol = symbolsArr[0];
         String symbol = symbolsArr[1];
-        return !CANNOT_SUBTRACTED_SYMBOLS.contains(subtractedSymbol)
-                && symbolToCanSubtractedSymbolMap.containsKey(subtractedSymbol)
-                && symbolToCanSubtractedSymbolMap.get(subtractedSymbol).contains(symbol);
+        return !this.CANNOT_SUBTRACTED_SYMBOLS.contains(subtractedSymbol)
+                && this.symbolToCanSubtractedSymbolMap.containsKey(subtractedSymbol)
+                && this.symbolToCanSubtractedSymbolMap.get(subtractedSymbol)
+                .contains(symbol);
     }
 }

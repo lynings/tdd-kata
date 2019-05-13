@@ -16,6 +16,15 @@ class Anagram {
         this.words = words;
     }
 
+    public Integer lengthOfWord() {
+        return this.anyWord()
+                .length();
+    }
+
+    public static Anagram of(Set<Word> words) {
+        return new Anagram(words);
+    }
+
     public static Anagram of(String... words) {
         Set<Word> wordSet = Arrays.asList(words)
                 .stream()
@@ -24,20 +33,12 @@ class Anagram {
         return new Anagram(wordSet);
     }
 
-    public static Anagram of(Set<Word> words) {
-        return new Anagram(words);
+    public Integer size() {
+        return this.words.size();
     }
 
     public Set<Word> words() {
         return this.words;
-    }
-
-    public Integer lengthOfWord() {
-        return this.anyWord().length();
-    }
-
-    public Integer size() {
-        return this.words.size();
     }
 
     private String anyWord() {

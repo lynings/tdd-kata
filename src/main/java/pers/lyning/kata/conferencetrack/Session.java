@@ -9,16 +9,15 @@ import java.util.List;
 public class Session {
 
     private final int REMAINING_MINUTES_CONSTANT;
+    private final List<Talk> talks = new ArrayList<>();
     /**
      * session 剩余时间
      */
     private int remainingMinutes;
 
-    private List<Talk> talks = new ArrayList<>();
-
     public Session(int remainingMinutes) {
         this.remainingMinutes = remainingMinutes;
-        REMAINING_MINUTES_CONSTANT = remainingMinutes;
+        this.REMAINING_MINUTES_CONSTANT = remainingMinutes;
     }
 
     public void addTalk(Talk talk) {
@@ -26,20 +25,20 @@ public class Session {
         this.remainingMinutes -= talk.getDurationMinutes();
     }
 
-    public List<Talk> getTalks() {
-        return talks;
+    public void clear() {
+        this.getTalks().clear();
+        this.remainingMinutes = this.REMAINING_MINUTES_CONSTANT;
     }
 
     public int getRemainingMinutes() {
-        return remainingMinutes;
+        return this.remainingMinutes;
+    }
+
+    public List<Talk> getTalks() {
+        return this.talks;
     }
 
     public boolean hasRemainingMinutes() {
         return this.getRemainingMinutes() > 0;
-    }
-
-    public void clear() {
-        this.getTalks().clear();
-        this.remainingMinutes = REMAINING_MINUTES_CONSTANT;
     }
 }

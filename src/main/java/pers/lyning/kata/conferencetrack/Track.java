@@ -5,20 +5,19 @@ package pers.lyning.kata.conferencetrack;
  */
 public class Track {
 
-    private Session morning;
-
-    private Session afternoon;
+    private final Session afternoon;
+    private final Session morning;
 
     public Track(Session morning, Session afternoon) {
         this.morning = morning;
         this.afternoon = afternoon;
     }
 
-    public Session getMorning() {
-        return morning;
+    public Session getAfternoon() {
+        return this.afternoon;
     }
 
-    public Session getAfternoon() {
-        return afternoon;
+    public Session getMorning() {
+        return this.morning;
     }
 }

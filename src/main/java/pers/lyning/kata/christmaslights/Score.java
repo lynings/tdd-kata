@@ -12,9 +12,8 @@ public class Score {
     private Score() {
     }
 
-    public Score start(int x, int y) {
-        this.start = new Position(x, y);
-        return this;
+    public static Score create() {
+        return new Score();
     }
 
     public Score end(int x, int y) {
@@ -22,15 +21,16 @@ public class Score {
         return this;
     }
 
-    public static Score create() {
-        return new Score();
+    public Position getEnd() {
+        return this.end;
     }
 
     public Position getStart() {
         return this.start;
     }
 
-    public Position getEnd() {
-        return this.end;
+    public Score start(int x, int y) {
+        this.start = new Position(x, y);
+        return this;
     }
 }

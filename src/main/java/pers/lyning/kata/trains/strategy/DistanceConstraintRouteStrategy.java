@@ -14,26 +14,26 @@ import java.util.Set;
  */
 public class DistanceConstraintRouteStrategy implements RouteStrategy {
 
-    private Digraph digraph;
     private final Route route;
-    private final Set<String> routes;
     private final RouteSpecification routeSpecification;
+    private final Set<String> routes;
+    private Digraph digraph;
 
     public DistanceConstraintRouteStrategy(Route route, RouteSpecification routeSpecification) {
         this.route = route;
         this.routeSpecification = routeSpecification;
-        routes = new HashSet<>();
+        this.routes = new HashSet<>();
     }
 
     @Override
     public Integer execute(Digraph digraph) {
         this.digraph = digraph;
         this.depthFirstSearch();
-        return routes.size();
+        return this.routes.size();
     }
 
     private void depthFirstSearch() {
-        List<Route> routes = this.digraph.selectRouteWithOrigin(route.getOrigin());
+        List<Route> routes = this.digraph.selectRouteWithOrigin(this.route.getOrigin());
         for (Route route : routes) {
             this.depthFirstSearch(route, route.getName(), route.getDistance());
         }
@@ -45,7 +45,7 @@ public class DistanceConstraintRouteStrategy implements RouteStrategy {
         }
 
         if (this.route.isEquals(route) && this.routeSpecification.isValid(distance)) {
-            routes.add(route);
+            this.routes.add(route);
         }
 
         List<Route> routes = this.digraph.selectRouteWithOrigin(currentRoute.getDestination());

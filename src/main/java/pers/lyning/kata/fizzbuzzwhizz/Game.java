@@ -15,35 +15,36 @@ public class Game {
         this.uniqueNumbers = new UniqueNumbers(firstNumber, secondNumber, thirdNumber);
     }
 
-    public static Game of(Integer firstNumber, Integer secondNumber, Integer thirdNumber) throws Exception {
-        return new Game(firstNumber, secondNumber, thirdNumber);
-    }
-
     public List<String> countOff(Integer totalPlayers) throws Exception {
         this.totalPlayers = totalPlayers;
         this.validate();
         return this.takeTurns();
     }
 
+    public static Game of(Integer firstNumber, Integer secondNumber, Integer thirdNumber) throws Exception {
+        return new Game(firstNumber, secondNumber, thirdNumber);
+    }
+
+    private boolean isContainFirstNumber(Integer number) {
+        return number.toString()
+                .contains(this.uniqueNumbers.getFirst()
+                        .getNumber()
+                        .toString());
+    }
+
     private boolean isDivisible(Integer divisor, Integer dividend) {
         return divisor % dividend == 0;
     }
 
-    private boolean isContainFirstNumber(Integer number) {
-        if (number.toString().contains(uniqueNumbers.getFirst().getNumber().toString())) {
-            return true;
-        }
-        return false;
-    }
-
     private String match(Integer order) {
-        if (isContainFirstNumber(order)) {
-            return uniqueNumbers.getFirst().getWord();
+        if (this.isContainFirstNumber(order)) {
+            return this.uniqueNumbers.getFirst()
+                    .getWord();
         }
-        return uniqueNumbers
+        return this.uniqueNumbers
                 .getNumberAndWords()
                 .stream()
-                .filter(item -> isDivisible(order, item.getNumber()))
+                .filter(item -> this.isDivisible(order, item.getNumber()))
                 .map(item -> item.getWord())
                 .reduce((w1, w2) -> w1 + w2)
                 .orElse(order.toString());

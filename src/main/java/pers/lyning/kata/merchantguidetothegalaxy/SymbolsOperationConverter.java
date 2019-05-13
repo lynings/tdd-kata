@@ -16,12 +16,11 @@ import java.util.List;
  */
 public class SymbolsOperationConverter {
 
-    private String[] symbolsArr;
-
-    private List<Constraint> constraints = Arrays.asList(
+    private final List<Constraint> constraints = Arrays.asList(
             new Constraint(new RepeatedOneTimesConstraintValidator(), new Exception("\"D\", \"L\", and \"V\" can never be repeated.")),
             new Constraint(new RepeatedThreeTimesConstraintValidator(), new Exception("The symbols \"I\", \"X\", \"C\", and \"M\" can be repeated three times in succession, but no more. (They may appear four times if the third and fourth are separated by a smaller value, such as XXXIX.)"))
     );
+    private String[] symbolsArr;
 
     /**
      * 将symbols按照一定的规则转换成多组操作，以便于计算
@@ -39,60 +38,61 @@ public class SymbolsOperationConverter {
 
         this.symbolsArr = symbols.split("");
         List<SymbolOperation> symbolGroup = new ArrayList<>();
-        for (int index = 1, len = symbolsArr.length; index < len; index++) {
+        for (int index = 1, len = this.symbolsArr.length; index < len; index++) {
             if (this.greaterThanOrEqualTo(index - 1, index)) {
                 if (!this.isOverflow(index)) {
                     if (this.greaterThanOrEqualTo(index, index + 1)) {
-                        symbolGroup.add(new AddOperation(symbolsArr[index - 1], symbolsArr[index]));
+                        symbolGroup.add(new AddOperation(this.symbolsArr[index - 1], this.symbolsArr[index]));
                         index += 1;
                     } else {
-                        symbolGroup.add(new AddOperation(symbolsArr[index - 1]));
+                        symbolGroup.add(new AddOperation(this.symbolsArr[index - 1]));
                     }
                 } else {
-                    symbolGroup.add(new AddOperation(symbolsArr[index - 1], symbolsArr[index]));
+                    symbolGroup.add(new AddOperation(this.symbolsArr[index - 1], this.symbolsArr[index]));
                     index += 1;
                 }
             } else {
-                symbolGroup.add(new SubtractOperation(symbolsArr[index], symbolsArr[index - 1]));
+                symbolGroup.add(new SubtractOperation(this.symbolsArr[index], this.symbolsArr[index - 1]));
                 index += 1;
             }
         }
         return symbolGroup;
     }
 
-    private boolean isOverflow(int index) {
-        return (index + 1) > symbolsArr.length - 1;
-    }
-
     private boolean greaterThanOrEqualTo(int sourceIndex, int targetIndex) {
-        String fromSymbol = symbolsArr[sourceIndex],
-                toSymbol = symbolsArr[targetIndex];
+        String fromSymbol = this.symbolsArr[sourceIndex],
+                toSymbol = this.symbolsArr[targetIndex];
         return SymbolTable.getValue(fromSymbol) - SymbolTable.getValue(toSymbol) >= 0;
     }
 
+    private boolean isOverflow(int index) {
+        return (index + 1) > this.symbolsArr.length - 1;
+    }
+
     private void validate(String symbols) throws Exception {
-        for (Constraint constraint : constraints) {
-            if (!constraint.getValidator().validate(symbols)) {
+        for (Constraint constraint : this.constraints) {
+            if (!constraint.getValidator()
+                    .validate(symbols)) {
                 throw constraint.getException();
             }
         }
     }
 
     private class Constraint {
-        private SymbolsConstraintValidator validator;
-        private Exception exception;
+        private final Exception exception;
+        private final SymbolsConstraintValidator validator;
 
         public Constraint(SymbolsConstraintValidator validator, Exception exception) {
             this.validator = validator;
             this.exception = exception;
         }
 
-        public SymbolsConstraintValidator getValidator() {
-            return validator;
+        public Exception getException() {
+            return this.exception;
         }
 
-        public Exception getException() {
-            return exception;
+        public SymbolsConstraintValidator getValidator() {
+            return this.validator;
         }
     }
 }

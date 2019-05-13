@@ -5,20 +5,19 @@ package pers.lyning.kata.conferencetrack;
  */
 public class Talk {
 
-    private String title;
-
-    private Integer durationMinutes;
+    private final Integer durationMinutes;
+    private final String title;
 
     public Talk(String title, Integer durationMinutes) {
         this.title = title;
         this.durationMinutes = durationMinutes;
     }
 
-    public String getTitle() {
-        return title;
+    public Integer getDurationMinutes() {
+        return this.durationMinutes;
     }
 
-    public Integer getDurationMinutes() {
-        return durationMinutes;
+    public String getTitle() {
+        return this.title;
     }
 }

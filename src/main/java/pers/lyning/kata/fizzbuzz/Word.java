@@ -14,12 +14,12 @@ class Word {
         this.name = name;
     }
 
-    public static Word fizz() {
-        return new Word(3, "Fizz");
-    }
-
     public static Word buzz() {
         return new Word(5, "Buzz");
+    }
+
+    public static Word fizz() {
+        return new Word(3, "Fizz");
     }
 
     public Optional<String> match(Integer number) {

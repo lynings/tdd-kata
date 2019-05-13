@@ -4,8 +4,8 @@ package pers.lyning.kata.trains;
  * @author lyning
  */
 public class Route {
-    private String origin;
-    private String destination;
+    private final String destination;
+    private final String origin;
     private Integer distance;
 
     public Route(String origin, String destination) {
@@ -19,26 +19,23 @@ public class Route {
         this.distance = distance;
     }
 
-    public String getOrigin() {
-        return origin;
-    }
-
     public String getDestination() {
-        return destination;
+        return this.destination;
     }
 
     public Integer getDistance() {
-        return distance;
+        return this.distance;
     }
 
     public String getName() {
         return this.getOrigin() + this.getDestination();
     }
 
+    public String getOrigin() {
+        return this.origin;
+    }
+
     public boolean isEquals(String route) {
-        if (route.startsWith(this.getOrigin()) && route.endsWith(this.getDestination())) {
-            return true;
-        }
-        return false;
+        return route.startsWith(this.getOrigin()) && route.endsWith(this.getDestination());
     }
 }

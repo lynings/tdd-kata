@@ -10,10 +10,6 @@ class Number {
         this.value = value;
     }
 
-    public static Number of(Integer number) {
-        return new Number(number);
-    }
-
     public boolean isContains(Integer number) {
         return this.value
                 .toString()
@@ -22,5 +18,9 @@ class Number {
 
     public boolean isDivisibleBy(Integer number) {
         return this.value % number == 0;
+    }
+
+    public static Number of(Integer number) {
+        return new Number(number);
     }
 }

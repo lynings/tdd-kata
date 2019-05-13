@@ -15,23 +15,24 @@ public class ConferencePlanner {
     public Conference execute(List<Talk> talks) {
         Conference conference = new Conference();
         while (!talks.isEmpty()) {
-            Session morning = planningMorning(talks);
-            Session afternoon = planningAfternoon(talks);
+            Session morning = this.planningMorning(talks);
+            Session afternoon = this.planningAfternoon(talks);
             conference.addSession(morning, afternoon);
         }
         return conference;
+    }
+
+    private List<Talk> defineTalksScope(List<Talk> talks, Integer durationMinutes) {
+        return talks
+                .stream()
+                .filter(talk -> talk.getDurationMinutes() <= durationMinutes)
+                .collect(toList());
     }
 
     private Session planningAfternoon(List<Talk> talks) {
         Session afternoon = this.planningBySession(talks, ConferenceConfig.AFTERNOON_SESSION_DURATION_MINUTES);
         afternoon.addTalk(new Talk("Networking Event", 0));
         return afternoon;
-    }
-
-    private Session planningMorning(List<Talk> talks) {
-        Session morning = planningBySession(talks, ConferenceConfig.MORNING_SESSION_DURATION_MINUTES);
-        morning.addTalk(new Talk("Lunch", 0));
-        return morning;
     }
 
     private Session planningBySession(List<Talk> talks, Integer sessionDurationMinutes) {
@@ -50,6 +51,12 @@ public class ConferencePlanner {
         return session;
     }
 
+    private Session planningMorning(List<Talk> talks) {
+        Session morning = this.planningBySession(talks, ConferenceConfig.MORNING_SESSION_DURATION_MINUTES);
+        morning.addTalk(new Talk("Lunch", 0));
+        return morning;
+    }
+
     private Optional<Talk> searchAnyTalk(List<Talk> talks, Integer durationMinutes) {
         // 确定接下来参与计算的 talk 的范围
         List<Talk> talkGroup = this.defineTalksScope(talks, durationMinutes);
@@ -59,12 +66,5 @@ public class ConferencePlanner {
         // 随机获取符合要求的 talk，目的是寻找所有可能的结果
         int random = RandomUnit.random(0, talkGroup.size() - 1);
         return Optional.of(talkGroup.get(random));
-    }
-
-    private List<Talk> defineTalksScope(List<Talk> talks, Integer durationMinutes) {
-        return talks
-                .stream()
-                .filter(talk -> talk.getDurationMinutes() <= durationMinutes)
-                .collect(toList());
     }
 }

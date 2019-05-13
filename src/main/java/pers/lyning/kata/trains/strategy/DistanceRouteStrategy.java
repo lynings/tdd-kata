@@ -12,9 +12,9 @@ import java.util.Optional;
  */
 public class DistanceRouteStrategy implements RouteStrategy {
 
-    private Digraph digraph;
-    private String route;
     public static final Integer NO_SUCH_ROUTE = -1;
+    private final String route;
+    private Digraph digraph;
 
     public DistanceRouteStrategy(String route) {
         this.route = route;
@@ -26,26 +26,28 @@ public class DistanceRouteStrategy implements RouteStrategy {
         return this.getDistance();
     }
 
+    private Optional<Route> findRoute(String route) {
+        Optional<Route> routeOptional = this.digraph.getRoutes()
+                .stream()
+                .filter(o -> o.getName()
+                        .equals(route))
+                .findFirst();
+        return routeOptional;
+    }
+
     private Integer getDistance() {
         Integer distance = 0;
-        String[] nodeArr = route.split("");
+        String[] nodeArr = this.route.split("");
         for (int i = 1, len = nodeArr.length; i < len; i++) {
             String route = nodeArr[i - 1] + nodeArr[i];
             Optional<Route> routeOptional = this.findRoute(route);
             if (routeOptional.isPresent()) {
-                distance += routeOptional.get().getDistance();
+                distance += routeOptional.get()
+                        .getDistance();
             } else {
                 return NO_SUCH_ROUTE;
             }
         }
         return distance;
-    }
-
-    private Optional<Route> findRoute(String route) {
-        Optional<Route> routeOptional = this.digraph.getRoutes()
-                .stream()
-                .filter(o -> o.getName().equals(route))
-                .findFirst();
-        return routeOptional;
     }
 }

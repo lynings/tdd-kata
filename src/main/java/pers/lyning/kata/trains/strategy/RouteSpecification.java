@@ -5,9 +5,8 @@ package pers.lyning.kata.trains.strategy;
  */
 public class RouteSpecification {
 
-    private Integer value;
-
-    private ConstraintEnum constraint;
+    private final ConstraintEnum constraint;
+    private final Integer value;
 
     public RouteSpecification(Integer value, ConstraintEnum constraint) {
         this.value = value;
@@ -15,13 +14,18 @@ public class RouteSpecification {
     }
 
     public Integer getValue() {
-        return value;
+        return this.value;
     }
 
     public boolean isValid(Integer value) {
         return this.isEqual(value)
                 || this.isLessThan(value)
                 || this.isLessThanOrEqual(value);
+    }
+
+    private boolean isEqual(int value) {
+        return this.constraint == ConstraintEnum.Equal
+                && value == this.getValue();
     }
 
     private boolean isLessThan(Integer value) {
@@ -31,11 +35,6 @@ public class RouteSpecification {
     private boolean isLessThanOrEqual(Integer value) {
         return this.constraint == ConstraintEnum.LessThanOrEqual
                 && value <= this.getValue();
-    }
-
-    private boolean isEqual(int value) {
-        return this.constraint == ConstraintEnum.Equal
-                && value == this.getValue();
     }
 
     public enum ConstraintEnum {

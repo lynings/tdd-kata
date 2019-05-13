@@ -14,6 +14,11 @@ import java.util.stream.Collectors;
 public class MapValueParser implements ValueParser<Map<String, String>> {
 
     @Override
+    public String getDescription() {
+        return "schema '[&&]' default return empty map(such as schema: m[&&], args: -m), when value existed then return specified map value(such as schema: m[&&], args: -m name:lyning,age:25).";
+    }
+
+    @Override
     public Map<String, String> parse(String values) {
         if (Objects.isNull(values)) {
             return new HashMap<>(0);
@@ -27,10 +32,5 @@ public class MapValueParser implements ValueParser<Map<String, String>> {
         } catch (Exception e) {
             throw new ArgsException("The value of args must be an map，such as -m[&&] key1:val1,key2:val2,...");
         }
-    }
-
-    @Override
-    public String getDescription() {
-        return "schema '[&&]' default return empty map(such as schema: m[&&], args: -m), when value existed then return specified map value(such as schema: m[&&], args: -m name:lyning,age:25).";
     }
 }

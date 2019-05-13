@@ -4,7 +4,7 @@ package pers.lyning.kata.marsrover;
  * @author lyning
  */
 public class GridPositioner {
-    private Grid grid;
+    private final Grid grid;
 
     public GridPositioner(Grid grid) {
         this.grid = grid;
@@ -29,10 +29,12 @@ public class GridPositioner {
     }
 
     private Integer moveXAxis(Integer x, int steps) {
-        return Math.abs(x + steps) % this.grid.getRange().getX();
+        return Math.abs(x + steps) % this.grid.getRange()
+                .getX();
     }
 
     private Integer moveYAxis(Integer y, int steps) {
-        return Math.abs(y + steps) % this.grid.getRange().getY();
+        return Math.abs(y + steps) % this.grid.getRange()
+                .getY();
     }
 }

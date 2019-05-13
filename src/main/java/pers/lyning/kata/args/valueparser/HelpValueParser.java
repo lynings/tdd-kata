@@ -11,17 +11,31 @@ import java.util.Optional;
  */
 public class HelpValueParser implements ValueParser<Map<String, String>> {
     private final Map<String, String> schemaToDescriptionMap = new HashMap() {{
-        put("", ValueParserFactory.getInstance("").getDescription());
-        put("*", ValueParserFactory.getInstance("*").getDescription());
-        put("#", ValueParserFactory.getInstance("#").getDescription());
-        put("##", ValueParserFactory.getInstance("##").getDescription());
-        put("[*]", ValueParserFactory.getInstance("[*]").getDescription());
-        put("[#]", ValueParserFactory.getInstance("[#]").getDescription());
-        put("[##]", ValueParserFactory.getInstance("[##]").getDescription());
-        put("[&]", ValueParserFactory.getInstance("[&]").getDescription());
-        put("[&&]", ValueParserFactory.getInstance("[&&]").getDescription());
-        put("[help]", getDescription());
+        this.put("", ValueParserFactory.getInstance("")
+                .getDescription());
+        this.put("*", ValueParserFactory.getInstance("*")
+                .getDescription());
+        this.put("#", ValueParserFactory.getInstance("#")
+                .getDescription());
+        this.put("##", ValueParserFactory.getInstance("##")
+                .getDescription());
+        this.put("[*]", ValueParserFactory.getInstance("[*]")
+                .getDescription());
+        this.put("[#]", ValueParserFactory.getInstance("[#]")
+                .getDescription());
+        this.put("[##]", ValueParserFactory.getInstance("[##]")
+                .getDescription());
+        this.put("[&]", ValueParserFactory.getInstance("[&]")
+                .getDescription());
+        this.put("[&&]", ValueParserFactory.getInstance("[&&]")
+                .getDescription());
+        this.put("[help]", HelpValueParser.this.getDescription());
     }};
+
+    @Override
+    public String getDescription() {
+        return "schema '[help]' default return all schema description(such as schema:h[help], args:-h), otherwise return specified schema description(such as schema:h[help], args:-h [*]).";
+    }
 
     @Override
     public Map<String, String> parse(final String schemas) {
@@ -36,10 +50,5 @@ public class HelpValueParser implements ValueParser<Map<String, String>> {
                     return map;
                 })
                 .orElse(this.schemaToDescriptionMap);
-    }
-
-    @Override
-    public String getDescription() {
-        return "schema '[help]' default return all schema description(such as schema:h[help], args:-h), otherwise return specified schema description(such as schema:h[help], args:-h [*]).";
     }
 }

@@ -13,8 +13,8 @@ import java.util.Objects;
  */
 public class ShortestDistanceRouteStrategy implements RouteStrategy {
 
-    private Digraph digraph;
     private final Route route;
+    private Digraph digraph;
     private Integer shortestDistance;
 
     public ShortestDistanceRouteStrategy(Route route) {
@@ -26,6 +26,10 @@ public class ShortestDistanceRouteStrategy implements RouteStrategy {
         this.digraph = digraph;
         this.depthFirstSearch();
         return this.shortestDistance;
+    }
+
+    public boolean isShortest(Integer distance) {
+        return Objects.isNull(this.shortestDistance) || distance < this.shortestDistance;
     }
 
     private void depthFirstSearch() {
@@ -54,12 +58,5 @@ public class ShortestDistanceRouteStrategy implements RouteStrategy {
 
     private boolean isInfiniteLoop(String route) {
         return route.length() > this.digraph.getRoutes().size();
-    }
-
-    public boolean isShortest(Integer distance) {
-        if (Objects.isNull(this.shortestDistance) || distance < this.shortestDistance) {
-            return true;
-        }
-        return false;
     }
 }

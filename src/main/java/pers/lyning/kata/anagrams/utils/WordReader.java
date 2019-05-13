@@ -22,6 +22,12 @@ public class WordReader {
         this.words = words;
     }
 
+    public Set<Word> asWords() {
+        return this.words.stream()
+                .map(Word::new)
+                .collect(toSet());
+    }
+
     public static WordReader from(File file) throws IOException {
         String wordsString = FileContentReader.asString(file);
         Set<String> words = readAsWord(wordsString);
@@ -39,11 +45,5 @@ public class WordReader {
         return Arrays.asList(wordsString.split("\\n\\n|\\n"))
                 .stream()
                 .map(s -> s.split(" "));
-    }
-
-    public Set<Word> asWords() {
-        return this.words.stream()
-                .map(Word::new)
-                .collect(toSet());
     }
 }

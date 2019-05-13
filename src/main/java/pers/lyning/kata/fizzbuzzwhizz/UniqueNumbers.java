@@ -10,21 +10,28 @@ import java.util.stream.Collectors;
  * @author lyning
  */
 public class UniqueNumbers {
-    private NumberAndWord first;
-    private NumberAndWord second;
-    private NumberAndWord third;
-    private List<NumberAndWord> numberAndWords;
-
     private static final Integer LIMITED_NUMBER = 3;
     private static final Integer MIN_NUMBER = 1;
     private static final Integer MAX_NUMBER = 9;
+    private final NumberAndWord first;
+    private final List<NumberAndWord> numberAndWords;
+    private final NumberAndWord second;
+    private final NumberAndWord third;
 
     public UniqueNumbers(Integer firstNumber, Integer secondNumber, Integer thirdNumber) throws Exception {
         this.first = new NumberAndWord(firstNumber, "Fizz");
         this.second = new NumberAndWord(secondNumber, "Buzz");
         this.third = new NumberAndWord(thirdNumber, "Whizz");
-        this.numberAndWords = Arrays.asList(first, second, third);
+        this.numberAndWords = Arrays.asList(this.first, this.second, this.third);
         this.validate();
+    }
+
+    public NumberAndWord getFirst() {
+        return this.first;
+    }
+
+    public List<NumberAndWord> getNumberAndWords() {
+        return this.numberAndWords;
     }
 
     public void validate() throws Exception {
@@ -40,14 +47,6 @@ public class UniqueNumbers {
         }
     }
 
-    public NumberAndWord getFirst() {
-        return first;
-    }
-
-    public List<NumberAndWord> getNumberAndWords() {
-        return numberAndWords;
-    }
-
     private Set<Integer> distinct() {
         return this.numberAndWords
                 .stream()
@@ -58,8 +57,8 @@ public class UniqueNumbers {
 
     class NumberAndWord {
 
-        private Integer number;
-        private String word;
+        private final Integer number;
+        private final String word;
 
         public NumberAndWord(Integer number, String word) {
             this.number = number;
@@ -67,11 +66,11 @@ public class UniqueNumbers {
         }
 
         public Integer getNumber() {
-            return number;
+            return this.number;
         }
 
         public String getWord() {
-            return word;
+            return this.word;
         }
     }
 }

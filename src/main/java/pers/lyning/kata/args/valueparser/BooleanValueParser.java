@@ -8,12 +8,12 @@ import java.util.Objects;
 public class BooleanValueParser implements ValueParser<Boolean> {
 
     @Override
-    public Boolean parse(String values) {
-        return !Objects.isNull(values);
+    public String getDescription() {
+        return "default return false(such as schema: b, args: -b), when value existed then return true(such as schema: b, args: -b 1).";
     }
 
     @Override
-    public String getDescription() {
-        return "default return false(such as schema: b, args: -b), when value existed then return true(such as schema: b, args: -b 1).";
+    public Boolean parse(String values) {
+        return !Objects.isNull(values);
     }
 }

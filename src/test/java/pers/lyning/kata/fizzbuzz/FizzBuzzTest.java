@@ -12,8 +12,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 @RunWith(Parameterized.class)
 public class FizzBuzzTest {
 
-    private final Integer number;
     private final String answer;
+    private final Integer number;
+
     public FizzBuzzTest(Integer number, String answer) {
         this.number = number;
         this.answer = answer;

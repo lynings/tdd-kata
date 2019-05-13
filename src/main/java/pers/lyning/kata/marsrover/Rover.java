@@ -21,7 +21,7 @@ public class Rover {
         this.obstacleDetector = new ObstacleDetector(grid);
     }
 
-    public Position receive(char ...commands) {
+    public Position receive(char... commands) {
         for (char command : commands) {
             Position nextPosition = this.nextPosition(command);
             if (this.obstacleDetector.check(nextPosition)) {
@@ -32,6 +32,21 @@ public class Rover {
             this.position = nextPosition;
         }
         return this.position;
+    }
+
+    private Position backward(Position position) {
+        DirectionEnum currentDirection = position.getDirection();
+        DirectionEnum reverseDirection = DirectionLocator.turn180(position.getDirection());
+        position.setDirection(reverseDirection);
+        this.forward(position);
+        position.setDirection(currentDirection);
+        return position;
+    }
+
+    private Position forward(Position position) {
+        int steps = 1;
+        Position nextPosition = this.gridPositioner.search(position, steps);
+        return nextPosition;
     }
 
     private void moveToPossiblePoint() {
@@ -61,21 +76,6 @@ public class Rover {
             default:
                 throw new CommandIncorrectException(String.format("command '%s' incorrect!", command));
         }
-    }
-
-    private Position forward(Position position) {
-        int steps = 1;
-        Position nextPosition = this.gridPositioner.search(position, steps);
-        return nextPosition;
-    }
-
-    private Position backward(Position position) {
-        DirectionEnum currentDirection = position.getDirection();
-        DirectionEnum reverseDirection = DirectionLocator.turn180(position.getDirection());
-        position.setDirection(reverseDirection);
-        this.forward(position);
-        position.setDirection(currentDirection);
-        return position;
     }
 
     private Position turnLeft(Position position) {

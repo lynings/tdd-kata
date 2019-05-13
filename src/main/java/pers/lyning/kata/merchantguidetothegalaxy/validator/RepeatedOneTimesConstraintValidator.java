@@ -12,7 +12,7 @@ public class RepeatedOneTimesConstraintValidator implements SymbolsConstraintVal
 
     @Override
     public boolean validate(String symbols) {
-        for (String symbol : SYMBOLS) {
+        for (String symbol : this.SYMBOLS) {
             Integer repeatTimes = this.calcRepeatTimes(symbols, symbol);
             if (repeatTimes > 1) {
                 return false;
@@ -22,6 +22,7 @@ public class RepeatedOneTimesConstraintValidator implements SymbolsConstraintVal
     }
 
     private Integer calcRepeatTimes(String source, String target) {
-        return source.length() - source.replace(target, "").length();
+        return source.length() - source.replace(target, "")
+                .length();
     }
 }

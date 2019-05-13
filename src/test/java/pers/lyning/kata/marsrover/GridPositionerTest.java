@@ -11,7 +11,7 @@ public class GridPositionerTest {
         // given
         Grid grid = new Grid(new Range(5, 5));
         GridPositioner gridPositioner = new GridPositioner(grid);
-        Position initialPosition = new Position(1,1,DirectionEnum.NORTH);
+        Position initialPosition = new Position(1, 1, DirectionEnum.NORTH);
         // when
         Position nextPosition = gridPositioner.search(initialPosition, 1);
         // then

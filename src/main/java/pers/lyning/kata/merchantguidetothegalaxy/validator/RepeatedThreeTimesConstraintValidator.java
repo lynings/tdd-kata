@@ -14,7 +14,7 @@ public class RepeatedThreeTimesConstraintValidator implements SymbolsConstraintV
 
     @Override
     public boolean validate(String symbols) {
-        for (String symbol : SYMBOLS) {
+        for (String symbol : this.SYMBOLS) {
             Integer repeatTimes = this.calcRepeatTimes(symbols, symbol);
             if (repeatTimes > 4) {
                 return false;
@@ -32,7 +32,8 @@ public class RepeatedThreeTimesConstraintValidator implements SymbolsConstraintV
     }
 
     private Integer calcRepeatTimes(String source, String target) {
-        return source.length() - source.replace(target, "").length();
+        return source.length() - source.replace(target, "")
+                .length();
     }
 
     private boolean isLessThan(String source, String target) {

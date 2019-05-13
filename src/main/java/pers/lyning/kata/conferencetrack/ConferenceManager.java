@@ -9,12 +9,6 @@ import java.util.List;
  */
 public class ConferenceManager {
 
-    public Conference planning(List<Talk> talks) {
-        ConferencePlanner conferencePlanner = new ConferencePlanner();
-        Conference conference = conferencePlanner.execute(talks);
-        return conference;
-    }
-
     public void display(Conference conference) {
         for (int index = 0, len = conference.getTracks().size(); index < len; index++) {
             System.out.println("Track " + (index + 1) + ":");
@@ -23,6 +17,12 @@ public class ConferenceManager {
             this.display(track.getAfternoon(), ConferenceConfig.AFTERNOON_SESSION_START_HOURS);
         }
 
+    }
+
+    public Conference planning(List<Talk> talks) {
+        ConferencePlanner conferencePlanner = new ConferencePlanner();
+        Conference conference = conferencePlanner.execute(talks);
+        return conference;
     }
 
     private void display(Session session, int startHour) {

@@ -17,7 +17,8 @@ public class WordReaderTest {
         // given
         File wordFile = TestResourceFinder.getFile("/anagrams/wordlist_1633.txt");
         // when
-        Set<Word> words = WordReader.from(wordFile).asWords();
+        Set<Word> words = WordReader.from(wordFile)
+                .asWords();
         // then
         assertThat(words.size()).isEqualTo(1633);
     }
@@ -27,7 +28,8 @@ public class WordReaderTest {
         // given
         File wordFile = TestResourceFinder.getFile("/anagrams/wordlist_338882.txt");
         // when
-        Set<Word> words = WordReader.from(wordFile).asWords();
+        Set<Word> words = WordReader.from(wordFile)
+                .asWords();
         // then
         assertThat(words.size()).isEqualTo(338882);
     }

@@ -22,7 +22,13 @@ public class WordArrangerTest {
         List<Set<Word>> wordsGroup = WordArranger.arrange(words);
         // then
         assertThat(wordsGroup.size()).isEqualTo(1);
-        assertThat(countWords(wordsGroup)).isEqualTo(words.size());
+        assertThat(this.countWords(wordsGroup)).isEqualTo(words.size());
+    }
+
+    private long countWords(List<Set<Word>> wordsGroup) {
+        return wordsGroup.stream()
+                .flatMap(Collection::stream)
+                .count();
     }
 
     @Test
@@ -37,7 +43,7 @@ public class WordArrangerTest {
         List<Set<Word>> wordsGroup = WordArranger.arrange(words);
         // then
         assertThat(wordsGroup.size()).isEqualTo(3);
-        assertThat(countWords(wordsGroup)).isEqualTo(words.size());
+        assertThat(this.countWords(wordsGroup)).isEqualTo(words.size());
     }
 
     @Test
@@ -49,12 +55,6 @@ public class WordArrangerTest {
         List<Set<Word>> wordsGroup = WordArranger.arrange(words);
         // then
         assertThat(wordsGroup.size()).isEqualTo(1609);
-        assertThat(countWords(wordsGroup)).isEqualTo(words.size());
-    }
-
-    private long countWords(List<Set<Word>> wordsGroup) {
-        return wordsGroup.stream()
-                .flatMap(Collection::stream)
-                .count();
+        assertThat(this.countWords(wordsGroup)).isEqualTo(words.size());
     }
 }

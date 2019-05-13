@@ -159,7 +159,10 @@ public class AnagramsTest {
     /******************* most test end *****************/
 
     private int countWords(List<Anagram> anagramList) {
-        return anagramList.stream().map(a -> a.words().size()).reduce(Integer::sum).get();
+        return anagramList.stream()
+                .map(a -> a.words().size())
+                .reduce(Integer::sum)
+                .get();
     }
 
     private void assertAnagramsEquals(List<Anagram> sourceList, List<Anagram> targetList) {

@@ -29,27 +29,27 @@ public class Position {
         return new Position(position);
     }
 
-    public Integer getX() {
-        return x;
-    }
-
-    public Integer getY() {
-        return y;
-    }
-
     public DirectionEnum getDirection() {
-        return direction;
+        return this.direction;
+    }
+
+    public void setDirection(DirectionEnum direction) {
+        this.direction = direction;
+    }
+
+    public Integer getX() {
+        return this.x;
     }
 
     public void setX(Integer x) {
         this.x = x;
     }
 
-    public void setY(Integer y) {
-        this.y = y;
+    public Integer getY() {
+        return this.y;
     }
 
-    public void setDirection(DirectionEnum direction) {
-        this.direction = direction;
+    public void setY(Integer y) {
+        this.y = y;
     }
 }

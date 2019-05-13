@@ -14,16 +14,16 @@ public class StubClock extends Clock {
     }
 
     @Override
-    public Clock withZone(ZoneId zone) {
-        return null;
-    }
-
-    @Override
     public Instant instant() {
         return ticks[ticks.length - 1 == index ? index : index++];
     }
 
     public void setTicks(Instant... ticks) {
         this.ticks = ticks;
+    }
+
+    @Override
+    public Clock withZone(ZoneId zone) {
+        return null;
     }
 }

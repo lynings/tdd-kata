@@ -10,23 +10,23 @@ class Time {
         this.value = value;
     }
 
-    public static Time second(int second) {
-        return new Time(second);
-    }
-
-    public int years() {
-        return value / 3600;
+    public void increase(int value) {
+        this.value += value;
     }
 
     public int minutes() {
         return this.value / 60 % 60;
     }
 
+    public static Time second(int second) {
+        return new Time(second);
+    }
+
     public int seconds() {
         return this.value % 60;
     }
 
-    public void increase(int value) {
-        this.value += value;
+    public int years() {
+        return this.value / 3600;
     }
 }

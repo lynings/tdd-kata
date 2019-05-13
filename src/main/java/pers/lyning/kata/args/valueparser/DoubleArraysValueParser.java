@@ -11,6 +11,11 @@ import java.util.Objects;
 public class DoubleArraysValueParser implements ValueParser<Double[]> {
 
     @Override
+    public String getDescription() {
+        return "schema '[##]' default return empty double array(such as schema: d[##], args: -d), when value existed then return specified double array(such as schema: d[##], args: -d 1.0 2.5 3.4).";
+    }
+
+    @Override
     public Double[] parse(String values) {
         if (Objects.isNull(values)) {
             return new Double[]{};
@@ -23,10 +28,5 @@ public class DoubleArraysValueParser implements ValueParser<Double[]> {
         } catch (Exception e) {
             throw new ArgsException("The value of args must be an double arrays，such as -d[##] 1.0 2.5 3.14");
         }
-    }
-
-    @Override
-    public String getDescription() {
-        return "schema '[##]' default return empty double array(such as schema: d[##], args: -d), when value existed then return specified double array(such as schema: d[##], args: -d 1.0 2.5 3.4).";
     }
 }

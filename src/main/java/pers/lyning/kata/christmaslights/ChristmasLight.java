@@ -6,30 +6,24 @@ package pers.lyning.kata.christmaslights;
  */
 public class ChristmasLight {
 
+    private final int TOGGLE_INCREASE_BRIGHTNESS = 2;
+    private final int TURN_OFF_DECREASE_BRIGHTNESS = -1;
+    private final int TURN_ON_INCREASE_BRIGHTNESS = 1;
     /**
      * 圣诞灯矩阵
      */
-    private int[][] lightsMatrix = new int[1000][1000];
-    private final int TOGGLE_INCREASE_BRIGHTNESS = 2;
-    private final int TURN_ON_INCREASE_BRIGHTNESS = 1;
-    private final int TURN_OFF_DECREASE_BRIGHTNESS = -1;
+    private final int[][] lightsMatrix = new int[1000][1000];
 
-    /**
-     * increase brightness by 1
-     *
-     * @param score
-     */
-    public void turnOn(Score score) {
-        increaseBrightness(score, TURN_ON_INCREASE_BRIGHTNESS);
-    }
-
-    /**
-     * decrease brightness by 1, minimum of zero
-     *
-     * @param score
-     */
-    public void turnOff(Score score) {
-        decreaseBrightness(score, TURN_OFF_DECREASE_BRIGHTNESS);
+    public int getLights() {
+        int numberOfOnLights = 0;
+        for (int x = 0; x < this.lightsMatrix.length; x++) {
+            for (int y = 0; y < this.lightsMatrix[x].length; y++) {
+                if (this.lightsMatrix[x][y] > 0) {
+                    numberOfOnLights += 1;
+                }
+            }
+        }
+        return numberOfOnLights;
     }
 
     /**
@@ -38,31 +32,41 @@ public class ChristmasLight {
      * @param score
      */
     public void toggle(Score score) {
-        this.increaseBrightness(score, TOGGLE_INCREASE_BRIGHTNESS);
-    }
-
-    public int getLights() {
-        int numberOfOnLights = 0;
-        for (int x = 0; x < lightsMatrix.length; x++) {
-            for (int y = 0; y < lightsMatrix[x].length; y++) {
-                if (lightsMatrix[x][y] > 0) {
-                    numberOfOnLights += 1;
-                }
-            }
-        }
-        return numberOfOnLights;
+        this.increaseBrightness(score, this.TOGGLE_INCREASE_BRIGHTNESS);
     }
 
     public int totalBrightness() {
         int totalBrightness = 0;
-        for (int x = 0; x < lightsMatrix.length; x++) {
-            for (int y = 0; y < lightsMatrix[x].length; y++) {
-                if (lightsMatrix[x][y] > 0) {
-                    totalBrightness += lightsMatrix[x][y];
+        for (int x = 0; x < this.lightsMatrix.length; x++) {
+            for (int y = 0; y < this.lightsMatrix[x].length; y++) {
+                if (this.lightsMatrix[x][y] > 0) {
+                    totalBrightness += this.lightsMatrix[x][y];
                 }
             }
         }
         return totalBrightness;
+    }
+
+    /**
+     * decrease brightness by 1, minimum of zero
+     *
+     * @param score
+     */
+    public void turnOff(Score score) {
+        this.decreaseBrightness(score, this.TURN_OFF_DECREASE_BRIGHTNESS);
+    }
+
+    /**
+     * increase brightness by 1
+     *
+     * @param score
+     */
+    public void turnOn(Score score) {
+        this.increaseBrightness(score, this.TURN_ON_INCREASE_BRIGHTNESS);
+    }
+
+    private void decreaseBrightness(Score score, int brightness) {
+        this.increaseBrightness(score, brightness);
     }
 
     private void increaseBrightness(Score score, int brightness) {
@@ -70,12 +74,8 @@ public class ChristmasLight {
         Position end = score.getEnd();
         for (int x = start.getX(); x <= end.getX(); x++) {
             for (int y = start.getY(); y <= end.getY(); y++) {
-                lightsMatrix[x][y] += brightness;
+                this.lightsMatrix[x][y] += brightness;
             }
         }
-    }
-
-    private void decreaseBrightness(Score score, int brightness) {
-        increaseBrightness(score, brightness);
     }
 }

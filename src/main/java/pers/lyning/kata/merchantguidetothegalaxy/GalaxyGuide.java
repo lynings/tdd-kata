@@ -7,14 +7,9 @@ import java.util.*;
  */
 public class GalaxyGuide {
 
-    private SymbolCalculator symbolCalculator = new SymbolCalculator();
-    private InputHandler inputHandler = new InputHandler();
-    private Map<String, Double> metalsToAvgCreditsMap = new HashMap<>();
-
-    public void receive(String multipleLineText) throws Exception {
-        inputHandler.handle(multipleLineText);
-        this.calcAvgCreditsOfMetals();
-    }
+    private final InputHandler inputHandler = new InputHandler();
+    private final Map<String, Double> metalsToAvgCreditsMap = new HashMap<>();
+    private final SymbolCalculator symbolCalculator = new SymbolCalculator();
 
     public void display() {
         List<String> answers = this.answer();
@@ -23,9 +18,14 @@ public class GalaxyGuide {
         }
     }
 
+    public void receive(String multipleLineText) throws Exception {
+        this.inputHandler.handle(multipleLineText);
+        this.calcAvgCreditsOfMetals();
+    }
+
     private List<String> answer() {
         List<String> answers = new ArrayList<>();
-        List<String> questions = inputHandler.getQuestions();
+        List<String> questions = this.inputHandler.getQuestions();
         for (String question : questions) {
             try {
                 boolean isContainCreditsWord = question.contains("Credits");
@@ -34,7 +34,8 @@ public class GalaxyGuide {
                 String symbols = "";
                 Double avgCredits = null;
                 for (String word : wordArr) {
-                    String symbol = inputHandler.getWordToSymbolMap().get(word);
+                    String symbol = this.inputHandler.getWordToSymbolMap()
+                            .get(word);
                     if (Objects.isNull(symbol)) {
                         avgCredits = this.metalsToAvgCreditsMap.get(word);
                     } else {
@@ -64,9 +65,10 @@ public class GalaxyGuide {
                 String[] rightArr = arr[1].split(" ");
                 String symbols = "";
                 for (int i = 0; i < leftArr.length - 1; i++) {
-                    symbols += this.inputHandler.getWordToSymbolMap().get(leftArr[i]);
+                    symbols += this.inputHandler.getWordToSymbolMap()
+                            .get(leftArr[i]);
                 }
-                double number = symbolCalculator.calc(symbols);
+                double number = this.symbolCalculator.calc(symbols);
                 double credits = Integer.valueOf(rightArr[0]);
                 double avg = credits / number;
                 String metals = leftArr[leftArr.length - 1];

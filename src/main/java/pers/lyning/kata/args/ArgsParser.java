@@ -48,6 +48,7 @@ public class ArgsParser {
         if (!this.isFlag(arg)) {
             throw new ArgsException("INCORRECT FLAG");
         }
-        return arg.substring(1).charAt(0);
+        return arg.substring(1)
+                .charAt(0);
     }
 }

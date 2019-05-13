@@ -10,8 +10,8 @@ import pers.lyning.kata.merchantguidetothegalaxy.validator.SymbolsConstraintVali
 public class SubtractOperation implements SymbolOperation {
 
 
-    private final String symbol;
     private final String subtractSymbol;
+    private final String symbol;
 
     public SubtractOperation(String symbol, String subtractSymbol) {
         this.symbol = symbol;
@@ -22,19 +22,19 @@ public class SubtractOperation implements SymbolOperation {
     public int operate() {
         this.validate();
 
-        return this.subtract(symbol, subtractSymbol);
-    }
-
-    private void validate() throws RuntimeException {
-        SymbolsConstraintValidator validator = new SubtractionConstraintValidator();
-        if (!validator.validate(subtractSymbol.concat(symbol))) {
-            throw new RuntimeException(subtractSymbol + " cannot subtracted by " + symbol);
-        }
+        return this.subtract(this.symbol, this.subtractSymbol);
     }
 
     private Integer subtract(String symbol, String subtractSymbol) {
         Integer number = SymbolTable.getValue(symbol);
         Integer subtractNumber = SymbolTable.getValue(subtractSymbol);
         return number - subtractNumber;
+    }
+
+    private void validate() throws RuntimeException {
+        SymbolsConstraintValidator validator = new SubtractionConstraintValidator();
+        if (!validator.validate(this.subtractSymbol.concat(this.symbol))) {
+            throw new RuntimeException(this.subtractSymbol + " cannot subtracted by " + this.symbol);
+        }
     }
 }

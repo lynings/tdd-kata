@@ -18,8 +18,8 @@ public class Anagrams {
     }
 
     public List<Anagram> arrange() {
-        List<Set<Word>> wordsGroup = WordArranger.arrange(words);
-        return filterAnagrams(wordsGroup)
+        List<Set<Word>> wordsGroup = WordArranger.arrange(this.words);
+        return this.filterAnagrams(wordsGroup)
                 .map(Anagram::of)
                 .collect(toList());
     }

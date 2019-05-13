@@ -12,7 +12,7 @@ import static java.util.stream.Collectors.toSet;
  */
 public class Digraph {
 
-    private List<Route> routes;
+    private final List<Route> routes;
 
     public Digraph(List<Route> routes) {
         this.routes = routes;
@@ -23,19 +23,15 @@ public class Digraph {
         return routeStrategy.execute(this);
     }
 
-    private void validate() throws Exception {
-        if (this.isDuplicateRoute()) {
-            throw new Exception("duplicated route!");
-        } else if (this.isDuplicateNodeInRoute()) {
-            throw new Exception("origin and destination cannot be the same!");
-        }
+    public List<Route> getRoutes() {
+        return this.routes;
     }
 
-    private boolean isDuplicateRoute() {
+    public List<Route> selectRouteWithOrigin(String origin) {
         return this.getRoutes()
                 .stream()
-                .map(route -> route.getName())
-                .collect(toSet()).size() != this.getRoutes().size();
+                .filter(o -> o.getOrigin().equals(origin))
+                .collect(toList());
     }
 
     private boolean isDuplicateNodeInRoute() throws Exception {
@@ -47,14 +43,20 @@ public class Digraph {
         return false;
     }
 
-    public List<Route> selectRouteWithOrigin(String origin) {
+    private boolean isDuplicateRoute() {
         return this.getRoutes()
                 .stream()
-                .filter(o -> o.getOrigin().equals(origin))
-                .collect(toList());
+                .map(route -> route.getName())
+                .collect(toSet())
+                .size() != this.getRoutes()
+                .size();
     }
 
-    public List<Route> getRoutes() {
-        return this.routes;
+    private void validate() throws Exception {
+        if (this.isDuplicateRoute()) {
+            throw new Exception("duplicated route!");
+        } else if (this.isDuplicateNodeInRoute()) {
+            throw new Exception("origin and destination cannot be the same!");
+        }
     }
 }
