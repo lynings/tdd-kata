@@ -1,5 +1,7 @@
 package pers.lyning.kata.anagrams;
 
+import com.google.common.collect.Lists;
+
 import java.util.List;
 
 /**
@@ -7,7 +9,7 @@ import java.util.List;
  */
 public class Anagram {
 
-    private Words words;
+    private final Words words;
 
     private Anagram(Words words) {
         this.words = words;
@@ -22,20 +24,24 @@ public class Anagram {
     }
 
     public List<String> asList() {
-        return words.asList();
+        return Lists.newArrayList(words.get());
     }
 
     public boolean is(String word) {
-        String sourceWord = this.words.firstWord();
+        String sourceWord = this.anyWord();
         return WordUtils.sort(sourceWord)
                 .equals(WordUtils.sort(word));
     }
 
     public Integer length() {
-        return this.words.firstWord().length();
+        return this.anyWord().length();
     }
 
     public Integer size() {
         return this.words.size();
+    }
+
+    private String anyWord() {
+        return this.words.get().iterator().next();
     }
 }

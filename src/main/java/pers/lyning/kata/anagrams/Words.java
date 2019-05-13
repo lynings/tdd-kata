@@ -1,6 +1,5 @@
 package pers.lyning.kata.anagrams;
 
-import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
 import java.util.List;
@@ -10,7 +9,7 @@ import java.util.Set;
  * @author lyning
  */
 public class Words {
-    private Set<String> words;
+    private final Set<String> words;
 
     private Words(Set<String> words) {
         this.words = words;
@@ -24,19 +23,11 @@ public class Words {
         return new Words(Sets.newHashSet(words));
     }
 
-    public boolean contains(String word) {
-        return this.words.contains(word);
-    }
-
     public int size() {
         return words.size();
     }
 
-    public List<String> asList() {
-        return Lists.newArrayList(this.words);
-    }
-
-    public String firstWord() {
-        return this.words.iterator().next();
+    public Set<String> get() {
+        return this.words;
     }
 }

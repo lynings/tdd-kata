@@ -19,7 +19,7 @@ public class WordArranger {
     }
 
     private static Collection<List<String>> groupBySort(Words words) {
-        return words.asList()
+        return words.get()
                 .stream()
                 .collect(groupingBy(WordUtils::sort, toList()))
                 .values();

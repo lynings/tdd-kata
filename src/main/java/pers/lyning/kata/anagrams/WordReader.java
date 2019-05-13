@@ -31,6 +31,7 @@ public class WordReader {
     private static List<String> readAsWord(String wordsString) {
         return splitWord(wordsString)
                 .flatMap(words -> Sets.newHashSet(words).stream())
+                .filter(word -> !word.isEmpty())
                 .collect(toList());
     }
 
