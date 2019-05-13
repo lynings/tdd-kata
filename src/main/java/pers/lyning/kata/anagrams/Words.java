@@ -8,7 +8,7 @@ import java.util.Set;
 /**
  * @author lyning
  */
-public class Words {
+class Words {
     private final Set<String> words;
 
     private Words(Set<String> words) {

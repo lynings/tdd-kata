@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * @author lyning
  */
-public class Anagram {
+class Anagram {
 
     private final Words words;
 
@@ -25,12 +25,6 @@ public class Anagram {
 
     public List<String> asList() {
         return Lists.newArrayList(words.get());
-    }
-
-    public boolean is(String word) {
-        String sourceWord = this.anyWord();
-        return WordUtils.sort(sourceWord)
-                .equals(WordUtils.sort(word));
     }
 
     public Integer length() {

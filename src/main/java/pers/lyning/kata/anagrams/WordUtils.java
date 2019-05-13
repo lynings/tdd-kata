@@ -7,7 +7,7 @@ import static java.util.stream.Collectors.joining;
 /**
  * @author lyning
  */
-public class WordUtils {
+class WordUtils {
 
     public static String sort(String word) {
         return Arrays.asList(word.split(""))

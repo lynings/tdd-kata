@@ -14,7 +14,7 @@ import static java.util.stream.Collectors.toList;
 /**
  * @author lyning
  */
-public class WordReader {
+class WordReader {
 
     private final List<String> words;
 

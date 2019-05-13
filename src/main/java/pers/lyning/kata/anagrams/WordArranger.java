@@ -9,7 +9,7 @@ import static java.util.stream.Collectors.toList;
 /**
  * @author lyning
  */
-public class WordArranger {
+class WordArranger {
 
     public static List<Words> arrange(Words words) {
         return groupBySort(words)

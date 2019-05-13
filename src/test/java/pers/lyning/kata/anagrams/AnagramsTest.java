@@ -27,7 +27,7 @@ public class AnagramsTest {
         List<Anagram> anagramList = anagrams.arrange();
 
         // then
-        assertAnagramsEquals(anagramList, Arrays.asList(Anagram.of("kinship", "pinkish")));
+        assertAnagramsEquals(anagramList, Arrays.asList(Anagram.of(words)));
     }
 
     @Test

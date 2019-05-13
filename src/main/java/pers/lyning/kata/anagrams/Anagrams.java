@@ -18,7 +18,7 @@ public class Anagrams {
 
     public List<Anagram> arrange() {
         List<Words> wordsGroup = WordArranger.arrange(words);
-        return filterNonAnagrams(wordsGroup)
+        return filterAnagrams(wordsGroup)
                 .map(Anagram::of)
                 .collect(toList());
     }
@@ -35,7 +35,7 @@ public class Anagrams {
                 .get();
     }
 
-    private Stream<Words> filterNonAnagrams(List<Words> wordsGroup) {
+    private Stream<Words> filterAnagrams(List<Words> wordsGroup) {
         return wordsGroup.stream()
                 .filter(words -> words.size() > 1);
     }
