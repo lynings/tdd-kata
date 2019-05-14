@@ -17,8 +17,7 @@ class Anagram {
     }
 
     public Integer lengthOfWord() {
-        return this.anyWord()
-                .length();
+        return this.anyWord().length();
     }
 
     public static Anagram of(Set<Word> words) {
