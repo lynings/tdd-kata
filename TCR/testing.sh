@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-./gradlew test -i > logs/testerr.log
+./gradlew test -i > logs/test.log
