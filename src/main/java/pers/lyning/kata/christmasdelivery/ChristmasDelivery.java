@@ -13,8 +13,8 @@ public class ChristmasDelivery {
         this.presentForms = presentForms;
         this.presentDeliverers = presentDeliverers;
 
-        this.startMachine();
-        this.packing();
+//        this.startMachine();
+//        this.packing();
     }
 
     public SantasSleigh packTo(SantasSleigh santasSleigh) {

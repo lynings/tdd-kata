@@ -1,0 +1,273 @@
+Initialized native services in: /Users/mac/.gradle/native
+The client will now receive all logging from the daemon (pid: 90479). The daemon log file: /Users/mac/.gradle/daemon/4.10.3/daemon-90479.out.log
+Starting 73rd build in daemon [uptime: 4 hrs 40 mins 32.142 secs, performance: 100%, no major garbage collections]
+Using 4 worker leases.
+Starting Build
+Settings evaluated using settings file '/Users/mac/Code/TDD/tdd-kata/settings.gradle'.
+Projects loaded. Root project using build file '/Users/mac/Code/TDD/tdd-kata/build.gradle'.
+Included projects: [root project 'tdd-kata']
+
+> Configure project :
+Evaluating root project 'tdd-kata' using build file '/Users/mac/Code/TDD/tdd-kata/build.gradle'.
+All projects evaluated.
+Selected primary task 'clean' from project :
+Selected primary task 'test' from project :
+Tasks to be executed: [task ':clean', task ':compileJava', task ':processResources', task ':classes', task ':compileTestJava', task ':processTestResources', task ':testClasses', task ':test']
+:clean (Thread[Task worker for ':',5,main]) started.
+
+> Task :clean
+Task ':clean' is not up-to-date because:
+  Task has not declared any outputs despite executing actions.
+:clean (Thread[Task worker for ':',5,main]) completed. Took 0.041 secs.
+:compileJava (Thread[Task worker for ':',5,main]) started.
+
+> Task :compileJava
+Task ':compileJava' is not up-to-date because:
+  Output property 'destinationDir' file /Users/mac/Code/TDD/tdd-kata/build/classes/java/main has been removed.
+  Output property 'destinationDir' file /Users/mac/Code/TDD/tdd-kata/build/classes/java/main/pers has been removed.
+  Output property 'destinationDir' file /Users/mac/Code/TDD/tdd-kata/build/classes/java/main/pers/lyning has been removed.
+All input files are considered out-of-date for incremental task ':compileJava'.
+Full recompilation is required because no incremental change information is available. This is usually caused by clean builds or changing compiler arguments.
+Compiling with JDK Java compiler API.
+Created classpath snapshot for incremental compilation in 0.0 secs.
+:compileJava (Thread[Task worker for ':',5,main]) completed. Took 1.327 secs.
+:processResources (Thread[Task worker for ':',5,main]) started.
+
+> Task :processResources
+Task ':processResources' is not up-to-date because:
+  Output property 'destinationDir' file /Users/mac/Code/TDD/tdd-kata/build/resources/main has been removed.
+  Output property 'destinationDir' file /Users/mac/Code/TDD/tdd-kata/build/resources/main/anagrams has been removed.
+  Output property 'destinationDir' file /Users/mac/Code/TDD/tdd-kata/build/resources/main/anagrams/README.md has been removed.
+:processResources (Thread[Task worker for ':',5,main]) completed. Took 0.041 secs.
+:classes (Thread[Task worker for ':' Thread 3,5,main]) started.
+
+> Task :classes
+Skipping task ':classes' as it has no actions.
+:classes (Thread[Task worker for ':' Thread 3,5,main]) completed. Took 0.0 secs.
+:compileTestJava (Thread[Task worker for ':' Thread 3,5,main]) started.
+
+> Task :compileTestJava
+Task ':compileTestJava' is not up-to-date because:
+  Output property 'destinationDir' file /Users/mac/Code/TDD/tdd-kata/build/classes/java/test has been removed.
+  Output property 'destinationDir' file /Users/mac/Code/TDD/tdd-kata/build/classes/java/test/pers has been removed.
+  Output property 'destinationDir' file /Users/mac/Code/TDD/tdd-kata/build/classes/java/test/pers/lyning has been removed.
+All input files are considered out-of-date for incremental task ':compileTestJava'.
+Full recompilation is required because no incremental change information is available. This is usually caused by clean builds or changing compiler arguments.
+Compiling with JDK Java compiler API.
+Created classpath snapshot for incremental compilation in 0.004 secs. 1 duplicate classes found in classpath (see all with --debug).
+:compileTestJava (Thread[Task worker for ':' Thread 3,5,main]) completed. Took 1.64 secs.
+:processTestResources (Thread[Task worker for ':' Thread 3,5,main]) started.
+
+> Task :processTestResources
+Task ':processTestResources' is not up-to-date because:
+  Output property 'destinationDir' file /Users/mac/Code/TDD/tdd-kata/build/resources/test has been removed.
+  Output property 'destinationDir' file /Users/mac/Code/TDD/tdd-kata/build/resources/test/100_players_play_the_game_results.json has been removed.
+  Output property 'destinationDir' file /Users/mac/Code/TDD/tdd-kata/build/resources/test/anagrams has been removed.
+:processTestResources (Thread[Task worker for ':' Thread 3,5,main]) completed. Took 0.067 secs.
+:testClasses (Thread[Task worker for ':' Thread 3,5,main]) started.
+
+> Task :testClasses
+Skipping task ':testClasses' as it has no actions.
+:testClasses (Thread[Task worker for ':' Thread 3,5,main]) completed. Took 0.0 secs.
+:test (Thread[Task worker for ':' Thread 3,5,main]) started.
+
+> Task :test
+Task ':test' is not up-to-date because:
+  Task has failed previously.
+Starting process 'Gradle Test Executor 44'. Working directory: /Users/mac/Code/TDD/tdd-kata Command: /Library/Java/JavaVirtualMachines/jdk1.8.0_161.jdk/Contents/Home/bin/java -Djava.security.manager=worker.org.gradle.process.internal.worker.child.BootstrapSecurityManager -Dorg.gradle.native=false -javaagent:build/tmp/expandedArchives/org.jacoco.agent-0.8.1.jar_8059ed6e1ab8b88aac5d9097fad847bb/jacocoagent.jar=destfile=build/jacoco/test.exec,append=true,inclnolocationclasses=false,dumponexit=true,output=file,jmx=false -Dfile.encoding=UTF-8 -Duser.country=US -Duser.language=en -Duser.variant -ea -cp /Users/mac/.gradle/caches/4.10.3/workerMain/gradle-worker.jar worker.org.gradle.process.internal.worker.GradleWorkerMain 'Gradle Test Executor 44'
+Successfully started process 'Gradle Test Executor 44'
+
+Gradle Test Executor 44 started executing tests.
+
+> Task :test
+
+pers.lyning.kata.merchantguidetothegalaxy.GalaxyGuideTest > should_return_42_when_given_pish_tegj_glob_glob STANDARD_OUT
+    pish tegj glob glob is 42
+    glob prok Silver is 68 Credits
+    glob prok Gold is 57800 Credits
+    glob prok Iron is 782 Credits
+    I have no idea what you are talking about
+
+
+pers.lyning.kata.christmasdelivery.ChristmasDeliveryTest > test_fail FAILED
+    org.opentest4j.AssertionFailedError: 
+    Expecting:
+     <1>
+    to be equal to:
+     <2>
+    but was not.
+        at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+        at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+        at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+        at pers.lyning.kata.christmasdelivery.ChristmasDeliveryTest.test_fail(ChristmasDeliveryTest.java:49)
+
+pers.lyning.kata.christmasdelivery.ChristmasDeliveryTest > acceptance_test FAILED
+    org.opentest4j.AssertionFailedError: 
+    Expecting:
+     <null>
+    to be equal to:
+     <[pers.lyning.kata.christmasdelivery.PresentForm@45c282d9,
+        pers.lyning.kata.christmasdelivery.PresentForm@54cfe984,
+        pers.lyning.kata.christmasdelivery.PresentForm@22cc3f04]>
+    but was not.
+        at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+        at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+        at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+        at pers.lyning.kata.christmasdelivery.ChristmasDeliveryTest.acceptance_test(ChristmasDeliveryTest.java:44)
+
+pers.lyning.kata.countdowntimer.CountdownIntegrationTest > should_stopped_when_countdown_2_seconds STANDARD_OUT
+    tick called
+    tick called
+
+
+pers.lyning.kata.countdowntimer.CountdownIntegrationTest > should_called_tick STANDARD_OUT
+    tick called
+
+
+pers.lyning.kata.countdowntimer.CountdownTest > should_call_2_tick_and_remaining_8_seconds STANDARD_OUT
+    tick called
+    tick called
+
+
+pers.lyning.kata.countdowntimer.CountdownTest > should_running STANDARD_OUT
+
+
+pers.lyning.kata.countdowntimer.CountdownTest > should_stopped_when_countdown_10_seconds STANDARD_OUT
+    tick called
+    tick called
+    tick called
+    tick called
+    tick called
+    tick called
+    tick called
+    tick called
+    tick called
+    tick called
+
+
+pers.lyning.kata.countdowntimer.CountdownTest > should_remaining_10_seconds STANDARD_OUT
+
+
+pers.lyning.kata.countdowntimer.CountdownTest > should_not_running STANDARD_OUT
+
+
+pers.lyning.kata.conferencetrack.ConferenceManagerTest > check_afternoon_sessions_begin_must_finish_in_time_for_the_networking_event STANDARD_OUT
+
+
+pers.lyning.kata.conferencetrack.ConferenceManagerTest > check_morning_sessions_begin_at_9am_and_must_finish_before_12_noon_for_lunch STANDARD_OUT
+
+
+pers.lyning.kata.conferencetrack.ConferenceManagerTest > check_the_networking_event_can_start_no_earlier_than_4mp_and_no_later_than_5mp STANDARD_OUT
+
+
+pers.lyning.kata.conferencetrack.ConferenceManagerTest > check_display_conference STANDARD_OUT
+    Track 1:
+    9:00PM Pair Programming vs Noise 45min
+    9:45PM Clojure Ate Scala (on my project) 45min
+    10:30PM Ruby on Rails Legacy App Maintenance 60min
+    11:30PM A World Without HackerNews 30min
+    12:00AM Lunch
+    1:00AM Programming in the Boondocks of Seattle 30min
+    1:30AM Ruby on Rails: Why We Should Move On 60min
+    2:30AM Writing Fast Tests Against Enterprise Rails 60min
+    3:30AM Rails Magic 60min
+    4:30AM Ruby vs. Clojure for Back-End Development 30min
+    5:00AM Networking Event
+    Track 2:
+    9:00PM Common Ruby Errors 45min
+    9:45PM Ruby Errors from Mismatched Gem Versions 45min
+    10:30PM Communicating Over Distance 60min
+    11:30PM User Interface CSS in Rails Apps 30min
+    12:00AM Lunch
+    1:00AM Woah 30min
+    1:30AM Lua for the Masses 30min
+    2:00AM Overdoing it in Python 45min
+    2:45AM Sit Down and Write 30min
+    3:15AM Accounting-Driven Development 45min
+    4:00AM Rails for Python Developers lightning
+    4:05AM Networking Event
+
+
+pers.lyning.kata.marsrover.RoverTest > receive_FFR STANDARD_OUT
+
+
+pers.lyning.kata.marsrover.RoverTest > turn_left_should_return_north_when_given_direction_is_east STANDARD_OUT
+
+
+pers.lyning.kata.marsrover.RoverTest > turn_left_should_return_west_when_given_direction_is_north STANDARD_OUT
+
+
+pers.lyning.kata.marsrover.RoverTest > turn_right_should_return_south_when_given_direction_is_east STANDARD_OUT
+
+
+pers.lyning.kata.marsrover.RoverTest > turn_right_should_return_east_when_given_direction_is_north STANDARD_OUT
+
+
+pers.lyning.kata.marsrover.RoverTest > should_report_obstacle_when_encounters_an_obstacle STANDARD_OUT
+    position(1,1) encounters an obstacle!
+
+
+pers.lyning.kata.marsrover.RoverTest > turn_right_should_return_north_when_given_direction_is_west STANDARD_OUT
+
+
+pers.lyning.kata.marsrover.RoverTest > receive_FF STANDARD_OUT
+
+
+pers.lyning.kata.marsrover.RoverTest > should_move_to_last_possible_point_when_encounters_an_obstacle STANDARD_OUT
+    position(1,1) encounters an obstacle!
+
+
+pers.lyning.kata.marsrover.RoverTest > turn_right_should_return_west_when_given_direction_is_south STANDARD_OUT
+
+
+pers.lyning.kata.marsrover.RoverTest > a_step_backward_to_east STANDARD_OUT
+
+
+pers.lyning.kata.marsrover.RoverTest > a_step_backward_to_west STANDARD_OUT
+
+
+pers.lyning.kata.marsrover.RoverTest > a_step_backward_to_north STANDARD_OUT
+
+
+pers.lyning.kata.marsrover.RoverTest > a_step_backward_to_south STANDARD_OUT
+
+
+pers.lyning.kata.marsrover.RoverTest > should_fail_when_given_command_incorrect STANDARD_OUT
+
+
+pers.lyning.kata.marsrover.RoverTest > a_step_forward_to_north STANDARD_OUT
+
+
+pers.lyning.kata.marsrover.RoverTest > a_step_forward_to_south STANDARD_OUT
+
+
+pers.lyning.kata.marsrover.RoverTest > receive_FFLBBRFFFLBBB STANDARD_OUT
+
+
+pers.lyning.kata.marsrover.RoverTest > a_step_forward_to_east STANDARD_OUT
+
+
+pers.lyning.kata.marsrover.RoverTest > a_step_forward_to_west STANDARD_OUT
+
+
+pers.lyning.kata.marsrover.RoverTest > receive_FFLBB STANDARD_OUT
+
+
+pers.lyning.kata.marsrover.RoverTest > turn_left_should_return_south_when_given_direction_is_west STANDARD_OUT
+
+
+pers.lyning.kata.marsrover.RoverTest > turn_left_should_return_east_when_given_direction_is_south STANDARD_OUT
+
+
+Gradle Test Executor 44 finished executing tests.
+
+> Task :test FAILED
+Finished generating test XML results (0.003 secs) into: /Users/mac/Code/TDD/tdd-kata/build/test-results/test
+Generating HTML test report...
+Finished generating test html results (0.012 secs) into: /Users/mac/Code/TDD/tdd-kata/build/reports/tests/test
+:test (Thread[Task worker for ':' Thread 3,5,main]) completed. Took 8.485 secs.
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 5.0.
+Use '--warning-mode all' to show the individual deprecation warnings.
+See https://docs.gradle.org/4.10.3/userguide/command_line_interface.html#sec:command_line_warnings
+6 actionable tasks: 6 executed
