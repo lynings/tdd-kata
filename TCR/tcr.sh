@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-./build.sh && (./testing.sh && (./commit.sh)) || (./collect_log.sh && ./revert.sh)
+./build.sh && (./TCR/testing.sh && (./TCR/commit.sh)) || (./TCR/collect_log.sh && ./TCR/revert.sh)
